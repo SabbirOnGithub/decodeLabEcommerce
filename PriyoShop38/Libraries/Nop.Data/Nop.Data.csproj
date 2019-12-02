@@ -74,6 +74,7 @@
     <Compile Include="Mapping\Catalog\ProductUnpublishRequestByVendorMap.cs" />
     <Compile Include="Mapping\Common\AddressAttributeMap.cs" />
     <Compile Include="Mapping\Common\AddressAttributeValueMap.cs" />
+    <Compile Include="Mapping\Common\EventBannerMap.cs" />
     <Compile Include="Mapping\Customers\CustomerLedgerDetailMap.cs" />
     <Compile Include="Mapping\Customers\WalletAccountInformationMap.cs" />
     <Compile Include="Mapping\Customers\WalletAccountInformationTempMap.cs" />

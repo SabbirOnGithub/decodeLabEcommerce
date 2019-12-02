@@ -44,7 +44,6 @@ namespace Nop.Services.Catalog
         #region Fields
 
         private readonly IRepository<Product> _productRepository;
-        private readonly IRepository<ProductCategory> _productCategoryRepository;
         private readonly IRepository<ProductRestrictedPaymentMethod> _productRPMRepository;
         private readonly IRepository<RelatedProduct> _relatedProductRepository;
         private readonly IRepository<CrossSellProduct> _crossSellProductRepository;
@@ -109,7 +108,6 @@ namespace Nop.Services.Catalog
         /// <param name="productHistoryRepository">Product history repository</param>
         public ProductService(ICacheManager cacheManager,
             IRepository<Product> productRepository,
-            IRepository<ProductCategory> productCategoryRepository,
             IRepository<RelatedProduct> relatedProductRepository,
             IRepository<CrossSellProduct> crossSellProductRepository,
             IRepository<TierPrice> tierPriceRepository,
@@ -165,7 +163,6 @@ namespace Nop.Services.Catalog
             this._storeMappingService = storeMappingService;
             this._productRPMRepository = productRPMRepository;
             this._productHistoryRepository = productHistoryRepository;
-            this._productCategoryRepository = productCategoryRepository;
         }
 
         #endregion

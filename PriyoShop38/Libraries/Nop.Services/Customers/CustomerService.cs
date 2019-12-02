@@ -583,8 +583,16 @@ namespace Nop.Services.Customers
                         orderby c.Id
                         where c.Email == email
                         select c;
-            var customer = query.FirstOrDefault();
-            return customer;
+            if (query.Any())
+            {
+                var customer = query.FirstOrDefault();
+                return customer;
+            }
+            else
+            {
+                return new Customer();
+            }
+            
         }
 
         /// <summary>

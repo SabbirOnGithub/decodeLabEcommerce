@@ -23,32 +23,31 @@
     }
 }
 
-    <div>
-        <h1>Sabbir Ahmed</h1>
-        @if (IsSectionDefined("customScripts"))
-        {
-            @RenderSection("customScripts")
-        }
+<div>
+    @if (IsSectionDefined("customScripts"))
+    {
+        @RenderSection("customScripts")
+    }
 
-        @if (IsSectionDefined("customStyles"))
-        {
-            @RenderSection("customStyles")
-        }
+    @if (IsSectionDefined("customStyles"))
+    {
+        @RenderSection("customStyles")
+    }
 
-        <div class="main-slider-wrapper flex-container">
-            <div style="-webkit-flex: 65; -ms-flex: 65; -o-flex: 65; flex: 65;">
-                @homePageMainSlider
-            </div>
-            <div style="-webkit-flex: 1; -ms-flex: 1; -o-flex: 1; flex: 1;"></div>
-            <div style="-webkit-flex: 25; -ms-flex: 25; -o-flex: 25; flex: 25;">
-                @Html.Widget("home_page_main_slider_right_side")
-            </div>
+    <div class="main-slider-wrapper flex-container">
+        <div style="-webkit-flex: 65; -ms-flex: 65; -o-flex: 65; flex: 65;">
+            @homePageMainSlider
         </div>
-
-        @Html.Widget("homepage_slider_after")
+        <div style="-webkit-flex: 1; -ms-flex: 1; -o-flex: 1; flex: 1;"></div>
+        <div style="-webkit-flex: 25; -ms-flex: 25; -o-flex: 25; flex: 25;">
+            @Html.Widget("home_page_main_slider_right_side")
+        </div>
     </div>
 
-@* @Html.Widget("homepage_slider_after_custom") *@
+    @Html.Widget("homepage_slider_after")
+</div>
+
+@Html.Widget("homepage_slider_after_custom")
 
 @Html.Widget("main_column_before")
 @RenderBody()

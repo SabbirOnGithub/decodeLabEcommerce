@@ -253,6 +253,7 @@
     <Compile Include="Models\Cms\RenderWidgetModel.cs" />
     <Compile Include="Models\Common\AddressAttributeModel.cs" />
     <Compile Include="Models\Common\AddressAttributeValueModel.cs" />
+    <Compile Include="Models\Common\EventBannerModel.cs" />
     <Compile Include="Models\Common\LanguageSelectorModel.cs" />
     <Compile Include="Models\Common\SearchTermReportLineModel.cs" />
     <Compile Include="Models\Common\UrlRecordListModel.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="Validators\Catalog\PredefinedProductAttributeValueModelValidator.cs" />
     <Compile Include="Validators\Common\AddressAttributeValidator.cs" />
     <Compile Include="Validators\Common\AddressAttributeValueValidator.cs" />
+    <Compile Include="Validators\Common\EventBannerValidator.cs" />
     <Compile Include="Validators\Customers\CustomerAttributeValidator.cs" />
     <Compile Include="Validators\Customers\CustomerAttributeValueValidator.cs" />
     <Compile Include="Validators\Discounts\PurchaseOfferValidator.cs" />

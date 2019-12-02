@@ -152,6 +152,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\EventBannerService.cs" />
+    <Compile Include="Common\IEventBannerService.cs" />
     <Compile Include="Customers\CustomerLedgerDetailService.cs" />
     <Compile Include="Customers\CustomerLedgerMasterService.cs" />
     <Compile Include="Customers\ICustomerLedgerDetailService.cs" />

@@ -1153,10 +1153,10 @@ namespace Nop.Admin.Controllers
                         OrderStatusId = x.OrderStatusId,
                         PaymentStatus = x.PaymentStatus.GetLocalizedEnum(_localizationService, _workContext),
                         PaymentStatusId = x.PaymentStatusId,
-                        ShippingStatus = x.ShippingStatus.GetLocalizedEnum(_localizationService, _workContext),
+                        ShippingStatus =   x.ShippingStatus != null ? x.ShippingStatus.GetLocalizedEnum(_localizationService, _workContext) : "",
                         ShippingStatusId = x.ShippingStatusId,
-                        CustomerEmail = x.BillingAddress.Email,
-                        CustomerFullName = string.Format("{0} {1}", x.BillingAddress.FirstName, x.BillingAddress.LastName),
+                        CustomerEmail = x.BillingAddress != null ? x.BillingAddress.Email : "",
+                        CustomerFullName = string.Format("{0} {1}", x.BillingAddress != null ? x.BillingAddress.FirstName : "Sabbir", x.BillingAddress != null ? x.BillingAddress.LastName : "Ahmed"),
                         CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc),
                         UserAgentType = x.UserAgentType.GetLocalizedEnum(_localizationService, _workContext)
                     };

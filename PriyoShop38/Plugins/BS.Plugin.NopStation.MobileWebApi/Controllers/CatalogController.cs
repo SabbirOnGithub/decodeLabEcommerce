@@ -631,48 +631,48 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()) + "__v1",
                 _storeContext.CurrentStore.Id);
 
-            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, 3600, () =>
-            {
-                List<CategoryNavigationModelApi> categoryApiList = new List<CategoryNavigationModelApi>();
-                string jsonMenuCategory = null;
-                    var filePath = CommonHelper.MapPath("~/ApiJson/menu-category-json.json");
-
-                    try
-                    {
-                        jsonMenuCategory = System.IO.File.ReadAllText(filePath);
-                    }
-                    catch { }
-
-                    if (string.IsNullOrWhiteSpace(jsonMenuCategory))
-                    {
-                        try
-                        {
-                            filePath = CommonHelper.MapPath("~/ApiJson/menu-category-backup-json.json");
-                            jsonMenuCategory = System.IO.File.ReadAllText(filePath);
-                        }
-                        catch { }
-                    }
-                    return JsonConvert.DeserializeObject<List<CategoryNavigationModelApi>>(jsonMenuCategory);
-            });
-
-//            List<CategoryNavigationModelApi> categoryApiList = new List<CategoryNavigationModelApi>();
-//            var categoryList = _categoryService.GetAllCategories().Where(x => x.Deleted == false && x.Published && x.ParentCategoryId == 0).ToList();
-//            if (categoryList.Any())
+//            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, 3600, () =>
 //            {
-//                foreach (var category in categoryList)
-//                {
-//                    var categoryApi = new CategoryNavigationModelApi();
-//                    categoryApi.Id = category.Id;
-//                    categoryApi.Name = category.GetLocalized(x => x.Name);
-//                    categoryApi.ParentCategoryId = category.ParentCategoryId;
-//                    categoryApi.DisplayOrder = category.DisplayOrder;
-//                    categoryApi.PictureId = category.PictureId;
-//                    var picture = _pictureService.GetPictureById(category.PictureId);
-//                    categoryApi.ImageUrl = _pictureService.GetPictureUrl(picture);
+//                List<CategoryNavigationModelApi> categoryApiList = new List<CategoryNavigationModelApi>();
+//                string jsonMenuCategory = null;
+//                    var filePath = CommonHelper.MapPath("~/ApiJson/menu-category-json.json");
 //
-//                    categoryApiList.Add(categoryApi);
-//                }
-//            }
+//                    try
+//                    {
+//                        jsonMenuCategory = System.IO.File.ReadAllText(filePath);
+//                    }
+//                    catch { }
+//
+//                    if (string.IsNullOrWhiteSpace(jsonMenuCategory))
+//                    {
+//                        try
+//                        {
+//                            filePath = CommonHelper.MapPath("~/ApiJson/menu-category-backup-json.json");
+//                            jsonMenuCategory = System.IO.File.ReadAllText(filePath);
+//                        }
+//                        catch { }
+//                    }
+//                    return JsonConvert.DeserializeObject<List<CategoryNavigationModelApi>>(jsonMenuCategory);
+//            });
+
+            List<CategoryNavigationModelApi> categoryApiList = new List<CategoryNavigationModelApi>();
+            var categoryList = _categoryService.GetAllCategories().Where(x => x.Deleted == false && x.Published && x.ParentCategoryId == 0).ToList();
+            if (categoryList.Any())
+            {
+                foreach (var category in categoryList)
+                {
+                    var categoryApi = new CategoryNavigationModelApi();
+                    categoryApi.Id = category.Id;
+                    categoryApi.Name = category.GetLocalized(x => x.Name);
+                    categoryApi.ParentCategoryId = category.ParentCategoryId;
+                    categoryApi.DisplayOrder = category.DisplayOrder;
+                    categoryApi.PictureId = category.PictureId;
+                    var picture = _pictureService.GetPictureById(category.PictureId);
+                    categoryApi.ImageUrl = _pictureService.GetPictureUrl(picture);
+
+                    categoryApiList.Add(categoryApi);
+                }
+            }
 
 //            return categoryApiList;
 
@@ -744,7 +744,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             var result = new AllResponseModel
             {
-                Data = cachedCategoriesModel,
+                Data = categoryApiList,
                 Count = count,
                 DisplayTaxInOrderSummary = displayTaxInOrderSummary,
                 ShowDiscountBox = showDiscountBox,
