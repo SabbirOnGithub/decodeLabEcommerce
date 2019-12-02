@@ -1,0 +1,110 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Plugin.Widgets.BsMegaMenu;
+
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+<div class="section-header">
+    <div class="title">
+        @T("Uvited.Label.ManageMegaMenu")
+    </div>
+    <div class="options">
+        <a href="@Url.Action("/CreateBsMegaMenu")" class="k-button">
+            @T("Uvited.Label.NewMegaMenu")
+        </a>
+    </div>
+</div>
+
+<div id="menus"></div>
+
+<script>
+    $(document).ready(function () {
+        $("#menus").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("ListBsMegaMenus", "BsMegaMenu"))",
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    update: {
+                        url: "@Html.Raw(Url.Action("UpdateBsMegaMenu", "BsMegaMenu"))",
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    destroy: {
+                        url: "@Html.Raw(Url.Action("DeleteBsMegaMenu", "BsMegaMenu"))",
+                        type: "POST",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors",
+                    model: {
+                        id: "Id",
+                        fields: {
+                            SelectedCategory: { editable: false, type: "string" },
+                            NumberOfColums: { editable: false, type: "number" },
+                            ColumnPosition: { editable: false, type: "number" }
+                        }
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.type == "update") {
+                        this.read();
+                    }
+                },
+                error: function (e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                numeric: false,
+                previousNext: false,
+                info: false
+            },
+            editable: {
+                confirmation: true,
+                mode: "inline"
+            },
+            scrollable: false,
+            columns: [{
+                field: "SelectedCategory",
+                title: "Category",
+
+                width: 150
+            },
+            {
+                field: "NumberOfColums",
+                title: "Number Of Colums",
+                width: 150
+            },
+            {
+                field: "ColumnPosition",
+                title: "Column Position",
+                width: 150
+            },
+            {
+                title: "Update",
+                template: '<a href="/BsMegaMenu/UpdateBsMegaMenu?Id=#=Id#">Edit</a>',
+                width: 150
+            },
+            {
+                command: [{
+                    name: "destroy",
+                    text: "@T("Admin.Common.Delete")"
+                }],
+                width: 100
+            }]
+        });
+    });
+</script>

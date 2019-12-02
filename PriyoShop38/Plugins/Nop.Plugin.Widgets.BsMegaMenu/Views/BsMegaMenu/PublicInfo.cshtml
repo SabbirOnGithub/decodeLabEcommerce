@@ -1,0 +1,144 @@
+﻿@model BsMegaMenuModel
+@using Nop.Core;
+@using Nop.Web.Extensions;
+@using System.Security.Policy;
+@using System.Web.Mvc.Html;
+@using Nop.Core.Domain.Media;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+@using Nop.Core.Domain.Orders;
+@using Nop.Core.Domain.Tax;
+@using Nop.Web.Models.Catalog;
+@using Nop.Plugin.Widgets.BsMegaMenu.Models;
+@{
+    Html.AppendCssFileParts("~/Plugins/Widgets.BsMegaMenu/Content/jquery.mmenu.all.css");
+    Html.AppendCssFileParts("~/Plugins/Widgets.BsMegaMenu/Content/style.css");
+}
+@helper GenerateCategoryImage(List<CategoryMenuModel> colCategoryList)
+{
+foreach (var item in colCategoryList)
+{
+        <a href="@Url.Content("~/" + item.SeName)">
+            <img src="@item.PictureLink" />
+            @item.Name
+        </a>
+}
+}
+
+@helper GenerateCategory(List<CategoryMenuModel> colCategoryList)
+{
+    <ul class="sublist first-level">
+        @foreach (var item in colCategoryList)
+        {
+            <li>
+                <div class="hasMegaMenu">
+                    <div class="sublist-toggle"></div>
+                    <ul class="sublist ">
+                        @foreach (var subItem in item.SubCategories)
+                        {
+                            <li><a href="@Url.Content("~/" + subItem.SeName)">@subItem.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </li>
+        }
+    </ul>
+}
+<ul class="mega-menu">
+    @foreach (var category in Model.CategoryList)
+    {
+        if (!(category.SubCategories.Count > 0))
+        {
+            <li>
+                <a href="@Url.Content("~/" + category.SeName)">
+                    @category.Name
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="HasMultiple">
+                <a href="@Url.Content("~/" + category.SeName)">
+                    @category.Name
+                </a>
+                <div class="hasMegaMenu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-twelve">
+                                <div class="row top-category">
+                                    @foreach (var item in @category.SubCategories)
+                                    {
+                                        <div class="col-xs-three col-sm-two">
+                                            <a class="category-link" href="@Url.Content("~/" + item.SeName)">
+                                                <img src="@item.PictureLink" alt="@item.Name" title="@item.Name" />
+                                                <label>@item.Name</label>
+                                            </a>
+
+                                        </div>
+                                        if (@category.SubCategories.IndexOf(item) == 4)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </div>
+                                <div class="row view-top-category">
+                                    <div class="col-xs-ten">
+                                        <h2 class="category-title">@category.Name</h2>
+                                    </div>
+                                    <div class="col-xs-two">
+                                        <a class="pull-right view-all" href="@Url.Content("~/" + category.SeName)">
+                                            View All
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row category-items">
+                                    <div class="col-xs-twelve">
+                                        <ul class="category-list">
+                                            @for (var i = 0; i < @category.SubCategories.Count;)
+                                            {
+                                                var subItem = @category.SubCategories[i++];
+                                                <li>
+                                                    <a href="@Url.Content("~/" + subItem.SeName)">@subItem.Name</a>
+                                                    @if (@subItem.SubSubCategories.Count > 0)
+                                                    {
+                                                        <ul>
+                                                            @foreach (var subSubItem in @subItem.SubSubCategories)
+                                                            {
+                                                                <li><a href="@Url.Content("~/" + subSubItem.SeName)">@subSubItem.Name</a></li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+    @*@Html.Partial("~/Plugins/Widgets.BsMegaMenu/Views/BsMegaMenu/_BrandMenu.cshtml", Model.Manufactures)*@
+</ul>
+
+<div class="header-menu-parent">
+    <div class="header-menu">
+        <div class="close-menu">
+            <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+        </div>        
+        @Html.Action("TopMenu", "Catalog")
+    </div>
+</div>
+
+
+<script>
+    $('header').on('mouseenter', 'li.HasMultiple', function () {
+        $('header').addClass('active');
+    });
+    $('header').on('mouseleave', 'li.HasMultiple', function () {
+        $('header').removeClass('active');
+    });
+</script>

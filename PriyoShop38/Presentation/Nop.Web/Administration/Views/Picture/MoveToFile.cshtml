@@ -1,0 +1,51 @@
+﻿@model Nop.Admin.Models.Media.PictureDbToFileModel
+
+@{
+    //page title
+    ViewBag.Title = "Move to file";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Move to file
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.FromId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.FromId)
+                        @Html.ValidationMessageFor(model => model.FromId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ToId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ToId)
+                        @Html.ValidationMessageFor(model => model.ToId)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

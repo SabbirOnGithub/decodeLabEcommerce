@@ -1,0 +1,9 @@
+﻿Group: Widgets
+FriendlyName: AlgoliaSearch
+SystemName: Widgets.AlgoliaSearch
+Version: 1.00
+SupportedVersions: 3.80
+Author: Nopstation Team, Jaber Kibria, Ahmed Jubair
+DisplayOrder: 0
+FileName: Nop.Plugin.Widgets.AlgoliaSearch.dll
+Description: This plugin allows you to use algolia service

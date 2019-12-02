@@ -1,0 +1,90 @@
+
+ ======================================================================================
+Update process started on: Sep 24, 2019  10:05:30 PM
+ SQL Server: LME\SQL17
+ Database: PriyoShop38
+ User id: sa
+ ======================================================================================
+
+ Start updating database........
+
+ System is trying to apply the script: 20190923001
+ Script 20190923001 applied.
+
+ System is trying to apply the script: 20190923004
+ Script 20190923004 applied.
+
+ System is trying to apply the script: 20190923005
+ Script 20190923005 applied.
+
+ System is trying to apply the script: 20190923006
+ Script 20190923006 applied.
+
+ System is trying to apply the script: 20190923007
+ Script 20190923007 applied.
+
+ System is trying to apply the script: 20190923008
+ Script 20190923008 applied.
+
+ System is trying to apply the script: 20190923009
+ Script 20190923009 applied.
+
+ System is trying to apply the script: 20190923010
+ Script 20190923010 applied.
+
+ System is trying to apply the script: 20190923011
+ Script 20190923011 applied.
+
+ System is trying to apply the script: 20190923012
+ Script 20190923012 applied.
+
+ System is trying to apply the script: 20190923013
+ Script 20190923013 applied.
+
+ System is trying to apply the script: 20190923014
+ Script 20190923014 applied.
+
+ System is trying to apply the script: 20190923015
+ Script 20190923015 applied.
+
+ System is trying to apply the script: 20190923016
+ Script 20190923016 applied.
+
+ System is trying to apply the script: 20190923017
+ Script 20190923017 applied.
+
+ System is trying to apply the script: 20190923018
+ Script 20190923018 applied.
+
+ System is trying to apply the script: 20190923019
+ Script 20190923019 applied.
+
+ System is trying to apply the script: 20190923020
+ Script 20190923020 applied.
+
+ System is trying to apply the script: 20190923021
+ Script 20190923021 applied.
+
+ ======================================================================================
+ ======================================================================================
+ Following 19 script(s) are applied:
+20190923001
+20190923004
+20190923005
+20190923006
+20190923007
+20190923008
+20190923009
+20190923010
+20190923011
+20190923012
+20190923013
+20190923014
+20190923015
+20190923016
+20190923017
+20190923018
+20190923019
+20190923020
+20190923021
+Update process completed successfully.

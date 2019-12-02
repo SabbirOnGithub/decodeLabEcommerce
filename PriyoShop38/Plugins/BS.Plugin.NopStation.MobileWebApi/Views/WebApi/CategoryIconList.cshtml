@@ -1,0 +1,121 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    Html.SetActiveMenuItemSystemName("MobileWebApi.CategoryIcons");
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Category icons - List
+        </h1>
+
+        <div class="pull-right">
+            <a href="@Url.Action("CategoryIconCreate")" class="btn bg-blue">
+                <i class="fa fa-plus-square"></i>
+                @T("Admin.Common.AddNew")
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="categories-grid"></div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#categories-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("CategoryIconList", "MobileWebApiConfiguration"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: @(defaultGridPageSize),
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(gridPageSizes)]
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "PictureUrl",
+                                    title: "Pictur",
+                                    template: '<img src="#=PictureUrl#"> ',
+                                    width: 150
+                                }, {
+                                    field: "CategoryId",
+                                    title: "Category",
+                                    template: '# if(CategoryId != 0) {# <a href="/Admin/Category/Edit/#=CategoryId#">#=CategoryName #</a> #}  #',
+                                    width: 300
+                                }, {
+                                    field: "TextPrompt",
+                                    title: "Text prompt",
+                                    width: 200
+                                }, {
+                                    field: "DisplayOrder",
+                                    title: "Display order",
+                                    width: 100
+                                }, {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 100,
+                                    template: '<a href="CategoryIconEdit/#=Id#">@T("Admin.Common.Edit")</a>'
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+                    //search button
+                $('#search-categories').click(function () {
+                    var grid = $('#categories-grid').data('kendoGrid');
+                    grid.dataSource.page(1); //new search. Set page size to 1
+                    return false;
+                });
+            });
+        </script>
+    </div>
+}
+
+
+
+
+
+

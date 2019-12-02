@@ -1,0 +1,39 @@
+GO
+
+/****** Object:  Table [dbo].[AffiliateType]    Script Date: 5/5/2019 3:17:40 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AffiliateType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[NameUrlParameter] [nvarchar](50) NOT NULL,
+	[IdUrlParameter] [nvarchar](50) NOT NULL,
+	[Active] [bit] NOT NULL,
+ CONSTRAINT [PK_AffiliateType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_AffiliateType_1] UNIQUE NONCLUSTERED 
+(
+	[IdUrlParameter] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_AffiliateType_2] UNIQUE NONCLUSTERED 
+(
+	[NameUrlParameter] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT AffiliateType OFF
+
+INSERT INTO AffiliateType (Active, IdUrlParameter, [Name], NameUrlParameter, Id)
+SELECT Active, IdUrlParameter, [Name], NameUrlParameter, Id
+FROM BS_AffiliateTypeMap
+
+SET IDENTITY_INSERT AffiliateType ON
+
+

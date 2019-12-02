@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    //Layout = "~/Views/Shared/_ColumnsTwoHome.cshtml";
+
+    Html.AppendCssFileParts("~/Themes/Pavilion/Content/css/owl.carousel.css");
+    //Html.AddScriptParts("~/Themes/Pavilion/Content/scripts/owl.carousel.min.js");
+
+    //page class
+    Html.AppendPageCssClassParts("html-home-page");
+}
+
+<div class="page home-page">
+    <div class="page-body">        
+        @Html.Action("HomepageCategories", "Catalog")
+        @Html.Action("PublicPage", "HomePageProduct", new { area = "" })
+        @Html.Widget("home_page_top")   
+  
+        @Html.Widget("home_page_before_categories")    
+        
+                    
+        @Html.Widget("home_page_before_products")
+        @Html.Widget("home_page_before_best_sellers")
+
+        <div class="homepage-middle-wrapper">
+            @*@Html.Action("HomepageBestSellers", "Product")*@
+            <div class="bestsellers">
+                @Html.Widget("home_page_best_sellers")
+            </div>
+            @Html.Widget("pavilion_home_page_richblog")
+        </div>
+
+        @Html.Widget("home_page_before_news")
+        @Html.Action("HomePageNews", "News")
+        @Html.Widget("home_page_before_poll")
+        @Html.Action("HomePagePolls", "Poll")
+
+        <div class="homepage-bottom-wrapper">
+            @Html.Widget("home_page_bottom")
+        </div>
+        @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+    </div>
+</div>

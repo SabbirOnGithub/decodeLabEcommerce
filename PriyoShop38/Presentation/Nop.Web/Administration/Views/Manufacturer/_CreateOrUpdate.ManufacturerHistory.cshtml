@@ -1,0 +1,97 @@
+﻿@model ManufacturerModel
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+}
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="manufacturer-history-grid"></div>
+            <script>
+                $(document).ready(function() {
+                    $("#manufacturer-history-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ManufacturerHistoryList", "Manufacturer", new {manufacturerId = Model.Id}))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: addAntiForgeryToken
+                                },
+                                destroy: {
+                                    url: "@Html.Raw(Url.Action("ManufacturerHistoryDelete", "Manufacturer", new {manufacturerId = Model.Id}))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: addAntiForgeryToken
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        //do not implicitly specify all fields
+                                        //we do it only for fields which implicitly require it
+                                        //otherwise, they'll be formatted wrong way
+                                        CreatedOn: { type: "date" }
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        editable: {
+                            confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "CreatedOn",
+                                title: "@T("Admin.Catalog.ManufacturerHistory.Fields.CreatedOn")",
+                                width: 200,
+                                type: "date",
+                                format: "{0:G}"
+                            }, {
+                                field: "Description",
+                                title: "@T("Admin.Catalog.ManufacturerHistory.Fields.Description")",
+                                encoded: false
+                            }, {
+                                field: "CustomerEmail",
+                                title: "@T("Admin.Catalog.ManufacturerHistory.Fields.CustomerEmail")",
+                                template: '<a href="/Admin/Customer/Edit/#=CustomerId#">#=CustomerEmail#</a>',
+                                encoded: false
+                            }
+                            @if(Model.IsAdmin)
+                            { 
+                               <text> , {
+                                    command: { name: "destroy", text: "@T("Admin.Common.Delete")" },
+                                    title: "@T("Admin.Common.Delete")",
+                                    attributes: { style: "text-align:center" },
+                                    headerAttributes: { style: "text-align:center" },
+                                    width: 100
+                                }
+                                </text>
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>

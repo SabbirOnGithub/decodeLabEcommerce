@@ -1,0 +1,79 @@
+﻿@model Nop.Plugin.Widgets.BsAffiliate.Models.AffiliateCommissionRateModel
+@using Nop.Web.Framework;
+@using Nop.Plugin.Widgets.BsAffiliate.Domain;
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#@Html.FieldIdFor(x=> x.EntityType)').on('change', function () {
+            $('#vendor-field').hide();
+            $('#category-field').hide();
+
+            var value = this.value;
+            if (value == 30) {
+                $('#vendor-field').show();
+            }
+            if (value == 20) {
+                $('#category-field').show();
+            }
+        })
+    });
+</script>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.EntityType)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EnumDropDownListFor(model => model.EntityType, "Select Type", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.EntityType)
+                        </div>
+                    </div>
+                    <div class="form-group" id="vendor-field" style="display: @(Model.EntityType != EntityType.Vendor? " none": "block" )">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.VendorId)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.VendorId, Model.VendorList, "Select vendor", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VendorId)
+                        </div>
+                    </div>
+                    <div class="form-group" id="category-field" style="display: @(Model.EntityType != EntityType.Category? " none": "block" )">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CategoryId)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, "Select category", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CommissionType)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EnumDropDownListFor(model => model.CommissionType, "Select Type", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CommissionType)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CommissionRate)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.NopEditorFor(model => model.CommissionRate)
+                            @Html.ValidationMessageFor(model => model.CommissionRate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

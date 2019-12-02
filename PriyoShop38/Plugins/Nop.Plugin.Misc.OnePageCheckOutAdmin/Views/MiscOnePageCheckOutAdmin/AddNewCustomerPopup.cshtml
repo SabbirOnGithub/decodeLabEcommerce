@@ -1,0 +1,15 @@
+﻿@model CustomerModel
+@using Nop.Admin.Models.Customers;
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Admin.Customers.Customers.AddNew").Text;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.Partial("~/Plugins/Misc.OnePageCheckOutAdmin/Views/MiscOnePageCheckOutAdmin/_CreateOrUpdateCustomer.cshtml", Model)
+}

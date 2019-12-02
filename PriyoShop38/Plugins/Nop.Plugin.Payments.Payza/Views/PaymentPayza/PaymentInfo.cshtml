@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Payments.CyberSource/Content/Css/styles.css");
+}
+@model Nop.Plugin.Payments.Payza.Models.PaymentInfoModel
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI
+
+<table style="width:100%">
+
+    @foreach (var kvp in Model.Parameters.ToArray())
+    {
+
+        if (kvp.Key.Equals("signed_date_time") || kvp.Key.Equals("req_currency") || kvp.Key.Equals("req_reference_number") || kvp.Key.Equals("decision") || kvp.Key.Equals("req_amount") || kvp.Key.Equals("message") || kvp.Key.Equals("req_bill_to_surname") || kvp.Key.Equals("req_bill_to_forename"))
+        {
+            <tr>
+                <td width="40%">@kvp.Key</td>
+                <td width="40%">@kvp.Value</td>
+            </tr>
+        }
+
+    }
+
+
+</table>
+<div class="checkoutDiv">
+    <button onclick="location.href='@Model.ConfirmUrl'" class="buttonCheckout">
+        <span>Continue</span>
+    </button>
+</div>
+
+

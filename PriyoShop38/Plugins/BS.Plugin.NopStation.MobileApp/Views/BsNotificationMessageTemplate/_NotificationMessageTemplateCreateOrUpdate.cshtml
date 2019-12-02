@@ -1,0 +1,275 @@
+﻿@using Nop.Core.Infrastructure
+@using BS.Plugin.NopStation.MobileApp.Models
+@using Nop.Services.Events
+@using Nop.Web.Framework.Events
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@model NotificationMessageTemplateModel
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<!-- Begin emoji-picker Stylesheets -->
+<link href="~/Plugins/NopStation.MobileApp/content/emo/lib/css/emoji.css" rel="stylesheet" />
+<link href="~/Plugins/NopStation.MobileApp/content/emo/lib/css/nanoscroller.css" rel="stylesheet" />
+<!-- End emoji-picker Stylesheets -->
+<!-- Begin emoji-picker JavaScript -->
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/nanoscroller.min.js"></script>
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/tether.min.js"></script>
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/config.js"></script>
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/util.js"></script>
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/jquery.emojiarea.js"></script>
+<script src="~/Plugins/NopStation.MobileApp/content/emo/lib/js/emoji-picker.js"></script>
+<!-- End emoji-picker JavaScript -->
+@{
+    Html.AppendCssFileParts("~/Plugins/NopStation.MobileApp/Content/styles.css");
+}
+<script>
+    $(function () {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: '/Plugins/NopStation.MobileApp/content/emo/lib/img/',
+            popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+    });
+</script>
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<script>
+    $(document).ready(function () {
+        $("#template-edit").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            },
+            select: tabstrip_on_tab_select
+        });
+    });
+</script>
+
+
+<div id="template-edit" class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        @Html.RenderBootstrapTabHeader("tab-Info", @T("Admin.ContentManagement.MessageTemplates.Info"), true)
+        @Html.RenderBootstrapTabHeader("tab-Stores", @T("Admin.ContentManagement.MessageTemplates.Stores"))
+    </ul>
+    <div class="tab-content">
+        @Html.RenderBootstrapTabContent("tab-Info", @TabInfo())
+        @Html.RenderBootstrapTabContent("tab-Stores", @TabStores())
+    </div>
+</div>
+
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "template-edit");
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender)
+    {
+        @eventBlock
+    }
+}
+
+@*save selected tab index*@
+<input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@T("Admin.ContentManagement.MessageTemplates.Info")">
+
+@helper TabInfo()
+{
+    <div class="raw form-horizontal clearfix">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.AllowedTokens)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.DisplayFor(model => model.AllowedTokens)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.Name)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.IsActive)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.IsActive)
+                                @Html.ValidationMessageFor(model => model.IsActive)
+                            </div>
+                        </div>
+                        @(Html.LocalizedEditor<NotificationMessageTemplateModel, NotificationMessageTemplateLocalizedModel>("messagetemplate-localized",
+                        @<div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.NopLabelFor(model => model.Locales[item].Subject)
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Locales[item].Subject)
+                                    @Html.ValidationMessageFor(model => model.Locales[item].Subject)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.NopLabelFor(model => model.Locales[item].Body)
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Locales[item].Body, "RichEditor")
+                                    @Html.ValidationMessageFor(model => model.Locales[item].Body)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                            </div>
+                        </div>
+    ,
+                        @<div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.NopLabelFor(model => model.Subject)
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="lead emoji-picker-container">
+                                        <input id="Subject" name="Subject" type="text" class="form-control" data-emojiable="true" value="@Model.Subject" />
+                                    </p>
+                                    @Html.ValidationMessageFor(model => model.Subject)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.NopLabelFor(model => model.Body)
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="lead emoji-picker-container">
+                                        <textarea id="Body" name="Body" class="form-control textarea-control" data-emojiable="true" rows="4">@Model.Body</textarea>
+                                    </p>
+                                    @Html.ValidationMessageFor(model => model.Body)
+                                </div>
+                                <style>
+                                    .emoji-wysiwyg-editor.textarea-control {
+                                        min-height: 15em;
+                                        resize: vertical;
+                                    }
+                                </style>
+                            </div>
+
+                        </div>
+        ))
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.AttachedDownloadId)
+                            </div>
+                            <div class="col-md-9">
+                                @{
+                    //Static file attachments do not support URLs yet
+                    //A store owner have to upload a file
+                    //we store a value into "ViewData" and then use it in the Download.cshtml file
+                    ViewData["nop.DownloadEditor.DisableUrl"] = true;
+                                }
+                                @Html.EditorFor(model => model.HasAttachedDownload) @T("Admin.ContentManagement.MessageTemplates.Fields.AttachedDownload.Exists")
+                                <div id="pnlAttachedDownload">
+                                    @Html.EditorFor(model => model.AttachedDownloadId)
+                                    @Html.ValidationMessageFor(model => model.AttachedDownloadId)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#@Html.FieldIdFor(model => model.HasAttachedDownload)").change(toggleHasAttachedDownload);
+            toggleHasAttachedDownload();
+        });
+
+        function toggleHasAttachedDownload() {
+            if ($('#@Html.FieldIdFor(model => model.HasAttachedDownload)').is(':checked')) {
+                $('#pnlAttachedDownload').show();
+            }
+            else {
+                $('#pnlAttachedDownload').hide();
+            }
+        }
+
+    </script>
+}
+
+@helper TabStores()
+{
+    <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("#@Html.FieldIdFor(model => model.LimitedToStores)").click(toggleStoreMapping);
+
+                toggleStoreMapping();
+            });
+
+
+            function toggleStoreMapping() {
+                if ($('#@Html.FieldIdFor(model => model.LimitedToStores)').is(':checked')) {
+                    $('#pnl-available-stores').show();
+                }
+                else {
+                    $('#pnl-available-stores').hide();
+                }
+            }
+
+    </script>
+    <div class="raw form-horizontal clearfix">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.LimitedToStores)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.LimitedToStores)
+                                @Html.ValidationMessageFor(model => model.LimitedToStores)
+                            </div>
+                        </div>
+                        <div class="form-group" id="pnl-available-stores">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.AvailableStores)
+                            </div>
+                            <div class="col-md-9">
+                                @if (Model.AvailableStores != null && Model.AvailableStores.Count > 0)
+                                {
+                                    @Html.Action("MultistoreDisabledWarning", "Common", new { area = "Admin" })
+                                    foreach (var store in Model.AvailableStores)
+                                    {
+                                        <div>
+                                            <input type="checkbox" name="SelectedStoreIds" value="@store.Id" checked="@(Model.SelectedStoreIds != null && Model.SelectedStoreIds.Contains(store.Id))" />@store.Name
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>No stores defined</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

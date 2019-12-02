@@ -1,0 +1,24 @@
+﻿@using BS.Plugin.NopStation.MobileApp.Helpers
+@model BS.Plugin.NopStation.MobileApp.Models.ScheduledNotificationModel
+@using Nop.Web.Framework
+@{Layout = "_PluginsAdminLayout";}
+@{
+    //page title
+    ViewBag.Title = @T("Admin.Plugin.NopStation.MobileApp.Schedule.Title.EditSchedule").Text;
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-promotions.png")" alt="" />@T("Admin.Plugin.NopStation.MobileApp.Schedule.Header.EditSchedule")
+            <a href="/Admin/Plugin/NopStation/MobileApp/ScheduleList"> @T("Admin.Plugin.NopStation.MobileApp.Common.BackToList") </a>
+        </div>
+        <div class="options">
+            <button name="button" type="submit" value="save" class="t-button" >@T("Admin.Common.Save")</button>
+
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdateSchedule", Model)
+}
+
+

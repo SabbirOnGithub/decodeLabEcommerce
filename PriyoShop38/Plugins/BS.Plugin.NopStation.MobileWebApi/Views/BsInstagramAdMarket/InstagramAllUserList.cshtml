@@ -1,0 +1,96 @@
+﻿@using Nop.Core.Infrastructure
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using System.Globalization;
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Admin.Customers.Customers").Text;
+}
+
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt="" />
+        User List
+    </div>
+</div>
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="instagram-user-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#instagram-user-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ReadAllUserList", "BsInstagramAdmin"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: null
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        scrollable: false,
+                        columns: [
+                            //{
+                            //field: "Id",
+                            //headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                            //headerAttributes: { style: "text-align:center" },
+                            //attributes: { style: "text-align:center" },
+                            //template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
+                            //width: 50
+                            //},
+                            
+                            {
+                                field: "UserName",
+                                title: "UserName",
+                                width: 200
+                            },
+                            {
+                                field: "Name",
+                                title: "Name",
+                                width: 200
+                            },
+                            {
+                                field: "Followers",
+                                title: "Followers",
+                                width: 200
+                            }]
+                    });
+                });
+            </script>
+
+
+        </td>
+    </tr>
+</table>

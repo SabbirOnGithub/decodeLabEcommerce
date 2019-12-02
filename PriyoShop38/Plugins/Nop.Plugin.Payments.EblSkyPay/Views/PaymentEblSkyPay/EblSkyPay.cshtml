@@ -1,0 +1,101 @@
+﻿@using Nop.Web.Framework;
+@model Nop.Plugin.Payments.EblSkyPay.Models.EblSkyPayConfigurationModel
+@{
+    //Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    Layout = "";
+}
+@helper Text_Truncate(string input, int length)
+{
+    input = HttpUtility.JavaScriptStringEncode(input);
+    if (input.Length <= length)
+    {
+        @Html.Raw(@input)
+    }
+    else
+    {
+        @Html.Raw(@input.Substring(0, length))
+    }
+}
+<script src="https://easternbank.ap.gateway.mastercard.com/checkout/version/35/checkout.js"
+    data-error = "@Model.ErrorCallbackUrl"
+    data-cancel = "@Model.CancelUrl"
+    data-complete = "@Model.SuccessUrl">
+</script>
+
+<div class="container">
+    <div class="row" style="padding-top:15px;">
+        <div style="font-size:20px;margin-bottom:15px;" class="redir-text">Redirecting to EBL Gateway to complete your payment . </div>
+        <div id="ebl-button-containner">
+            <input style="display:none;padding:5px 20px 5px 20px;" type="button" id="eblppg" value="Not working? try again" onclick="Checkout.showPaymentPage();" />
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    Checkout.configure({
+        merchant: '@Model.MerchantId',
+        order: {
+            amount: @Model.Amount,
+            currency: '@Model.Currency',
+            description: '@Text_Truncate(Model.Description, 125)',
+            id: '@Model.OrderId'
+        },
+        interaction: {
+            merchant: {
+                name: '@Model.MerchantName',
+                address: {
+                    line1: '@Text_Truncate(Model.Address1,99)',
+                    line2: '@Text_Truncate(Model.Address2,27)'
+                },
+                logo:  'https://www.othoba.com/Themes/PRAN-RFL/Content/css/images/logo.png'
+            },
+            displayControl:{
+                billingAddress:'@Model.DisplayControl'
+            }
+        },
+        session:{
+            id:'@Model.SessionId'
+        }
+    });
+
+    //pure js
+    document.addEventListener("DOMContentLoaded", function(event) {
+        @if (!Model.AutoRedirectEnable)
+        {
+            <text>
+                document.getElementById("ebl-button-containner").style.display = 'block';
+                document.getElementById("eblsbox").style.display = 'none';document.getElementById("eblppg").style.display = 'block';
+            </text>
+        }else
+        {
+            <text>
+            setTimeout(function(){
+                var el2=document.getElementById("eblppg");
+                if (el2.onclick) {
+                    el2.onclick();
+                } else if (el2.click) {
+                    el2.click();
+                }
+            },2000);
+
+            //dotted animation(15 sec)
+            for(var k=1; k<=20; k++) {
+                (function(k_copy) {
+                    setTimeout(function() {
+                        var p=document.getElementsByClassName("redir-text")[0];
+                        p.innerHTML=p.innerHTML+' .';
+                        if(k_copy==20){
+                            document.getElementById("eblppg").style.display="block";
+                        }
+                    },k*1000);
+                })(k);
+            }
+            </text>
+        }
+    });
+</script>
+
+@*@section dataLayer
+{
+    @Html.Partial("_TrxDataLayer", Model.TrxModel);
+}*@

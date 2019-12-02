@@ -1,0 +1,78 @@
+﻿@** Copyright 2015 Seven Spikes Ltd. All rights reserved. (http://www.nop-templates.com)
+    * http://www.nop-templates.com/t/licensinginfo
+*@
+
+@using SevenSpikes.Nop.Plugins.AnywhereSliders.Models.Carousel3D
+
+@model Carousel3DModel
+
+@{
+    Layout = null;
+
+    if (Model.SliderImages != null && Model.SliderImages.Count > 0 && Model.SliderImages.Count != 3)
+    {
+        <div class="jCarouselMainWrapper @Model.SliderHtmlElementId custom-carousel " 
+             data-carouselhtmlelementid="@Model.SliderHtmlElementId" 
+             data-supportrtl="false" 
+             data-carouselitemminwidth="160" 
+             data-numberofvisibleitems="3" 
+             data-vertical="false" data-startindex="1" data-scrollitems="1" 
+             data-animationspeed="slow" data-autoscroll="3" data-size="@Model.SliderImages.Count" data-easing="swing" data-wrap="circular">
+
+            <div class="nop-jcarousel ">
+                <h2 class="carousel-title"><span></span></h2>
+                <ul id="@Model.SliderHtmlElementId">
+
+                    @foreach (var sliderImage in Model.SliderImages)
+                    {
+                    var url = "#";
+                    if (!string.IsNullOrWhiteSpace(sliderImage.Url))
+                    {
+                    url = sliderImage.Url;
+                    }
+                    <li>
+                        <a href="@url" class="title" title="@sliderImage.DisplayText">
+                            @*<img width="@Model.Settings.PictureWidth" height="@Model.Settings.PictureHeight" class="cloudcarousel" src="@sliderImage.PicturePath" alt="@sliderImage.Alt" />*@
+                            <img class="cloudcarousel" src="@sliderImage.PicturePath" alt="@sliderImage.Alt" />
+                        </a>
+                    </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    }
+    else if (Model.SliderImages != null && Model.SliderImages.Count > 0 && Model.SliderImages.Count == 3)
+    {
+<div class="jCarouselMainWrapper @Model.SliderHtmlElementId custom-carousel "
+     data-carouselhtmlelementid="@Model.SliderHtmlElementId"
+     data-supportrtl="false"
+     data-carouselitemminwidth="160"
+     data-numberofvisibleitems="3"
+     data-vertical="false" data-startindex="1" data-scrollitems="0"
+     data-animationspeed="slow" data-autoscroll="0" data-size="@Model.SliderImages.Count" data-easing="swing" data-wrap="circular">
+
+    <div class="nop-jcarousel ">
+        <h2 class="carousel-title"><span></span></h2>
+        <ul id="@Model.SliderHtmlElementId">
+
+            @foreach (var sliderImage in Model.SliderImages)
+            {
+            var url = "#";
+            if (!string.IsNullOrWhiteSpace(sliderImage.Url))
+            {
+            url = sliderImage.Url;
+            }
+            <li>
+                <a href="@url" class="title" title="@sliderImage.DisplayText">
+                    @*<img width="@Model.Settings.PictureWidth" height="@Model.Settings.PictureHeight" class="cloudcarousel" src="@sliderImage.PicturePath" alt="@sliderImage.Alt" />*@
+                    <img class="cloudcarousel" src="@sliderImage.PicturePath" alt="@sliderImage.Alt" />
+                </a>
+            </li>
+            }
+
+        </ul>
+    </div>
+</div>
+    }
+}

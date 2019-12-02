@@ -1,0 +1,169 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.MobileSettingsModel
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using System.Globalization;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@using (Html.BeginForm())
+{ @Html.AntiForgeryToken()
+    @*@Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_NopMobileMenu.cshtml")*@
+    <div class="plugincontainer">
+        <div class="configurecontaincontainer">
+            <div class="storelocatersettingtitle">
+                <strong>@T("Plugins.NopStation.MobileWebApi.mobilewebsitesettingTitle")</strong>
+            </div>
+            <div>
+                <table class="adminContent">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.ActivatePushNotification_OverrideForStore, model => model.ActivatePushNotification, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.ActivatePushNotification):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.ActivatePushNotification)
+                            @Html.ValidationMessageFor(model => model.ActivatePushNotification)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.SandboxMode_OverrideForStore, model => model.SandboxMode, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.SandboxMode):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.SandboxMode)
+                            @Html.ValidationMessageFor(model => model.SandboxMode)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.GcmApiKey_OverrideForStore, model => model.GcmApiKey, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.GcmApiKey):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.GcmApiKey)
+                            @Html.ValidationMessageFor(model => model.GcmApiKey)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.GoogleApiProjectNumber_OverrideForStore, model => model.GoogleApiProjectNumber, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.GoogleApiProjectNumber):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.GoogleApiProjectNumber)
+                            @Html.ValidationMessageFor(model => model.GoogleApiProjectNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.UploudeIOSPEMFile_OverrideForStore, model => model.UploudeIOSPEMFile, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.UploudeIOSPEMFile):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.UploudeIOSPEMFile)
+                            @Html.ValidationMessageFor(model => model.UploudeIOSPEMFile)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.PEMPassword_OverrideForStore, model => model.PEMPassword, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.PEMPassword):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.PEMPassword)
+                            @Html.ValidationMessageFor(model => model.PEMPassword)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppNameOnGooglePlayStore_OverrideForStore, model => model.AppNameOnGooglePlayStore, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppNameOnGooglePlayStore):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppNameOnGooglePlayStore)
+                            @Html.ValidationMessageFor(model => model.AppNameOnGooglePlayStore)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppUrlOnGooglePlayStore_OverrideForStore, model => model.AppUrlOnGooglePlayStore, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppUrlOnGooglePlayStore):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppUrlOnGooglePlayStore)
+                            @Html.ValidationMessageFor(model => model.AppUrlOnGooglePlayStore)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppNameOnAppleStore_OverrideForStore, model => model.AppNameOnAppleStore, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppNameOnAppleStore):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppNameOnAppleStore)
+                            @Html.ValidationMessageFor(model => model.AppNameOnAppleStore)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppUrlonAppleStore_OverrideForStore, model => model.AppUrlonAppleStore, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppUrlonAppleStore):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppUrlonAppleStore)
+                            @Html.ValidationMessageFor(model => model.AppUrlonAppleStore)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppDescription_OverrideForStore, model => model.AppDescription, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppDescription):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextAreaFor(model => model.AppDescription, new { @class = "textareatextbox" })
+                            @Html.ValidationMessageFor(model => model.AppDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppImage_OverrideForStore, model => model.AppImage, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppImage):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppImage)
+                            @Html.ValidationMessageFor(model => model.AppImage)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.AppLogo_OverrideForStore, model => model.AppLogo, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.AppLogo):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppLogo)
+                            @Html.ValidationMessageFor(model => model.AppLogo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @*@Html.OverrideStoreCheckboxFor(model => model.AppLogoAltText_OverrideForStore, model => model.AppLogoAltText, Model.AppLogoAltText)*@
+                            @Html.NopLabelFor(model => model.AppLogoAltText):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.AppLogoAltText)
+                            @Html.ValidationMessageFor(model => model.AppLogoAltText)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}

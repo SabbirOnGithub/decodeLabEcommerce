@@ -1,0 +1,268 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.BannerSliderModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+@{
+    Html.SetActiveMenuItemSystemName("MobileWebApi.SliderImage");
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    Html.AppendCssFileParts("~/Plugins/NopStation.MobileWebApi/Content/styles.css");
+}
+@using System.Globalization;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="raw form-horizontal clearfix">
+        @*@Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_NopMobileMenu.cshtml")*@
+
+        <div class="col-md-9">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>@T("Plugins.NopMobile.WebApi.bannerconfigureTitle")</strong>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend><div class="header-legend">@T("Plugins.Widgets.NivoSlider.Picture1")</div></legend>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Picture1Id_OverrideForStore, model => model.Picture1Id, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Picture1Id)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Picture1Id)
+                                        @Html.ValidationMessageFor(model => model.Picture1Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Text1_OverrideForStore, model => model.Text1, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Text1)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Text1)
+                                        @Html.ValidationMessageFor(model => model.Text1)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.IsProduct1_OverrideForStore, model => model.IsProduct1, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.IsProduct1)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.IsProduct1)
+                                        @Html.ValidationMessageFor(model => model.IsProduct1)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.ProductOrCategory1_OverrideForStore, model => model.ProductOrCategory1, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.ProductOrCategory1)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ProductOrCategory1)
+                                        @Html.ValidationMessageFor(model => model.ProductOrCategory1)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend><div class="header-legend">@T("Plugins.Widgets.NivoSlider.Picture2")</div></legend>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Picture2Id_OverrideForStore, model => model.Picture2Id, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Picture2Id)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Picture2Id)
+                                        @Html.ValidationMessageFor(model => model.Picture2Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Text2_OverrideForStore, model => model.Text2, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Text2)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Text2)
+                                        @Html.ValidationMessageFor(model => model.Text2)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.IsProduct2_OverrideForStore, model => model.IsProduct2, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.IsProduct2)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.IsProduct2)
+                                        @Html.ValidationMessageFor(model => model.IsProduct2)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.ProductOrCategory2_OverrideForStore, model => model.ProductOrCategory2, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.ProductOrCategory2)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ProductOrCategory2)
+                                        @Html.ValidationMessageFor(model => model.ProductOrCategory2)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend><div class="header-legend">@T("Plugins.Widgets.NivoSlider.Picture3")</div></legend>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Picture3Id_OverrideForStore, model => model.Picture3Id, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Picture3Id)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Picture3Id)
+                                        @Html.ValidationMessageFor(model => model.Picture3Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Text3_OverrideForStore, model => model.Text3, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Text3)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Text3)
+                                        @Html.ValidationMessageFor(model => model.Text3)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.IsProduct3_OverrideForStore, model => model.IsProduct3, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.IsProduct3)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.IsProduct3)
+                                        @Html.ValidationMessageFor(model => model.IsProduct3)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.ProductOrCategory3_OverrideForStore, model => model.ProductOrCategory3, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.ProductOrCategory3)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ProductOrCategory3)
+                                        @Html.ValidationMessageFor(model => model.ProductOrCategory3)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend><div class="header-legend">@T("Plugins.Widgets.NivoSlider.Picture4")</div></legend>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Picture4Id_OverrideForStore, model => model.Picture4Id, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Picture4Id)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Picture4Id)
+                                        @Html.ValidationMessageFor(model => model.Picture4Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Text4_OverrideForStore, model => model.Text4, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Text4)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Text4)
+                                        @Html.ValidationMessageFor(model => model.Text4)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.IsProduct4_OverrideForStore, model => model.IsProduct4, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.IsProduct4)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.IsProduct4)
+                                        @Html.ValidationMessageFor(model => model.IsProduct4)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.ProductOrCategory4_OverrideForStore, model => model.ProductOrCategory4, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.ProductOrCategory4)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ProductOrCategory4)
+                                        @Html.ValidationMessageFor(model => model.ProductOrCategory4)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend><div class="header-legend">@T("Plugins.Widgets.NivoSlider.Picture5")</div></legend>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Picture5Id_OverrideForStore, model => model.Picture5Id, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Picture5Id)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Picture5Id)
+                                        @Html.ValidationMessageFor(model => model.Picture5Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.Text5_OverrideForStore, model => model.Text5, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.Text5)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Text5)
+                                        @Html.ValidationMessageFor(model => model.Text5)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.IsProduct5_OverrideForStore, model => model.IsProduct5, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.IsProduct5)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.IsProduct5)
+                                        @Html.ValidationMessageFor(model => model.IsProduct5)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        @Html.OverrideStoreCheckboxFor(model => model.ProductOrCategory5_OverrideForStore, model => model.ProductOrCategory5, Model.ActiveStoreScopeConfiguration)
+                                        @Html.NopLabelFor(model => model.ProductOrCategory5)
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ProductOrCategory5)
+                                        @Html.ValidationMessageFor(model => model.ProductOrCategory5)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br />
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

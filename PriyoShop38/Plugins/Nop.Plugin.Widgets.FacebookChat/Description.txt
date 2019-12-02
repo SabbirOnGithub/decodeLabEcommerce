@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Scripts for Facebook Chat
+SystemName: Widgets.FacebookChat
+Version: 3.70
+SupportedVersions: 3.80
+Author: Jaber Kibria
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.FacebookChat.dll

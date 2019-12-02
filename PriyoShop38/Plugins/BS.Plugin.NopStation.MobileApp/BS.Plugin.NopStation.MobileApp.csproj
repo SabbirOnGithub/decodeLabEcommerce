@@ -1,0 +1,1381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D151CE65-D10D-4C6F-8C09-0F74464596B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BS.Plugin.NopStation.MobileApp</RootNamespace>
+    <AssemblyName>BS.Plugin.NopStation.MobileApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\NopStation.MobileApp\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\NopStation.MobileApp\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi">
+      <HintPath>..\..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.8.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LumenWorks.Framework.IO.3.8.0\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Data.Edm.5.7.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Admin, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Admin.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Data, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Services, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Services.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Web, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Nop.Web.Framework, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PushSharp.Amazon, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Amazon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushSharp.Apple, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Apple.dll</HintPath>
+    </Reference>
+    <Reference Include="PushSharp.Blackberry, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Blackberry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushSharp.Core, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushSharp.Firefox, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Firefox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushSharp.Google, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Google.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushSharp.Windows, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\BsNotificationAdminController.cs" />
+    <Compile Include="Controllers\BsNotificationApiController.cs" />
+    <Compile Include="Controllers\BsNotificationMessageTemplateController.cs" />
+    <Compile Include="Data\NotificationMessageTemplateMap.cs" />
+    <Compile Include="Data\QueuedNotificationMap.cs" />
+    <Compile Include="Data\ScheduledNotificationMap.cs" />
+    <Compile Include="Extensions\FcmExtension.cs" />
+    <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
+    <Compile Include="Infrastructure\EfStartUpTask.cs" />
+    <Compile Include="Data\MobileAppObjectContext.cs" />
+    <Compile Include="Data\SmartGroupsMap.cs" />
+    <Compile Include="Domain\DeviceType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\NotificationMessageTemplate.cs" />
+    <Compile Include="Domain\NotificationSettings.cs" />
+    <Compile Include="Domain\NotificationType.cs" />
+    <Compile Include="Domain\QueuedNotification.cs" />
+    <Compile Include="Domain\ScheduledNotification.cs" />
+    <Compile Include="Domain\SmartGroup.cs" />
+    <Compile Include="Extensions\DistanceExtension.cs" />
+    <Compile Include="Extensions\ErrorMessageExtension.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\MappingExtension.cs" />
+    <Compile Include="Extensions\PrePareModelExtension.cs" />
+    <Compile Include="Helpers\ComboList.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
+    <Compile Include="Infrastructure\CumtomModelBinder.cs" />
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\RouteProvider.cs" />
+    <Compile Include="Infrastructure\WebApi\FilterConfig.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\CustomExceptionLogger.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\ErrorResult.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\GlobalExceptionHandler.cs" />
+    <Compile Include="Infrastructure\WebApi\WebApiConfig.cs" />
+    <Compile Include="ModelsApi\QueryModel\TimeModel.cs" />
+    <Compile Include="ModelsApi\ResponseModel\ResponseWrapper.cs" />
+    <Compile Include="MobileAppPlugin.cs" />
+    <Compile Include="Models\AppleAps.cs" />
+    <Compile Include="Models\AppleApsCustomObject.cs" />
+    <Compile Include="Models\AppleNotification.cs" />
+    <Compile Include="Models\AppleNotificationResponse.cs" />
+    <Compile Include="Models\CategoryForNotificationModel.cs" />
+    <Compile Include="Models\CustomObjectModel.cs" />
+    <Compile Include="Models\DeviceModel.cs" />
+    <Compile Include="Models\FcmDataModel.cs" />
+    <Compile Include="Models\FcmErrorObject.cs" />
+    <Compile Include="Models\FcmModel.cs" />
+    <Compile Include="Models\FcmNotificationModel.cs" />
+    <Compile Include="Models\FcmSingleResult.cs" />
+    <Compile Include="Models\NotificationMessageTemplateListModel.cs" />
+    <Compile Include="Models\NotificationMessageTemplateModel.cs" />
+    <Compile Include="Models\ProductForNotificationModel.cs" />
+    <Compile Include="Models\QueuedNotificationModel.cs" />
+    <Compile Include="Models\ScheduledNotificationModel.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\CriteriaModel.cs" />
+    <Compile Include="Models\SmartContactModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILoggerNotification.cs" />
+    <Compile Include="Services\INotificationMessageTemplateService.cs" />
+    <Compile Include="Services\InsertQueuedNotificationsTask.cs" />
+    <Compile Include="Services\LoggerNotification.cs" />
+    <Compile Include="Services\NotificationMessageTemplateService.cs" />
+    <Compile Include="Services\QueuedNotificationSendTask.cs" />
+    <Compile Include="Services\QueuedNotificationService.cs" />
+    <Compile Include="Services\ScheduledNotificationService.cs" />
+    <Compile Include="Services\IQueuedNotificationService.cs" />
+    <Compile Include="Services\IScheduledNotificationService.cs" />
+    <Compile Include="Services\ISmartGroupService.cs" />
+    <Compile Include="Services\SmartGroupService.cs" />
+    <Compile Include="Validators\DeviceValidator.cs" />
+    <Compile Include="Validators\NotificationMessageTemplateValidator.cs" />
+    <Compile Include="Validators\QueuedNotificationValidator.cs" />
+    <Compile Include="Validators\ScheduledNotificationValidator.cs" />
+    <Compile Include="Validators\SmartGroupValidator.cs" />
+    <Compile Include="ViewEngines\CustomViewEngine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Install\SmartGroup_BsNotification.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emoji\fontello\css\animation.css" />
+    <Content Include="Content\emoji\fontello\css\fontello-codes.css" />
+    <Content Include="Content\emoji\fontello\css\fontello-embedded.css" />
+    <Content Include="Content\emoji\fontello\css\fontello-ie7-codes.css" />
+    <Content Include="Content\emoji\fontello\css\fontello-ie7.css" />
+    <Content Include="Content\emoji\fontello\css\fontello.css" />
+    <Content Include="Content\emoji\fontello\demo.html" />
+    <Content Include="Content\emoji\fontello\font\fontello.svg" />
+    <Content Include="Content\emoji\fontello\LICENSE.txt" />
+    <Content Include="Content\emoji\fontello\README.txt" />
+    <Content Include="Content\emoji\jquery.emojiarea.css" />
+    <Content Include="Content\emoji\jquery.emojiarea.js" />
+    <Content Include="Content\emoji\jquery.emojiarea.min.js" />
+    <Content Include="Content\emoji\packs\basic\emojis.js" />
+    <Content Include="Content\emoji\packs\basic\images\+1.png" />
+    <Content Include="Content\emoji\packs\basic\images\-1.png" />
+    <Content Include="Content\emoji\packs\basic\images\100.png" />
+    <Content Include="Content\emoji\packs\basic\images\109.png" />
+    <Content Include="Content\emoji\packs\basic\images\1234.png" />
+    <Content Include="Content\emoji\packs\basic\images\8ball.png" />
+    <Content Include="Content\emoji\packs\basic\images\a.png" />
+    <Content Include="Content\emoji\packs\basic\images\ab.png" />
+    <Content Include="Content\emoji\packs\basic\images\abc.png" />
+    <Content Include="Content\emoji\packs\basic\images\abcd.png" />
+    <Content Include="Content\emoji\packs\basic\images\accept.png" />
+    <Content Include="Content\emoji\packs\basic\images\aerial_tramway.png" />
+    <Content Include="Content\emoji\packs\basic\images\airplane.png" />
+    <Content Include="Content\emoji\packs\basic\images\alarm_clock.png" />
+    <Content Include="Content\emoji\packs\basic\images\alien.png" />
+    <Content Include="Content\emoji\packs\basic\images\ambulance.png" />
+    <Content Include="Content\emoji\packs\basic\images\anchor.png" />
+    <Content Include="Content\emoji\packs\basic\images\angel.png" />
+    <Content Include="Content\emoji\packs\basic\images\anger.png" />
+    <Content Include="Content\emoji\packs\basic\images\angry.png" />
+    <Content Include="Content\emoji\packs\basic\images\anguished.png" />
+    <Content Include="Content\emoji\packs\basic\images\ant.png" />
+    <Content Include="Content\emoji\packs\basic\images\apple.png" />
+    <Content Include="Content\emoji\packs\basic\images\aquarius.png" />
+    <Content Include="Content\emoji\packs\basic\images\aries.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrows_clockwise.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrows_counterclockwise.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_backward.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_double_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_double_up.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_down_small.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_forward.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_heading_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_heading_up.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_left.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_lower_left.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_lower_right.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_right.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_right_hook.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_up.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_upper_left.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_upper_right.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_up_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\arrow_up_small.png" />
+    <Content Include="Content\emoji\packs\basic\images\art.png" />
+    <Content Include="Content\emoji\packs\basic\images\articulated_lorry.png" />
+    <Content Include="Content\emoji\packs\basic\images\astonished.png" />
+    <Content Include="Content\emoji\packs\basic\images\atm.png" />
+    <Content Include="Content\emoji\packs\basic\images\b.png" />
+    <Content Include="Content\emoji\packs\basic\images\baby.png" />
+    <Content Include="Content\emoji\packs\basic\images\baby_bottle.png" />
+    <Content Include="Content\emoji\packs\basic\images\baby_chick.png" />
+    <Content Include="Content\emoji\packs\basic\images\baby_symbol.png" />
+    <Content Include="Content\emoji\packs\basic\images\baggage_claim.png" />
+    <Content Include="Content\emoji\packs\basic\images\balloon.png" />
+    <Content Include="Content\emoji\packs\basic\images\ballot_box_with_check.png" />
+    <Content Include="Content\emoji\packs\basic\images\bamboo.png" />
+    <Content Include="Content\emoji\packs\basic\images\banana.png" />
+    <Content Include="Content\emoji\packs\basic\images\bangbang.png" />
+    <Content Include="Content\emoji\packs\basic\images\bank.png" />
+    <Content Include="Content\emoji\packs\basic\images\barber.png" />
+    <Content Include="Content\emoji\packs\basic\images\bar_chart.png" />
+    <Content Include="Content\emoji\packs\basic\images\baseball.png" />
+    <Content Include="Content\emoji\packs\basic\images\basketball.png" />
+    <Content Include="Content\emoji\packs\basic\images\bath.png" />
+    <Content Include="Content\emoji\packs\basic\images\bathtub.png" />
+    <Content Include="Content\emoji\packs\basic\images\battery.png" />
+    <Content Include="Content\emoji\packs\basic\images\bear.png" />
+    <Content Include="Content\emoji\packs\basic\images\bee.png" />
+    <Content Include="Content\emoji\packs\basic\images\beer.png" />
+    <Content Include="Content\emoji\packs\basic\images\beers.png" />
+    <Content Include="Content\emoji\packs\basic\images\beetle.png" />
+    <Content Include="Content\emoji\packs\basic\images\beginner.png" />
+    <Content Include="Content\emoji\packs\basic\images\bell.png" />
+    <Content Include="Content\emoji\packs\basic\images\bento.png" />
+    <Content Include="Content\emoji\packs\basic\images\bicyclist.png" />
+    <Content Include="Content\emoji\packs\basic\images\bike.png" />
+    <Content Include="Content\emoji\packs\basic\images\bikini.png" />
+    <Content Include="Content\emoji\packs\basic\images\bird.png" />
+    <Content Include="Content\emoji\packs\basic\images\birthday.png" />
+    <Content Include="Content\emoji\packs\basic\images\black_circle.png" />
+    <Content Include="Content\emoji\packs\basic\images\black_joker.png" />
+    <Content Include="Content\emoji\packs\basic\images\black_nib.png" />
+    <Content Include="Content\emoji\packs\basic\images\black_square.png" />
+    <Content Include="Content\emoji\packs\basic\images\black_square_button.png" />
+    <Content Include="Content\emoji\packs\basic\images\blossom.png" />
+    <Content Include="Content\emoji\packs\basic\images\blowfish.png" />
+    <Content Include="Content\emoji\packs\basic\images\blue_book.png" />
+    <Content Include="Content\emoji\packs\basic\images\blue_car.png" />
+    <Content Include="Content\emoji\packs\basic\images\blue_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\blush.png" />
+    <Content Include="Content\emoji\packs\basic\images\boar.png" />
+    <Content Include="Content\emoji\packs\basic\images\boat.png" />
+    <Content Include="Content\emoji\packs\basic\images\bomb.png" />
+    <Content Include="Content\emoji\packs\basic\images\book.png" />
+    <Content Include="Content\emoji\packs\basic\images\bookmark.png" />
+    <Content Include="Content\emoji\packs\basic\images\bookmark_tabs.png" />
+    <Content Include="Content\emoji\packs\basic\images\books.png" />
+    <Content Include="Content\emoji\packs\basic\images\boom.png" />
+    <Content Include="Content\emoji\packs\basic\images\boot.png" />
+    <Content Include="Content\emoji\packs\basic\images\bouquet.png" />
+    <Content Include="Content\emoji\packs\basic\images\bow.png" />
+    <Content Include="Content\emoji\packs\basic\images\bowling.png" />
+    <Content Include="Content\emoji\packs\basic\images\bowtie.png" />
+    <Content Include="Content\emoji\packs\basic\images\boy.png" />
+    <Content Include="Content\emoji\packs\basic\images\bread.png" />
+    <Content Include="Content\emoji\packs\basic\images\bride_with_veil.png" />
+    <Content Include="Content\emoji\packs\basic\images\bridge_at_night.png" />
+    <Content Include="Content\emoji\packs\basic\images\briefcase.png" />
+    <Content Include="Content\emoji\packs\basic\images\broken_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\bug.png" />
+    <Content Include="Content\emoji\packs\basic\images\bulb.png" />
+    <Content Include="Content\emoji\packs\basic\images\bullettrain_front.png" />
+    <Content Include="Content\emoji\packs\basic\images\bullettrain_side.png" />
+    <Content Include="Content\emoji\packs\basic\images\bus.png" />
+    <Content Include="Content\emoji\packs\basic\images\busstop.png" />
+    <Content Include="Content\emoji\packs\basic\images\busts_in_silhouette.png" />
+    <Content Include="Content\emoji\packs\basic\images\bust_in_silhouette.png" />
+    <Content Include="Content\emoji\packs\basic\images\cactus.png" />
+    <Content Include="Content\emoji\packs\basic\images\cake.png" />
+    <Content Include="Content\emoji\packs\basic\images\calendar.png" />
+    <Content Include="Content\emoji\packs\basic\images\calling.png" />
+    <Content Include="Content\emoji\packs\basic\images\camel.png" />
+    <Content Include="Content\emoji\packs\basic\images\camera.png" />
+    <Content Include="Content\emoji\packs\basic\images\cancer.png" />
+    <Content Include="Content\emoji\packs\basic\images\candy.png" />
+    <Content Include="Content\emoji\packs\basic\images\capital_abcd.png" />
+    <Content Include="Content\emoji\packs\basic\images\capricorn.png" />
+    <Content Include="Content\emoji\packs\basic\images\car.png" />
+    <Content Include="Content\emoji\packs\basic\images\card_index.png" />
+    <Content Include="Content\emoji\packs\basic\images\carousel_horse.png" />
+    <Content Include="Content\emoji\packs\basic\images\cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\cat2.png" />
+    <Content Include="Content\emoji\packs\basic\images\cd.png" />
+    <Content Include="Content\emoji\packs\basic\images\chart.png" />
+    <Content Include="Content\emoji\packs\basic\images\chart_with_downwards_trend.png" />
+    <Content Include="Content\emoji\packs\basic\images\chart_with_upwards_trend.png" />
+    <Content Include="Content\emoji\packs\basic\images\checkered_flag.png" />
+    <Content Include="Content\emoji\packs\basic\images\cherries.png" />
+    <Content Include="Content\emoji\packs\basic\images\cherry_blossom.png" />
+    <Content Include="Content\emoji\packs\basic\images\chestnut.png" />
+    <Content Include="Content\emoji\packs\basic\images\chicken.png" />
+    <Content Include="Content\emoji\packs\basic\images\children_crossing.png" />
+    <Content Include="Content\emoji\packs\basic\images\chocolate_bar.png" />
+    <Content Include="Content\emoji\packs\basic\images\christmas_tree.png" />
+    <Content Include="Content\emoji\packs\basic\images\church.png" />
+    <Content Include="Content\emoji\packs\basic\images\cinema.png" />
+    <Content Include="Content\emoji\packs\basic\images\circus_tent.png" />
+    <Content Include="Content\emoji\packs\basic\images\city_sunrise.png" />
+    <Content Include="Content\emoji\packs\basic\images\city_sunset.png" />
+    <Content Include="Content\emoji\packs\basic\images\cl.png" />
+    <Content Include="Content\emoji\packs\basic\images\clap.png" />
+    <Content Include="Content\emoji\packs\basic\images\clapper.png" />
+    <Content Include="Content\emoji\packs\basic\images\clipboard.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock1.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock10.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock1030.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock11.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock1130.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock12.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock1230.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock130.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock2.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock230.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock3.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock330.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock4.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock430.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock5.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock530.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock6.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock630.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock7.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock730.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock8.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock830.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock9.png" />
+    <Content Include="Content\emoji\packs\basic\images\clock930.png" />
+    <Content Include="Content\emoji\packs\basic\images\closed_book.png" />
+    <Content Include="Content\emoji\packs\basic\images\closed_lock_with_key.png" />
+    <Content Include="Content\emoji\packs\basic\images\closed_umbrella.png" />
+    <Content Include="Content\emoji\packs\basic\images\cloud.png" />
+    <Content Include="Content\emoji\packs\basic\images\clubs.png" />
+    <Content Include="Content\emoji\packs\basic\images\cn.png" />
+    <Content Include="Content\emoji\packs\basic\images\cocktail.png" />
+    <Content Include="Content\emoji\packs\basic\images\coffee.png" />
+    <Content Include="Content\emoji\packs\basic\images\cold_sweat.png" />
+    <Content Include="Content\emoji\packs\basic\images\collision.png" />
+    <Content Include="Content\emoji\packs\basic\images\computer.png" />
+    <Content Include="Content\emoji\packs\basic\images\confetti_ball.png" />
+    <Content Include="Content\emoji\packs\basic\images\confounded.png" />
+    <Content Include="Content\emoji\packs\basic\images\confused.png" />
+    <Content Include="Content\emoji\packs\basic\images\congratulations.png" />
+    <Content Include="Content\emoji\packs\basic\images\construction.png" />
+    <Content Include="Content\emoji\packs\basic\images\construction_worker.png" />
+    <Content Include="Content\emoji\packs\basic\images\convenience_store.png" />
+    <Content Include="Content\emoji\packs\basic\images\cookie.png" />
+    <Content Include="Content\emoji\packs\basic\images\cool.png" />
+    <Content Include="Content\emoji\packs\basic\images\cop.png" />
+    <Content Include="Content\emoji\packs\basic\images\copyright.png" />
+    <Content Include="Content\emoji\packs\basic\images\corn.png" />
+    <Content Include="Content\emoji\packs\basic\images\couple.png" />
+    <Content Include="Content\emoji\packs\basic\images\couplekiss.png" />
+    <Content Include="Content\emoji\packs\basic\images\couple_with_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\cow.png" />
+    <Content Include="Content\emoji\packs\basic\images\cow2.png" />
+    <Content Include="Content\emoji\packs\basic\images\credit_card.png" />
+    <Content Include="Content\emoji\packs\basic\images\crocodile.png" />
+    <Content Include="Content\emoji\packs\basic\images\crossed_flags.png" />
+    <Content Include="Content\emoji\packs\basic\images\crown.png" />
+    <Content Include="Content\emoji\packs\basic\images\cry.png" />
+    <Content Include="Content\emoji\packs\basic\images\crying_cat_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\crystal_ball.png" />
+    <Content Include="Content\emoji\packs\basic\images\cupid.png" />
+    <Content Include="Content\emoji\packs\basic\images\curly_loop.png" />
+    <Content Include="Content\emoji\packs\basic\images\currency_exchange.png" />
+    <Content Include="Content\emoji\packs\basic\images\curry.png" />
+    <Content Include="Content\emoji\packs\basic\images\custard.png" />
+    <Content Include="Content\emoji\packs\basic\images\customs.png" />
+    <Content Include="Content\emoji\packs\basic\images\cyclone.png" />
+    <Content Include="Content\emoji\packs\basic\images\dancer.png" />
+    <Content Include="Content\emoji\packs\basic\images\dancers.png" />
+    <Content Include="Content\emoji\packs\basic\images\dango.png" />
+    <Content Include="Content\emoji\packs\basic\images\dart.png" />
+    <Content Include="Content\emoji\packs\basic\images\dash.png" />
+    <Content Include="Content\emoji\packs\basic\images\date.png" />
+    <Content Include="Content\emoji\packs\basic\images\de.png" />
+    <Content Include="Content\emoji\packs\basic\images\deciduous_tree.png" />
+    <Content Include="Content\emoji\packs\basic\images\department_store.png" />
+    <Content Include="Content\emoji\packs\basic\images\diamonds.png" />
+    <Content Include="Content\emoji\packs\basic\images\diamond_shape_with_a_dot_inside.png" />
+    <Content Include="Content\emoji\packs\basic\images\disappointed.png" />
+    <Content Include="Content\emoji\packs\basic\images\dizzy.png" />
+    <Content Include="Content\emoji\packs\basic\images\dizzy_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\dog.png" />
+    <Content Include="Content\emoji\packs\basic\images\dog2.png" />
+    <Content Include="Content\emoji\packs\basic\images\dollar.png" />
+    <Content Include="Content\emoji\packs\basic\images\dolls.png" />
+    <Content Include="Content\emoji\packs\basic\images\dolphin.png" />
+    <Content Include="Content\emoji\packs\basic\images\door.png" />
+    <Content Include="Content\emoji\packs\basic\images\doughnut.png" />
+    <Content Include="Content\emoji\packs\basic\images\do_not_litter.png" />
+    <Content Include="Content\emoji\packs\basic\images\dragon.png" />
+    <Content Include="Content\emoji\packs\basic\images\dragon_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\dress.png" />
+    <Content Include="Content\emoji\packs\basic\images\dromedary_camel.png" />
+    <Content Include="Content\emoji\packs\basic\images\droplet.png" />
+    <Content Include="Content\emoji\packs\basic\images\dvd.png" />
+    <Content Include="Content\emoji\packs\basic\images\e-mail.png" />
+    <Content Include="Content\emoji\packs\basic\images\ear.png" />
+    <Content Include="Content\emoji\packs\basic\images\earth_africa.png" />
+    <Content Include="Content\emoji\packs\basic\images\earth_americas.png" />
+    <Content Include="Content\emoji\packs\basic\images\earth_asia.png" />
+    <Content Include="Content\emoji\packs\basic\images\ear_of_rice.png" />
+    <Content Include="Content\emoji\packs\basic\images\egg.png" />
+    <Content Include="Content\emoji\packs\basic\images\eggplant.png" />
+    <Content Include="Content\emoji\packs\basic\images\eight.png" />
+    <Content Include="Content\emoji\packs\basic\images\eight_pointed_black_star.png" />
+    <Content Include="Content\emoji\packs\basic\images\eight_spoked_asterisk.png" />
+    <Content Include="Content\emoji\packs\basic\images\electric_plug.png" />
+    <Content Include="Content\emoji\packs\basic\images\elephant.png" />
+    <Content Include="Content\emoji\packs\basic\images\email.png" />
+    <Content Include="Content\emoji\packs\basic\images\end.png" />
+    <Content Include="Content\emoji\packs\basic\images\envelope.png" />
+    <Content Include="Content\emoji\packs\basic\images\es.png" />
+    <Content Include="Content\emoji\packs\basic\images\euro.png" />
+    <Content Include="Content\emoji\packs\basic\images\european_castle.png" />
+    <Content Include="Content\emoji\packs\basic\images\european_post_office.png" />
+    <Content Include="Content\emoji\packs\basic\images\evergreen_tree.png" />
+    <Content Include="Content\emoji\packs\basic\images\exclamation.png" />
+    <Content Include="Content\emoji\packs\basic\images\expressionless.png" />
+    <Content Include="Content\emoji\packs\basic\images\eyeglasses.png" />
+    <Content Include="Content\emoji\packs\basic\images\eyes.png" />
+    <Content Include="Content\emoji\packs\basic\images\facepunch.png" />
+    <Content Include="Content\emoji\packs\basic\images\factory.png" />
+    <Content Include="Content\emoji\packs\basic\images\fallen_leaf.png" />
+    <Content Include="Content\emoji\packs\basic\images\family.png" />
+    <Content Include="Content\emoji\packs\basic\images\fast_forward.png" />
+    <Content Include="Content\emoji\packs\basic\images\fax.png" />
+    <Content Include="Content\emoji\packs\basic\images\fearful.png" />
+    <Content Include="Content\emoji\packs\basic\images\feelsgood.png" />
+    <Content Include="Content\emoji\packs\basic\images\feet.png" />
+    <Content Include="Content\emoji\packs\basic\images\ferris_wheel.png" />
+    <Content Include="Content\emoji\packs\basic\images\file_folder.png" />
+    <Content Include="Content\emoji\packs\basic\images\finnadie.png" />
+    <Content Include="Content\emoji\packs\basic\images\fire.png" />
+    <Content Include="Content\emoji\packs\basic\images\fireworks.png" />
+    <Content Include="Content\emoji\packs\basic\images\fire_engine.png" />
+    <Content Include="Content\emoji\packs\basic\images\first_quarter_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\first_quarter_moon_with_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\fish.png" />
+    <Content Include="Content\emoji\packs\basic\images\fishing_pole_and_fish.png" />
+    <Content Include="Content\emoji\packs\basic\images\fish_cake.png" />
+    <Content Include="Content\emoji\packs\basic\images\fist.png" />
+    <Content Include="Content\emoji\packs\basic\images\five.png" />
+    <Content Include="Content\emoji\packs\basic\images\flags.png" />
+    <Content Include="Content\emoji\packs\basic\images\flashlight.png" />
+    <Content Include="Content\emoji\packs\basic\images\floppy_disk.png" />
+    <Content Include="Content\emoji\packs\basic\images\flower_playing_cards.png" />
+    <Content Include="Content\emoji\packs\basic\images\flushed.png" />
+    <Content Include="Content\emoji\packs\basic\images\foggy.png" />
+    <Content Include="Content\emoji\packs\basic\images\football.png" />
+    <Content Include="Content\emoji\packs\basic\images\fork_and_knife.png" />
+    <Content Include="Content\emoji\packs\basic\images\fountain.png" />
+    <Content Include="Content\emoji\packs\basic\images\four.png" />
+    <Content Include="Content\emoji\packs\basic\images\four_leaf_clover.png" />
+    <Content Include="Content\emoji\packs\basic\images\fr.png" />
+    <Content Include="Content\emoji\packs\basic\images\free.png" />
+    <Content Include="Content\emoji\packs\basic\images\fried_shrimp.png" />
+    <Content Include="Content\emoji\packs\basic\images\fries.png" />
+    <Content Include="Content\emoji\packs\basic\images\frog.png" />
+    <Content Include="Content\emoji\packs\basic\images\frowning.png" />
+    <Content Include="Content\emoji\packs\basic\images\fuelpump.png" />
+    <Content Include="Content\emoji\packs\basic\images\full_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\full_moon_with_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\game_die.png" />
+    <Content Include="Content\emoji\packs\basic\images\gb.png" />
+    <Content Include="Content\emoji\packs\basic\images\gem.png" />
+    <Content Include="Content\emoji\packs\basic\images\gemini.png" />
+    <Content Include="Content\emoji\packs\basic\images\ghost.png" />
+    <Content Include="Content\emoji\packs\basic\images\gift.png" />
+    <Content Include="Content\emoji\packs\basic\images\gift_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\girl.png" />
+    <Content Include="Content\emoji\packs\basic\images\globe_with_meridians.png" />
+    <Content Include="Content\emoji\packs\basic\images\goat.png" />
+    <Content Include="Content\emoji\packs\basic\images\goberserk.png" />
+    <Content Include="Content\emoji\packs\basic\images\godmode.png" />
+    <Content Include="Content\emoji\packs\basic\images\golf.png" />
+    <Content Include="Content\emoji\packs\basic\images\grapes.png" />
+    <Content Include="Content\emoji\packs\basic\images\green_apple.png" />
+    <Content Include="Content\emoji\packs\basic\images\green_book.png" />
+    <Content Include="Content\emoji\packs\basic\images\green_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\grey_exclamation.png" />
+    <Content Include="Content\emoji\packs\basic\images\grey_question.png" />
+    <Content Include="Content\emoji\packs\basic\images\grimacing.png" />
+    <Content Include="Content\emoji\packs\basic\images\grin.png" />
+    <Content Include="Content\emoji\packs\basic\images\grinning.png" />
+    <Content Include="Content\emoji\packs\basic\images\guardsman.png" />
+    <Content Include="Content\emoji\packs\basic\images\guitar.png" />
+    <Content Include="Content\emoji\packs\basic\images\gun.png" />
+    <Content Include="Content\emoji\packs\basic\images\haircut.png" />
+    <Content Include="Content\emoji\packs\basic\images\hamburger.png" />
+    <Content Include="Content\emoji\packs\basic\images\hammer.png" />
+    <Content Include="Content\emoji\packs\basic\images\hamster.png" />
+    <Content Include="Content\emoji\packs\basic\images\hand.png" />
+    <Content Include="Content\emoji\packs\basic\images\handbag.png" />
+    <Content Include="Content\emoji\packs\basic\images\hankey.png" />
+    <Content Include="Content\emoji\packs\basic\images\hash.png" />
+    <Content Include="Content\emoji\packs\basic\images\hatched_chick.png" />
+    <Content Include="Content\emoji\packs\basic\images\hatching_chick.png" />
+    <Content Include="Content\emoji\packs\basic\images\headphones.png" />
+    <Content Include="Content\emoji\packs\basic\images\heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\heartbeat.png" />
+    <Content Include="Content\emoji\packs\basic\images\heartpulse.png" />
+    <Content Include="Content\emoji\packs\basic\images\hearts.png" />
+    <Content Include="Content\emoji\packs\basic\images\heart_decoration.png" />
+    <Content Include="Content\emoji\packs\basic\images\heart_eyes.png" />
+    <Content Include="Content\emoji\packs\basic\images\heart_eyes_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\hear_no_evil.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_check_mark.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_division_sign.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_dollar_sign.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_exclamation_mark.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_minus_sign.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_multiplication_x.png" />
+    <Content Include="Content\emoji\packs\basic\images\heavy_plus_sign.png" />
+    <Content Include="Content\emoji\packs\basic\images\helicopter.png" />
+    <Content Include="Content\emoji\packs\basic\images\herb.png" />
+    <Content Include="Content\emoji\packs\basic\images\hibiscus.png" />
+    <Content Include="Content\emoji\packs\basic\images\high_brightness.png" />
+    <Content Include="Content\emoji\packs\basic\images\high_heel.png" />
+    <Content Include="Content\emoji\packs\basic\images\hocho.png" />
+    <Content Include="Content\emoji\packs\basic\images\honeybee.png" />
+    <Content Include="Content\emoji\packs\basic\images\honey_pot.png" />
+    <Content Include="Content\emoji\packs\basic\images\horse.png" />
+    <Content Include="Content\emoji\packs\basic\images\horse_racing.png" />
+    <Content Include="Content\emoji\packs\basic\images\hospital.png" />
+    <Content Include="Content\emoji\packs\basic\images\hotel.png" />
+    <Content Include="Content\emoji\packs\basic\images\hotsprings.png" />
+    <Content Include="Content\emoji\packs\basic\images\hourglass.png" />
+    <Content Include="Content\emoji\packs\basic\images\hourglass_flowing_sand.png" />
+    <Content Include="Content\emoji\packs\basic\images\house.png" />
+    <Content Include="Content\emoji\packs\basic\images\house_with_garden.png" />
+    <Content Include="Content\emoji\packs\basic\images\hurtrealbad.png" />
+    <Content Include="Content\emoji\packs\basic\images\hushed.png" />
+    <Content Include="Content\emoji\packs\basic\images\icecream.png" />
+    <Content Include="Content\emoji\packs\basic\images\ice_cream.png" />
+    <Content Include="Content\emoji\packs\basic\images\id.png" />
+    <Content Include="Content\emoji\packs\basic\images\ideograph_advantage.png" />
+    <Content Include="Content\emoji\packs\basic\images\imp.png" />
+    <Content Include="Content\emoji\packs\basic\images\inbox_tray.png" />
+    <Content Include="Content\emoji\packs\basic\images\incoming_envelope.png" />
+    <Content Include="Content\emoji\packs\basic\images\information_desk_person.png" />
+    <Content Include="Content\emoji\packs\basic\images\information_source.png" />
+    <Content Include="Content\emoji\packs\basic\images\innocent.png" />
+    <Content Include="Content\emoji\packs\basic\images\interrobang.png" />
+    <Content Include="Content\emoji\packs\basic\images\iphone.png" />
+    <Content Include="Content\emoji\packs\basic\images\it.png" />
+    <Content Include="Content\emoji\packs\basic\images\izakaya_lantern.png" />
+    <Content Include="Content\emoji\packs\basic\images\jack_o_lantern.png" />
+    <Content Include="Content\emoji\packs\basic\images\japan.png" />
+    <Content Include="Content\emoji\packs\basic\images\japanese_castle.png" />
+    <Content Include="Content\emoji\packs\basic\images\japanese_goblin.png" />
+    <Content Include="Content\emoji\packs\basic\images\japanese_ogre.png" />
+    <Content Include="Content\emoji\packs\basic\images\jeans.png" />
+    <Content Include="Content\emoji\packs\basic\images\joy.png" />
+    <Content Include="Content\emoji\packs\basic\images\joy_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\jp.png" />
+    <Content Include="Content\emoji\packs\basic\images\key.png" />
+    <Content Include="Content\emoji\packs\basic\images\keycap_ten.png" />
+    <Content Include="Content\emoji\packs\basic\images\kimono.png" />
+    <Content Include="Content\emoji\packs\basic\images\kiss.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing_closed_eyes.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\kissing_smiling_eyes.png" />
+    <Content Include="Content\emoji\packs\basic\images\koala.png" />
+    <Content Include="Content\emoji\packs\basic\images\koko.png" />
+    <Content Include="Content\emoji\packs\basic\images\kr.png" />
+    <Content Include="Content\emoji\packs\basic\images\large_blue_circle.png" />
+    <Content Include="Content\emoji\packs\basic\images\large_blue_diamond.png" />
+    <Content Include="Content\emoji\packs\basic\images\large_orange_diamond.png" />
+    <Content Include="Content\emoji\packs\basic\images\last_quarter_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\last_quarter_moon_with_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\laughing.png" />
+    <Content Include="Content\emoji\packs\basic\images\leaves.png" />
+    <Content Include="Content\emoji\packs\basic\images\ledger.png" />
+    <Content Include="Content\emoji\packs\basic\images\leftwards_arrow_with_hook.png" />
+    <Content Include="Content\emoji\packs\basic\images\left_luggage.png" />
+    <Content Include="Content\emoji\packs\basic\images\left_right_arrow.png" />
+    <Content Include="Content\emoji\packs\basic\images\lemon.png" />
+    <Content Include="Content\emoji\packs\basic\images\leo.png" />
+    <Content Include="Content\emoji\packs\basic\images\leopard.png" />
+    <Content Include="Content\emoji\packs\basic\images\libra.png" />
+    <Content Include="Content\emoji\packs\basic\images\light_rail.png" />
+    <Content Include="Content\emoji\packs\basic\images\link.png" />
+    <Content Include="Content\emoji\packs\basic\images\lips.png" />
+    <Content Include="Content\emoji\packs\basic\images\lipstick.png" />
+    <Content Include="Content\emoji\packs\basic\images\lock.png" />
+    <Content Include="Content\emoji\packs\basic\images\lock_with_ink_pen.png" />
+    <Content Include="Content\emoji\packs\basic\images\lollipop.png" />
+    <Content Include="Content\emoji\packs\basic\images\loop.png" />
+    <Content Include="Content\emoji\packs\basic\images\loudspeaker.png" />
+    <Content Include="Content\emoji\packs\basic\images\love_hotel.png" />
+    <Content Include="Content\emoji\packs\basic\images\love_letter.png" />
+    <Content Include="Content\emoji\packs\basic\images\low_brightness.png" />
+    <Content Include="Content\emoji\packs\basic\images\m.png" />
+    <Content Include="Content\emoji\packs\basic\images\mag.png" />
+    <Content Include="Content\emoji\packs\basic\images\mag_right.png" />
+    <Content Include="Content\emoji\packs\basic\images\mahjong.png" />
+    <Content Include="Content\emoji\packs\basic\images\mailbox.png" />
+    <Content Include="Content\emoji\packs\basic\images\mailbox_closed.png" />
+    <Content Include="Content\emoji\packs\basic\images\mailbox_with_mail.png" />
+    <Content Include="Content\emoji\packs\basic\images\mailbox_with_no_mail.png" />
+    <Content Include="Content\emoji\packs\basic\images\man.png" />
+    <Content Include="Content\emoji\packs\basic\images\mans_shoe.png" />
+    <Content Include="Content\emoji\packs\basic\images\man_with_gua_pi_mao.png" />
+    <Content Include="Content\emoji\packs\basic\images\man_with_turban.png" />
+    <Content Include="Content\emoji\packs\basic\images\maple_leaf.png" />
+    <Content Include="Content\emoji\packs\basic\images\mask.png" />
+    <Content Include="Content\emoji\packs\basic\images\massage.png" />
+    <Content Include="Content\emoji\packs\basic\images\meat_on_bone.png" />
+    <Content Include="Content\emoji\packs\basic\images\mega.png" />
+    <Content Include="Content\emoji\packs\basic\images\melon.png" />
+    <Content Include="Content\emoji\packs\basic\images\memo.png" />
+    <Content Include="Content\emoji\packs\basic\images\mens.png" />
+    <Content Include="Content\emoji\packs\basic\images\metal.png" />
+    <Content Include="Content\emoji\packs\basic\images\metro.png" />
+    <Content Include="Content\emoji\packs\basic\images\microphone.png" />
+    <Content Include="Content\emoji\packs\basic\images\microscope.png" />
+    <Content Include="Content\emoji\packs\basic\images\milky_way.png" />
+    <Content Include="Content\emoji\packs\basic\images\minibus.png" />
+    <Content Include="Content\emoji\packs\basic\images\minidisc.png" />
+    <Content Include="Content\emoji\packs\basic\images\mobile_phone_off.png" />
+    <Content Include="Content\emoji\packs\basic\images\moneybag.png" />
+    <Content Include="Content\emoji\packs\basic\images\money_with_wings.png" />
+    <Content Include="Content\emoji\packs\basic\images\monkey.png" />
+    <Content Include="Content\emoji\packs\basic\images\monkey_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\monorail.png" />
+    <Content Include="Content\emoji\packs\basic\images\moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\mortar_board.png" />
+    <Content Include="Content\emoji\packs\basic\images\mountain_bicyclist.png" />
+    <Content Include="Content\emoji\packs\basic\images\mountain_cableway.png" />
+    <Content Include="Content\emoji\packs\basic\images\mountain_railway.png" />
+    <Content Include="Content\emoji\packs\basic\images\mount_fuji.png" />
+    <Content Include="Content\emoji\packs\basic\images\mouse.png" />
+    <Content Include="Content\emoji\packs\basic\images\mouse2.png" />
+    <Content Include="Content\emoji\packs\basic\images\movie_camera.png" />
+    <Content Include="Content\emoji\packs\basic\images\moyai.png" />
+    <Content Include="Content\emoji\packs\basic\images\muscle.png" />
+    <Content Include="Content\emoji\packs\basic\images\mushroom.png" />
+    <Content Include="Content\emoji\packs\basic\images\musical_keyboard.png" />
+    <Content Include="Content\emoji\packs\basic\images\musical_note.png" />
+    <Content Include="Content\emoji\packs\basic\images\musical_score.png" />
+    <Content Include="Content\emoji\packs\basic\images\mute.png" />
+    <Content Include="Content\emoji\packs\basic\images\nail_care.png" />
+    <Content Include="Content\emoji\packs\basic\images\name_badge.png" />
+    <Content Include="Content\emoji\packs\basic\images\neckbeard.png" />
+    <Content Include="Content\emoji\packs\basic\images\necktie.png" />
+    <Content Include="Content\emoji\packs\basic\images\negative_squared_cross_mark.png" />
+    <Content Include="Content\emoji\packs\basic\images\neutral_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\new.png" />
+    <Content Include="Content\emoji\packs\basic\images\newspaper.png" />
+    <Content Include="Content\emoji\packs\basic\images\new_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\new_moon_with_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\ng.png" />
+    <Content Include="Content\emoji\packs\basic\images\nine.png" />
+    <Content Include="Content\emoji\packs\basic\images\non-potable_water.png" />
+    <Content Include="Content\emoji\packs\basic\images\nose.png" />
+    <Content Include="Content\emoji\packs\basic\images\notebook.png" />
+    <Content Include="Content\emoji\packs\basic\images\notebook_with_decorative_cover.png" />
+    <Content Include="Content\emoji\packs\basic\images\notes.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_bell.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_bicycles.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_entry.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_entry_sign.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_good.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_mobile_phones.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_mouth.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_pedestrians.png" />
+    <Content Include="Content\emoji\packs\basic\images\no_smoking.png" />
+    <Content Include="Content\emoji\packs\basic\images\nut_and_bolt.png" />
+    <Content Include="Content\emoji\packs\basic\images\o.png" />
+    <Content Include="Content\emoji\packs\basic\images\o2.png" />
+    <Content Include="Content\emoji\packs\basic\images\ocean.png" />
+    <Content Include="Content\emoji\packs\basic\images\octocat.png" />
+    <Content Include="Content\emoji\packs\basic\images\octopus.png" />
+    <Content Include="Content\emoji\packs\basic\images\oden.png" />
+    <Content Include="Content\emoji\packs\basic\images\office.png" />
+    <Content Include="Content\emoji\packs\basic\images\ok.png" />
+    <Content Include="Content\emoji\packs\basic\images\ok_hand.png" />
+    <Content Include="Content\emoji\packs\basic\images\ok_woman.png" />
+    <Content Include="Content\emoji\packs\basic\images\older_man.png" />
+    <Content Include="Content\emoji\packs\basic\images\older_woman.png" />
+    <Content Include="Content\emoji\packs\basic\images\on.png" />
+    <Content Include="Content\emoji\packs\basic\images\oncoming_automobile.png" />
+    <Content Include="Content\emoji\packs\basic\images\oncoming_bus.png" />
+    <Content Include="Content\emoji\packs\basic\images\oncoming_police_car.png" />
+    <Content Include="Content\emoji\packs\basic\images\oncoming_taxi.png" />
+    <Content Include="Content\emoji\packs\basic\images\one.png" />
+    <Content Include="Content\emoji\packs\basic\images\open_file_folder.png" />
+    <Content Include="Content\emoji\packs\basic\images\open_hands.png" />
+    <Content Include="Content\emoji\packs\basic\images\open_mouth.png" />
+    <Content Include="Content\emoji\packs\basic\images\ophiuchus.png" />
+    <Content Include="Content\emoji\packs\basic\images\orange_book.png" />
+    <Content Include="Content\emoji\packs\basic\images\outbox_tray.png" />
+    <Content Include="Content\emoji\packs\basic\images\ox.png" />
+    <Content Include="Content\emoji\packs\basic\images\pager.png" />
+    <Content Include="Content\emoji\packs\basic\images\page_facing_up.png" />
+    <Content Include="Content\emoji\packs\basic\images\page_with_curl.png" />
+    <Content Include="Content\emoji\packs\basic\images\palm_tree.png" />
+    <Content Include="Content\emoji\packs\basic\images\panda_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\paperclip.png" />
+    <Content Include="Content\emoji\packs\basic\images\parking.png" />
+    <Content Include="Content\emoji\packs\basic\images\partly_sunny.png" />
+    <Content Include="Content\emoji\packs\basic\images\part_alternation_mark.png" />
+    <Content Include="Content\emoji\packs\basic\images\passport_control.png" />
+    <Content Include="Content\emoji\packs\basic\images\paw_prints.png" />
+    <Content Include="Content\emoji\packs\basic\images\peach.png" />
+    <Content Include="Content\emoji\packs\basic\images\pear.png" />
+    <Content Include="Content\emoji\packs\basic\images\pencil.png" />
+    <Content Include="Content\emoji\packs\basic\images\pencil2.png" />
+    <Content Include="Content\emoji\packs\basic\images\penguin.png" />
+    <Content Include="Content\emoji\packs\basic\images\pensive.png" />
+    <Content Include="Content\emoji\packs\basic\images\performing_arts.png" />
+    <Content Include="Content\emoji\packs\basic\images\persevere.png" />
+    <Content Include="Content\emoji\packs\basic\images\person_frowning.png" />
+    <Content Include="Content\emoji\packs\basic\images\person_with_blond_hair.png" />
+    <Content Include="Content\emoji\packs\basic\images\person_with_pouting_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\phone.png" />
+    <Content Include="Content\emoji\packs\basic\images\pig.png" />
+    <Content Include="Content\emoji\packs\basic\images\pig2.png" />
+    <Content Include="Content\emoji\packs\basic\images\pig_nose.png" />
+    <Content Include="Content\emoji\packs\basic\images\pill.png" />
+    <Content Include="Content\emoji\packs\basic\images\pineapple.png" />
+    <Content Include="Content\emoji\packs\basic\images\pisces.png" />
+    <Content Include="Content\emoji\packs\basic\images\pizza.png" />
+    <Content Include="Content\emoji\packs\basic\images\plus1.png" />
+    <Content Include="Content\emoji\packs\basic\images\point_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\point_left.png" />
+    <Content Include="Content\emoji\packs\basic\images\point_right.png" />
+    <Content Include="Content\emoji\packs\basic\images\point_up.png" />
+    <Content Include="Content\emoji\packs\basic\images\point_up_2.png" />
+    <Content Include="Content\emoji\packs\basic\images\police_car.png" />
+    <Content Include="Content\emoji\packs\basic\images\poodle.png" />
+    <Content Include="Content\emoji\packs\basic\images\poop.png" />
+    <Content Include="Content\emoji\packs\basic\images\postal_horn.png" />
+    <Content Include="Content\emoji\packs\basic\images\postbox.png" />
+    <Content Include="Content\emoji\packs\basic\images\post_office.png" />
+    <Content Include="Content\emoji\packs\basic\images\potable_water.png" />
+    <Content Include="Content\emoji\packs\basic\images\pouch.png" />
+    <Content Include="Content\emoji\packs\basic\images\poultry_leg.png" />
+    <Content Include="Content\emoji\packs\basic\images\pound.png" />
+    <Content Include="Content\emoji\packs\basic\images\pouting_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\pray.png" />
+    <Content Include="Content\emoji\packs\basic\images\princess.png" />
+    <Content Include="Content\emoji\packs\basic\images\punch.png" />
+    <Content Include="Content\emoji\packs\basic\images\purple_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\purse.png" />
+    <Content Include="Content\emoji\packs\basic\images\pushpin.png" />
+    <Content Include="Content\emoji\packs\basic\images\put_litter_in_its_place.png" />
+    <Content Include="Content\emoji\packs\basic\images\question.png" />
+    <Content Include="Content\emoji\packs\basic\images\rabbit.png" />
+    <Content Include="Content\emoji\packs\basic\images\rabbit2.png" />
+    <Content Include="Content\emoji\packs\basic\images\racehorse.png" />
+    <Content Include="Content\emoji\packs\basic\images\radio.png" />
+    <Content Include="Content\emoji\packs\basic\images\radio_button.png" />
+    <Content Include="Content\emoji\packs\basic\images\rage.png" />
+    <Content Include="Content\emoji\packs\basic\images\rage1.png" />
+    <Content Include="Content\emoji\packs\basic\images\rage2.png" />
+    <Content Include="Content\emoji\packs\basic\images\rage3.png" />
+    <Content Include="Content\emoji\packs\basic\images\rage4.png" />
+    <Content Include="Content\emoji\packs\basic\images\railway_car.png" />
+    <Content Include="Content\emoji\packs\basic\images\rainbow.png" />
+    <Content Include="Content\emoji\packs\basic\images\raised_hand.png" />
+    <Content Include="Content\emoji\packs\basic\images\raised_hands.png" />
+    <Content Include="Content\emoji\packs\basic\images\ram.png" />
+    <Content Include="Content\emoji\packs\basic\images\ramen.png" />
+    <Content Include="Content\emoji\packs\basic\images\rat.png" />
+    <Content Include="Content\emoji\packs\basic\images\recycle.png" />
+    <Content Include="Content\emoji\packs\basic\images\red_car.png" />
+    <Content Include="Content\emoji\packs\basic\images\red_circle.png" />
+    <Content Include="Content\emoji\packs\basic\images\registered.png" />
+    <Content Include="Content\emoji\packs\basic\images\relaxed.png" />
+    <Content Include="Content\emoji\packs\basic\images\relieved.png" />
+    <Content Include="Content\emoji\packs\basic\images\repeat.png" />
+    <Content Include="Content\emoji\packs\basic\images\repeat_one.png" />
+    <Content Include="Content\emoji\packs\basic\images\restroom.png" />
+    <Content Include="Content\emoji\packs\basic\images\revolving_hearts.png" />
+    <Content Include="Content\emoji\packs\basic\images\rewind.png" />
+    <Content Include="Content\emoji\packs\basic\images\ribbon.png" />
+    <Content Include="Content\emoji\packs\basic\images\rice.png" />
+    <Content Include="Content\emoji\packs\basic\images\rice_ball.png" />
+    <Content Include="Content\emoji\packs\basic\images\rice_cracker.png" />
+    <Content Include="Content\emoji\packs\basic\images\rice_scene.png" />
+    <Content Include="Content\emoji\packs\basic\images\ring.png" />
+    <Content Include="Content\emoji\packs\basic\images\rocket.png" />
+    <Content Include="Content\emoji\packs\basic\images\roller_coaster.png" />
+    <Content Include="Content\emoji\packs\basic\images\rooster.png" />
+    <Content Include="Content\emoji\packs\basic\images\rose.png" />
+    <Content Include="Content\emoji\packs\basic\images\rotating_light.png" />
+    <Content Include="Content\emoji\packs\basic\images\round_pushpin.png" />
+    <Content Include="Content\emoji\packs\basic\images\rowboat.png" />
+    <Content Include="Content\emoji\packs\basic\images\ru.png" />
+    <Content Include="Content\emoji\packs\basic\images\rugby_football.png" />
+    <Content Include="Content\emoji\packs\basic\images\runner.png" />
+    <Content Include="Content\emoji\packs\basic\images\running.png" />
+    <Content Include="Content\emoji\packs\basic\images\running_shirt_with_sash.png" />
+    <Content Include="Content\emoji\packs\basic\images\sa.png" />
+    <Content Include="Content\emoji\packs\basic\images\sagittarius.png" />
+    <Content Include="Content\emoji\packs\basic\images\sailboat.png" />
+    <Content Include="Content\emoji\packs\basic\images\sake.png" />
+    <Content Include="Content\emoji\packs\basic\images\sandal.png" />
+    <Content Include="Content\emoji\packs\basic\images\santa.png" />
+    <Content Include="Content\emoji\packs\basic\images\satellite.png" />
+    <Content Include="Content\emoji\packs\basic\images\satisfied.png" />
+    <Content Include="Content\emoji\packs\basic\images\saxophone.png" />
+    <Content Include="Content\emoji\packs\basic\images\school.png" />
+    <Content Include="Content\emoji\packs\basic\images\school_satchel.png" />
+    <Content Include="Content\emoji\packs\basic\images\scissors.png" />
+    <Content Include="Content\emoji\packs\basic\images\scorpius.png" />
+    <Content Include="Content\emoji\packs\basic\images\scream.png" />
+    <Content Include="Content\emoji\packs\basic\images\scream_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\scroll.png" />
+    <Content Include="Content\emoji\packs\basic\images\seat.png" />
+    <Content Include="Content\emoji\packs\basic\images\secret.png" />
+    <Content Include="Content\emoji\packs\basic\images\seedling.png" />
+    <Content Include="Content\emoji\packs\basic\images\see_no_evil.png" />
+    <Content Include="Content\emoji\packs\basic\images\seven.png" />
+    <Content Include="Content\emoji\packs\basic\images\shaved_ice.png" />
+    <Content Include="Content\emoji\packs\basic\images\sheep.png" />
+    <Content Include="Content\emoji\packs\basic\images\shell.png" />
+    <Content Include="Content\emoji\packs\basic\images\ship.png" />
+    <Content Include="Content\emoji\packs\basic\images\shipit.png" />
+    <Content Include="Content\emoji\packs\basic\images\shirt.png" />
+    <Content Include="Content\emoji\packs\basic\images\shit.png" />
+    <Content Include="Content\emoji\packs\basic\images\shoe.png" />
+    <Content Include="Content\emoji\packs\basic\images\shower.png" />
+    <Content Include="Content\emoji\packs\basic\images\signal_strength.png" />
+    <Content Include="Content\emoji\packs\basic\images\six.png" />
+    <Content Include="Content\emoji\packs\basic\images\six_pointed_star.png" />
+    <Content Include="Content\emoji\packs\basic\images\ski.png" />
+    <Content Include="Content\emoji\packs\basic\images\skull.png" />
+    <Content Include="Content\emoji\packs\basic\images\sleeping.png" />
+    <Content Include="Content\emoji\packs\basic\images\sleepy.png" />
+    <Content Include="Content\emoji\packs\basic\images\slot_machine.png" />
+    <Content Include="Content\emoji\packs\basic\images\small_blue_diamond.png" />
+    <Content Include="Content\emoji\packs\basic\images\small_orange_diamond.png" />
+    <Content Include="Content\emoji\packs\basic\images\small_red_triangle.png" />
+    <Content Include="Content\emoji\packs\basic\images\small_red_triangle_down.png" />
+    <Content Include="Content\emoji\packs\basic\images\smile.png" />
+    <Content Include="Content\emoji\packs\basic\images\smiley.png" />
+    <Content Include="Content\emoji\packs\basic\images\smiley_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\smile_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\smiling_imp.png" />
+    <Content Include="Content\emoji\packs\basic\images\smirk.png" />
+    <Content Include="Content\emoji\packs\basic\images\smirk_cat.png" />
+    <Content Include="Content\emoji\packs\basic\images\smoking.png" />
+    <Content Include="Content\emoji\packs\basic\images\snail.png" />
+    <Content Include="Content\emoji\packs\basic\images\snake.png" />
+    <Content Include="Content\emoji\packs\basic\images\snowboarder.png" />
+    <Content Include="Content\emoji\packs\basic\images\snowflake.png" />
+    <Content Include="Content\emoji\packs\basic\images\snowman.png" />
+    <Content Include="Content\emoji\packs\basic\images\sob.png" />
+    <Content Include="Content\emoji\packs\basic\images\soccer.png" />
+    <Content Include="Content\emoji\packs\basic\images\soon.png" />
+    <Content Include="Content\emoji\packs\basic\images\sos.png" />
+    <Content Include="Content\emoji\packs\basic\images\sound.png" />
+    <Content Include="Content\emoji\packs\basic\images\space_invader.png" />
+    <Content Include="Content\emoji\packs\basic\images\spades.png" />
+    <Content Include="Content\emoji\packs\basic\images\spaghetti.png" />
+    <Content Include="Content\emoji\packs\basic\images\sparkler.png" />
+    <Content Include="Content\emoji\packs\basic\images\sparkles.png" />
+    <Content Include="Content\emoji\packs\basic\images\sparkling_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\speaker.png" />
+    <Content Include="Content\emoji\packs\basic\images\speak_no_evil.png" />
+    <Content Include="Content\emoji\packs\basic\images\speech_balloon.png" />
+    <Content Include="Content\emoji\packs\basic\images\speedboat.png" />
+    <Content Include="Content\emoji\packs\basic\images\squirrel.png" />
+    <Content Include="Content\emoji\packs\basic\images\star.png" />
+    <Content Include="Content\emoji\packs\basic\images\star2.png" />
+    <Content Include="Content\emoji\packs\basic\images\stars.png" />
+    <Content Include="Content\emoji\packs\basic\images\station.png" />
+    <Content Include="Content\emoji\packs\basic\images\statue_of_liberty.png" />
+    <Content Include="Content\emoji\packs\basic\images\steam_locomotive.png" />
+    <Content Include="Content\emoji\packs\basic\images\stew.png" />
+    <Content Include="Content\emoji\packs\basic\images\straight_ruler.png" />
+    <Content Include="Content\emoji\packs\basic\images\strawberry.png" />
+    <Content Include="Content\emoji\packs\basic\images\stuck_out_tongue.png" />
+    <Content Include="Content\emoji\packs\basic\images\stuck_out_tongue_closed_eyes.png" />
+    <Content Include="Content\emoji\packs\basic\images\stuck_out_tongue_winking_eye.png" />
+    <Content Include="Content\emoji\packs\basic\images\sunflower.png" />
+    <Content Include="Content\emoji\packs\basic\images\sunglasses.png" />
+    <Content Include="Content\emoji\packs\basic\images\sunny.png" />
+    <Content Include="Content\emoji\packs\basic\images\sunrise.png" />
+    <Content Include="Content\emoji\packs\basic\images\sunrise_over_mountains.png" />
+    <Content Include="Content\emoji\packs\basic\images\sun_with_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\surfer.png" />
+    <Content Include="Content\emoji\packs\basic\images\sushi.png" />
+    <Content Include="Content\emoji\packs\basic\images\suspect.png" />
+    <Content Include="Content\emoji\packs\basic\images\suspension_railway.png" />
+    <Content Include="Content\emoji\packs\basic\images\sweat.png" />
+    <Content Include="Content\emoji\packs\basic\images\sweat_drops.png" />
+    <Content Include="Content\emoji\packs\basic\images\sweat_smile.png" />
+    <Content Include="Content\emoji\packs\basic\images\sweet_potato.png" />
+    <Content Include="Content\emoji\packs\basic\images\swimmer.png" />
+    <Content Include="Content\emoji\packs\basic\images\symbols.png" />
+    <Content Include="Content\emoji\packs\basic\images\syringe.png" />
+    <Content Include="Content\emoji\packs\basic\images\tada.png" />
+    <Content Include="Content\emoji\packs\basic\images\tanabata_tree.png" />
+    <Content Include="Content\emoji\packs\basic\images\tangerine.png" />
+    <Content Include="Content\emoji\packs\basic\images\taurus.png" />
+    <Content Include="Content\emoji\packs\basic\images\taxi.png" />
+    <Content Include="Content\emoji\packs\basic\images\tea.png" />
+    <Content Include="Content\emoji\packs\basic\images\telephone.png" />
+    <Content Include="Content\emoji\packs\basic\images\telephone_receiver.png" />
+    <Content Include="Content\emoji\packs\basic\images\telescope.png" />
+    <Content Include="Content\emoji\packs\basic\images\tennis.png" />
+    <Content Include="Content\emoji\packs\basic\images\tent.png" />
+    <Content Include="Content\emoji\packs\basic\images\thought_balloon.png" />
+    <Content Include="Content\emoji\packs\basic\images\three.png" />
+    <Content Include="Content\emoji\packs\basic\images\thumbsdown.png" />
+    <Content Include="Content\emoji\packs\basic\images\thumbsup.png" />
+    <Content Include="Content\emoji\packs\basic\images\ticket.png" />
+    <Content Include="Content\emoji\packs\basic\images\tiger.png" />
+    <Content Include="Content\emoji\packs\basic\images\tiger2.png" />
+    <Content Include="Content\emoji\packs\basic\images\tired_face.png" />
+    <Content Include="Content\emoji\packs\basic\images\tm.png" />
+    <Content Include="Content\emoji\packs\basic\images\toilet.png" />
+    <Content Include="Content\emoji\packs\basic\images\tokyo_tower.png" />
+    <Content Include="Content\emoji\packs\basic\images\tomato.png" />
+    <Content Include="Content\emoji\packs\basic\images\tongue.png" />
+    <Content Include="Content\emoji\packs\basic\images\top.png" />
+    <Content Include="Content\emoji\packs\basic\images\tophat.png" />
+    <Content Include="Content\emoji\packs\basic\images\tractor.png" />
+    <Content Include="Content\emoji\packs\basic\images\traffic_light.png" />
+    <Content Include="Content\emoji\packs\basic\images\train.png" />
+    <Content Include="Content\emoji\packs\basic\images\train2.png" />
+    <Content Include="Content\emoji\packs\basic\images\tram.png" />
+    <Content Include="Content\emoji\packs\basic\images\triangular_flag_on_post.png" />
+    <Content Include="Content\emoji\packs\basic\images\triangular_ruler.png" />
+    <Content Include="Content\emoji\packs\basic\images\trident.png" />
+    <Content Include="Content\emoji\packs\basic\images\triumph.png" />
+    <Content Include="Content\emoji\packs\basic\images\trolleybus.png" />
+    <Content Include="Content\emoji\packs\basic\images\trollface.png" />
+    <Content Include="Content\emoji\packs\basic\images\trophy.png" />
+    <Content Include="Content\emoji\packs\basic\images\tropical_drink.png" />
+    <Content Include="Content\emoji\packs\basic\images\tropical_fish.png" />
+    <Content Include="Content\emoji\packs\basic\images\truck.png" />
+    <Content Include="Content\emoji\packs\basic\images\trumpet.png" />
+    <Content Include="Content\emoji\packs\basic\images\tshirt.png" />
+    <Content Include="Content\emoji\packs\basic\images\tulip.png" />
+    <Content Include="Content\emoji\packs\basic\images\turtle.png" />
+    <Content Include="Content\emoji\packs\basic\images\tv.png" />
+    <Content Include="Content\emoji\packs\basic\images\twisted_rightwards_arrows.png" />
+    <Content Include="Content\emoji\packs\basic\images\two.png" />
+    <Content Include="Content\emoji\packs\basic\images\two_hearts.png" />
+    <Content Include="Content\emoji\packs\basic\images\two_men_holding_hands.png" />
+    <Content Include="Content\emoji\packs\basic\images\two_women_holding_hands.png" />
+    <Content Include="Content\emoji\packs\basic\images\u5272.png" />
+    <Content Include="Content\emoji\packs\basic\images\u5408.png" />
+    <Content Include="Content\emoji\packs\basic\images\u55b6.png" />
+    <Content Include="Content\emoji\packs\basic\images\u6307.png" />
+    <Content Include="Content\emoji\packs\basic\images\u6708.png" />
+    <Content Include="Content\emoji\packs\basic\images\u6709.png" />
+    <Content Include="Content\emoji\packs\basic\images\u6e80.png" />
+    <Content Include="Content\emoji\packs\basic\images\u7121.png" />
+    <Content Include="Content\emoji\packs\basic\images\u7533.png" />
+    <Content Include="Content\emoji\packs\basic\images\u7981.png" />
+    <Content Include="Content\emoji\packs\basic\images\u7a7a.png" />
+    <Content Include="Content\emoji\packs\basic\images\uk.png" />
+    <Content Include="Content\emoji\packs\basic\images\umbrella.png" />
+    <Content Include="Content\emoji\packs\basic\images\unamused.png" />
+    <Content Include="Content\emoji\packs\basic\images\underage.png" />
+    <Content Include="Content\emoji\packs\basic\images\unlock.png" />
+    <Content Include="Content\emoji\packs\basic\images\up.png" />
+    <Content Include="Content\emoji\packs\basic\images\us.png" />
+    <Content Include="Content\emoji\packs\basic\images\v.png" />
+    <Content Include="Content\emoji\packs\basic\images\vertical_traffic_light.png" />
+    <Content Include="Content\emoji\packs\basic\images\vhs.png" />
+    <Content Include="Content\emoji\packs\basic\images\vibration_mode.png" />
+    <Content Include="Content\emoji\packs\basic\images\video_camera.png" />
+    <Content Include="Content\emoji\packs\basic\images\video_game.png" />
+    <Content Include="Content\emoji\packs\basic\images\violin.png" />
+    <Content Include="Content\emoji\packs\basic\images\virgo.png" />
+    <Content Include="Content\emoji\packs\basic\images\volcano.png" />
+    <Content Include="Content\emoji\packs\basic\images\vs.png" />
+    <Content Include="Content\emoji\packs\basic\images\walking.png" />
+    <Content Include="Content\emoji\packs\basic\images\waning_crescent_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\waning_gibbous_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\warning.png" />
+    <Content Include="Content\emoji\packs\basic\images\watch.png" />
+    <Content Include="Content\emoji\packs\basic\images\watermelon.png" />
+    <Content Include="Content\emoji\packs\basic\images\water_buffalo.png" />
+    <Content Include="Content\emoji\packs\basic\images\wave.png" />
+    <Content Include="Content\emoji\packs\basic\images\wavy_dash.png" />
+    <Content Include="Content\emoji\packs\basic\images\waxing_crescent_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\waxing_gibbous_moon.png" />
+    <Content Include="Content\emoji\packs\basic\images\wc.png" />
+    <Content Include="Content\emoji\packs\basic\images\weary.png" />
+    <Content Include="Content\emoji\packs\basic\images\wedding.png" />
+    <Content Include="Content\emoji\packs\basic\images\whale.png" />
+    <Content Include="Content\emoji\packs\basic\images\whale2.png" />
+    <Content Include="Content\emoji\packs\basic\images\wheelchair.png" />
+    <Content Include="Content\emoji\packs\basic\images\white_check_mark.png" />
+    <Content Include="Content\emoji\packs\basic\images\white_circle.png" />
+    <Content Include="Content\emoji\packs\basic\images\white_flower.png" />
+    <Content Include="Content\emoji\packs\basic\images\white_square.png" />
+    <Content Include="Content\emoji\packs\basic\images\white_square_button.png" />
+    <Content Include="Content\emoji\packs\basic\images\wind_chime.png" />
+    <Content Include="Content\emoji\packs\basic\images\wine_glass.png" />
+    <Content Include="Content\emoji\packs\basic\images\wink.png" />
+    <Content Include="Content\emoji\packs\basic\images\wink2.png" />
+    <Content Include="Content\emoji\packs\basic\images\wolf.png" />
+    <Content Include="Content\emoji\packs\basic\images\woman.png" />
+    <Content Include="Content\emoji\packs\basic\images\womans_clothes.png" />
+    <Content Include="Content\emoji\packs\basic\images\womans_hat.png" />
+    <Content Include="Content\emoji\packs\basic\images\womens.png" />
+    <Content Include="Content\emoji\packs\basic\images\worried.png" />
+    <Content Include="Content\emoji\packs\basic\images\wrench.png" />
+    <Content Include="Content\emoji\packs\basic\images\x.png" />
+    <Content Include="Content\emoji\packs\basic\images\yellow_heart.png" />
+    <Content Include="Content\emoji\packs\basic\images\yen.png" />
+    <Content Include="Content\emoji\packs\basic\images\yum.png" />
+    <Content Include="Content\emoji\packs\basic\images\zap.png" />
+    <Content Include="Content\emoji\packs\basic\images\zero.png" />
+    <Content Include="Content\emoji\packs\basic\images\zzz.png" />
+    <Content Include="Content\emo\lib\css\emoji.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\css\nanoscroller.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\blank.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\emoji_spritesheet_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\IconsetSmiles.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\IconsetSmiles_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\IconsetW.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\img\IconsetW_1x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\config.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\emoji-picker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\jquery.emojiarea.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\nanoscroller.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\tether.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\util.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\notification.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\Scripts\CategoryNotification.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Scripts\notification.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Scripts\sammy.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotification\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\styles.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Description.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\emo\lib\css\emoji.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\emoji-picker.coffee">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\emo\lib\js\emoji-picker.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App_Data\NopStation Development APNS BS 136.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\emoji\fontello\config.json" />
+    <None Include="Content\emoji\fontello\font\fontello.eot" />
+    <None Include="Content\emoji\fontello\font\fontello.ttf" />
+    <None Include="Content\emoji\fontello\font\fontello.woff" />
+    <None Include="Content\iPhone\key.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\iPhone\NishhyPush.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\iPhone\testAPNS_BS.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Views\BsNotification\TestPushNotification.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotification\CategoryAddPopup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotification\ProductAddPopup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotificationMessageTemplate\NotificationMessageTemplateCreate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App_Data\nopStationCert.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\QueuedList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\DeviceList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotificationMessageTemplate\NotificationMessageTemplateList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotificationMessageTemplate\NotificationMessageTemplateEdit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsNotificationMessageTemplate\_NotificationMessageTemplateCreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Views\BsNotification\CreateGroup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\CreateSchedule.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\EditGroup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\EditSchedule.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\Group.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\ScheduleList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\_CreateOrUpdateSchedule.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\_PluginsAdminLayout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\SmartGroup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsNotification\_CreateOrUpdateGroup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj">
+      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+      <Name>Nop.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\BS.Plugin.NopStation.MobileWebApi\BS.Plugin.NopStation.MobileWebApi.csproj">
+      <Project>{4c5ac5a5-d798-4167-b2df-400c58fa3fa6}</Project>
+      <Name>BS.Plugin.NopStation.MobileWebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

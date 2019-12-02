@@ -1,0 +1,216 @@
+﻿@model Nop.Plugin.Misc.HomePageProduct.Models.HomePageProductListModel
+@using Nop.Core.Infrastructure
+@using Nop.Web.Framework
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Admin.Plugins.HomePageProduct").Text;
+}
+
+@Html.HiddenFor(model => model.CategoryId)
+<a href="/Plugin/Misc//HomePageProduct/CategoryAdd">(Back to plugin main page)</a>
+<table width="100%">
+    <tr>
+        <td class="adminTitle">
+            Category Name:
+        </td>
+        <td class="adminData">
+            @Html.TextBoxFor(model => model.CategoryName, new { @readonly = true })
+        </td>
+    </tr>
+
+</table>
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="products-grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#products-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ListJson", "HomePageProduct", new { area = "" }))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: additionalData
+                                },
+                                update: {
+                                    url: "@Html.Raw(Url.Action("HomePageProductUpdate", "HomePageProduct", new { categoryId = Model.CategoryId, area = "" }))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+
+                                parameterMap: function(data, operation) {
+                                    if (operation != "read") {
+                                        //post the entities so the ASP.NET DefaultModelBinder will understand them:
+                                        //products[0].Name="name"
+                                        //products[0].Id = 1
+                                        //products[1].Name="name"
+                                        //products[1].Id = 1
+
+                                        var result = {};
+
+                                        for (var i = 0; i < data.models.length; i++) {
+                                            var entity = data.models[i];
+
+                                            for (var member in entity) {
+                                                result["products[" + i + "]." + member] = entity[member];
+                                            }
+                                        }
+
+                                        return result;
+                                    } else {
+                                        //return JSON.stringify(data);
+                                        return data;
+                                    }
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Id: { editable: false, type: "number" },
+                                        Name: { editable: false, type: "string" },
+                                        ProductId: { editable: false, type: "number" },
+                                        Sku: { editable: true, type: "string" },
+                                        Price: { editable: true, type: "number" },
+                                        StockQuantity: { editable: false, type: "number" },
+                                        Published: { editable: true, type: "boolean" },
+                                        DisableBuyButton: { editable: true, type: "boolean" },
+                                        ShowOnHomePage: { editable: true, type: "boolean" },
+                                        Priority: { editable: true, type: "number" }
+                                    }
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            //bulk editing
+                            batch: true,
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        toolbar: ["save", "cancel"],
+                        editable: {
+                            confirmation: false,
+                            //bulk editing
+                            mode: "incell"
+                        },
+                        scrollable: false,
+                        columns: [
+                             {
+                                 field: "PictureThumbnailUrl",
+                                 title: "@T("Admin.Catalog.Products.Fields.PictureThumbnailUrl")",
+                                 template: '<img src="#=PictureThumbnailUrl#" />',
+                                 width: 100
+                             },
+                            {
+                                field: "Id",
+                                title: "@T("Admin.Catalog.BulkEdit.Fields.ProductName")",
+                                template: '<a href="@Url.Content("~/Admin/Product/Edit/")#=Id#">#:Name#</a>'
+                            },
+                            {
+                                field: "ShowOnHomePage",
+                                title: "@T("ShowOnHomePage")",
+                                width: 100
+                            },
+                            {
+                                field: "Sku",
+                                title: "@T("Admin.Catalog.BulkEdit.Fields.Sku")",
+                                width: 150
+                            },
+                            {
+                                field: "Price",
+                                title: "@T("Admin.Catalog.BulkEdit.Fields.Price")",
+                                width: 150,
+                                editor: function (container, options) {
+                                    $('<input name="' + options.field + '"/>')
+                                        .appendTo(container)
+                                        .kendoNumericTextBox({
+                                            format: "{0:n4}",
+                                            decimals: 4
+                                        });
+                                }
+                            },
+                            {
+                                field: "StockQuantity",
+                                title: "@T("Admin.Catalog.BulkEdit.Fields.StockQuantity")",
+                                //integer format
+                                format: "{0:0}",
+                                width: 150
+                            },
+                            {
+                                field: "Priority",
+                                title: "@T("Priority")",
+                                editor: function (container, options) {
+                                    $('<input name="' + options.field + '"/>')
+                                        .appendTo(container)
+                                        .kendoNumericTextBox({
+                                            format: "{0:n4}",
+                                            decimals: 4
+                                        });
+                                },
+                                //integer format
+                                width: 150
+                            },
+                            {
+                                field: "Published",
+                                title: "@T("Admin.Catalog.BulkEdit.Fields.Published")",
+                                width: 200
+                            },
+                            {
+                                field: "DisableBuyButton",
+                                title: "@T("Admin.Catalog.Products.Variants.Fields.DisableBuyButton")",
+                                width: 100
+                            }
+                        ]
+                    });
+                });
+            </script>
+
+            <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#btnSearch').click(function () {
+            var grid = $('#products-grid').data('kendoGrid');
+            grid.dataSource.page(1); //new search. Set page size to 1
+            //grid.dataSource.read();
+            grid.refresh();
+            return false;
+        });
+    });
+
+    function additionalData()
+    {
+        //return {
+        //    CategoryId: $('#CategoryId').val()
+        //};
+        
+        var data = {
+            CategoryId:$('#CategoryId').val()
+        };
+        addAntiForgeryToken(data);
+        return data;
+    }
+
+            </script>
+        </td>
+    </tr>
+</table>

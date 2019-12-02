@@ -1,0 +1,220 @@
+﻿@using Nop.Core.Domain.Common
+@using Nop.Web.Framework.UI
+@using Nop.Web.Framework
+@model Nop.Plugin.Widgets.AlgoliaSearch.Models.UploadProductModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = T("Plugin.AlgoliaSearch.UploadProduct.Title").Text;
+    Html.SetActiveMenuItemSystemName("AlgoliaAdmin.UploadProducts");
+}
+<script src="~/Plugins/Widgets.AlgoliaSearch/Scripts/jquery.signalR-2.4.0.js"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+
+<style>
+    #bind-progress, #upload-progress {
+        width: 100%;
+        background-color: #ddd;
+        display: none;
+    }
+
+    #bind-bar, #upload-bar {
+        width: 0%;
+        height: 10px;
+        background-color: #009FFF;
+    }
+
+    #upload-msg, #bind-msg {
+        display: none;
+    }
+</style>
+
+<script>
+
+    $(document).ready(function () {
+        var hub = $.connection.UploadHub;
+
+        // Connect
+        $.connection.hub.start()
+            .done(function () {
+                console.log('started')
+            })
+            .fail(function (reason) {
+                console.log("SignalR connection failed: " + reason);
+            });
+
+        hub.client.productUploaded = function (res) {
+
+            console.log(res);
+
+            if (res.Status == 100) {
+                $('#bind-msg').hide();
+                $('#bind-progress').hide();
+                $('#ajaxBusy').hide();
+
+                $('#upload-msg').show();
+                $('#upload-progress').show();
+                $('#upload-msg').html(res.UploadedProducts + ' of ' + res.TotalProducts + ' product(s) uploaded (failed ' + res.Failed + ')');
+                $('#upload-bar').css('width', res.UploadedProducts / res.TotalProducts * 100 + '%');
+            }
+            else if (res.Status == 50) {
+                $('#bind-msg').show();
+                $('#bind-progress').show();
+                $('#bind-msg').html('Deleting unpublished products from Algolia (' + res.Binding + ' of ' + res.CurrentPageProducts + ' product(s) checked)');
+                $('#bind-bar').css('width', res.Binding / res.CurrentPageProducts * 100 + '%');
+
+                $('#upload-msg').show();
+                $('#upload-progress').show();
+                $('#upload-msg').html(res.UploadedProducts + ' of ' + res.TotalProducts + ' product(s) uploaded (failed ' + res.Failed + ')');
+                $('#upload-bar').css('width', res.UploadedProducts / res.TotalProducts * 100 + '%');
+            }
+            else if (res.Status == 10) {
+                $('#bind-msg').show();
+                $('#bind-progress').show();
+                $('#bind-msg').html('Listing product model to Algolia (' + res.Binding + ' of ' + res.CurrentPageProducts + ' product(s)) (page ' + res.CurrentPage + ' of ' + res.TotalPages + ' page(s))');
+                $('#bind-bar').css('width', res.Binding / res.CurrentPageProducts * 100 + '%');
+
+                $('#upload-msg').show();
+                $('#upload-progress').show();
+                $('#upload-msg').html(res.UploadedProducts + ' of ' + res.TotalProducts + ' product(s) uploaded (failed ' + res.Failed + ')');
+                $('#upload-bar').css('width', res.UploadedProducts / res.TotalProducts * 100 + '%');
+            }
+            else if (res.Status == 110) {
+                $('#bind-msg').show();
+                $('#bind-progress').show();
+                $('#bind-msg').html('Preparing Algolia product model (' + res.Binding + ' of ' + res.CurrentPageProducts + ' product(s)) (page ' + res.CurrentPage + ' of ' + res.TotalPages + ' page(s))');
+                $('#bind-bar').css('width', res.Binding / res.CurrentPageProducts * 100 + '%');
+
+                $('#upload-msg').show();
+                $('#upload-progress').show();
+                $('#upload-msg').html(res.UploadedProducts + ' of ' + res.TotalProducts + ' product(s) uploaded (failed ' + res.Failed + ')');
+                $('#upload-bar').css('width', res.UploadedProducts / res.TotalProducts * 100 + '%');
+            }
+            else if (res.Status == -1) {
+                $('#bind-msg').show();
+                $('#bind-progress').show();
+                $('#bind-msg').html(res.Message);
+                $('#bind-bar').css('width', res.Binding / res.CurrentPageProducts * 100 + '%');
+
+                $('#upload-msg').show();
+                $('#upload-progress').show();
+                $('#upload-msg').html(res.UploadedProducts + ' of ' + res.TotalProducts + ' product(s) uploaded (failed ' + res.Failed + ')');
+                $('#upload-bar').css('width', res.UploadedProducts / res.TotalProducts * 100 + '%');
+            }
+            else if (res.Status == -10) {
+                $('#bind-msg').show();
+                $('#bind-progress').show();
+                $('#bind-msg').html(res.Message);
+                $('#bind-bar').css('width', '0%');
+            }
+        };
+
+        $.connection.hub.disconnected(function () {
+            setTimeout(function () {
+                $.connection.hub.start();
+                console.log('started');
+            }, 1000);
+        });
+
+        $("#upload-button").click(function () {
+            var model = {};
+            model.FromId = $("#FromId").val();
+            model.ToId = $("#ToId").val();
+            model.CategoryId = $("#CategoryId").val();
+            model.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+
+            $('#bind-msg').show();
+            $('#bind-progress').show();
+
+            $('#upload-msg').show();
+            $('#upload-progress').show();
+            $('#bind-msg').html('Products fetching from database...');
+
+            $.ajax({
+                url: "/AlgoliaAdmin/UploadProducts",
+                type: "POST",
+                dataType: 'json',
+                data: model,
+                success: function (result) {
+                    console.log(result);
+                    if (result.Message != '') {
+                        $('#upload-msg').html(result.Message);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#CategoryId').change(function () {
+            if ($('#CategoryId').val() == '0') {
+                $('#no-category').show();
+            }
+            else {
+                $('#no-category').hide();
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugin.AlgoliaSearch.UploadProduct.Title")
+        </h1>
+        <div class="pull-right">
+            <button type="button" name="save" class="btn bg-blue" id="upload-button">
+                <i class="fa fa-upload"></i>
+                Upload
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.FromId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.FromId)
+                                @Html.ValidationMessageFor(model => model.FromId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ToId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ToId)
+                                @Html.ValidationMessageFor(model => model.ToId)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <span id="bind-msg"></span>
+                                <div id="bind-progress">
+                                    <div id="bind-bar"></div>
+                                </div>
+
+                                <span id="upload-msg"></span>
+                                <div id="upload-progress">
+                                    <div id="upload-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}    

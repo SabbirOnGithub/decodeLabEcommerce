@@ -1,0 +1,37 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.Slider.SliderImageModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+
+@{
+    //page title
+    ViewBag.Title = "Add new home page slider";
+
+    ViewBag.Title = T("Admin.Plugins.SliderImage").Text;
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Add new home page slider
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a href="/MobileWebApiConfiguration/SliderImage">back to home page slider list</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_SliderImageCreateOrUpdate.cshtml", Model)
+}

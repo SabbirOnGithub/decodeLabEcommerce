@@ -1,0 +1,239 @@
+﻿@{
+}
+@using Nop.Web.Framework
+@model Nop.Plugin.Purchase.Offer.ViewModel.PurchaseOfferViewModel
+
+<form action="/PurchaseOffer/Configure/" method="post" novalidate="novalidate">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            @Html.RenderBootstrapTabHeader("tab-info", @T("Admin.Purchase.Offer.Info"), true)
+            @Html.RenderBootstrapTabHeader("tab-resources", @T("Admin.Purchase.Offer.Options"))
+        </ul>
+        <div class="tab-content">
+            @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+            @Html.RenderBootstrapTabContent("tab-resources", @TabRequirements())
+        </div>
+    </div>
+@helper TabInfo()
+{
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.Name)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ValidFrom)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ValidFrom)
+                                @Html.ValidationMessageFor(model => model.ValidFrom)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ValidTo)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ValidTo)
+                                @Html.ValidationMessageFor(model => model.ValidTo)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.IsActive)
+                            </div>
+                            <div class="col-md-9">
+                                @if (Model.IsActive)
+                                {
+                                    <input type="checkbox" name="IsActive" value="True" checked>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="IsActive" value="True">
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShowNotificationOnCart)
+                            </div>
+                            <div class="col-md-9">
+                                @if (Model.ShowNotificationOnCart)
+                                {
+                                    <input type="checkbox" name="ShowNotificationOnCart" value="True" checked>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="ShowNotificationOnCart" value="True">
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.Description)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopTextAreaFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button type="submit" name="save" class="btn bg-blue">
+                    <i class="fa fa-floppy-o"></i>
+                    @T("Admin.Common.Save")
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@helper TabRequirements()
+{
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="resources-grid"></div>
+                <script>
+            $(document).ready(function() {
+                $("#resources-grid").kendoGrid({
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: {
+                                url: "@Html.Raw(Url.Action("GetOptions", "PurchaseOffer", new {id = Model.Id}))",
+                                type: "POST",
+                                dataType: "json"
+                            },
+                            destroy: {
+                                url: "/PurchaseOffer/DeleteOption",
+                                type: "POST",
+                                dataType: "json",
+                                data: addAntiForgeryToken
+                            }
+                        },
+                        schema: {
+                            data: "Data",
+                            total: "Total",
+                            errors: "Errors",
+                            model: {
+                                id: "Id",
+                                fields: {
+                                    ProductImage: { editable: false, type: "string" },
+                                    ProductName: { editable: false, type: "string" },
+                                    MinimumPurchaseAmount: { editable: false, type: "number" },
+                                    Quantity: { editable: false, type: "number" },
+                                    Note: { editable: false, type: "string" },
+                                    Id: { editable: false, type: "number" }
+                                }
+                            }
+                        },
+                        error: function(e) {
+                            display_kendoui_grid_error(e);
+                            // Cancel the changes
+                            this.cancelChanges();
+                        },
+                        pageSize: 15,
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
+                    pageable: {
+                        refresh: true,
+                        pageSizes: [10,15,20,50,100]
+                    },
+                    editable: {
+                        confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                        mode: "inline"
+                    },
+                    scrollable: false,
+                    columns: [
+                        {
+                            field: "ProductImage",
+                            headerTemplate: "Product Image",
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: "<img src='#=ProductImage#' width='75' height='75' />",
+                            width: 100
+                        },
+                        {
+                            field: "ProductName",
+                            title: "Product Name",
+                            width: 250
+                        },
+                        {
+                            field: "MinimumPurchaseAmount",
+                            title: "Min. Purchase",
+                            width: 100,
+						    type: "number"
+                        },
+                        {
+                            field: "Quantity",
+                            title: "Quantity",
+                            width: 70,
+						    type: "number"
+                        }, {
+                            field: "Note",
+                            title: "Note",
+                            width: 350
+                        },  {
+                            field: "Id",
+                            title: "@T("Admin.Common.Edit")",
+                            width: 200,
+                            command: [
+                                {
+                                    text: "Edit",
+                                    iconClass: "k-icon k-edit",
+                                    click: openPopUpWindow
+                                },
+                                {
+                                    name: "destroy",
+                                    text: "@T("Admin.Common.Delete")"
+                                }
+                            ]
+                        }
+                    ]
+                });
+            });
+
+            function openPopUpWindow(e) {
+                var tr = $(e.target).closest("tr");
+                var data = this.dataItem(tr);
+                javascript: OpenWindow('/PurchaseOffer/OptionAddPopup?offerId=1&optionId=' + data.Id + '&btnId=btnRefresOptions&formId=option-form', 600, 500, true);
+                return false;
+            }
+                </script>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" id="btnAddNewProduct" onclick="javascript:OpenWindow('@(Url.Action("OptionAddPopup", "PurchaseOffer", new {offerId = Model.Id, btnId = "btnRefresOptions", formId = "option-form"}))', 600, 500, true); return false;" class="btn btn-primary">
+                    @T("Admin.Purchase.Offer.AddNew")
+                </button>
+                <input type="submit" id="btnRefresOptions" style="display: none" />
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#btnRefresOptions').click(function () {
+                            console.log(11)
+                            var grid = $("#resources-grid").data('kendoGrid');
+                            grid.dataSource.read();
+                            return false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+}
+</form>

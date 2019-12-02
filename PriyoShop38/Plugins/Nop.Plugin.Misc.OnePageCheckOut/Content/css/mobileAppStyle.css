@@ -1,0 +1,121 @@
+#topicPageMobileApp {
+			width: 966px; margin: 10px auto; font-family: Roboto, sans-serif;
+		}
+
+		.topicPageMobileApp .row {
+			clear: both; position: relative;
+		}
+
+		.topicPageMobileApp .clear {
+			clear: both;
+		}
+
+		.topicPageMobileApp .vid {
+			position: absolute; top: 130px; left: 255px;
+		}
+
+		.topicPageMobileApp .fleft {
+			float: left;
+		}
+
+		.topicPageMobileApp .fright {
+			float: right;
+		}
+
+		.topicPageMobileApp .txt {
+			text-transform: uppercase;
+		}
+
+		.topicPageMobileApp .txt1 {
+			text-align: right; font-weight: 400; margin-left: 180px; margin-top: 25px; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt3 {
+			text-align: right; font-weight: 500; margin-left: 100px; margin-top: 25px; float: left; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt5 {
+			text-align: right; font-weight: 500; margin-left: 180px; margin-top: 25px; float: left; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt7 {
+			text-align: right; font-weight: 500; margin-left: 217px; margin-top: 25px; float: left; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt9 {
+			text-align: right; font-weight: 500; margin-left: 218px; margin-top: 25px; float: left; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt11 {
+			text-align: right; font-weight: 500; margin-left: 215px; margin-top: 25px; float: left; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .icn {
+			margin-right: 145px;
+		}
+
+		.topicPageMobileApp .txt2 {
+			text-align: left; font-weight: 500; margin-right: 235px; margin-top: 25px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt4 {
+			text-align: left; font-weight: 500; margin-right: 160px; margin-top: 25px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt6 {
+			text-align: left; font-weight: 500; margin-right: 200px; margin-top: 40px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt8 {
+			text-align: left; font-weight: 500; margin-right: 287px; margin-top: 40px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt10 {
+			text-align: left; font-weight: 500; margin-right: 130px; margin-top: 25px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .txt12 {
+			text-align: left; font-weight: 500; margin-right: 440px; margin-top: 40px; float: right; font-size: 24px; line-height: 24px;
+		}
+
+		.topicPageMobileApp .icn1 {
+			margin-right: 145px; float: right;
+		}
+
+		.topicPageMobileApp .icn2 {
+			margin: 10px 0 0 145px; float: left;
+		}
+
+		.topicPageMobileApp .bg-y { background: #ff9900; font-size: 32px; font-weight: 300; line-height: 34px; text-align: center; text-transform: uppercase; padding: 20px 0; }
+
+		.topicPageMobileApp .bg-g { background: #F2F2F2; width: 100%; height: 100px; }
+
+		.topicPageMobileApp .vouch {position: absolute; top: 145px; left: 772px; font-size: 20px; line-height: 26px; text-align: center; text-transform: uppercase; -ms-transform: rotate(7deg); -webkit-transform: rotate(7deg); transform: rotate(7deg); }
+
+		.topicPageMobileApp .disc { font-size: 12px; font-weight: 300; text-align: center; }
+
+/*#appStorearea {
+    outline: none;
+    width: 240px;
+    height: 81px;
+    display: inline-block;
+    border-radius: 10px;
+    position: absolute;
+    right: 410px;
+    top: 20px;
+}
+#googlePlayarea {
+    outline: none;
+    width: 260px;
+    height: 77px;
+    display: inline-block;
+    border-radius: 10px;
+    position: absolute;
+    right: 60px;
+    top: 22px;
+}*/
+    
+
+    
+
+  

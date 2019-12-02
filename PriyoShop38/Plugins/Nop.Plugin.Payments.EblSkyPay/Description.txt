@@ -1,0 +1,8 @@
+﻿Group: Payment methods
+FriendlyName: Payments.EblSkyPay
+SystemName: Payments.EblSkyPay
+Version: 1.00
+SupportedVersions: 3.80
+Author: Nirupam Chandra Modak, Jaber Kibria
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.EblSkyPay.dll

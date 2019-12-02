@@ -1,0 +1,194 @@
+﻿@{
+    Layout = "";
+}
+@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.GeneralSettingModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using System.Globalization
+
+<table class="adminContent">
+    <tr>
+        <td class="adminTitle" colspan="2">
+            <p>
+                Nothing need to configure for this plugin. Thanks for using it.
+            </p>
+        </td>
+    </tr>
+    <tr>
+</table>
+
+@*@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "featureProducts-form" }))
+{ 
+    @Html.AntiForgeryToken()
+
+    <div class="raw form-horizontal clearfix">
+    <div class="panel-group plugincontainer">
+        <div class="panel panel-default configurecontaincontainer">
+            <div class="panel-heading storelocatersettingtitle">
+                <strong>@T("Plugins.NopStation.MobileWebApi.categoryiconTitle")</strong>
+            </div>
+            <div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.OverrideStoreCheckboxFor(model => model.EnableBestseller_OverrideForStore, model => model.EnableBestseller, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.EnableBestseller)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.EnableBestseller)
+                            @Html.ValidationMessageFor(model => model.EnableBestseller)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.OverrideStoreCheckboxFor(model => model.EnableNewProducts_OverrideForStore, model => model.EnableNewProducts, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.EnableNewProducts)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.EnableNewProducts)
+                            @Html.ValidationMessageFor(model => model.EnableNewProducts)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.OverrideStoreCheckboxFor(model => model.EnableFeaturedProducts_OverrideForStore, model => model.EnableFeaturedProducts, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.EnableFeaturedProducts)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.EnableFeaturedProducts)
+                            @Html.ValidationMessageFor(model => model.EnableFeaturedProducts)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div></div>
+                        <div width="100%">
+                            <div id="fetureproductcontainer">
+                                <input type="submit" id="btnAddNewfeatureProduct" value="@T("Plugins.NopStation.MobileWebApi.AddNew")" onclick=" javascript:OpenWindow('@(Url.Action("FeaturedProductsAddPopup", "MobileWebApiConfiguration", new {btnId = "btnRefreshfeatureProducts", formId = "featureProducts-form"}))', 800, 800, true); return false; " class="k-button"/>
+                                <input type="submit" id="btnRefreshfeatureProducts" style="display: none"/>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $('#btnRefreshfeatureProducts').click(function() {
+                                            //refresh grid
+                                            var grid = $("#featureproducts-grid").data('kendoGrid');
+                                            grid.dataSource.read();
+
+                                            //return false to don't reload a page
+                                            return false;
+                                        });
+                                    });
+                                </script>
+                                <div id="featureproducts-grid"></div>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#featureproducts-grid").kendoGrid({
+                                            dataSource: {
+                                                type: "json",
+                                                transport: {
+                                                    read: {
+                                                        url: "@Html.Raw(Url.Action("FeaturedProductList", "MobileWebApiConfiguration"))",
+                                                        type: "POST",
+                                                        dataType: "json",
+                                                        data: addAntiForgeryToken
+                                                    },
+                                                    destroy: {
+                                                        url: "@Html.Raw(Url.Action("FeaturedProductDelete", "MobileWebApiConfiguration"))",
+                                                        type: "POST",
+                                                        dataType: "json",
+                                                        data: addAntiForgeryToken
+                                                    }
+                                                },
+                                                schema: {
+                                                    data: "Data",
+                                                    total: "Total",
+                                                    errors: "Errors",
+                                                    model: {
+                                                        id: "Id",
+                                                        fields: {
+                                                            ProductName: { editable: false, type: "string" },
+                                                            DisplayOrder: { editable: true, type: "number" },
+                                                            Id: { editable: false, type: "number" }
+                                                        }
+                                                    }
+                                                },
+                                                requestEnd: function(e) {
+                                                    if (e.type == "update") {
+                                                        this.read();
+                                                    }
+                                                },
+                                                error: function(e) {
+                                                    display_kendoui_grid_error(e);
+                                                    // Cancel the changes
+                                                    this.cancelChanges();
+                                                },
+                                                serverPaging: true,
+                                                serverFiltering: true,
+                                                serverSorting: true
+                                            },
+                                            pageable: {
+                                                refresh: true,
+                                                numeric: false,
+                                                previousNext: false,
+                                                info: false
+                                            },
+                                            editable: {
+                                                confirmation: false,
+                                                mode: "inline"
+                                            },
+                                            scrollable: false,
+                                            columns: [
+                                            {
+                                                field: "ProductName",
+                                                title: "@T("Admin.Catalog.Products.AssociatedProducts.Fields.Product")"
+                                            }, {
+                                                field: "Id",
+                                                title: "@T("Admin.Common.View")",
+                                                width: 100,
+                                                template: '<a href="@Url.Content("~/Admin/Product/Edit/")#=Id#">@T("Admin.Common.View")</a>'
+                                            }, {
+                                                command: [
+                                                {
+                                                    name: "destroy",
+                                                    text: "@T("Admin.Common.Delete")"
+                                                        }
+                                                    ],
+                                                    width: 200
+                                                }
+                                            ]
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-md-offset-3">
+                            <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <script>
+    $(document).ready(function () {
+        var enablefetureproduct = document.getElementById('EnableFeaturedProducts');
+        if (enablefetureproduct.checked) {
+            $("#fetureproductcontainer").show(200);
+        }
+        else{
+            $("#fetureproductcontainer").hide(200);
+        }
+
+        enablefetureproduct.onchange = function () {
+            if (this.checked) {
+                $("#fetureproductcontainer").show(200);
+            } else {
+                $("#fetureproductcontainer").hide(200);
+            }
+        }
+    });
+        </script>
+        }*@

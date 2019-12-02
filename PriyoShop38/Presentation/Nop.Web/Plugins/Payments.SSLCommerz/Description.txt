@@ -1,0 +1,9 @@
+﻿Group: Payment methods
+FriendlyName: Card Payment
+SystemName: Payments.SSLCommerz
+Version: 1.50
+SupportedVersions: 3.80
+Author: Ratul Paul
+DisplayOrder: 2
+FileName: Nop.Plugin.Payments.SSLCommerz.dll
+Description: 

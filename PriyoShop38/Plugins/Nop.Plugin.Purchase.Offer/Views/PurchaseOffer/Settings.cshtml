@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Purchase Offer";
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+@using Nop.Web.Framework
+@model Nop.Plugin.Purchase.Offer.ViewModel.PurchaseOfferViewModel
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Purchase Offer
+    </h1>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        @Html.Partial("~/Plugins/Purchase.Offer/Views/PurchaseOffer/Configure.cshtml", Model)
+    </div>
+</div>

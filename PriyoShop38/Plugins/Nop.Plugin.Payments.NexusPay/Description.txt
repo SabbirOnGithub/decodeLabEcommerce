@@ -1,0 +1,9 @@
+﻿Group: Payment methods
+FriendlyName: Nexus Pay
+SystemName: Payments.NexusPay
+Version: 1.20
+SupportedVersions: 3.80
+Author: Jaber Kibria
+DisplayOrder: 3
+FileName: Nop.Plugin.Payments.NexusPay.dll
+Description: This payment module allows you to enable "NexusPay" option in your store.

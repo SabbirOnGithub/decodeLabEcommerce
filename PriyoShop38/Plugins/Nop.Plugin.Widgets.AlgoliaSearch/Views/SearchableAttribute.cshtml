@@ -1,0 +1,252 @@
+﻿@model Nop.Plugin.Widgets.AlgoliaSearch.Models.SearchableAttributeListModel
+@using Nop.Web.Framework.UI
+
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Algolia Searchable Attributes";
+    Html.SetActiveMenuItemSystemName("AlgoliaAdmin.SearchableAttributes");
+
+    int i = 0;
+}
+
+<style>
+    .searchable-attr select {
+        max-width: 150px !important;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet">
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Algolia Searchable Attributes
+        </h1>
+        <div class="pull-right">
+            <button type="submit" id="btnSubmit" name="save" class="btn bg-blue" disabled>
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+
+                        <em>
+                            <h4>Modifiers</h4>
+                            <ul>
+                                <li>
+                                    <p>
+                                        <strong id="parameter-option-ordered">ordered:</strong>
+                                        Matches at the beginning of an attribute are more important than in the middle,
+                                        and matches in the middle are more important than towards the end.
+                                    </p>
+
+                                    <p>If you don’t use either <code class="highlighter-rouge">ordered</code> or <code class="highlighter-rouge">unordered</code>, <code class="highlighter-rouge">ordered</code> is the default.</p>
+
+                                </li>
+                                <li>
+                                    <p>
+                                        <strong id="parameter-option-unordered">unordered:</strong>
+                                        There is no preference: Any match anywhere in the attribute has the same weight.
+                                    </p>
+
+                                </li>
+                            </ul>
+                            <br />
+                            [Note] Searchable attribute add, update or delete operation may took longer time.
+                        </em>
+
+                        <table class="table table-bordered pagin-table searchable-attr">
+                            <thead>
+                                <tr>
+                                    <th width="60%">Property Name</th>
+                                    <th width="25%">Modifier</th>
+                                    <th width="15%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Attributes)
+                                {
+                                    i++;
+                                    <tr id="tr_srl_@i">
+                                        <td>
+                                            @item.PropertyName
+                                            <input type="hidden" value="@item.PropertyName" name="PropertyName" />
+                                        </td>
+                                        <td>
+                                            <input type="hidden" value="@item.IsOrdered.ToString()" name="IsOrdered" id="IsOrdered_@i" />
+                                            <select onchange="changeModifier(this, @i)" class="form-control modifier"
+                                                    @(!item.ChangableModifier ? "disabled" : "")>
+                                                <option value="false" @(!item.IsOrdered ? "selected" : "")>Unordered</option>
+                                                <option value="true" @(item.IsOrdered ? "selected" : "")>Ordered</option>
+                                            </select>
+                                        </td>
+                                        <td><button type="button" class="btn btn-danger remove-btn" onclick="removeRow(@i)">Delete</button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <button type="button" class="btn bg-blue" data-toggle="modal" data-target="#myModal">
+                                            Add a Searchable Attribute
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <script type="text/javascript">
+                            var dataChanged = false;
+
+                            var i = @i;
+
+                            function enableSaveButton() {
+                                $('#btnSubmit').attr("disabled", false);
+                                dataChanged = true;
+                            }
+
+                            function changeModifier(el, srl) {
+                                var val = $(el).val();
+
+                                $('#IsOrdered_' + srl).val(val);
+                                console.log(srl, val);
+
+                                enableSaveButton();
+                            }
+
+                            function removeRow(i) {
+                                $('#tr_srl_' + i).remove();
+                                enableSaveButton();
+                            }
+
+                            $(document).ready(function () {
+                                $('button[type="submit"]').click(function () {
+                                    dataChanged = false;
+                                });
+
+                                $('tbody').sortable({
+                                    start: function (event, ui) {
+                                    },
+                                    change: function (event, ui) {
+                                        enableSaveButton();
+                                    },
+                                    update: function (event, ui) {
+                                        enableSaveButton();
+                                    }
+                                });
+
+                                window.onbeforeunload = function () {
+                                    if (dataChanged) {
+                                        return "There are unsaved data.";
+                                    }
+                                    return undefined;
+                                }
+
+                                $('.add-attr-btn').click(function () {
+                                    i++;
+                                    var added = false;
+                                    var prop = $('#ModalAttribute').val();
+                                    var ord = $('#ModalOrdered').is(':checked');
+                                    console.log(prop, ord)
+                                    $("input[name='PropertyName']").each(function () {
+                                        if ($(this).val().trim() == prop) {
+                                            alert('Property already added');
+                                            added = true;
+                                        }
+                                    });
+
+                                    if (!added) {
+                                        enableSaveButton();
+                                        var trHtml = '<tr id="tr_srl_' + i +'"><td>' + prop +
+                                            '<input type="hidden" value="' + prop + '" name="PropertyName" /> ' +
+                                            '</td>' +
+                                            '<td>' +
+                                            '<input type="hidden" value="' + ord + '" name="IsOrdered" id="IsOrdered_' + i + '" />' +
+                                            '<select onchange="changeModifier(this, ' + i + ')" class="form-control modifier">' +
+                                            '<option value="false"';
+
+                                        if (!ord) {
+                                            trHtml += 'selected';
+                                        }
+
+                                        trHtml += '>Unordered</option>' +
+                                                    '<option value="true"';
+
+                                        if (ord) {
+                                            trHtml += 'selected';
+                                        }
+
+                                        trHtml += '>Ordered</option>' +
+                                                '</select>' +
+                                            '</td>' +
+                                            '<td> <button type="button" class="btn btn-danger remove-btn" onclick="removeRow(' + i +')">Delete</button></td > ' +
+                                            '</tr>';
+
+                                        $('.searchable-attr tbody').append(trHtml);
+
+                                        $('tbody').sortable('destroy')
+                                        $('tbody').unbind();
+                                        $('tbody').sortable({
+                                            start: function (event, ui) {
+                                            },
+                                            change: function (event, ui) {
+                                                enableSaveButton();
+                                            },
+                                            update: function (event, ui) {
+                                                enableSaveButton();
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a Searchable Attribute</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/action_page.php">
+                    <div class="form-group">
+                        <label for="Attribute">Attribute name:</label>
+                        <select class="form-control" id="ModalAttribute">
+                            @foreach (var item in Model.SelectableProperties)
+                            {
+                                <option>@item</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ordered">Ordered:</label>
+                        <input type="checkbox" id="ModalOrdered">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-blue add-attr-btn" data-dismiss="modal">Add</button>
+            </div>
+        </div>
+
+    </div>
+</div>

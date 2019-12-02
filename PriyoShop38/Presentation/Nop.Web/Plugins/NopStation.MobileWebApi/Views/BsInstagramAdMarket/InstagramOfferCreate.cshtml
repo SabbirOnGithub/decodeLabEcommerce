@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    Html.AddCssFileParts("~/Plugins/Misc.BsInstagramAdMarket/Content/styles.css");
+}
+@model BsInstagramOfferModel
+@using Nop.Core.Infrastructure
+@using BsWebApi.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false)
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="section-header">
+
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+        </div>
+    </div>
+    
+    <table class="adminContent">
+        
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Title):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Description):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Description,"RichEditor")
+                @Html.ValidationMessageFor(model => model.Description)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ImageId):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ImageId, "../../../Plugins/Misc.BsInstagramAdMarket/Views/Shared/EditorTemplates/Picture")
+                @Html.ValidationMessageFor(model => model.ImageId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.DbGeography):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DbGeography, "../../../Plugins/Misc.BsInstagramAdMarket/Views/Shared/EditorTemplates/DbGeography")
+                @Html.ValidationMessageFor(model => model.DbGeography)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.OfferStartDateTimeUtc):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.OfferStartDateTimeUtc)
+                @Html.ValidationMessageFor(model => model.OfferStartDateTimeUtc)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.OfferEndDateTimeUtc):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.OfferEndDateTimeUtc)
+                @Html.ValidationMessageFor(model => model.OfferEndDateTimeUtc)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Published):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Published)
+                @Html.ValidationMessageFor(model => model.Published)
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+}
+

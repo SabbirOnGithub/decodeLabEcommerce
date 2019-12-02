@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_RootForHome.cshtml";
+}
+
+<style>
+    .sure-thing-offer {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div>
+    @Html.Widget("sure_thing_main_slider")
+
+    @if (IsSectionDefined("timer"))
+    {
+        @RenderSection("timer")
+    }
+    <div class="sure-thing-offer">
+        @Html.Widget("sure_thing_page_top")
+    </div>
+</div>
+
+@RenderBody()

@@ -1,0 +1,187 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = T("Plugins.Widgets.BsAffiliate.AffiliateCommission").Text;
+    Html.SetActiveMenuItemSystemName("Affiliate.UserCommission");
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Plugins.Widgets.BsAffiliate.AffiliateCommission")
+    </h1>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="commission-grid"></div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#commission-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("GetCommissions", "BsAffiliateConfigure"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            contentType: "application/json",
+                                        },
+                                        update: {
+                                            url: "@Html.Raw(Url.Action("CommissionUpdate", "BsAffiliateConfigure"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        reset: {
+                                            url: "@Html.Raw(Url.Action("CommissionReset", "BsAffiliateConfigure"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        parameterMap: function (data, operation) {
+                                            if (operation != "read") {
+                                                return data;
+                                            } else {
+                                                //for some reasons only such "Filter" data be parsed
+                                                return JSON.stringify(data);
+                                            }
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors",
+                                        model: {
+                                            id: "Id",
+                                            fields: {
+                                                AffiliateName: { editable: false, type: "string" },
+                                                CustomerName: { editable: false, type: "string" },
+                                                AffiliateType: { editable: false, type: "string" },
+                                                BKash: { editable: true, type: "string" },
+                                                CommissionType: { editable: true, type: "number" },
+                                                CommissionTypeString: { editable: false, type: "string" },
+                                                CommissionRate: { editable: true, type: "number" },
+                                                CommissionString: { editable: false, type: "string" },
+                                                Id: { editable: false, type: "number" }
+                                            }
+                                        }
+                                    },
+                                    requestEnd: function (e) {
+                                        if (e.type == "create" || e.type == "update") {
+                                            this.read();
+                                        }
+                                    },
+                                    error: function (e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize),
+                            serverPaging: true,
+                                serverFiltering: true,
+                                    serverSorting: true
+                        },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes)]
+                                                                                                                        },
+                        editable: {
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                            columns: [
+                                {
+                                    field: "AffiliateName",
+                                    title: "@T("Plugins.Widgets.BsAffiliate.AffiliateUserCommissionModel.AffiliateName")",
+                                    width: 320,
+                                    template: '<a title="#=AffiliateEmail#" href="/Admin/Affiliate/Edit/#=Id#">#=AffiliateName#</a>'
+                                }, {
+                                    field: "CustomerName",
+                                    title: "@T("Plugins.Widgets.BsAffiliate.AffiliateUserCommissionModel.CustomerName")",
+                                    width: 320,
+                                    template: '#if(CustomerId != 0){#<a title="#=CustomerEmail#" href="/Admin/Customer/Edit/#=CustomerId#">#=CustomerName#</a>#}#'
+                                }, {
+                                    field: "AffiliateType",
+                                    title: "Affiliate Type",
+                                    width: 250
+                                }, {
+                                    field: "BKash",
+                                    title: "@T("Admin.Affiliates.Fields.BKash")",
+                                    width: 250
+                                }, {
+                                    field: "CommissionType",
+                                    title: "@T("Plugins.Widgets.BsAffiliate.AffiliateUserCommissionModel.CommissionType")",
+                                    width: 140,
+                                    editor: typeDropDownEditorCommossion,
+                                    template: "#=CommissionTypeString#"
+                                }, {
+                                    field: "CommissionRate",
+                                    title: "@T("Plugins.Widgets.BsAffiliate.AffiliateUserCommissionModel.CommissionRate")",
+                                    width: 140,
+                                    template: "<span>#=CommissionString#</span>"
+                                }
+                                @if (ViewBag.CanManage)
+                                {
+                                    <text>
+                                    , {
+                                    command:
+                                        [{
+                                            name: "edit",
+                                            text: {
+                                                edit: "@T("Admin.Common.Edit")",
+                                                update: "@T("Admin.Common.Update")",
+                                                cancel: "@T("Admin.Common.Cancel")"
+                                            }
+                                        }],
+                                        width: 120
+                                    }
+                                    </text>
+                                }
+                                @if (ViewBag.CanMap || ViewBag.CanManage)
+                                {
+                                    <text>
+                                    , {
+                                        field: "Id",
+                                        title: "Reset",
+                                        width: 300,
+                                        template: '@if(ViewBag.CanMap){<text><a href="/BsAffiliateConfigure/CustomerMap/#=Id#" class="k-button k-button-icontext">Modify User</a> </text>}@if(ViewBag.CanManage){<text>#if(CommissionRate != 0){#<a href="/BsAffiliateConfigure/CommissionReset/#=Id#" onclick="return confirm(\'Are you sure you want to reset this item?\')" class="k-button k-button-icontext"><span class="k-icon k-delete"></span> Reset</a>#}#</text>}'
+                                    }
+                                    </text>
+                                }
+                            ]
+                            });
+                        });
+
+                        //local datasource
+                        var allStores = [
+                            {
+                                Id: 10,
+                                Name: "Fixed"
+                            },
+                            {
+                                Id: 20,
+                                Name: "Percentage"
+                            }
+                        ];
+
+                        function typeDropDownEditorCommossion(container, options) {
+                            $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:CommissionType"/>')
+                                .appendTo(container)
+                                .kendoDropDownList({
+                                    autoBind: false,
+                                    dataSource: allStores
+                                });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

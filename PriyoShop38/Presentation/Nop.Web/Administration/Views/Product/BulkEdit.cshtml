@@ -1,0 +1,451 @@
+﻿@model BulkEditListModel
+@using Newtonsoft.Json;
+@using Nop.Services.Vendors
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Admin.Catalog.BulkEdit").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Bulk edit products");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Catalog.BulkEdit")
+        </h1>
+        <div class="pull-right">
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchProductName)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopEditorFor(model => model.SearchProductName)
+                                    </div>
+                                </div>
+                                <div class="form-group" @(Model.AvailableCategories.SelectionIsNotPossible() ? Html.Raw("style=\"display:none\"") : null)>
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchCategoryId)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopDropDownList("SearchCategoryId", Model.AvailableCategories)
+                                    </div>
+                                </div>
+                                <div class="form-group" @(Model.AvailableManufacturers.SelectionIsNotPossible() ? Html.Raw("style=\"display:none\"") : null)>
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchManufacturerId)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopDropDownList("SearchManufacturerId", Model.AvailableManufacturers)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchProductTypeId)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopDropDownList("SearchProductTypeId", Model.AvailableProductTypes)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchVendorId)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopDropDownList("SearchVendorId", Model.AvailableVendors)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SearchPublishedId)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.NopDropDownList("SearchPublishedId", Model.AvailablePublishedOptions)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-4">
+                                        <button type="button" id="search-products" class="btn btn-primary btn-search">
+                                            <i class="fa fa-search"></i>
+                                            @T("Admin.Common.Search")
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="products-grid"></div>
+                        <script>
+                            $(document).ready(function() {
+                                $("#products-grid").kendoGrid({
+                                    dataSource: {
+                                        type: "json",
+                                        transport: {
+                                            read: {
+                                                url: "@Html.Raw(Url.Action("BulkEditSelect", "Product"))",
+                                                type: "POST",
+                                                dataType: "json",
+                                                data: additionalData
+                                            },
+                                            update: {
+                                                url: "@Html.Raw(Url.Action("BulkEditUpdate", "Product"))",
+                                                type: "POST",
+                                                dataType: "json"
+                                            },
+                                            destroy: {
+                                                url: "@Html.Raw(Url.Action("BulkEditDelete", "Product"))",
+                                                type: "POST",
+                                                dataType: "json"
+                                            },
+                                            parameterMap: function(data, operation) {
+                                                if (operation != "read") {
+                                                    //post the entities so the ASP.NET DefaultModelBinder will understand them:
+                                                    //products[0].Name="name"
+                                                    //products[0].Id = 1
+                                                    //products[1].Name="name"
+                                                    //products[1].Id = 1
+
+                                                    var result = {};
+
+                                                    for (var i = 0; i < data.models.length; i++) {
+                                                        var entity = data.models[i];
+
+                                                        for (var member in entity) {
+                                                            result["products[" + i + "]." + member] = entity[member];
+                                                        }
+                                                    }
+
+                                                    addAntiForgeryToken(result);
+                                                    return result;
+                                                } else {
+                                                    addAntiForgeryToken(data);
+                                                    //return JSON.stringify(data);
+                                                    return data;
+                                                }
+                                            }
+                                        },
+                                        schema: {
+                                            data: "Data",
+                                            total: "Total",
+                                            errors: "Errors",
+                                            model: {
+                                                id: "Id",
+                                                fields: {
+                                                    Name: { editable: true, type: "string" },
+                                                    ProductId: { editable: false, type: "number" },
+                                                    Sku: { editable: true, type: "string" },
+                                                    Price: { editable: true, type: "number" },
+                                                    OldPrice: { editable: true, type: "number" },
+                                                    ProductCost: { editable: true, type: "number" },
+                                                    ManageInventoryMethod: { editable: false, type: "string" },
+                                                    StockQuantity: { editable: true, type: "number" },
+                                                    VendorName: { editable: true, type: "string"},
+                                                    VendorId: { editable: true, type: "number"},
+                                                    Published: { editable: true, type: "boolean" },
+                                                    PictureThumbnailUrl: { editable: false, type: "string" },
+                                                    Id: { editable: false, type: "number" },
+                                                    CategoryCount: { editable: false, type: "string" },
+                                                    CategoryIds: { editable: true, type: "string" }
+                                                }
+                                            }
+                                        },
+                                        requestEnd: function (e) {
+                                            if (e.type == "update") {
+                                                this.read();
+                                            }
+                                        },
+                                        error: function(e) {
+                                            display_kendoui_grid_error(e);
+                                            // Cancel the changes
+                                            this.cancelChanges();
+                                        },
+                                        //bulk editing
+                                        batch: true,
+                                        pageSize: @(defaultGridPageSize),
+                                        serverPaging: true,
+                                        serverFiltering: true,
+                                        serverSorting: true
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        pageSizes: [@(gridPageSizes)]
+                                    },
+                                    toolbar: ["save", "cancel"],
+                                    editable: {
+                                        confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                        //bulk editing
+                                        mode: "incell"
+                                    },
+                                    scrollable: false,
+                                    columns: [ {
+                                            field: "Name",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.Name")",
+                                            width: 200
+                                        }, {
+                                            field: "ProductId",
+                                            title: "@T("Admin.Common.View")",
+                                            width: 100,
+                                            template: '<a href="@Url.Content("~/Admin/Product/Edit/")#=Id#">@T("Admin.Common.View")</a>'
+                                        },{
+                                            field: "Sku",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.Sku")",
+                                            width: 150
+                                        }, {
+                                            field: "Price",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.Price")",
+                                            width: 150,
+                                            editor: function (container, options) {
+                                                $('<input name="' + options.field + '"/>')
+                                                    .appendTo(container)
+                                                    .kendoNumericTextBox({
+                                                        format: "{0:n4}",
+                                                        decimals: 4
+                                                    });
+                                            }
+                                        }, {
+                                            field: "OldPrice",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.OldPrice")",
+                                            width: 150,
+                                            editor: function(container, options) {
+                                                $('<input name="' + options.field + '"/>')
+                                                    .appendTo(container)
+                                                    .kendoNumericTextBox({
+                                                        format: "{0:n4}",
+                                                        decimals: 4
+                                                    });
+                                            }
+                                        },
+                                        {
+                                            field: "ProductCost",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.ProductCost")",
+                                            width: 170,
+                                            editor: function(container, options) {
+                                                $('<input name="' + options.field + '"/>')
+                                                    .appendTo(container)
+                                                    .kendoNumericTextBox({
+                                                        format: "{0:n4}",
+                                                        decimals: 4
+                                                    });
+                                            }
+                                        },
+                                        {
+                                            field: "CategoryCount",
+                                            title: "#Category",
+                                            template:
+                                                "<span id='categoryField' style='height:100%; display: block; overflow:auto' onclick='updateCategory(#=Id#)'>#=CategoryCount#</span>",
+                                            width: 110
+                                        },
+                                        {
+                                            field: "ManageInventoryMethod",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.ManageInventoryMethod")",
+                                            width: 150
+                                        }, {
+                                            field: "StockQuantity",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.StockQuantity")",
+                                            //integer format
+                                            format: "{0:0}",
+                                            width: 150
+                                        }, {
+                                            field: "VendorId",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.Vendor")",
+                                            width: 150,
+                                            editor: vendorDropDownEditor,
+                                            template: "#=getVendorName(VendorId)#"
+                                        },  {
+                                            field: "Published",
+                                            title: "@T("Admin.Catalog.BulkEdit.Fields.Published")",
+                                            width: 85,
+                                            template: '# if(Published) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                                        },
+                                        {
+                                            field: "PictureThumbnailUrl",
+                                            title: "@T("Admin.Catalog.Products.Fields.PictureThumbnailUrl")",
+                                            template: '<img src="#=PictureThumbnailUrl#" />',
+                                            width: 100
+                                        }                                        
+//                                         ,
+//                                    {
+//                                        command: { name: "destroy", text: "@T("Admin.Common.Delete")" },
+//                                        title: "@T("Admin.Common.Delete")",
+//                                        width: 100
+//                                    }
+                                    ]
+                                });
+                            });
+
+                            function updateCategory(productId) {
+                                var divToPopUp = $('#category-update-popup');
+                                $('html , body').css('position', 'relative');
+                                divToPopUp.attr('style', 'display:block');
+                                divToPopUp.dialog({
+                                    height: 350,
+                                    width: 500,
+                                    title: 'Edit categories',
+                                    resizable: true,
+                                    draggable: true,
+                                    dialogClass: "no-close",
+                                    closeOnEscape: true,
+                                    modal: true,
+                                    buttons: [
+                                        {
+                                            text: "Save Changes",
+                                            click: function() {
+                                                // Getting the selected values
+                                                var selectedItems = multiSelect.value();
+
+                                                // Setting the new value in kendo-grid cell
+                                                dataItem.set("CategoryIds", selectedItems.toString());
+
+                                                // Persist the category changes
+                                                kendoGrid.data("kendoGrid").dataSource.sync();
+
+                                                // closing the dialog-box
+                                                $(this).closest('.ui-dialog-content').dialog('close');
+                                            }
+                                        }
+                                    ]
+                                });
+
+                                // Setting the already save category-ids into the kendo-multi-select
+                                var kendoGrid = $("#products-grid");
+                                var dataItem = kendoGrid.data("kendoGrid").dataSource.get(productId);
+
+                                var categoryIds = dataItem["CategoryIds"];
+                                var multiSelect = $("#multiSelect-category").data("kendoMultiSelect");
+
+                                multiSelect.value(categoryIds.split(','));
+
+                                // Setting the Id and Name of the product
+                                $('#product-id-span').text(productId);
+                                $('#product-name-span').text(dataItem["Name"]);
+                            }
+
+                            var allVendors = [
+                                {
+                                    Id: 0,
+                                    Name: "@T("Admin.Catalog.Products.Fields.Vendor.None")"
+                                }
+                                @{
+                                    var vendorService = EngineContext.Current.Resolve<IVendorService>();
+                                    var allVendors = vendorService.GetAllVendors();
+                                }
+                                @foreach (var vendor in allVendors)
+                                {
+                                    <text>
+                                        , {
+                                            Id: @(vendor.Id),
+                                            Name: "@(Html.Raw(HttpUtility.JavaScriptStringEncode(vendor.Name))) (@(vendor.Id))"
+                                        }
+                                    </text>
+                                }
+                            ];
+
+                            function vendorDropDownEditor(container, options) {
+                                $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:VendorId"/>')
+                                    .appendTo(container)
+                                    .kendoDropDownList({
+                                        autoBind: false,
+                                        dataSource: allVendors
+                                    });
+                            }
+
+                            function getVendorName(vendorId) {
+                                for (var idx = 0; idx < allVendors.length; idx++) {
+                                    if (allVendors[idx].Id === vendorId) {
+                                        return allVendors[idx].Name;
+                                    }
+                                }
+                            }
+                        </script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#search-products').click(function () {
+                                    var grid = $('#products-grid').data('kendoGrid');
+                                    grid.dataSource.page(1); //new search. Set page size to 1
+                                    //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                    return false;
+                                });
+
+                                $("#@Html.FieldIdFor(model => model.SearchProductName)").keydown(function (event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-products").click();
+                                        return false;
+                                    }
+                                });
+                            });
+
+                            function additionalData() {
+                                var data = {
+                                    SearchProductName: $('#@Html.FieldIdFor(model => model.SearchProductName)').val(),
+                                    SearchCategoryId: $('#SearchCategoryId').val(),
+                                    SearchManufacturerId: $('#SearchManufacturerId').val(),
+                                    SearchProductTypeId: $('#SearchProductTypeId').val(),
+                                    SearchVendorId: $('#SearchVendorId').val(),
+                                    SearchPublishedId: $('#SearchPublishedId').val()
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <div id="category-update-popup" style="display: none">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <div class="label-wrapper">
+                            <label class="control-label">Product Name:</label>
+                        </div>
+                    </div>
+                    <div><span id="product-name-span"></span></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-wrapper">
+                        <label>Categories:</label>
+                    </div>
+                    <div><select id="multiSelect-category" multiple="multiple"></select></div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+        $("#multiSelect-category").kendoMultiSelect({
+            dataTextField: "Name",
+            dataValueField: "Value"
+        });
+
+        var dataSource = new kendo.data.DataSource({
+            data: JSON.parse(
+                '@Html.Raw(Json.Encode(Model.AvailableCategories.Select(ac => new {Name = ac.Text, Value = ac.Value}).ToList()))'),
+            pageSize: 500
+        });
+
+        var multiselect = $("#multiSelect-category").data("kendoMultiSelect");
+        multiselect.setDataSource(dataSource);
+        </script>
+    </div>

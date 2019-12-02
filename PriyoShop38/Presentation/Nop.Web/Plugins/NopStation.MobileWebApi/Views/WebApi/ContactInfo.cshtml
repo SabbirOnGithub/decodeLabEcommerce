@@ -1,0 +1,54 @@
+﻿@model Nop.Plugin.Misc.BsWebApi.Models.DashboardModel.ContactInfoModel
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using System.Globalization;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@using (Html.BeginForm())
+{ @Html.AntiForgeryToken()
+    @Html.Partial("~/Plugins/Misc.BsWebApi/Views/WebApi/_NopMobileMenu.cshtml")
+    <div class="plugincontainer">
+        <div class="configurecontaincontainer">
+            <div class="storelocatersettingtitle">
+                <strong>@T("Plugins.NopMobile.WebApi.contactInfoTitle")</strong>
+            </div>
+            <div>
+                <table class="adminContent">
+                    <tr>
+                        <td colspan="2">
+                            <strong>@T("Plugins.NopMobile.WebApi.AvailableCallTime")</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.MobContactNumber_OverrideForStore, model => model.MobContactNumber, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.MobContactNumber):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.MobContactNumber)
+                            @Html.ValidationMessageFor(model => model.MobContactNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.MobContactEmail_OverrideForStore, model => model.MobContactEmail, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.MobContactEmail):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.MobContactEmail)
+                            @Html.ValidationMessageFor(model => model.MobContactEmail)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}

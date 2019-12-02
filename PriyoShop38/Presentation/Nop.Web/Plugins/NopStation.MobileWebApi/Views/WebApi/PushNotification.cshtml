@@ -1,0 +1,49 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.PushNotificationModel
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using System.Globalization;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@using (Html.BeginForm())
+{ @Html.AntiForgeryToken()
+    @*@Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_NopMobileMenu.cshtml")*@
+    <div class="plugincontainer">
+        <div class="configurecontaincontainer">
+            <div class="storelocatersettingtitle">
+                <strong>@T("Plugins.NopStation.MobileWebApi.pushnotificationTitle")</strong>
+            </div>
+            <div>
+                <table class="adminContent">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.PushNotificationHeading_OverrideForStore, model => model.PushNotificationHeading, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.PushNotificationHeading):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.PushNotificationHeading)
+                            @Html.ValidationMessageFor(model => model.PushNotificationHeading)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.PushNotificationMessage_OverrideForStore, model => model.PushNotificationMessage, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.PushNotificationMessage):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextAreaFor(model => model.PushNotificationMessage, new { @class = "textareatextbox" })
+                            @Html.ValidationMessageFor(model => model.PushNotificationMessage)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,60 @@
+﻿@using Nop.Web.Framework.Events;
+@using Nop.Services.Events;
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+
+@model BS.Plugin.NopStation.MobileWebApi.Models.HomePage.HomePageCategoryModel
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<script>
+    $(document).ready(function () {
+        bindBootstrapTabSelectEvent('homepagecategory-edit');
+    });
+</script>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div id="homepagecategory-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", @T("Plugins.NopMobile.WebApi.HomePageCategory.Info"), true)
+                @if (Model.Id > 0)
+                {
+                    @Html.RenderBootstrapTabHeader("tab-products", @T("Plugins.NopMobile.WebApi.HomePageCategory.Products"))
+                }
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+                @if (Model.Id > 0)
+                {
+                    @Html.RenderBootstrapTabContent("tab-products", @TabProducts())
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "homepagecategory-edit");
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender)
+    {
+        @eventBlock
+    }
+}
+
+@*save selected tab name*@
+<input type="hidden" id="selected-tab-name" name="selected-tab-name" value="@(Html.GetSelectedTabName())">
+
+@helper TabInfo()
+{
+    /**/
+    @Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_HomePageCategoryCreateOrUpdate.Info.cshtml", Model)
+}
+
+@helper TabProducts()
+{
+    /**/
+    @Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_HomePageCategoryCreateOrUpdate.Products.cshtml", Model)
+}

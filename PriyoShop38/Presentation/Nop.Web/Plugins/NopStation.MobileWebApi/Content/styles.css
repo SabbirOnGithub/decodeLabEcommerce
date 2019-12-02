@@ -1,0 +1,86 @@
+﻿.foo{}
+.froogle .product-info{float:left;width:30%;}
+.froogle .google-info{float:left;width:50%;padding:0 20px;}
+.froogle .google-info dt,.froogle .google-info dd{float:left;display:inline;}
+.froogle .google-info dt{clear:left;font-weight:bold;margin:0px 10px 0px 0px;}
+.froogle .commands{float:left;width:10%;}
+.productmenu-title .detail {
+    float: left;
+    padding-left: 10px;
+    width: 320px;
+}
+
+
+    .productmenu-title .detail h3 {
+        color: #003366;
+        font-family: helvetica;
+        font-size: 25px;
+    }
+
+    .productmenu-title .detail p {
+        font-family: helvetica;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 28px;
+        margin: 0;
+    }
+
+.supportmenu {
+    float: left;
+    width: 200px;
+    margin-right:20px;
+    min-height:400px;
+}
+    .supportmenu .section-header .title {
+        color:#000;
+    }
+    .supportmenu .supportmenu_ul {
+        list-style: outside none none;
+    margin-left: -35px;
+    }
+        .supportmenu .supportmenu_ul .menu_li {
+            border: 1px solid #dfdfdf;
+            padding: 8px 4px;
+        }
+        .supportmenu .supportmenu_ul .menu_li:hover {
+            background-color:#E7EFEF;
+        }
+        .supportmenu .supportmenu_ul .menulink {
+            color:#000;
+        }
+
+
+.color {border: 2px solid #000;
+      margin-bottom: 3px;
+    padding: 3px;
+}
+.plugincontainer {float:left;width:80%;
+                      
+}
+.configurecontaincontainer {
+    border: 1px solid #acacac;
+    margin-bottom: 35px;
+    padding: 20px;
+    width: 100%;
+    background: #faf9fa none repeat scroll 0 0;
+    margin-top: 20px;
+}
+
+.storelocatersettingtitle {
+    background: #748690 none repeat scroll 0 0;
+    margin: -20px -20px 20px;
+    padding: 6px;
+    color:#fff;
+}
+.textareatextbox {
+    
+}
+
+.subcategory-list {
+    margin-top: 50px;
+}
+
+ .header-legend {
+     font-weight: bold;
+     padding-left: 15px;
+}
