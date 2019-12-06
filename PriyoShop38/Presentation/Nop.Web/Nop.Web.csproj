@@ -2204,6 +2204,7 @@
     <Content Include="Views\Catalog\VendorAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Images\eventBanner\" />
     <Folder Include="Views\Affiliate\" />
     <Folder Include="Views\CustomerWallatAccount\" />
   </ItemGroup>

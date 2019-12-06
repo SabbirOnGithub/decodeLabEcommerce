@@ -182,6 +182,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Controllers\EventBannerController.cs" />
     <Compile Include="Controllers\ZeroAgentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Agent\AgentImageInformationMap.cs" />
@@ -372,6 +373,7 @@
     <Compile Include="Models\_QueryModel\Device\AppStartModel.cs" />
     <Compile Include="Models\_QueryModel\Payment\AuthorizeQueryModel.cs" />
     <Compile Include="Models\_QueryModel\Product\ProductReviewQueryModel.cs" />
+    <Compile Include="Models\_ResponseModel\Banner\EventBannerResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\Catalog\CategoryResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\Catalog\ManufacturerDetailFeaturedProductResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\Catalog\CategoryDetailFeaturedProductAndSubcategoryResponseModel.cs" />

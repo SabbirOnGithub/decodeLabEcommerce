@@ -19,6 +19,7 @@ namespace Nop.Core.Domain.Common
         public string BannerName { get; set; }
         public int PictureId { get; set; }
         public bool IsActive { get; set; }
+        public string PictureUrl { get; set; }
 
         public virtual Category Category { get; set; }
     }

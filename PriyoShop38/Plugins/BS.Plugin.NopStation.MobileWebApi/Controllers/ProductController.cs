@@ -25,6 +25,7 @@ using BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel;
 using BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel.Product;
 using BS.Plugin.NopStation.MobileWebApi.Services;
 using Nop.Services.Catalog;
+using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
 using Nop.Services.Events;
@@ -878,6 +879,16 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
         #endregion
 
         #region Action Method
+
+        [System.Web.Http.Route("api/eventBanners")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult EventBannersList(int? thumbPictureSize = null)
+        {
+            var result = "Give all event Banners";
+            return Ok(result);
+        }
+
+
         [System.Web.Http.Route("api/homepageproducts")]
         [System.Web.Http.HttpGet]
         public IHttpActionResult HomepageProducts(int? thumbPictureSize = null)

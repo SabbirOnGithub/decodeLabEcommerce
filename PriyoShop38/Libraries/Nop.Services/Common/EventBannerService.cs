@@ -65,7 +65,7 @@ namespace Nop.Services.Common
             _eventPublisher.EntityDeleted(eventBanner);
         }
 
-        public IList<EventBanner> getAllEventBanners(int languageId = 0, bool showHidden = false)
+        public IList<EventBanner> GetAllEventBanners(int languageId = 0, bool showHidden = false)
         {
             string key = string.Format(EVENTBANNER_ALL_KEY, languageId, showHidden);
             return _cacheManager.Get(key, () =>
