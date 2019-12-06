@@ -14,7 +14,7 @@ using Nop.Services.Events;
 
 namespace Nop.Services.Common
 {
-    public partial class EventBannerService: IEventBannerService
+    public partial class EventBannerService : IEventBannerService
     {
         #region Constants
 
@@ -33,29 +33,39 @@ namespace Nop.Services.Common
 
         #endregion
 
+        #region Fields
+
         private readonly IRepository<EventBanner> _eventBannerRepository;
+        private readonly IRepository<StoreMapping> _storeMappingRepository;
         private readonly IStoreContext _storeContext;
-        private readonly CatalogSettings _catalogSettings;
         private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
 
+        #endregion
+
+        #region ctor
+
         public EventBannerService(ICacheManager cacheManager,
             IRepository<EventBanner> eventBannerRepository,
+            IRepository<StoreMapping> storeMappingRepository,
             IStoreContext storeContext,
-            CatalogSettings catalogSettings,
             IEventPublisher eventPublisher)
         {
             this._cacheManager = cacheManager;
             this._eventBannerRepository = eventBannerRepository;
+            this._storeMappingRepository = storeMappingRepository;
             this._storeContext = storeContext;
-            this._catalogSettings = catalogSettings;
             this._eventPublisher = eventPublisher;
         }
+
+        #endregion
+
+        #region Methods
 
         public void DeleteEventBanner(EventBanner eventBanner)
         {
             if (eventBanner == null)
-                throw new ArgumentNullException("eventBanner");
+                throw new ArgumentNullException("");
 
             _eventBannerRepository.Delete(eventBanner);
 
@@ -76,7 +86,7 @@ namespace Nop.Services.Common
 
                 if (languageId > 0)
                 {
-                    eventBanners = eventBanners.OrderBy(x =>x.BannerName).ToList();
+                    eventBanners = eventBanners.OrderBy(x => x.BannerName).ToList();
                 }
                 return eventBanners;
             });
@@ -96,8 +106,8 @@ namespace Nop.Services.Common
                 return new List<EventBanner>();
 
             var query = from c in _eventBannerRepository.Table
-                where eventBannerIds.Contains(c.Id)
-                select c;
+                        where eventBannerIds.Contains(c.Id)
+                        select c;
             var eventBanners = query.ToList();
             //sort by passed identifiers
             var sortedEventBanners = new List<EventBanner>();
@@ -119,5 +129,6 @@ namespace Nop.Services.Common
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

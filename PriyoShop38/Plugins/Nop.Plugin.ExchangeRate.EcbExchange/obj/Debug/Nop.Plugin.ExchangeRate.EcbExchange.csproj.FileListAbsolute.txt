@@ -45,3 +45,12 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbE
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\ExchangeRate.EcbExchange\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\ExchangeRate.EcbExchange\logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\ExchangeRate.EcbExchange\Nop.Plugin.ExchangeRate.EcbExchange.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\ExchangeRate.EcbExchange\Nop.Plugin.ExchangeRate.EcbExchange.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\ExchangeRate.EcbExchange\Nop.Plugin.ExchangeRate.EcbExchange.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.csproj.App.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.ExchangeRate.EcbExchange\obj\Debug\Nop.Plugin.ExchangeRate.EcbExchange.pdb

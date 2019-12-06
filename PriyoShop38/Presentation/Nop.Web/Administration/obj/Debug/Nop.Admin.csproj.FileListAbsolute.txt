@@ -40,3 +40,11 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csproj.CopyComplete
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\bin\Nop.Admin.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\bin\Nop.Admin.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\bin\Nop.Admin.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csproj.App.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.csproj.CopyComplete
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Administration\obj\Debug\Nop.Admin.pdb

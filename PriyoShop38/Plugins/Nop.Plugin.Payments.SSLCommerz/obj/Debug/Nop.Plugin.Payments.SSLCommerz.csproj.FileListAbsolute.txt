@@ -55,3 +55,14 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLComme
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Views\PaymentSSLCommerz\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Views\PaymentSSLCommerz\PaymentInfo.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\logo.png
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Nop.Plugin.Payments.SSLCommerz.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Nop.Plugin.Payments.SSLCommerz.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerz\Nop.Plugin.Payments.SSLCommerz.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerz\obj\Debug\Nop.Plugin.Payments.SSLCommerz.pdb

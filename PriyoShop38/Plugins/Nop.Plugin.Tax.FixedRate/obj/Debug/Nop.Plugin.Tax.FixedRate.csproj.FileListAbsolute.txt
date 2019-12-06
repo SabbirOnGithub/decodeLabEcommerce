@@ -51,3 +51,14 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.pdb
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\Views\TaxFixedRate\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\Nop.Plugin.Tax.FixedRate.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\Nop.Plugin.Tax.FixedRate.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Tax.FixedRate\Nop.Plugin.Tax.FixedRate.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.csproj.App.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Tax.FixedRate\obj\Debug\Nop.Plugin.Tax.FixedRate.pdb

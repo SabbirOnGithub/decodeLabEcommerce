@@ -54,3 +54,14 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.Cus
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Views\DiscountRulesCustomerRoles\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.csproj.App.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Debug\Nop.Plugin.DiscountRules.CustomerRoles.pdb

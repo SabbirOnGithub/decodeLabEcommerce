@@ -50,3 +50,14 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payment
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Views\PaymentCreditCardPOS\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Views\PaymentCreditCardPOS\PaymentInfo.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\logo.png
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Nop.Plugin.Payments.CreditCardPOS.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Nop.Plugin.Payments.CreditCardPOS.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Nop.Plugin.Payments.CreditCardPOS.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.csprojAssemblyReference.cache

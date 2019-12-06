@@ -50,3 +50,13 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\o
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.csproj.CopyComplete
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\Views\PaymentDmoney\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\Nop.Plugin.Payments.Dmoney.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.Dmoney\Nop.Plugin.Payments.Dmoney.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.csproj.CopyComplete
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.Dmoney\obj\Debug\Nop.Plugin.Payments.Dmoney.pdb

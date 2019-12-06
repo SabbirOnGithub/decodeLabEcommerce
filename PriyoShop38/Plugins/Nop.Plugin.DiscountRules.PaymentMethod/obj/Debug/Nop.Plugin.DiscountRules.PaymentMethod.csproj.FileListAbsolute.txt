@@ -45,3 +45,12 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.Pay
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Views\DiscountRulesPaymentMethod\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.pdb

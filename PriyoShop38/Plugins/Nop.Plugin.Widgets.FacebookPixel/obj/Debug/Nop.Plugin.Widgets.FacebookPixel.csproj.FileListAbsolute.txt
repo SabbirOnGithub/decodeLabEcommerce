@@ -55,3 +55,14 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookP
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.csproj.CopyComplete
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\Views\WidgetsFacebookPixel\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\Nop.Plugin.Widgets.FacebookPixel.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\Nop.Plugin.Widgets.FacebookPixel.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Widgets.FacebookPixel\Nop.Plugin.Widgets.FacebookPixel.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.csproj.CopyComplete
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.FacebookPixel\obj\Debug\Nop.Plugin.Widgets.FacebookPixel.pdb

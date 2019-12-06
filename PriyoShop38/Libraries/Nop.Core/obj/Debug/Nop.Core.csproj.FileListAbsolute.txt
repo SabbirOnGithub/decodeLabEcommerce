@@ -229,7 +229,7 @@ G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\bin\Debug\ko\Micr
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\bin\Debug\ru\Microsoft.Data.Edm.resources.dll
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll
-G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.csprojAssemblyReference.cache
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.csproj.CopyComplete
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.dll
 G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.csprojAssemblyReference.cache

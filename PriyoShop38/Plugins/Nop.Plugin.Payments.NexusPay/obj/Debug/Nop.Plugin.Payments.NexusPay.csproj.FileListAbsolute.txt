@@ -64,3 +64,16 @@ E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.csproj.CoreCompileInputs.cache
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.dll
 E:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\nexus_pay_process_1.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Views\PaymentNexusPay\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Views\PaymentNexusPay\PaymentInfo.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Views\PaymentNexusPay\HowToPay.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\logo.png
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.pdb
