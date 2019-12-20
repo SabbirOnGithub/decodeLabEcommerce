@@ -1,8 +1,0 @@
-﻿Group: NopStation
-FriendlyName: Ek-shop a2i
-SystemName: Widgets.EkShopA2I
-Version: 1.00
-SupportedVersions: 3.80
-Author: Jaber Kibria
-DisplayOrder: 2
-FileName: Nop.Plugin.Widgets.EkShopA2I.dll

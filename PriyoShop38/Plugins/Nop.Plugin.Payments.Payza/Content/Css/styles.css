@@ -1,6 +1,0 @@
-﻿table, th, td { border: 1px solid black; border-collapse: collapse; }
-
-th, td { padding: 5px; text-align: left; }
-.checkoutDiv { width: 100%; margin: 0 auto; text-align: center; margin-bottom: 0; }
-.buttonCheckout { cursor: pointer; background: #02456F; -webkit-transition: all 0.2s ease 0s; -ms-transition: all 0.2s ease 0s; transition: all 0.2s ease 0s; color: #fff; padding: 10px 20px; border: none; font-size: 16px; font-weight: normal; margin: 5px auto; }
-    .buttonCheckout:hover { background-color: #34649F; -webkit-transition: all 0.2s ease 0s; -ms-transition: all 0.2s ease 0s; transition: all 0.2s ease 0s; }

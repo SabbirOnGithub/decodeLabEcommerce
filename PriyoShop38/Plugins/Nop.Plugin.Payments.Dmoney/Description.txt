@@ -1,9 +1,0 @@
-﻿Group: Payment methods
-FriendlyName: Dmoney
-SystemName: Payments.Dmoney
-Version: 1.03
-SupportedVersions: 3.80
-Author: Jaber Kibria
-DisplayOrder: 4
-FileName: Nop.Plugin.Payments.Dmoney.dll
-Description: 

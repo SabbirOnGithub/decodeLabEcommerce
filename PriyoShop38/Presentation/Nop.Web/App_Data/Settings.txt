@@ -1,2 +1,0 @@
-﻿DataProvider: sqlserver
-DataConnectionString: Data Source=localhost;Initial Catalog=PriyoShop38;Integrated Security=True;MultipleActiveResultSets=True

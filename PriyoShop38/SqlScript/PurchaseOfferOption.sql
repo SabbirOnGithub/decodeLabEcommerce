@@ -1,1 +1,0 @@
-ALTER TABLE PurchaseOffer_Option ADD PictureId int NOT NULL DEFAULT 0  

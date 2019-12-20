@@ -1,8 +1,0 @@
-﻿Group: NopStation
-FriendlyName: BS Affiliate
-SystemName: Widgets.BsAffiliate
-Version: 1.00
-SupportedVersions: 3.80
-Author: Jaber Kibria
-DisplayOrder: 2
-FileName: Nop.Plugin.Widgets.BsAffiliate.dll
