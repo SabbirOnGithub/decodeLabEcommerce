@@ -1,0 +1,151 @@
+﻿@using Nop.Core.Infrastructure
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "EBL SkyPay";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="/Administration/Content/images/ico-content.png" alt=""/>
+            Checkout Session List <a href="/Admin/Payment/ConfigureMethod?systemName=Payments.EblSkyPay">(back to settings)</a>
+        </div>
+    </div>
+
+    <table class="adminContent" style="max-width:100%">
+        <tr>
+            <td>
+                <div id="skypay-grid"></div>
+
+                <script>
+                $(document).ready(function () {
+                    $("#skypay-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "/PaymentEblSkyPay/ListJson",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        detailInit:detailInit,
+                        columns: [{
+                            field: "Id",
+                            title: "Id"
+                        }, {
+                            field: "OrderId",
+                            title: "OrderId",
+                            template: '<a href="/Admin/Order/Edit/#=OrderId#">#=OrderId#</a>',
+                        },{
+                            field: "CreatedOnUtc",
+                            title: "CreatedOnUtc",
+                            width: 200,
+                            type: "date",
+                            format: "{0:G}"
+                        }, {
+                            field: "Merchant",
+                            title: "Merchant"
+                        }, {
+                            field: "Result",
+                            title: "Result",
+                            width: 100
+                        }, {
+                            field: "PaymentStatus",
+                            title: "PaymentStatus"
+                        }, {
+                            field: "Active",
+                            title: "Active",
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Active#.gif" />'
+                        },{
+                            field: "SessionId",
+                            title: "SessionId",
+                            width: 100
+                        }, {
+                            field: "SessionVersion",
+                            title: "SessionVersion",
+                            width: 100
+                        }, {
+                            field: "SuccessIndicator",
+                            title: "SuccessIndicator",
+                            width: 100
+                        }]
+                    });
+                    //details grid
+                    function detailInit(e) {
+                        $("<div/>").appendTo(e.detailCell).kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("ListJsonResponse", "PaymentEblSkyPay"))?id="+e.data.Id,
+                                        type: "POST",
+                                        dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                            },
+                            resizable: false,
+                            scrollable: false,
+                            sortable: true,
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false
+                            },
+                            columns: [
+                            {
+                                field: "OrderRetriveResponse",
+                                title: "OrderRetriveResponse",
+                                width:200
+                            }]
+                        });
+                    }
+                });
+                </script>
+            </td>
+        </tr>
+    </table>
+}

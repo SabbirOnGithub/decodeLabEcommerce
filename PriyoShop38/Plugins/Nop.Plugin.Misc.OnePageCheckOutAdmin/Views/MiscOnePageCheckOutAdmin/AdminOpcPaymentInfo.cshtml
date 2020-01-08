@@ -1,0 +1,24 @@
+﻿@model CheckoutPaymentInfoModel
+@using Nop.Plugin.Misc.OnePageCheckOutAdmin.Models.Checkout;
+
+
+<div class="checkout-data">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "payment-information-submit-form" }))
+        {
+        <div class="section payment-info">
+            <div class="info">
+                @Html.Action(Model.PaymentInfoActionName, Model.PaymentInfoControllerName, Model.PaymentInfoRouteValues)
+            </div>
+            @{
+                var validationSummary = Html.ValidationSummary(false);
+            }
+            @if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+            <div class="message-error">@validationSummary</div>
+            }
+    </div>
+}
+    <div class="buttons">
+        <input type="button" name="SavePaymentInformation" value="@T("checkout.paymentInfo.submit")" class="button-1 new-address-next-step-button" onclick="SavePaymentInformation()" />
+    </div>
+</div>

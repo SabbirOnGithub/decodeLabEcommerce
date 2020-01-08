@@ -1,0 +1,715 @@
+﻿@model Nop.Web.Controllers.BrandWeekModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/BrandWeek/_Layout.cshtml";
+    Html.AppendCssFileParts("~/Themes/Pavilion/Content/css/owl.carousel.css");
+    Html.AddScriptParts("~/Scripts/jquery-watch.min.js");
+    //page class
+    Html.AppendPageCssClassParts("html-brand-week-page");
+}
+
+@section customScripts  {
+    <script>
+            function startCountdown() {
+                var startTime = new Date('@Model.StartDateTime.ToString()');
+                var delta = (startTime.getTime() - Date.now()) / 1000;
+
+                if (delta > 0) {
+                    var days = Math.floor(delta / 86400);
+                    delta -= days * 86400;
+                    $('#timer-days').html(days >= 10 ? days : '0' + days);
+
+                    var hours = Math.floor(delta / 3600) % 24;
+                    delta -= hours * 3600;
+                    $('#timer-hours').html(hours >= 10 ? hours : '0' + hours);
+
+                    var minutes = Math.floor(delta / 60) % 60;
+                    delta -= minutes * 60;
+                    $('#timer-mins').html(minutes >= 10 ? minutes : '0' + minutes);
+
+                    var seconds = Math.floor(delta % 60);
+                    $('#timer-secs').html(seconds >= 10 ? seconds : '0' + seconds);
+
+                    setTimeout(function () {
+                        startCountdown();
+                    }, 999);
+                }
+                else {
+                    $('#timer-days').html('00');
+                    $('#timer-hours').html('00');
+                    $('#timer-mins').html('00');
+                    $('#timer-secs').html('00');
+                }
+            }
+
+            $(document).ready(function() {
+                startCountdown();
+                //#region Fashion
+                $('.brand_week_fashion > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('FASHION');
+
+                var fashionMiddlePrevNav =
+                    $(
+                        '.brand_week_fashion_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var fashionMiddleNextNav =
+                    $(
+                        '.brand_week_fashion_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                fashionMiddlePrevNav.hide();
+                fashionMiddleNextNav.hide();
+
+                var fashionBottomPrevNav =
+                    $(
+                        '.brand_week_fashion_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var fashionBottomNextNav =
+                    $(
+                        '.brand_week_fashion_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                fashionBottomPrevNav.hide();
+                fashionBottomNextNav.hide();
+
+                //#region syncing of brand images and products - fashion
+                var fashionPrevNav =
+                    $(
+                        '.brand_week_fashion > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var fashionNextNav =
+                    $(
+                        '.brand_week_fashion > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                fashionPrevNav.click(function() {
+                    fashionMiddlePrevNav.click();
+                    fashionBottomPrevNav.click();
+                });
+
+                fashionNextNav.click(function() {
+                    fashionMiddleNextNav.click();
+                    fashionBottomNextNav.click();
+                });
+
+                var isFashion3DCarouselTriggeringProducts = false;
+                var fashionIntervalId = setInterval(function() {
+
+                        if (isFashion3DCarouselTriggeringProducts) {
+                            clearInterval(fashionIntervalId);
+                            return;
+                    }
+                    fashionMiddleNextNav.click();
+                    fashionBottomNextNav.click();
+                    },
+                    4000);
+
+                var fashion3DJCarouselClipUl =
+                    $(
+                        '.brand_week_fashion > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (fashion3DJCarouselClipUl.length > 0) {
+                    var fashion3DJCarouselClipUlWidth =
+                        parseInt(fashion3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    fashion3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < fashion3DJCarouselClipUlWidth) return;
+
+                            isFashion3DCarouselTriggeringProducts = true;
+                            fashion3DJCarouselClipUlWidth = newValue;
+
+                            fashionMiddleNextNav.click();
+                            fashionBottomNextNav.click();
+                        }
+                    });
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Smartphone
+                $('.brand_week_smartphone > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('SMART & FEATURE PHONES');
+
+                var smartphoneMiddlePrevNav =
+                    $(
+                        '.brand_week_smartphone_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var smartphoneMiddleNextNav =
+                    $(
+                        '.brand_week_smartphone_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                smartphoneMiddlePrevNav.hide();
+                smartphoneMiddleNextNav.hide();
+
+                var smartphoneBottomPrevNav =
+                    $(
+                        '.brand_week_smartphone_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var smartphoneBottomNextNav =
+                    $(
+                        '.brand_week_smartphone_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                smartphoneBottomPrevNav.hide();
+                smartphoneBottomNextNav.hide();
+
+                //#region syncing of brand images and products - smartphone
+                var smartphonePrevNav =
+                    $(
+                        '.brand_week_smartphone > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var smartphoneNextNav =
+                    $(
+                        '.brand_week_smartphone > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                smartphonePrevNav.click(function() {
+                    smartphoneMiddlePrevNav.click();
+                    smartphoneBottomPrevNav.click();
+                });
+
+                smartphoneNextNav.click(function() {
+                    smartphoneMiddleNextNav.click();
+                    smartphoneBottomNextNav.click();
+                });
+
+                var isSmartphone3DCarouselTriggeringProducts = false;
+                var smartphoneIntervalId = setInterval(function() {
+
+                        if (isSmartphone3DCarouselTriggeringProducts) {
+                            clearInterval(smartphoneIntervalId);
+                            return;
+                    }
+                    smartphoneMiddleNextNav.click();
+                    smartphoneBottomNextNav.click();
+                    },
+                    4000);
+
+                var smartphone3DJCarouselClipUl =
+                    $(
+                        '.brand_week_smartphone > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (smartphone3DJCarouselClipUl.length > 0) {
+                    var smartphone3DJCarouselClipUlWidth =
+                        parseInt(smartphone3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    smartphone3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < smartphone3DJCarouselClipUlWidth) return;
+
+                            isSmartphone3DCarouselTriggeringProducts = true;
+                            smartphone3DJCarouselClipUlWidth = newValue;
+
+                            smartphoneMiddleNextNav.click();
+                            smartphoneBottomNextNav.click();
+                        }
+                    });
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Appliance
+                $('.brand_week_appliance > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('ELECTRONICS AND APPLIANCE');
+
+                var applianceMiddlePrevNav =
+                    $(
+                        '.brand_week_appliance_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var applianceMiddleNextNav =
+                    $(
+                        '.brand_week_appliance_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                applianceMiddlePrevNav.hide();
+                applianceMiddleNextNav.hide();
+
+                var applianceBottomPrevNav =
+                    $(
+                        '.brand_week_appliance_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var applianceBottomNextNav =
+                    $(
+                        '.brand_week_appliance_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                applianceBottomPrevNav.hide();
+                applianceBottomNextNav.hide();
+
+                //#region syncing of brand images and products - appliance
+                var appliancePrevNav =
+                    $(
+                        '.brand_week_appliance > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var applianceNextNav =
+                    $(
+                        '.brand_week_appliance > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                appliancePrevNav.click(function() {
+                    applianceMiddlePrevNav.click();
+                    applianceBottomPrevNav.click();
+                });
+
+                applianceNextNav.click(function() {
+                    applianceMiddleNextNav.click();
+                    applianceBottomNextNav.click();
+                });
+
+                var isAppliance3DCarouselTriggeringProducts = false;
+                var applianceIntervalId = setInterval(function() {
+
+                        if (isAppliance3DCarouselTriggeringProducts) {
+                            clearInterval(applianceIntervalId);
+                            return;
+                    }
+                    applianceMiddleNextNav.click();
+                    applianceBottomNextNav.click();
+                    },
+                    4000);
+
+                var appliance3DJCarouselClipUl =
+                    $(
+                        '.brand_week_appliance > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (appliance3DJCarouselClipUl.length > 0) {
+                    var appliance3DJCarouselClipUlWidth =
+                        parseInt(appliance3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    appliance3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < appliance3DJCarouselClipUlWidth) return;
+
+                            isAppliance3DCarouselTriggeringProducts = true;
+                            appliance3DJCarouselClipUlWidth = newValue;
+
+                            applianceMiddleNextNav.click();
+                            applianceBottomNextNav.click();
+                        }
+                    });
+
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Grocery
+                $('.brand_week_grocery > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('DAILY NEEDS');
+
+                var groceryMiddlePrevNav =
+                    $(
+                        '.brand_week_grocery_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var groceryMiddleNextNav =
+                    $(
+                        '.brand_week_grocery_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                groceryMiddlePrevNav.hide();
+                groceryMiddleNextNav.hide();
+
+                var groceryBottomPrevNav =
+                    $(
+                        '.brand_week_grocery_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var groceryBottomNextNav =
+                    $(
+                        '.brand_week_grocery_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                groceryBottomPrevNav.hide();
+                groceryBottomNextNav.hide();
+
+                //#region syncing of brand images and products - grocery
+                var groceryPrevNav =
+                    $(
+                        '.brand_week_grocery > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var groceryNextNav =
+                    $(
+                        '.brand_week_grocery > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                groceryPrevNav.click(function() {
+                    groceryMiddlePrevNav.click();
+                    groceryBottomPrevNav.click();
+                });
+
+                groceryNextNav.click(function() {
+                    groceryMiddleNextNav.click();
+                    groceryBottomNextNav.click();
+                });
+
+                var isGrocery3DCarouselTriggeringProducts = false;
+                var groceryIntervalId = setInterval(function() {
+
+                        if (isGrocery3DCarouselTriggeringProducts) {
+                            clearInterval(groceryIntervalId);
+                            return;
+                    }
+                    groceryMiddleNextNav.click();
+                    groceryBottomNextNav.click();
+                    },
+                    4000);
+
+                var grocery3DJCarouselClipUl =
+                    $(
+                        '.brand_week_grocery > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (grocery3DJCarouselClipUl.length > 0) {
+                    var grocery3DJCarouselClipUlWidth =
+                        parseInt(grocery3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    grocery3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < grocery3DJCarouselClipUlWidth) return;
+
+                            isGrocery3DCarouselTriggeringProducts = true;
+                            grocery3DJCarouselClipUlWidth = newValue;
+
+                            groceryMiddleNextNav.click();
+                            groceryBottomNextNav.click();
+                        }
+                    });
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Motor Bike
+                $('.brand_week_motorbike > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('MOTOR BIKE');
+
+                var motorbikeMiddlePrevNav =
+                    $(
+                        '.brand_week_motorbike_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var motorbikeMiddleNextNav =
+                    $(
+                        '.brand_week_motorbike_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                motorbikeMiddlePrevNav.hide();
+                motorbikeMiddleNextNav.hide();
+
+                var motorbikeBottomPrevNav =
+                    $(
+                        '.brand_week_motorbike_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var motorbikeBottomNextNav =
+                    $(
+                        '.brand_week_motorbike_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                motorbikeBottomPrevNav.hide();
+                motorbikeBottomNextNav.hide();
+
+                //#region syncing of brand images and products - motorbike
+                var motorbikePrevNav =
+                    $(
+                        '.brand_week_motorbike > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var motorbikeNextNav =
+                    $(
+                        '.brand_week_motorbike > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                motorbikePrevNav.click(function() {
+                    motorbikeMiddlePrevNav.click();
+                    motorbikeBottomPrevNav.click();
+                });
+
+                motorbikeNextNav.click(function() {
+                    motorbikeMiddleNextNav.click();
+                    motorbikeBottomNextNav.click();
+                });
+
+                var isMotorbike3DCarouselTriggeringProducts = false;
+                var motorbikeIntervalId = setInterval(function() {
+
+                        if (isMotorbike3DCarouselTriggeringProducts) {
+                            clearInterval(motorbikeIntervalId);
+                            return;
+                    }
+                    motorbikeMiddleNextNav.click();
+                    motorbikeBottomNextNav.click();
+                    },
+                    4000);
+
+                var motorbike3DJCarouselClipUl =
+                    $(
+                        '.brand_week_motorbike > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (motorbike3DJCarouselClipUl.length > 0) {
+                    var motorbike3DJCarouselClipUlWidth =
+                        parseInt(motorbike3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    motorbike3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < motorbike3DJCarouselClipUlWidth) return;
+
+                            isMotorbike3DCarouselTriggeringProducts = true;
+                            motorbike3DJCarouselClipUlWidth = newValue;
+
+                            motorbikeMiddleNextNav.click();
+                            motorbikeBottomNextNav.click();
+                        }
+                    });
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Gadget
+                $('.brand_week_gadget > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('COMPUTER AND ACCESSORIES');
+
+                var gadgetMiddlePrevNav =
+                    $(
+                        '.brand_week_gadget_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var gadgetMiddleNextNav =
+                    $(
+                        '.brand_week_gadget_middle > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                gadgetMiddlePrevNav.hide();
+                gadgetMiddleNextNav.hide();
+
+                var gadgetBottomPrevNav =
+                    $(
+                        '.brand_week_gadget_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var gadgetBottomNextNav =
+                    $(
+                        '.brand_week_gadget_bottom > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+                gadgetBottomPrevNav.hide();
+                gadgetBottomNextNav.hide();
+
+                //#region syncing of brand images and products - gadget
+                var gadgetPrevNav =
+                    $(
+                        '.brand_week_gadget > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-prev');
+                var gadgetNextNav =
+                    $(
+                        '.brand_week_gadget > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-next');
+
+                gadgetPrevNav.click(function() {
+                    gadgetMiddlePrevNav.click();
+                    gadgetBottomPrevNav.click();
+                });
+
+                gadgetNextNav.click(function() {
+                    gadgetMiddleNextNav.click();
+                    gadgetBottomNextNav.click();
+                });
+
+                var isGadget3DCarouselTriggeringProducts = false;
+                var gadgetIntervalId = setInterval(function() {
+
+                        if (isGadget3DCarouselTriggeringProducts) {
+                            clearInterval(gadgetIntervalId);
+                            return;
+                    }
+                    gadgetMiddleNextNav.click();
+                    gadgetBottomNextNav.click();
+                    },
+                    4000);
+
+                var gadget3DJCarouselClipUl =
+                    $(
+                        '.brand_week_gadget > .jCarouselMainWrapper > .nop-jcarousel > .jcarousel-container > .jcarousel-clip > ul');
+
+                // hook up the watcher
+                if (gadget3DJCarouselClipUl.length > 0) {
+                    var gadget3DJCarouselClipUlWidth =
+                        parseInt(gadget3DJCarouselClipUl.width().toString().replace('px', ''));
+
+                    gadget3DJCarouselClipUl.watch({
+                        // specify CSS styles or attribute names to monitor
+                        properties: 'width',
+                        // callback function when a change is detected
+                        callback: function (data, i) {
+                            var newValue = parseInt(data.vals[i].replace('px', ''));
+                            if (newValue < gadget3DJCarouselClipUlWidth) return;
+
+                            isGadget3DCarouselTriggeringProducts = true;
+                            gadget3DJCarouselClipUlWidth = newValue;
+
+                            gadgetMiddleNextNav.click();
+                            gadgetBottomNextNav.click();
+                        }
+                    });
+                }
+
+                //#endregion
+                //#endregion
+
+                //#region Partners
+                $('.brand_week_partners > .jCarouselMainWrapper > .nop-jcarousel > .carousel-title > span')
+                    .text('OUR PARTNERS');
+                //#endregion
+            });
+    </script>
+}
+
+@section customStyles  {
+    <style type="text/css">
+        /*Fashion*/
+        .brand_week_fashion {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_fashion_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_fashion_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Fashion*/
+
+        /*Smart Phone*/
+        .brand_week_smartphone {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_smartphone_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_smartphone_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Smart Phone*/
+
+        /*Appliance*/
+        .brand_week_appliance {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_appliance_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_appliance_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Appliance*/
+
+        /*Grocery*/
+        .brand_week_grocery {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_grocery_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_grocery_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Grocery*/
+
+        /*Motor Bike*/
+        .brand_week_motorbike {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_motorbike_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_motorbike_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Motor Bike*/
+
+        /*Gadget*/
+        .brand_week_gadget {
+            margin: 10px 0 50px 0;
+        }
+
+        .brand_week_gadget_middle {
+            margin: -50px 0 0 0;
+        }
+
+        .brand_week_gadget_bottom {
+            margin: -50px 0 0 0;
+        }
+        /*Gadget*/
+
+        .brand_week_partners {
+            margin: 0 0 0 0;
+        }
+    </style>
+}
+
+@* Timer *@
+<div class="flash-sale-timer-container">
+    <span class="flash-sale-content">UNBOXING ENDS BY</span>
+    <div class="flash-sale-date-time">
+        <span class="time"><span class="days" id="timer-days">00</span><span class="label">DAYS</span></span>
+        <span class="time"><span class="days" id="timer-hours">00 </span><span class="label">HOUR </span></span>
+        <span class="time"><span class="days" id="timer-mins">00 </span><span class="label">MIN </span></span>
+        <span class="time"><span class="days" id="timer-secs">00 </span><span class="label">SEC</span></span>
+    </div>
+</div>
+
+@* Fashion *@
+<div class="brand_week_fashion">
+    @Html.Widget("brand_week_fashion_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_fashion_middle">
+        @Html.Widget("brand_week_fashion_middle_jcarousel")
+    </div>
+    <div class="brand_week_fashion_bottom">
+        @Html.Widget("brand_week_fashion_bottom_jcarousel")
+    </div>
+</div>
+
+@* SmartPhone *@
+<div class="brand_week_smartphone">
+    @Html.Widget("brand_week_smartphone_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_smartphone_middle">
+        @Html.Widget("brand_week_smartphone_middle_jcarousel")
+    </div>
+    <div class="brand_week_smartphone_bottom">
+        @Html.Widget("brand_week_smartphone_bottom_jcarousel")
+    </div>
+</div>
+
+@* Appliance *@
+<div class="brand_week_appliance">
+    @Html.Widget("brand_week_appliance_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_appliance_middle">
+        @Html.Widget("brand_week_appliance_middle_jcarousel")
+    </div>
+    <div class="brand_week_appliance_bottom">
+        @Html.Widget("brand_week_appliance_bottom_jcarousel")
+    </div>
+</div>
+
+@* Grocery *@
+<div class="brand_week_grocery">
+    @Html.Widget("brand_week_grocery_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_grocery_middle">
+        @Html.Widget("brand_week_grocery_middle_jcarousel")
+    </div>
+    <div class="brand_week_grocery_bottom">
+        @Html.Widget("brand_week_grocery_bottom_jcarousel")
+    </div>
+</div>
+
+@* Motor Bike *@
+<div class="brand_week_motorbike">
+    @Html.Widget("brand_week_motorbike_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_motorbike_middle">
+        @Html.Widget("brand_week_motorbike_middle_jcarousel")
+    </div>
+    <div class="brand_week_motorbike_bottom">
+        @Html.Widget("brand_week_motorbike_bottom_jcarousel")
+    </div>
+</div>
+
+@* Gadget *@
+<div class="brand_week_gadget">
+    @Html.Widget("brand_week_gadget_upper_anywhere_slider_3d_carousel")
+    <div class="brand_week_gadget_middle">
+        @Html.Widget("brand_week_gadget_middle_jcarousel")
+    </div>
+    <div class="brand_week_gadget_bottom">
+        @Html.Widget("brand_week_gadget_bottom_jcarousel")
+    </div>
+</div>
+
+@* Partners *@
+<div class="brand_week_partners">
+    @Html.Widget("brand_week_partners")
+</div>

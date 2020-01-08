@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PriyoShop38/.vs/PriyoshopNop38/v15/Server/sqlite3
+*.suo
+/PriyoShop38/.vs/PriyoshopNop38/v16/Server/sqlite3/*.ide-shm
+/PriyoShop38/.vs/PriyoshopNop38/v16/Server/sqlite3
+/PriyoShop38/Presentation/Nop.Web/bin/*.zip

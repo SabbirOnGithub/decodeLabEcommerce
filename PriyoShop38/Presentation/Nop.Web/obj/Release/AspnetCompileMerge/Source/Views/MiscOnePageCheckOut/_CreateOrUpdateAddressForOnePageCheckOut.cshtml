@@ -1,0 +1,346 @@
+﻿@model AddressModel
+
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Plugin.Misc.OnePageCheckOut.Models.Common;
+
+@{
+    Model.CountryId = 10;
+    var email = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.Email;
+}
+
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+    <script type="text/javascript">
+        $(function () {
+            var selectedItem = 10;
+            var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
+            var statesProgress = $("#states-loading-progress");
+
+            statesProgress.show();
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+                success: function (data) {
+                    ddlStates.html('');
+
+                    $.each(data, function (id, option) {
+                        ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                    });
+
+                    statesProgress.hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#@Html.FieldIdFor(model => model.CountryId)").change(function () {
+                var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
+                var statesProgress = $("#states-loading-progress");
+
+                statesProgress.show();
+
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                    data: { "countryId": 10, "addSelectStateItem": "true" },
+                    success: function (data) {
+                        ddlStates.html('');
+
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        });
+
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+@Html.HiddenFor(model => model.Id)
+
+<div class="edit-address">
+    <div class="inputs">
+        <label for="NewAddress_FirstName">Name:</label>
+        <input class="text-box single-line new-address-field" data-val="true" data-val-required="Name is required." id="NewAddress_FirstName" name="NewAddress.FirstName" type="text" placeholder="Name">
+        <span class="required">*</span>
+        <span class="field-validation-valid" data-valmsg-for="NewAddress.FirstName" data-valmsg-replace="true"></span>
+        <div class="new-address-validation-error"></div>
+    </div>
+
+    @if (String.IsNullOrEmpty(email))
+    {
+        <div class="inputs">
+            <label for="NewAddress_Email">Email:</label>
+            <input class="text-box single-line new-address-field" data-val="true" data-val-email="Wrong email" data-val-required="Email is required." id="NewAddress_Email" name="NewAddress.Email" type="text" placeholder="Email">
+            <span class="required">*</span>
+            <span class="field-validation-valid" data-valmsg-for="NewAddress.Email" data-valmsg-replace="true"></span>
+            <div class="new-address-validation-error"></div>
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(model => model.Email, new { Value = email })
+    }
+
+    <div class="inputs" style="display: none">
+        <label for="NewAddress_Company">Company:</label>
+        <input class="text-box single-line" id="NewAddress_Company" name="NewAddress.Company" type="text" value="" placeholder="Company">
+        <span class="field-validation-valid" data-valmsg-for="NewAddress.Company" data-valmsg-replace="true"></span>
+    </div>
+
+    @if (Model.CountryEnabled)
+    {
+        <div class="inputs" style="display:none">
+            @Html.LabelFor(model => model.CountryId, new { }, ":")
+            @Html.DropDownListFor(model => model.CountryId, Model.AvailableCountries)
+            @Html.RequiredHint()
+            @Html.ValidationMessageFor(model => model.CountryId)
+        </div>
+    }
+
+    <div class="inputs">
+        @Html.LabelFor(model => model.StateProvinceId, new { }, ":")
+        @Html.DropDownListFor(model => model.StateProvinceId, Model.AvailableStates)
+        <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+        @Html.ValidationMessageFor(model => model.StateProvinceId)
+        <div class="new-address-validation-error"></div>
+    </div>
+
+    <div class="inputs">
+        <label for="NewAddress_Address1">Address 1:</label>
+        <textarea class="new-address-field" data-val="true" data-val-required="Address is required" id="NewAddress_Address1" name="NewAddress.Address1" placeholder="Address"></textarea>
+        <span class="required">*</span>
+        <span class="field-validation-valid" data-valmsg-for="NewAddress.Address1" data-valmsg-replace="true"></span>
+        <div class="new-address-validation-error"></div>
+    </div>
+
+    <div class="inputs">
+    </div>
+
+    <div class="inputs">
+        <label for="NewAddress_PhoneNumber">Phone number:</label>
+        <input class="text-box single-line new-address-field" data-val="true" data-val-required="Phone number is required" id="NewAddress_PhoneNumber" name="NewAddress.PhoneNumber" type="text" value="" placeholder="Phone Number">
+        <span class="required">*</span>
+        <span class="field-validation-valid" data-valmsg-for="NewAddress.PhoneNumber" data-valmsg-replace="true"></span>
+        <div class="new-address-validation-error"></div>
+    </div>
+
+    @if (Model.CustomAddressAttributes.Count > 0)
+    {
+        @Html.Partial("_AddressAttributes", Model.CustomAddressAttributes)
+    }
+</div>
+
+
+
+@*$(document).ready(function () {
+            var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
+            var statesProgress = $("#states-loading-progress");
+            statesProgress.show();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                data: { "countryId": 186, "addSelectStateItem": "true" },
+            success: function (data) {
+                ddlStates.html('');
+                $.each(data, function (id, option) {
+                ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                });
+                statesProgress.hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to retrieve states.');
+                statesProgress.hide();
+            }
+        });;
+    });*@
+
+
+@*<span class="field-validation-error" data-valmsg-for="NewAddress.FirstName" data-valmsg-replace="true"></span>*@
+
+@*<div class="name-field">
+        <div class="inputs">
+            <label for="NewAddress_FirstName">First name:</label>
+            <input class="text-box single-line" data-val="true" data-val-required="First name is required." id="NewAddress_FirstName" name="NewAddress.FirstName" type="text" placeholder="First Name">
+            <span class="required">*</span>
+            <span class="field-validation-error" data-valmsg-for="NewAddress.FirstName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="inputs">
+            <label for="NewAddress_LastName">Last name:</label>
+            <input class="text-box single-line valid" data-val="true" data-val-required="Last name is required." id="NewAddress_LastName" name="NewAddress.LastName" type="text" placeholder="Last Name">
+            <span class="required">*</span>
+            <span class="field-validation-valid" data-valmsg-for="NewAddress.LastName" data-valmsg-replace="true"></span>
+
+        </div>
+    </div>*@
+
+@*@Html.HiddenFor(model => model.Email, new { Value = email })*@
+@*<input class="text-box single-line" data-val="true" data-val-required="Street address is required" id="NewAddress_Address1" name="NewAddress.Address1" type="text" placeholder="Address">*@
+@*<span class="field-validation-error" data-valmsg-for="NewAddress.Address1" data-valmsg-replace="true"></span>*@
+@*<label for="NewAddress_City">City:</label>
+    <input class="text-box single-line" data-val="true" data-val-required="City is required" id="NewAddress_City" name="NewAddress.City" type="text" placeholder="City">
+
+    <span class="required">*</span>            <span class="field-validation-valid" data-valmsg-for="NewAddress.City" data-valmsg-replace="true"></span>*@
+@*@if (Model.AvailableCities != null && Model.AvailableCities.Count > 0)
+    {
+        @Html.DropDownListFor(model => model.City, Model.AvailableCities, new { @class= "new-address-field" })
+        @Html.ValidationMessageFor(model => model.AvailableCities)
+        <div class="new-address-validation-error"></div>
+    }*@
+
+
+@*<div class="inputs">
+        <label for="NewAddress_Address2">Address 2:</label>
+        <input class="text-box single-line" id="NewAddress_Address2" name="NewAddress.Address2" type="text" value="" placeholder="Address 2">
+        <span class="field-validation-valid" data-valmsg-for="NewAddress.Address2" data-valmsg-replace="true"></span>
+    </div>*@
+@*<div class="inputs">
+        <label for="NewAddress_ZipPostalCode">Zip / postal code:</label>
+        <input class="text-box single-line" data-val="true" data-val-required="Zip / postal code is required" id="NewAddress_ZipPostalCode" name="NewAddress.ZipPostalCode" type="text" value="" placeholder="Zip / Postal Code">
+        <span class="required">*</span>            <span class="field-validation-valid" data-valmsg-for="NewAddress.ZipPostalCode" data-valmsg-replace="true"></span>
+    </div>*@
+
+@*<span class="field-validation-error" data-valmsg-for="NewAddress.PhoneNumber" data-valmsg-replace="true"></span>*@
+
+@*<div class="inputs">
+        @Html.LabelFor(model => model.FirstName, new { }, ":")
+            @Html.EditorFor(model => model.FirstName, new { placeholder =@Html.DisplayNameFor(m=>m.FirstName) })
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+    <div class="inputs">
+        @Html.LabelFor(model => model.LastName, new { }, ":")
+            @Html.EditorFor(model => model.LastName, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.LastName)
+
+    </div>
+    <div class="inputs">
+        @Html.LabelFor(model => model.Email, new { }, ":")
+            @Html.EditorFor(model => model.Email, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    @if (Model.CompanyEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.Company, new { }, ":")
+                @Html.EditorFor(model => model.Company, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+            @if (Model.CompanyRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.Company)
+        </div>
+    }
+    @if (Model.CountryEnabled)
+    {
+        <div class="inputs" style="display:none" >
+            @Html.LabelFor(model => model.CountryId, new { }, ":")
+            @Html.DropDownListFor(model => model.CountryId, Model.AvailableCountries)
+            @Html.RequiredHint()
+            @Html.ValidationMessageFor(model => model.CountryId)
+        </div>
+    }
+
+    @if (Model.CountryEnabled && Model.StateProvinceEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.StateProvinceId, new { }, ":")
+                @Html.DropDownListFor(model => model.StateProvinceId, Model.AvailableStates)
+            <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+            @Html.ValidationMessageFor(model => model.StateProvinceId)
+        </div>
+    }
+    @if (Model.CityEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.City, new { }, ":")
+                @Html.EditorFor(model => model.City, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+
+            @if (Model.CityRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+    }
+    @if (Model.StreetAddressEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.Address1, new { }, ":")
+                @Html.EditorFor(model => model.Address1, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+            @if (Model.StreetAddressRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.Address1)
+        </div>
+    }
+    @if (Model.StreetAddress2Enabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.Address2, new { }, ":")
+                @Html.EditorFor(model => model.Address2, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+            @if (Model.StreetAddress2Required)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+    }
+    @if (Model.ZipPostalCodeEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.ZipPostalCode, new { }, ":")
+                @Html.EditorFor(model => model.ZipPostalCode, new { placeholder = @Html.DisplayNameFor(m => m.LastName) })
+            @if (Model.ZipPostalCodeRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.ZipPostalCode)
+        </div>
+    }
+    @if (Model.PhoneEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.PhoneNumber, new { }, ":")
+                @Html.EditorFor(model => model.PhoneNumber, new { @placeholder = "PhoneNumber" })
+            @if (Model.PhoneRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+    }
+    @if (Model.FaxEnabled)
+    {
+        <div class="inputs">
+            @Html.LabelFor(model => model.FaxNumber, new { }, ":")
+                @Html.EditorFor(model => model.FaxNumber, new { @placeholder = "PhoneNumber" })
+            @if (Model.FaxRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.FaxNumber)
+        </div>
+    }*@
+

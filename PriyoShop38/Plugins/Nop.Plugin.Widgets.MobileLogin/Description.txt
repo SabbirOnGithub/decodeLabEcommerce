@@ -1,0 +1,9 @@
+﻿Group: NopStation
+FriendlyName: Mobile Login
+SystemName: Widgets.MobileLogin
+Version: 1.00
+SupportedVersions: 3.80
+Author: Nop-Station Team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.MobileLogin.dll
+Description: This plugin enables mobile login

@@ -1,0 +1,8 @@
+﻿Group: NopStation
+FriendlyName: MobileWebApi 
+SystemName: NopStation.MobileWebApi
+Version: 1.0
+SupportedVersions: 3.80
+Author: Nop-Station Team, BrainStation-23
+DisplayOrder: 1
+FileName: BS.Plugin.NopStation.MobileWebApi.dll

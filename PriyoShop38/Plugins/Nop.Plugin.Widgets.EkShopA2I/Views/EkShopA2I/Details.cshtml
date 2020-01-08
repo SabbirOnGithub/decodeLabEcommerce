@@ -1,0 +1,133 @@
+﻿
+@model Nop.Plugin.Widgets.EkShopA2I.Models.EsOrderModel
+@using Nop.Web.Framework;
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Ek-shop Order Details
+        <small><i class="fa fa-arrow-circle-left"></i><a href="/EkShopA2i/OrderList">back to order list</a></small>
+    </h1>
+</div>
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.OrderCode)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.OrderCode)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.LpCode)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.LpCode)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.LpName)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.LpName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.LpContactPerson)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.LpContactPerson)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.LpContactNumber)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.LpContactNumber)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.LpLocation)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.LpLocation)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.DeliveryCharge)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.DeliveryCharge)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.PaymentMethod)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.PaymentMethod)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.Total)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.Total)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.UdcCommission)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.UdcCommission)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.DeliveryDuration)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.DeliveryDuration)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.OtherRequiredData)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.OtherRequiredData)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.NopLabelFor(x => x.CreatedOn)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.NopDisplayFor(x => x.CreatedOn)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                            <a href="/Admin/Order/Edit/@Model.OrderId">Edit Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

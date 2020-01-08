@@ -1,0 +1,606 @@
+﻿@model OnePageCheckoutModel
+
+@using System.Text.RegularExpressions
+@using Nop.Web.Framework.UI;
+@using Nop.Plugin.Misc.OnePageCheckOut.Models.Checkout;
+
+@{
+    Layout = "~/Views/MiscOnePageCheckOut/_ColumnsTwoForOnePageCheckOut.cshtml";
+
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Misc.OnePageCheckOut/Content/css/styles.css");
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Misc.OnePageCheckOut/Content/css/BPopUp.css");
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Misc.OnePageCheckOut/Content/css/owl.carousel.css");
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Misc.OnePageCheckOut/Content/css/owl.theme.css");
+
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Misc.OnePageCheckOut/Scripts/public.accordion.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Misc.OnePageCheckOut/Scripts/public.onepagecheckout.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Misc.OnePageCheckOut/scripts/jquery.bpopup.min.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Misc.OnePageCheckOut/scripts/owl.carousel.min.js");
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+}
+
+@{
+//step numbers
+
+//if (!Model.ShippingRequired)
+//{
+//}
+
+//if (Model.DisableBillingAddressCheckoutStep)
+//{
+//}
+
+//var decimalExtractor = new Regex("[^0-9.-]");
+//var totalPayableFromWallet = decimalExtractor.Replace(Model.AllOrderTotalsModel.TotalPayableFromWallet, "");
+}
+
+ 
+
+<div class="OnOnePageCheckOutLeft">
+  
+ 
+
+    <div class="" id="orderSummaryOnOnePageCheckOutDiv">
+        @Html.Partial("OpcPaymentMethods", Model.CheckoutPaymentMethod)
+    </div>
+
+    <div id="confirmPaymentHtml">
+    </div>
+</div>
+
+<div class="OnOnePageCheckOutRight">
+    
+
+    @*<div id="shippingMethodOnOnePageCheckOutDiv" class="">
+        @if (Model.CheckoutShippingMethod != null)
+        {
+            @Html.Partial("OpcShippingMethods", Model.CheckoutShippingMethod)
+        }
+    </div>*@
+
+    @*@Html.Action("TopicBlock", "Topic", new { systemName = "checkoutAdvertising" })*@
+</div>
+
+<div class="loder" id="pageLoading">
+    <strong>
+        <img align="middle" src="~/Plugins/Misc.OnePageCheckOut/Content/img/loading.gif" />
+    </strong>
+
+    <div class="modal-backdrop" style="opacity: 0;background-color: transparent;"></div>
+</div>
+
+<script type="text/javascript">
+    var stateList = ["Dhaka", "Gazipur"];
+
+    $(document).ready(function () {
+        owlCarosusel();
+        updateShoppingCartDeliveryCharge();
+
+        $("#NewAddress_StateProvinceId").change(function() {
+            changeShippingAddressStateProvience();
+        });
+
+        var selectedElement = $("input[name='SelectedShippingAdressId']:checked");
+        showHideCashOnDelivery(selectedElement);
+
+        $("#NewAddress_StateProvinceId").on('change', function (e) {
+            if ($.inArray($("#NewAddress_StateProvinceId option:selected").text(), stateList) === -1) {
+                $("input[value='Payments.CreditCardPOS']").closest("li").hide();
+
+                if ($("input[value='Payments.CreditCardPOS']").is(":checked")) {
+                    $("input[value='Payments.CashOnDelivery']").prop("checked", true);
+                }
+            } else {
+                $("input[value='Payments.CreditCardPOS']").closest("li").show();
+            }
+        });
+
+        $('input[type=radio][name=paymentmethod]').on('change', function() {
+            updateOrderTotal(this.value);
+        });
+
+        $(".new-address-field").bind("blur", function() {
+            if ($(this).val() !== "") {
+                $(this).siblings(".new-address-validation-error").hide();
+            }
+        });
+    });
+
+    function updateShoppingCartDeliveryCharge() {
+        $("#deliveryChargeInShoppingCart").html($("#deliveryChargeInOrderTotal").html());
+    }
+
+    function random(owlSelector) {
+        owlSelector.children().sort(function() {
+            return Math.round(Math.random()) - 0.5;
+        }).each(function() {
+            $(this).appendTo(owlSelector);
+        });
+    }
+
+    function disableAllElement() {
+        $('#confirmPaymentHtml').bPopup().close();
+        $('#pageLoading').bPopup({
+            modalClose: false
+        });
+    }
+
+    function enableAllElement() {
+        $('#pageLoading').bPopup().close();
+    }
+
+    function add() {
+        $("#Adress" + selectedAddressId).prependTo("#slidingAdress");
+    }
+
+    function owlCarosusel() {
+        $('#slidingAdress').owlCarousel({
+            items: 2,
+            navigation: true,
+            navigationText: [
+                "<div class='icon-chevron-left icon-white'></div>",
+                "<div class='icon-chevron-right icon-white'></div>"
+            ],
+            beforeInit: function(elem) {
+                add();
+                $("#slidingAdress").toggle();
+            }
+        });
+    }
+
+    function changeShippingAddressStateProvience() {
+        var stProvinceName = $("#NewAddress_StateProvinceId option:selected").val();
+        var chargeForDelivery = 0;
+
+        $.ajax({
+            url: "GetDelivaryChargeByStateProvinceId/" + stProvinceName,
+            data: { stProvinceName: stProvinceName },
+            type: "POST",
+            success: function(data) {
+                if (data.success === 1) {
+                    var deliveryCharge = parseInt(removeTKAndCommaFromNumber($("#deliveryChargeInOrderTotal").html()));
+                    var orderTotal = parseInt(removeTKAndCommaFromNumber($('span.value-summary strong').html()));
+                    var newDeliveryCharge = parseInt(data.rate);
+
+                    if (isNaN(deliveryCharge))
+                        deliveryCharge = 0;
+                    if (isNaN(newDeliveryCharge))
+                        newDeliveryCharge = 0;
+
+                    orderTotal = orderTotal + newDeliveryCharge - deliveryCharge;
+
+                    orderTotal = Math.trunc(orderTotal);
+                    chargeForDelivery = Math.trunc(data.rate);
+
+                    chargeForDelivery = addCommaIntoNumber(chargeForDelivery);
+                    orderTotal = addCommaIntoNumber(orderTotal);
+
+                    $("#deliveryChargeInOrderTotal").html(chargeForDelivery);
+                    $('span.value-summary strong').html(orderTotal);
+                    $("#deliveryChargeInShoppingCart").html(chargeForDelivery);
+
+                    if (data.hasEMIPaymentMethod) {
+                        if (data.emiOption3Amount) {
+                            $('#emiOption3Label').html("@T("PaymentMethode.EmiOption1")" + " - " + data.emiOption3Amount);
+                        }
+
+                        if (data.emiOption6Amount) {
+                            $('#emiOption6Label').html("@T("PaymentMethode.EmiOption2")" + " - " + data.emiOption6Amount);
+                        }
+
+                        if (data.emiOption9Amount) {
+                            $('#emiOption9Label').html("@T("PaymentMethode.EmiOption3")" + " - " + data.emiOption9Amount);
+                        }
+
+                        if (data.emiOption12Amount) {
+                            $('#emiOption12Label').html("@T("PaymentMethode.EmiOption4")" + " - " + data.emiOption12Amount);
+                        }
+
+                        if (data.emiOption18Amount) {
+                            $('#emiOption18Label').html("@T("PaymentMethode.EmiOption5")" + " - " + data.emiOption18Amount);
+                        }
+
+                        if (data.emiOption24Amount) {
+                            $('#emiOption24Label').html("@T("PaymentMethode.EmiOption6")" + " - " + data.emiOption24Amount);
+                        }
+                    }
+                } else if (data.success === 0) {
+                    window.location.href = "/cart";
+                }
+            },
+            error: function() {
+            }
+        });
+    };
+
+    function addCommaIntoNumber(number) {
+        var numToStr = number.toString();
+        var numberWithComma = numToStr.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        var numberWithCommaAndTaka = "Tk" + numberWithComma;
+        return numberWithCommaAndTaka;
+    };
+
+    function removeTKAndCommaFromNumber(str) {
+        if (str == undefined || str === "")
+            return "0";
+
+        var spliteComa = str.replace(",", "");
+        var strWithoutComa = spliteComa.replace("Tk", "");
+
+        if (strWithoutComa === " ")
+            strWithoutComa = "0";
+
+        return strWithoutComa;
+    };
+
+    function SaveSelectedShippingAddress(shippingAddressId) {
+        disableAllElement();
+
+        var selectedElement = $("input[name='SelectedShippingAdressId']:checked");
+        showHideCashOnDelivery(selectedElement);
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("SaveSelectedShippingAddressAjax", "MiscOnePageCheckOut", new {area = ""})",
+            data: {
+                "shippingAddressId": shippingAddressId
+            },
+            success: function(data) {
+                enableAllElement();
+
+                if (data.update_section) {
+                    $('#shippingMethodOnOnePageCheckOutDiv').html(data.update_section.ShippingMethodUpdateHtml);
+                    $('#orderTotalsOnOnePageCheckOutDiv').html(data.update_section.OrderTotalHtml);
+                    owlCarosusel();
+                    updateShoppingCartDeliveryCharge();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    };
+
+    function SaveNewShippingAddress() {
+        disableAllElement();
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("ShippingAddress", "MiscOnePageCheckOut", new {area = ""})",
+            data: $("#new-shipping-address-form").serialize(),
+            success: function(data) {
+                if (data.update_section) {
+                    setTimeout(
+                        function() {
+                            SavePaymentMethodforCheckout();
+                        }, 2000);
+                } else {
+                    enableAllElement();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    };
+
+    function CheckAddressValidation()
+    {
+        //var checkShippingAddressDiv = $("#NewShippingAddressesView").css('display') === 'block';
+
+        //if (checkShippingAddressDiv === true)
+        //{
+        //    var isValidAddress = true;
+
+        //    if ($("#NewAddress_FirstName").val() === "") {
+        //        $("#NewAddress_FirstName").siblings(".new-address-validation-error").html("Name is required.").show();
+        //        isValidAddress = false;
+        //    }
+
+        //    if ($("#NewAddress_Email").val() === "") {
+        //        $("#NewAddress_Email").siblings(".new-address-validation-error").html("Email is required.").show();
+        //        isValidAddress = false;
+        //    }
+
+        //    if ($("#NewAddress_Address1").val() === "") {
+        //        $("#NewAddress_Address1").siblings(".new-address-validation-error").html("Address is required.").show();
+        //        isValidAddress = false;
+        //    }
+
+        //    if ($("#NewAddress_PhoneNumber").val() === "") {
+        //        $("#NewAddress_PhoneNumber").siblings(".new-address-validation-error").html("Phone number is required.").show();
+        //        isValidAddress = false;
+        //    }
+
+        //    if ($("#NewAddress_StateProvinceId").val() === 0) {
+        //        $("#NewAddress_StateProvinceId").siblings(".new-address-validation-error").html("Delivery zone is required.").show();
+        //        isValidAddress = false;
+        //    }
+
+        //    if (!isValidAddress) {
+        //        return;
+        //    }
+
+        //    if ($.inArray($("#NewAddress_StateProvinceId option:selected").text(), stateList) === -1) {
+        //        if ($("input[value='Payments.CreditCardPOS']").is(":checked")) {
+        //            $("input[value='Payments.CashOnDelivery']").prop("checked", true);
+        //        }
+        //    }
+
+        //    SaveNewShippingAddress();
+        //} else {
+            SavePaymentMethodforCheckout();
+        //}
+    }
+
+    function SavePaymentMethodforCheckout()
+    {
+        disableAllElement();
+      
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("SavePaymentMethodForMakePayment", "MiscOnePageCheckOut", new {area = ""})",
+            data: $("#checkout-payment-method-form").serialize(),
+            success: function(data) {
+                enableAllElement();
+
+                if (data.update_section) {
+                    $('#confirmPaymentHtml').html(data.update_section.PaymentInfoHtml);
+
+                    if (!data.update_section.warning && data.isPaymentWorkflowRequired) {
+                        SavePaymentInformation();
+                    } else {
+                        $('#confirmPaymentHtml').bPopup({
+                            modalClose: false
+                        });
+                    }
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    };
+
+    function SavePaymentInformation() {
+        disableAllElement();
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("SavePaymentInformationForMakePayment", "MiscOnePageCheckOut", new {area = ""})",
+            data: $("#payment-information-submit-form").serialize(),
+            success: function(data) {
+                enableAllElement();
+
+                if (data.update_section) {
+                    if (!data.update_section.warning) {
+                        saveConfirmOrder();
+                    } else {
+                        $('#confirmPaymentHtml').html(data.update_section.PaymentInfoHtml);
+                        $('#confirmPaymentHtml').bPopup(
+                        {
+                            modalClose: false
+                        });
+                    }
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    };
+
+    function saveConfirmOrder() {
+        disableAllElement();
+        
+        $.ajax({
+            cache: false,
+            url: "@Url.Action("SaveConfirmPayment", "MiscOnePageCheckOut", new {area = ""})",
+            success: function(data) {
+                enableAllElement();
+
+                if (data.success === 1) {
+                    window.location.href = "/checkout/CompletedMakePayment";
+                } else if (data.success === 2) {
+                    window.location.href = "/checkout/OpcCompleteRedirectionMakepayment";
+                } else if (data.success === 0) {
+                    if (data.update_section) {
+                        enableAllElement();
+
+                        $('#confirmPaymentHtml').html(data.update_section.PaymentInfoHtml);
+                        $('#confirmPaymentHtml').bPopup(
+                        {
+                            modalClose: false
+                        });
+                    }
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    }
+
+    function ApplyCustomerWalletAmount(event) {
+        var walletPayAmount = $('.customer-wallet-payment td:nth-child(2) > span').text().replace(/\D/g, '');
+        if (!walletPayAmount) walletPayAmount = 0;
+        walletPayAmount = parseFloat(walletPayAmount);
+
+        switch ($(event.target).val().toLowerCase()) {
+            case "i would like to pay from my wallet":
+                $(event.target).val("do not pay from my wallet");
+
+                UpdateOrderTotalWithWalletPayAmount(walletPayAmount, true);
+                break;
+            case "do not pay from my wallet":
+                $(event.target).val("i would like to pay from my wallet");
+
+                UpdateOrderTotalWithWalletPayAmount(walletPayAmount, false);
+                break;
+        }
+    }
+
+    function updateOrderTotal(paymentMethod)
+    {
+        disableAllElement();
+        var stProvinceName = $("#NewAddress_StateProvinceId option:selected").text();
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("UpdateMakePaymentTotal", "MiscOnePageCheckOut", new {area = ""})",
+            data: { "paymentMethod": paymentMethod, "stProvinceName": stProvinceName },
+            success: function (data) {
+                if (data.success === 1) {
+                    if (data.update_section) {
+                        enableAllElement();
+                        $('#orderTotalsOnOnePageCheckOutDiv').html(data.update_section.OrderTotalHtml);
+
+                        if (data.showWalletPay) {
+                            $('.customer-wallet-payment').show();
+                        }
+                    }
+                } else if (data.success === 0) {
+                    window.location.href = "/cart";
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    }
+
+    function UpdateOrderTotalWithWalletPayAmount(walletPayAmount, willDeduct) {
+        disableAllElement();
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("UpdateOrderTotalWithWalletPayAmount", "MiscOnePageCheckOut", new {area = ""})",
+            data: { "walletPayAmount": walletPayAmount, "willDeduct": willDeduct },
+            success: function(data) {
+                if (data.success === 1) {
+                    if (data.update_section) {
+                        enableAllElement();
+                        $('#orderTotalsOnOnePageCheckOutDiv').html(data.update_section.OrderTotalHtml);
+
+                        if (willDeduct) {
+                            $('.customer-wallet-payment').show();
+                        }
+                    }
+                } else if (data.success === 0) {
+                    window.location.href = "/cart";
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    }
+
+    function updateOrderTotalWithEmi(paymentMethod, paymentEmioption) {
+        disableAllElement();
+        var stProvinceName = $("#NewAddress_StateProvinceId option:selected").text();
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("updateOrderTotalWithEmi", "MiscOnePageCheckOut", new {area = ""})",
+            data: { "paymentMethod": paymentMethod, "paymentEmioption": paymentEmioption, "stProvinceName": stProvinceName },
+            success: function(data) {
+                if (data.success === 1) {
+                    if (data.update_section) {
+                        enableAllElement();
+
+                        $('#orderTotalsOnOnePageCheckOutDiv').html(data.update_section.OrderTotalHtml);
+
+                        if (data.hasEMIPaymentMethod) {
+                            if (data.emiOption3Amount) {
+                                $('#emiOption3Label').html("@T("PaymentMethode.EmiOption1")" + " - " + data.emiOption3Amount);
+                            }
+
+                            if (data.emiOption6Amount) {
+                                $('#emiOption6Label').html("@T("PaymentMethode.EmiOption2")" + " - " + data.emiOption6Amount);
+                            }
+
+                            if (data.emiOption9Amount) {
+                                $('#emiOption9Label').html("@T("PaymentMethode.EmiOption3")" + " - " + data.emiOption9Amount);
+                            }
+
+                            if (data.emiOption12Amount) {
+                                $('#emiOption12Label').html("@T("PaymentMethode.EmiOption4")" + " - " + data.emiOption12Amount);
+                            }
+
+                            if (data.emiOption18Amount) {
+                                $('#emiOption18Label').html("@T("PaymentMethode.EmiOption5")" + " - " + data.emiOption18Amount);
+                            }
+
+                            if (data.emiOption24Amount) {
+                                $('#emiOption24Label').html("@T("PaymentMethode.EmiOption6")" + " - " + data.emiOption24Amount);
+                            }
+                        }
+                    }
+                } else if (data.success === 0) {
+                    window.location.href = "/cart";
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                enableAllElement();
+                alert(thrownError);
+            }
+        });
+    }
+
+    function toggleQuantitydiv(elem1, elem2) {
+        $(elem1).toggle();
+        $(elem2).toggle();
+    }
+
+    function showHideCashOnDelivery(elm) {
+        if ($.inArray($(elm).siblings("#NewAddress_StateProvinceId option:selected").text(), stateList) === -1) {
+            $("input[value='Payments.CreditCardPOS']").closest("li").hide();
+
+            if ($("input[value='Payments.CreditCardPOS']").is(":checked")) {
+                $("input[value='Payments.CashOnDelivery']").prop("checked", true);
+            }
+        } else {
+            $("input[value='Payments.CreditCardPOS']").closest("li").show();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    var paymnetmethodeChacked = "";
+
+    $('input:radio[name="paymentmethod"]').change(
+        function () {
+            if ($(this).is(':checked') && $(this).val() === 'Payments.SSLCommerzEmi') {
+                $('.sSLCommerzEmiSelection').css('display', 'block');
+                $("#emiOption3").prop("checked", true);
+
+                paymnetmethodeChacked = $(this).val();
+                updateOrderTotalWithEmi(this.value, "3");
+            } else {
+                $('.emiOption').prop('checked', false);
+                $('.sSLCommerzEmiSelection').css('display', 'none');
+            }
+
+            $('input[type=radio][name=emiOption]').on('change', function () {
+                updateOrderTotalWithEmi(paymnetmethodeChacked, this.value);
+            });
+        });
+</script>
+ 

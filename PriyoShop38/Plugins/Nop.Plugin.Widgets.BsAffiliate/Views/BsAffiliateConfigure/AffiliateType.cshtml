@@ -1,0 +1,105 @@
+﻿@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = T("Plugins.Widgets.BsAffiliate.AffiliateCommission").Text;
+    Html.SetActiveMenuItemSystemName("Affiliate.Types");
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Plugins.Widgets.BsAffiliate.AffiliateType")
+    </h1>
+    @if (ViewBag.CanManage)
+    {
+        <div class="pull-right">
+            <a href="AddAffiliateType" class="btn bg-blue">
+                <i class="fa fa-plus"></i>
+                @T("Admin.Common.AddNew")
+            </a>
+        </div>
+    }
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="type-grid"></div>
+                    <script>
+                        $(document).ready(function() {
+                                $("#type-grid").kendoGrid({
+                                    dataSource: {
+                                        type: "json",
+                                        transport: {
+                                            read: {
+                                                url: "/BsAffiliateConfigure/GetAffiliateTypes",
+                                                type: "POST",
+                                                dataType: "json",
+                                                //data: additionalData
+                                            }
+                                        },
+                                        schema: {
+                                            data: "Data",
+                                            total: "Total",
+                                            errors: "Errors"
+                                        },
+                                        error: function(e) {
+                                            display_kendoui_grid_error(e);
+                                            // Cancel the changes
+                                            this.cancelChanges();
+                                        },
+                                        pageSize: 15,
+                                        serverPaging: true,
+                                        serverFiltering: true,
+                                        serverSorting: true
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        pageSizes: [10, 15, 25, 50, 100]
+                                    },
+                                    scrollable: false,
+                                    //dataBound: onDataBound,
+                                    columns: [
+                                        {
+                                            field: "Name",
+                                            title: "Name",
+                                            width: 300
+                                        }, {
+                                            field: "NameUrlParameter",
+                                            title: "Name Url Parameter",
+                                            width: 200
+                                        }, {
+                                            field: "IdUrlParameter",
+                                            title: "Id Url Parameter",
+                                            width: 200
+                                        }
+                                        @if (ViewBag.CanManage)
+                                        {
+                                            <text>
+                                        , {
+                                                field: "Id",
+                                            title: "Edit",
+                                            width: 80,
+                                            template: '<a href="EditAffiliateType/#=Id#">Edit</a>'
+                                        }, {
+                                                field: "Id",
+                                            title: "Delete",
+                                            width: 80,
+                                            template: '<a onclick="return confirm(\'Are you sure you want to delete this item?\')" href="DeleteAffiliateType/#=Id#">Delete</a>'
+                                        },
+                                        </text>
+                                        }
+                                    ]
+                                });
+                            });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

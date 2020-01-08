@@ -1,0 +1,251 @@
+﻿h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+
+
+body {
+    padding-top: 81px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.imgheightofcategory {
+    max-width: 100%;
+}
+
+.categorynameheader {
+    color: #fff;
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 12px 0px;
+    text-align: center;
+    font-family: 'Arial';
+}
+
+.maincategory {
+    color: white;
+    font-family: Arial;
+    text-decoration: none;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    color: inherit;
+    font-size: 16px;
+}
+
+.picture {
+    padding: 10px;
+}
+
+    .picture img {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        text-align: center;
+        transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+    }
+
+    .picture:hover img {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+.imgwidth {
+    width: 91%;
+    margin-top: 8px;
+    margin-left: 8px;
+    height: 100%;
+}
+
+.prices {
+    text-align: center;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rowofpublicpage {
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    border-left: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+
+    .rowofpublicpage ul {
+        margin: 0 auto;
+    }
+
+    .rowofpublicpage a {
+    }
+
+        .rowofpublicpage a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+.subcategoryli {
+    font-family: arial;
+    font-style: normal;
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 15px;
+    color: #000;
+}
+
+    .subcategoryli:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+
+.master-wrapper-content {
+    /*width: 73% !important;*/
+}
+
+/*.productContainer {
+    margin-right: -16px !important;
+    margin-left: -20px;
+}*/
+
+h2.product-title {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+    h2.product-title > a {
+        color: #000000;
+        font-size: 14px;
+        font-weight: normal;
+        text-decoration: none;
+    }
+
+.add-info .buttons {
+    text-align: left;
+}
+
+.mid-content-title {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    color: #000; /*border-bottom: 2px solid #000;*/
+    margin: 0;
+}
+
+.product-item {
+    position: relative;
+    background-color: white;
+    /*height: 0px;*/
+}
+
+.rowBorder {
+    padding: 0;
+    border-right: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    border-left: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
+}
+
+    .rowBorder:hover {
+        padding: 0;
+        border-right: 1px solid #248ece;
+        border-bottom: 1px solid #248ece;
+        border-left: 1px solid #248ece;
+        border-top: 1px solid #248ece;
+    }
+
+.rowBorde .product-item {
+}
+
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+}
+
+.divCarousel, .divTitle {
+    padding: 0;
+}
+
+.divTitle {
+  margin-left: -1px;
+  margin-top: -1px;
+}
+.home-page .product-item .details {
+    padding: 0px 10px 10px 10px;
+}
+
+.product-item .details .buttons {
+    margin: 0;
+    text-align: center;
+}
+
+
+
+
+
+/*=====================================================
+    
+    TABLETS LANDSCAPE & NETBOOKS
+
+=====================================================*/
+@media screen and (max-width:940px) and (min-width:769px) {
+    .add-info .buttons {
+        text-align: center;
+    }
+
+    .picture {
+        padding: 12px;
+    }
+}
+
+
+
+/*=====================================================
+    
+    TABLETS PORTRAIT & SMARTPHONES LANDSCAPE
+
+=====================================================*/
+@media screen and (max-width:768px) and (min-width:481px) {
+    .add-info .buttons {
+        text-align: center;
+    }
+
+    .picture {
+        padding: 12px;
+    }
+}
+/*=====================================================
+    
+    SMALLER MOBILE DEVICES
+
+=====================================================*/
+@media screen and (max-width:480px) {
+    .add-info .buttons {
+        text-align: center;
+    }
+
+    .picture {
+        padding: 12px;
+    }
+
+    .rowofpublicpage ul li:last-child {
+        border-bottom: 0 !important;
+    }
+}

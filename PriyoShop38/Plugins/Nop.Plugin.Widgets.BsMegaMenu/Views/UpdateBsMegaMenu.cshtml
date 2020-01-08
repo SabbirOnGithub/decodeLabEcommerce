@@ -1,0 +1,83 @@
+﻿@using System.Diagnostics
+@using Nop.Web.Framework;
+@using System.Linq;
+@using Nop.Web.Framework.UI;
+
+@model Nop.Plugin.Widgets.BsMegaMenu.Domain.BsMegaMenuDomain
+
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="section-header">
+    <div class="title">
+        Update BS Mega Menu for this categorys @Html.ActionLink("(" + "back to BS Mega Menu list" + ")", "ManageBsMegaMenu")
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var value = $('#ParentCategoryId').val()
+
+        if (value == 0) {
+            $("#numberOfColumns").show();
+            $("#columnPosition").hide();
+        }
+
+        else {
+            $("#numberOfColumns").hide();
+            $("#columnPosition").show();
+        }
+
+    });
+
+</script>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "megaMenuform" }))
+{
+    <fieldset>
+        <legend><strong>Manage Your Mega Menu</strong></legend>
+        <table class="adminContent">
+            <tr>
+                <td class="adminData">@Html.HiddenFor(m => m.Id)</td>
+            </tr>
+            <tr>
+                <td class="adminData">@Html.HiddenFor(m => m.ParentCategoryId)</td>
+            </tr>
+            <tr>
+                <td class="adminTitle">@Html.HiddenFor(m => m.CategoryId)</td>
+            </tr>
+            <tr id="categoryList">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.CategoryId):</td>
+                <td class="adminData">
+                    @Html.Label(Model.SelectedCategory)
+                </td>
+            </tr>
+            <tr id="numberOfColumns">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.NumberOfColums):</td>
+                <td class="adminData">
+                    @Html.EditorFor(m => m.NumberOfColums)
+                    @Html.ValidationMessageFor(m => m.NumberOfColums)
+                </td>
+            </tr>
+            <tr id="columnPosition">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.ColumnPosition):</td>
+                <td class="adminData">
+                    @Html.EditorFor(m => m.ColumnPosition)
+                    @Html.ValidationMessageFor(m => m.ColumnPosition)
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <br />
+
+    <table class="adminContent">
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="update" id="update" class="k-button" value="@T("admin.common.update")" />
+            </td>
+        </tr>
+    </table>
+}

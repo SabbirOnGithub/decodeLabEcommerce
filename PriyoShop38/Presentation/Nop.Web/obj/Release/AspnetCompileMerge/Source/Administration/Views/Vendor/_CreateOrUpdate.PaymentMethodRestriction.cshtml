@@ -1,0 +1,125 @@
+﻿@model VendorModel
+
+<div class="panel-group">
+    @if (Model.Id > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="payment-method-restriction-grid"></div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#payment-method-restriction-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("PaymentMethodRestrictList", "Vendor", new { vendorId = Model.Id }))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    },
+                                    update: {
+                                        url: "@Html.Raw(Url.Action("PaymentMethodRestrictUpdate", "Vendor"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "SystemName",
+                                        fields: {
+                                            FriendlyName: { editable: false, type: "string" },
+                                            SystemName: { editable: false, type: "string" },
+                                            LogoUrl: { editable: false, type: "string" },
+                                            SupportVoid: { editable: false, type: "boolean" },
+                                            IsRestricted: { editable: true, type: "boolean" },
+                                            IsActive: { editable: false, type: "boolean" }
+                                        }
+                                    }
+                                },
+                                requestEnd: function(e) {
+                                    if (e.type == "update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                            {
+                                field: "FriendlyName",
+                                title: "@T("Admin.Configuration.Payment.Methods.Fields.FriendlyName")",
+                                width: 250
+                            }, {
+                                field: "SystemName",
+                                title: "@T("Admin.Configuration.Payment.Methods.Fields.SystemName")",
+                                width: 250
+                            }, {
+                                field: "LogoUrl",
+                                title: "@T("Admin.Configuration.Payment.Methods.Fields.Logo")",
+                                width: 100,
+                                template: '<img src="#=LogoUrl#" />'
+                            }, {
+                                field: "IsActive",
+                                title: "@T("Admin.Configuration.Payment.Methods.Fields.IsActive")",
+                                width: 100,
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: '# if(IsActive) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                            }, {
+                                field: "IsRestricted",
+                                title: "@T("Admin.Configuration.Products.RestrictedPaymentMethod.IsRestricted")",
+                                width: 150,
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: '# if(IsRestricted) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                            }, {
+                                command: {
+                                    name: "edit",
+                                    text: {
+                                        edit: "@T("Admin.Common.Edit")",
+                                        update: "@T("Admin.Common.Update")",
+                                        cancel: "@T("Admin.Common.Cancel")"
+                                    }
+                                },
+                                title: "@T("Admin.Common.Edit")",
+                                    width: 150
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Admin.Catalog.Vendors.PaymentMethodRestriction.SaveBeforeEdit")
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+﻿@using System.Web.Mvc.Html;
+@using Nop.Web.Framework.UI
+@{
+	//page title
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    Html.AppendCssFileParts("~/Plugins/NopStation.MobileApp/Content/notification.css");
+    Html.AddCssFileParts("~/Scripts/fineuploader/fineuploader-4.2.2.min.css");
+    //Html.AppendScriptParts("~/Plugins/NopStation.MobileApp/Content/Scripts/sammy.min.js");
+    Html.AppendScriptParts("~/Plugins/NopStation.MobileApp/Content/Scripts/notification.js");
+    Html.AppendScriptParts("~/Content/tinymce/tinymce.min.js");
+    Html.AddScriptParts("~/Scripts/fineuploader/jquery.fineuploader-4.2.2.min.js");
+}
+@RenderBody()

@@ -1,0 +1,69 @@
+﻿@model AffiliatedOrderListModel
+@using Nop.Web.Models.Affiliates;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Models.Customer;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-address-edit-page");
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.AffiliatedOrders })
+}
+<style>
+    .cart th, .data-table th, .forums-table-section th {
+        white-space: initial !important;
+    }
+
+    .form-fields-table {
+        padding: 30px 60px;
+    }
+
+        .form-fields-table table th {
+            font-weight: bold;
+        }
+</style>
+
+    <div class="page account-page address-edit-page">
+        <div class="page-title">
+            <h1>@T("Plugins.Widgets.BsAffiliate.OrderTitle")</h1>
+        </div>
+        <div class="page-body">
+            @if (!Model.Active)
+            {
+                <div class="no-data">
+                    @T("Plugins.Widgets.BsAffiliate.Info.VerificationPendingMessage")
+                </div>
+            }
+            else 
+            {
+                <script>
+                    $(document).ready(function () {
+                        loadOrders(1);
+                    });
+
+                    function loadOrders(pageNumber) {
+                        AjaxCart.setLoadWaiting(true);
+                        $.ajax({
+                            url: "/affiliate/orderList",
+                            type: "get",
+                            data: { pageNumber: pageNumber },
+                            success: function (data) {
+                                console.log(data);
+                                if (data.status) {
+                                    $('#order-list').html(data.html);
+                                }
+                            },
+                            complete: function () {
+                                AjaxCart.setLoadWaiting(false);
+                            }
+                        });
+                    }
+                </script>
+
+                <div id="order-list"></div>
+            }
+        </div>
+    </div>

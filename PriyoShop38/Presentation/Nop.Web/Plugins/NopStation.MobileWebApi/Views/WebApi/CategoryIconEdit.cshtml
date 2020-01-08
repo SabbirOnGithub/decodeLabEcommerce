@@ -1,0 +1,64 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.CategoryIconsModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+
+@{
+    Html.SetActiveMenuItemSystemName("MobileWebApi.CategoryIcons");
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Edit category icon
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a href="/MobileWebApiConfiguration/CategoryIconList">back to category list</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+            <span id="category-delete" class="btn bg-red" data-toggle="modal" data-target="#categorymodel-delete-confirmation">
+                <i class="fa fa-trash-o"></i>
+                @T("Admin.Common.Delete")
+            </span>
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/NopStation.MobileWebApi/Views/WebApi/_CategoryIconCreateOrUpdate.cshtml", Model)
+}
+
+
+<div id="categorymodel-delete-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="categorymodel-delete-confirmation-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="homepagecategorymodel-delete-confirmation-title">Are you sure?</h4>
+            </div>
+            <form action="/MobileWebApiConfiguration/CategoryIconDelete/@Model.Id" method="post" novalidate="novalidate">
+                <div class="form-horizontal">
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        Are you sure you want to delete this item?
+                    </div>
+                    <div class="modal-footer">
+                        <span class="btn btn-default" data-dismiss="modal">No, cancel</span>
+                        <button type="submit" class="btn btn-primary pull-right">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

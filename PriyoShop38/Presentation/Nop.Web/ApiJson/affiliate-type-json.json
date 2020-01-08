@@ -1,0 +1,26 @@
+[
+  {
+    "NameUrlParameter": "bl22",
+    "IdUrlParameter": "as23423423"
+  },
+  {
+    "NameUrlParameter": "techhub",
+    "IdUrlParameter": "techhub-id"
+  },
+  {
+    "NameUrlParameter": "yb",
+    "IdUrlParameter": "yb-id"
+  },
+  {
+    "NameUrlParameter": "eshop",
+    "IdUrlParameter": "eshop-id"
+  },
+  {
+    "NameUrlParameter": "pec",
+    "IdUrlParameter": "pecid"
+  },
+  {
+    "NameUrlParameter": "blname",
+    "IdUrlParameter": "blid"
+  }
+]

@@ -1,0 +1,107 @@
+﻿@model MobileLoginStep2Model
+@using Nop.Web.Models.Customer;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Login").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-login-page");
+}
+
+<div class="page login-page">
+    <div class="page-title">
+        <h1>Please enter Name & Email address</h1>
+    </div>
+    <div class="page-body">
+        <div class="customer-blocks">
+            <div class="fieldset">
+                @using (Html.BeginForm())
+                {
+                    var validationSummary = Html.ValidationSummary(true, T("Account.Login.Unsuccessful").Text);
+                    
+                    <div class="inner-wrapper show">
+                        @if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+                        {
+                            <div class="message-error">@validationSummary</div>
+                        }
+                        <div class="form-fields">
+                            @if (Model.OTPValidationRequired)
+                            {
+                                <div class="inputs">
+                                    @Html.LabelFor(m => m.OTP, new { }, ":")
+                                    @Html.TextBoxFor(m => m.OTP, new { @class = "otp", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.OTP)
+                                </div>
+                            }
+                            @if (Model.NewCustomer)
+                            {
+                                <div class="inputs">
+                                    @Html.LabelFor(m => m.Name, new { }, ":")
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "name" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                </div>
+                                <div class="inputs">
+                                    @Html.LabelFor(m => m.Email, new { }, ":")
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "email" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                            }
+                            @Html.HiddenFor(m => m.NewCustomer)
+
+                        </div>
+                        <div id="result" style="font-weight: bold"></div>
+                        <div class="buttons" style="margin-top: 20px">
+                            @if (Model.NewCustomer)
+                            {
+                                <input class="button-1 login-button" type="submit" value="@T("Account.SignUpButton")" />
+                            }
+                            else
+                            {
+                                <input class="button-1 login-button" type="submit" value="@T("Account.Login.LoginButton")" />
+                            }
+                            @if (Model.OTPValidationRequired)
+                            {
+                                <input class="button-1" type="button" value="Request OTP" onclick="requestOTP()"/>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function requestOTP() {
+        var postData = { };
+        addAntiForgeryToken(postData);
+
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '/Customer/RequestOTP',
+            data: postData,
+            dataType: 'text',
+            success: function (data) {
+                if (data) {
+                    $("#result").css("color", "green");
+                    $("#result").html("OTP has been sent to your mobile.");
+                }
+                else {
+                    $("#result").css("color", "red");
+                    $("#result").html("Something went wrong! Please try again.");
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("#result").css("color", "red");
+                $("#result").html("Something went wrong! Please try again.");
+            }
+        });
+        return false;
+
+    }
+</script>

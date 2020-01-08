@@ -1,0 +1,9 @@
+﻿Group: NopStation
+FriendlyName: Purchase Offer
+SystemName: Purchase.Offer
+Version: 1.00
+SupportedVersions: 3.80
+Author: Jaber Kibria
+DisplayOrder: 2
+FileName: Nop.Plugin.Purchase.Offer.dll
+Description: This plugin allows you to set purchase offer

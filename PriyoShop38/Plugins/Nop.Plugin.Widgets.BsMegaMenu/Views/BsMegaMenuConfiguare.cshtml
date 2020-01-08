@@ -1,0 +1,69 @@
+﻿@using Nop.Plugin.Widgets.BsMegaMenu.Models
+@using Nop.Web.Framework
+@model BsMegaMenuSettingsModel
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI
+
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+<!--product breadcrumb-->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(false)*@
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @T("admin.plugin.widgets.BsMegaMenu.settings")
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ShowImage)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ShowImage)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.SetWidgetZone)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.SetWidgetZone, new SelectList(new[] { "header_menu_after", "content_before", "header_menu_before", "left_side_column_before", "body_start_html_tag_after", "bsmegamenu" }.Select(x => new { value = x, text = x }), "Value", "Text"), new { id = "cursor_tye_dropdown_list", @class = "form-control valid" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.MenuType)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.MenuType, new SelectList(new[] { "Fixed Menu", "Mega Menu" }.Select(x => new { value = x, text = x }), "Value", "Text"), new { id = "cursor_tye_dropdown_list", @class = "form-control valid" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.noOfMenufactureItems)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.noOfMenufactureItems)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <button type="submit" name="save" value="save" class="btn bg-blue">@T("admin.plugin.widgets.BsMegaMenu.save")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("#noOfMenufactureItems").kendoNumericTextBox({
+        min: 1
+    });
+</script>

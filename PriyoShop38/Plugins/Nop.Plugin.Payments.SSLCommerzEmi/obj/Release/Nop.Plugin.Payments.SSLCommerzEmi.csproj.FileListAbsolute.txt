@@ -1,0 +1,12 @@
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\web.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Views\PaymentSSLCommerzEmi\Configure.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Views\PaymentSSLCommerzEmi\PaymentInfo.cshtml
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Description.txt
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\logo.png
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\_logo.jpg
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Nop.Plugin.Payments.SSLCommerzEmi.dll.config
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Nop.Plugin.Payments.SSLCommerzEmi.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.SSLCommerzEmi\Nop.Plugin.Payments.SSLCommerzEmi.pdb
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerzEmi\obj\Release\Nop.Plugin.Payments.SSLCommerzEmi.csprojAssemblyReference.cache
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerzEmi\obj\Release\Nop.Plugin.Payments.SSLCommerzEmi.dll
+G:\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.SSLCommerzEmi\obj\Release\Nop.Plugin.Payments.SSLCommerzEmi.pdb

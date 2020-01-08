@@ -1,0 +1,163 @@
+﻿<style>
+    @@media (max-width: 768px) {
+        .app-banner-wrapper {
+            position: fixed;
+            width: 100%;
+            min-height: 100%;
+            height: auto;
+            left: 0;
+            top: 0;
+            display: none;
+            z-index: 2000;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+            .app-banner-wrapper.active {
+                display: block !important;
+            }
+
+            .app-banner-wrapper::after {
+                content: '';
+            }
+
+        .app-banner {
+            width: 94%;
+            height: 94%;
+            position: relative;
+            background: #fff;
+            max-width: 320px;
+            margin: 2% auto;
+            padding: 10px 10px;
+            border-radius: 3px;
+        }
+
+            .app-banner img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .app-banner a {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .app-banner::after {
+                content: '';
+            }
+
+            .app-banner .btn-banner-close {
+                display: inline-block;
+                position: absolute;
+                z-index: 1;
+                top: 7px;
+                right: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                font-family: cursive;
+            }
+
+            .app-banner .app-banner-logo {
+                margin-bottom: 10px;
+            }
+
+                .app-banner .app-banner-logo a {
+                    font-size: 0;
+                    line-height: 0;
+                }
+
+                .app-banner .app-banner-logo img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 6px;
+                    overflow: hidden;
+                }
+
+            .app-banner .banner-message {
+            }
+
+            .app-banner .download-now {
+                margin: 8px auto;
+            }
+
+            .app-banner .btn-download-now {
+                background: #f74258;
+                color: #fff;
+                font-weight: 600;
+                padding: 12px 30px;
+                border-radius: 5px;
+            }
+
+            .app-banner .continue-site {
+                display: none;
+            }
+
+            .app-banner .btn-continue-site {
+                text-decoration: underline;
+            }
+
+            .app-banner .dont-show-again {
+                margin: 5px auto;
+            }
+
+                .app-banner .dont-show-again input {
+                }
+
+                .app-banner .dont-show-again label {
+                }
+
+            .app-banner .banner {
+                text-align: center;
+            }
+
+                .app-banner .banner img {
+                    margin: 0 auto;
+                    max-height: 250px;
+                }
+    }
+</style>
+
+<div id="AppBannerWrapper" class="app-banner-wrapper">
+    <div class="app-banner">
+        <a id="BtnBannerClose" class="btn-banner-close remove-banner">X</a>
+        <div class="app-banner-logo">
+            <a href="https://priyoshop.com/">
+                <img src="~/Themes/Pavilion/Content/img/app-banner-logo.jpg" />
+            </a>
+        </div>
+        <p class="banner-message">Download Briyoshop.com Android App and Stay up-to-date</p>
+        <div class="download-now">
+            <a class="btn-download-now" href="https://play.google.com/store/apps/details?id=com.priyo.shop">
+                Download Now
+            </a>
+        </div>
+        <div class="continue-site">
+            <a class="btn-continue-site remove-banner" href="https://priyoshop.com/">
+                Skip & Continue to site
+            </a>
+        </div>
+        <div class="dont-show-again">
+            <input type="checkbox" id="DontShowAgain" />
+            <label for="DontShowAgain">Don't show again</label>
+        </div>
+        <div class="banner">
+            <img src="~/Themes/Pavilion/Content/img/app-banner.png" />
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 769) {
+            if (sessionStorage.hideBanner != 'true') {
+                $("#AppBannerWrapper").addClass("active");
+            }
+        }
+
+        $(".remove-banner").click(function () {
+            if ($('#DontShowAgain').is(':checked')) {
+                sessionStorage.setItem('hideBanner', true);
+            }
+            $("#AppBannerWrapper").removeClass("active");
+        });
+    });
+</script>

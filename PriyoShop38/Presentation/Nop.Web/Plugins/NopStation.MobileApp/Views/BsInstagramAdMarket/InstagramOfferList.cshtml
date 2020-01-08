@@ -1,0 +1,130 @@
+﻿@using Nop.Core.Infrastructure
+@using BsWebApi.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using System.Globalization;
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Admin.Customers.Customers").Text;
+}
+
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt="" />
+        Offer List
+    </div>
+    <div class="options">
+        <a href="@Url.Action("InstagramOfferCreate")" class="k-button">@T("Admin.Common.AddNew")</a>
+
+
+    </div>
+</div>
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="instagram-offer-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#instagram-offer-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ReadOfferList", "BsInstagramVendor"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: null
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        scrollable: false,
+                        columns: [
+                            //{
+                            //field: "Id",
+                            //headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                            //headerAttributes: { style: "text-align:center" },
+                            //attributes: { style: "text-align:center" },
+                            //template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
+                            //width: 50
+                            //},
+                            {
+                                field: "Id",
+                                title: "ID",
+                                width: 50
+                            }, {
+                                field: "Title",
+                                title: "Title",
+                                width: 200
+                            },
+
+                            {
+                                field: "Description",
+                                title: "Description",
+                                width: 200
+                            }, {
+                                field: "ImageUrl",
+                                title: "Image",
+                                template: '<img src="#=ImageUrl#" />',
+                                width: 100
+                            },
+
+                        {
+                            field: "Published",
+                            title: "Published",
+                            width: 100
+                        }, {
+                            field: "CreatedOn",
+                            title: "@T("Admin.Customers.Customers.Fields.CreatedOn")",
+                            width: 200,
+                            type: "date",
+                            format: "{0:G}"
+                        },
+                            @*{
+                                field: "Id",
+                                title: "@T("Admin.Common.Edit")",
+                                width: 50,
+                                template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
+                            },*@
+                        {
+                            field: "Id",
+                            title: "Offer Details",
+                            width: 50,
+                            template: '<a href="OfferDetails/#=Id#">Details</a>'
+                        }]
+                    });
+                });
+            </script>
+
+
+        </td>
+    </tr>
+</table>

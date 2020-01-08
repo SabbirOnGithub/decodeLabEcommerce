@@ -1,0 +1,165 @@
+﻿@model CategoryNavigationModel
+@using Nop.Web.Models.Catalog;
+@using Nop.Services.Topics;
+@using Nop.Services.Localization;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@functions{
+    public bool BreadCrumbContainsCurrentCategoryId(CategorySimpleModel category)
+    {
+        if (Model.CurrentCategoryId == 0)
+            return false;
+
+        if (category.Id == Model.CurrentCategoryId)
+            return true;
+
+        foreach (var subCategory in category.SubCategories)
+        {
+            if (BreadCrumbContainsCurrentCategoryId(subCategory))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+@helper RenderCategoryLine(CategorySimpleModel category)
+{
+bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+bool last = category.Id == Model.CurrentCategoryId;
+string liClass = active ? "active" : "inactive";
+if (last)
+{
+    liClass += " last";
+}
+    <li class="@liClass @if (category.SubCategories.Count() > 0) { <text>dropdown</text> } ">
+        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
+            @category.Name
+            @if (category.NumberOfProducts.HasValue)
+            {
+                <text> </text>@T("Categories.TotalProducts", category.NumberOfProducts.Value)
+
+            }
+       </a>
+        @{                               
+            if (category.SubCategories.Count > 0)
+            {
+                <ul class="sublist">
+                    @foreach (var subCategory in category.SubCategories)
+                    {
+                        @RenderCategoryLine(subCategory)
+                    }
+                </ul>
+            }
+        }
+   </li>
+}
+@if (Model.Categories.Count > 0)
+{
+    <div class="block block-category-navigation">
+        <div class="title">
+            <strong>@T("Categories")</strong>
+        </div>
+        <div class="listbox">
+            <ul class="list goo-collapsible">
+                <li>
+                    
+                    @{
+                        var topicService = EngineContext.Current.Resolve<ITopicService>();
+                        var localizeService = EngineContext.Current.Resolve<ILocalizationService>();
+                        var currentContext = EngineContext.Current.Resolve<IWorkContext>();
+                        var currentStore = EngineContext.Current.Resolve<IStoreContext>().CurrentStore;
+
+                        int storeId = currentStore.Id;
+                        var eventsMenuSystemName = T("events.menutitle").ToHtmlString();
+                        var topic = topicService.GetTopicBySystemName(eventsMenuSystemName, storeId);
+                        if (topic != null)
+                        {
+                            <a href="@Url.RouteUrl("Topic", new { SeName = topic.SystemName })">@topic.Title</a>                            
+                        }
+                    }
+                    
+
+                </li>
+                @foreach (var category in Model.Categories)
+                {
+                    @RenderCategoryLine(category)
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+        //$(".goo-collapsible > li > a").on("click", function (e) {
+
+        //    if (!$(this).hasClass("active")) {
+
+        //        // hide any open menus and remove all other classes
+        //        $(".goo-collapsible li ul").slideUp(350);
+        //        $(".goo-collapsible li a").removeClass("active");
+
+        //        // open our new menu and add the open class
+        //        $(this).next("ul").slideDown(350);
+        //        $(this).addClass("active");
+
+        //    } else if ($(this).hasClass("active")) {
+
+        //        $(this).removeClass("active");
+        //        $(this).next("ul").slideUp(350);
+        //    }
+        //});
+
+        $(".goo-collapsible > li > a").on("hover", function (e) {
+            
+            if (!$(this).parent().hasClass("active")) {
+
+                // hide any open menus and remove all other classes
+                $(".goo-collapsible li ul").slideUp(350);
+                $(".goo-collapsible li").removeClass("active").addClass("inactive");           
+
+                // open our new menu and add the open class
+                //$(this).next("ul").slideDown(350);
+                $(this).next("ul").slideDown(600);
+                $(this).parent().addClass("active").removeClass("inactive");
+
+            } 
+        });
+
+        $(".goo-collapsible > li > ul > li > a").on("hover", function (e) {
+            
+            if (!$(this).parent().hasClass("active")) {                
+                
+                $(".goo-collapsible > li > ul > li > ul").slideUp(350);
+                $(".goo-collapsible > li > ul > li").removeClass("active").addClass("inactive");
+                
+                $(this).next("ul").slideDown(600);
+                $(this).parent().addClass("active").removeClass("inactive");
+
+            }
+        });
+
+        $(".goo-collapsible > li > ul > li > ul > li > a").on("hover", function (e) {
+
+            if (!$(this).parent().hasClass("active")) {
+
+                $(".goo-collapsible > li > ul > li > ul > li > ul").slideUp(350);
+                $(".goo-collapsible > li > ul > li > ul > li").removeClass("active").addClass("inactive");
+               
+                $(this).next("ul").slideDown(600);
+                $(this).parent().addClass("active").removeClass("inactive");
+
+            }
+        });
+
+        $(".block-category-navigation").mouseleave(function () {
+            $(".goo-collapsible li ul").slideUp(700);
+            $(".goo-collapsible li").removeClass("active").addClass("inactive");
+        });
+
+    });
+</script>

@@ -1,0 +1,16 @@
+﻿.vendorlogo { display: inline-block; vertical-align: middle; }
+    .vendorlogo img { margin: 25px; }
+.header-menu-item { border-top: 5px solid transparent; color: #fff; display: inline-block; font-size: 16px; font-weight: normal; margin: 0 5px; padding: 20px 15px; vertical-align: top; }
+    .header-menu-item:hover { text-decoration: none; border-top-color: #0000ff; color: #0000cd; font-weight: normal; }
+
+.customAdminContent .control-label {
+    float: left;
+}
+
+.customAdminContent .ico-help {
+    float: left;
+}
+
+.customAdminContent .label-wrapper {
+     min-width: 200px;
+}

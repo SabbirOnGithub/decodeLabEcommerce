@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.Search.Elastic.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ProviderName):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ProviderName)
+                @Html.ValidationMessageFor(model => model.ProviderName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ElasticSearchServerUrl):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ElasticSearchServerUrl)
+                @Html.ValidationMessageFor(model => model.ElasticSearchServerUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.StoreName):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.StoreName)
+                @Html.ValidationMessageFor(model => model.StoreName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ElasticBulkSize):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ElasticBulkSize)
+                @Html.ValidationMessageFor(model => model.ElasticBulkSize)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="reindex" class="k-button" value="Reindex" />
+            </td>
+        </tr>
+        
+    </table>
+    
+    
+}

@@ -1,0 +1,184 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.Slider.SliderImageModel
+@using Nop.Core.Infrastructure
+@using Nop.Web.Framework.UI
+@using Nop.Web.Framework
+@{
+    Html.SetActiveMenuItemSystemName("MobileWebApi.SliderImage");
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Admin.Plugins.SliderImage").Text;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Home page slider - List
+        </h1>
+
+        <div class="pull-right">
+            <a href="@Url.Action("SliderImageCreate")" class="btn bg-blue">
+                <i class="fa fa-plus-square"></i>
+                @T("Admin.Common.AddNew")
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal clearfix">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.SliderActiveStartDate)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.SliderActiveStartDate)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.SliderActiveEndDate)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.SliderActiveEndDate)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.SliderDomainTypeId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopDropDownListFor(model => model.SliderDomainTypeId, Model.AvailableSliderDomainTypes)
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-md-offset-3">
+                            <button type="button" id="search-sliders" class="btn btn-primary btn-search">
+                                <i class="fa fa-search"></i>
+                                @T("Admin.Common.Search")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="sliders-grid"></div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#sliders-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("SliderImageList", "MobileWebApiConfiguration"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: additionalData
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: @(defaultGridPageSize),
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(gridPageSizes)]
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "Id",
+                                    title: "Id",
+                                    width: 50
+                                }, {
+                                    field: "PictureUrl",
+                                    title: "@T("Admin.SliderImage.Fields.Picture")",
+                                    template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" /></a>',
+                                    width: 150
+                                }, {
+                                    field: "SliderActiveStartDate",
+                                    title: "@T("Admin.SliderImage.Fields.SliderActiveStartDate")",
+                                    width: 150,
+                                    type: "date",
+                                    format: "{0:dd-MM-yyyy HH:mm}"
+                                }, {
+                                    field: "SliderActiveEndDate",
+                                    title: "@T("Admin.SliderImage.Fields.SliderActiveEndDate")",
+                                    width: 150,
+                                    type: "date",
+                                    format: "{0:dd-MM-yyyy HH:mm}"
+                                }, {
+                                    field: "SliderDomainTypeStr",
+                                    title: "@T("Admin.SliderImage.Fields.SliderDomainType")",
+                                    width: 100
+                                }, {
+                                    field: "DomainId",
+                                    title: "@T("Admin.SliderImage.Fields.DomainId")",
+                                    width: 100
+                                }, {
+                                    field: "DisplayOrder",
+                                    title: "@T("Admin.SliderImage.Fields.DisplayOrder")",
+                                    width: 100
+                                }, {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 100,
+                                    template: '<a href="SliderImageEdit/#=Id#">@T("Admin.Common.Edit")</a>'
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+                    //search button
+                $('#search-sliders').click(function () {
+                    var grid = $('#sliders-grid').data('kendoGrid');
+                    grid.dataSource.page(1); //new search. Set page size to 1
+                    return false;
+                });
+            });
+
+            function additionalData() {
+                var data = {
+                    SliderActiveStartDate: $('#@Html.FieldIdFor(model => model.SliderActiveStartDate)').val(),
+                    SliderActiveEndDate: $('#@Html.FieldIdFor(model => model.SliderActiveEndDate)').val(),
+                    SliderDomainTypeId: $('#@Html.FieldIdFor(model => model.SliderDomainTypeId)').val()
+                };
+                addAntiForgeryToken(data);
+                return data;
+            }
+        </script>
+    </div>
+}
+
+

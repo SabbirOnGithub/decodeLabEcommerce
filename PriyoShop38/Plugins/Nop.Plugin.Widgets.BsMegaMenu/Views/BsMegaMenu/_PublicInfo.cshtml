@@ -1,0 +1,113 @@
+﻿@using System.Security.Policy
+@using Nop.Plugin.Widgets.BsMegaMenu.Models
+@using Nop.Web.Framework.UI
+@model BsMegaMenuModel
+
+@using System.Web.Mvc.Html;
+@using Nop.Core.Domain.Media
+@using Nop.Core.Infrastructure;
+
+@{
+    Html.AppendCssFileParts("~/Plugins/Widgets.BsMegaMenu/Content/style.css");
+    Html.AppendCssFileParts("~/Plugins/Widgets.BsMegaMenu/Content/reset.css");
+
+    Html.AppendScriptParts("~/Plugins/Widgets.BsMegaMenu/Scripts/modernizr.js");
+}
+
+<li class="cd-dropdown-wrapper">
+    <a class="cd-dropdown-trigger" href="#0">Category</a>
+    <nav class="cd-dropdown">
+        <h2>Title</h2>
+        <a href="#0" class="cd-close">Close</a>
+        <ul class="cd-dropdown-content">
+
+            @foreach (var category in Model.CategoryList) //problem here
+            {
+                if (!(category.SubCategories.Count > 0))
+                {
+                    <li class="dropdown">
+                        <a href="@Url.Content("~/" + category.SeName)">
+                            @category.Name
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="has-children">
+                        <a href="@Url.Content("~/" + category.SeName)">@category.Name</a>
+
+                        <ul class="cd-secondary-dropdown is-hidden">
+                            <li class="go-back"><a href="#0">@category.Name</a></li>
+                            <li class="see-all"><a href="@Url.Content("~/" + category.SeName)">@category.Name</a></li>
+                            @foreach (var subCategory in category.SubCategories)
+                            {
+                                if (!(subCategory.SubSubCategories.Count > 0))
+                                {
+                                    <li>
+                                        <a class="cd-dropdown-item" href="@Url.Content("~/" + subCategory.SeName)">
+                                            @subCategory.SeName
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="has-children">
+                                        <a href="@Url.Content("~/" + subCategory.SeName)">
+                                            @subCategory.Name
+                                        </a>
+                                        <ul class="is-hidden">
+                                            <li class="go-back"><a>@subCategory.Name</a></li>
+                                            <li class="see-all"><a href="@Url.Content("~/" + subCategory.SeName)">@subCategory.Name</a></li>
+                                            @foreach (var subSubCategory in subCategory.SubSubCategories)
+                                            {
+                                                if (!(subSubCategory.SubSubSubCategories.Count > 0))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Content("~/" + subSubCategory.SeName)">
+                                                            @subSubCategory.SeName
+                                                        </a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="has-children">
+                                                        <a>
+                                                            @subSubCategory.Name
+                                                        </a>
+
+                                                        <ul class="is-hidden">
+
+                                                            <li class="go-back"><a>@subSubCategory.Name</a></li>
+                                                            <li class=""><a href="@Url.Content("~/" + subSubCategory.SeName)">@subSubCategory.Name</a></li>
+                                                            @foreach (var subSubSubCategory in subSubCategory.SubSubSubCategories)
+                                                            {
+                                                                <li>
+                                                                    <a href="@Url.Content("~/" + subSubSubCategory.SeName)">
+                                                                        @subSubSubCategory.Name
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+
+                                    </li>
+                                }
+                            }
+
+                        </ul> <!-- .cd-dropdown-icons -->
+                    </li> <!-- .has-children -->
+                }
+            }
+
+        </ul> <!-- .cd-dropdown-content -->
+    </nav> <!-- .cd-dropdown -->
+</li> <!-- .cd-dropdown-wrapper -->
+
+<div style="display:none;">
+    <script src="~/Plugins/Widgets.BsMegaMenu/Scripts/jquery.menu-aim.js"></script> <!-- menu aim -->
+    <script src="~/Plugins/Widgets.BsMegaMenu/Scripts/main.js"></script> <!-- Resource jQuery -->
+</div>

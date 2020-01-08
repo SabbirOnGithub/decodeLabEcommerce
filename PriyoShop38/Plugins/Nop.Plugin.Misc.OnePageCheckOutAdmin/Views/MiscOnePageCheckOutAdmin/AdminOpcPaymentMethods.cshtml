@@ -1,0 +1,62 @@
+﻿@model CheckoutPaymentMethodModel
+@using Nop.Plugin.Misc.OnePageCheckOutAdmin.Models.Checkout;
+@{
+   String DefaultMethod="Payments.CashOnDelivery";
+}
+<div class="checkout-data">
+    <h4>Choose a payment method</h4>
+    <div class="section payment-method">
+       @using (Html.BeginForm(null, null, FormMethod.Post, new {id = "checkout-payment-method-form"}))
+       {
+
+           if (Model.DisplayRewardPoints && Model.PaymentMethods.Count > 0)
+            {
+                <div class="use-reward-points">
+                    @Html.EditorFor(model => model.UseRewardPoints)
+                    @string.Format(T("Checkout.UseRewardPoints").Text, Model.RewardPointsBalance, Model.RewardPointsAmount)
+                </div>
+            }
+           if (Model.PaymentMethods.Count > 0)
+            {
+
+                <ul class="method-list">
+                    @for (int i = Model.PaymentMethods.Count-1; i >= 0; i--)
+                    {
+                        var paymentMethod = Model.PaymentMethods[i];
+                        var paymentMethodName = paymentMethod.Name;
+                        if (!String.IsNullOrEmpty(paymentMethod.Fee))
+                        {
+                            paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                        }
+                        <li>
+                            <div class="method-name">
+                                @if (!String.IsNullOrEmpty(paymentMethod.LogoUrl))
+                                {
+                                    <div class ="payment-logo">
+                                        <label for="paymentmethod_@(i)">
+                                            <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
+                                        </label>
+                                    </div>
+                                }
+                                <div class="payment-details">
+                                    <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@(paymentMethod.PaymentMethodSystemName==DefaultMethod)" />
+                                    <label for="paymentmethod_@(i)">@paymentMethodName</label>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <input type="hidden" name="customerId" id="customerId" value="" />
+            }
+            else
+            {
+                <div class="message-error">
+                    @T("Checkout.NoPaymentMethods")
+                </div>
+            }
+       }
+        <div class="buttons">
+            <input type="button" name="SavePayementMethodButton" value="@T("checkout.confirm.payment")" class="button-1 " onclick="CheckAddressValidation()" />
+        </div>
+    </div>
+</div>

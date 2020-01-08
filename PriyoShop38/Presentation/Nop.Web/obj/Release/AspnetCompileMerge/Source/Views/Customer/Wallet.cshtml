@@ -1,0 +1,246 @@
+﻿@model CustomerLedgerView
+
+@using Nop.Web.Models.Customer;
+
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+    
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-wallet-page");
+}
+
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer")
+}
+
+<style>
+    .center-2 {
+        width: 100%;
+        margin-top: -70px;
+    }
+
+    .side-2 {
+        width: 100% !important;
+        margin-top: 50px;
+    }
+
+    #Walletcontainer {
+        position: relative;
+    }
+
+    .WalletLeftcontainer {
+        position: absolute;
+        top: 45%;
+        left: 10%;
+        color: #e30047;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .WalletRightcontainer {
+        position: absolute;
+        top: 35%;
+        right: 12%;
+        color: #FFF;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .spn {
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    #WalletLedger {
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #WalletLedger caption {
+            background: #e30047;
+            font-size: 16px;
+            padding: 3px 3px;
+            color: #fff;
+            font-family: Tahoma;
+            font-weight: 600;
+        }
+
+        #WalletLedger td, #WalletLedger th {
+            border: 1px solid #ccc;
+            padding: 8px;
+            color: #000;
+        }
+
+        #WalletLedger th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #ddd;
+            color: #000000;
+        }
+</style>
+
+
+
+<div class="page account-page wallet-page">
+    <div class="page-title">
+        <h1>@T("My Account") - @T("Wallet")</h1>
+    </div>
+
+    <div class="page-body">
+        @if (Model.CustomerLedgerMaster != null)
+        {
+            <div id="Walletcontainer">
+                <img src="~/Content/Images/WalletImage.jpg" />
+
+                <div class="WalletLeftcontainer">
+                    @*@using (Html.BeginForm("MakePaymentCheckout", "OnePageCheckOut"))*@
+                    @using (Html.BeginForm("MakePaymentMethod", "Checkout"))
+
+                    {
+                        <table id="WalletLedger" style="margin-left:-100px;margin-top:-130px">
+                            <caption>Make Payment</caption>
+                            <thead>
+                                <tr>
+
+                                    <td>
+                                        <div style="float:left;">
+                                            @Html.TextBoxFor(m => Model.CustomerWalletPayment.TransferAmount, new { placeholder = "Enter Amount", style = "width: 430px;" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="float:left;">
+                                            <input type="submit" value="Submit" id="btnSubmit" style="background-color: #f74258; transition: max-width 0.6s linear, background-color 0.3s linear, padding 0.1s linear; font-family: 'Open Sans'; font-size: 14px; color: white; height: 35px; width: 130px;" />
+
+
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+
+                            </thead>
+                        </table>
+                    }
+                    @using (Html.BeginForm("BalanceTransferFromWallet", "Checkout"))
+                    {
+                        <table id="WalletLedger" style="margin-left:-100px;margin-top:10px">
+                            <caption>Balance Transfer</caption>
+                            <thead>
+                                <tr>
+
+                                    <td>
+                                        <div style="float:left;padding-left:10px;">
+                                            @Html.TextBoxFor(m => Model.CustomerWalletPayment.TransferToContactNumber, new { placeholder = "Contact Number", style = "width: 200px;" })
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div style="float:left;">
+                                            @Html.TextBoxFor(m => Model.CustomerWalletPayment.TransferAmount, new { placeholder = "Enter Amount", style = "width: 200px;" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="float:left;">
+                                            <input type="submit" value="Submit" id="btnSubmit" style="background-color: #f74258; transition: max-width 0.6s linear, background-color 0.3s linear, padding 0.1s linear; font-family: 'Open Sans'; font-size: 14px; color: white; height: 35px; width: 130px;" />
+                                        </div>
+
+                                    </td>
+                                </tr>
+
+                            </thead>
+                        </table>
+
+                    }
+
+                </div>
+
+                <div class="WalletRightcontainer">Available Balance<br /><span style="font-size:34px">@Model.CustomerLedgerMaster.TotalBalance</span> TK.</div>
+            </div>
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+
+
+                if (Model.CustomerLedgerDetail != null && Model.CustomerLedgerDetail.Count > 0)
+                {
+                    <table id="WalletLedger">
+                        <caption>Ledger Details</caption>
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th>Amount Type</th>
+                                <th>Amount</th>
+                                <th>Transaction Date</th>
+                            </tr>
+                        </thead>
+
+                        @for (int i = 0; i < Model.CustomerLedgerDetail.Count; i++)
+                        {
+                            var detail = Model.CustomerLedgerDetail[i];
+
+                            <tr>
+                                <td>@detail.AmountDescription</td>
+                                <td>@detail.AmountType</td>
+                                <td>@detail.Amount</td>
+                                <td>@detail.LastAddedDate.ToString("dd-MMM-yyyy hh:mm tt")</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <div class="no-data">
+                        @T("No Balance")
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <div class="no-data" style="padding-bottom:100px">
+
+                @using (Html.BeginForm("CreateWallet", "Customer"))
+                {
+
+                    <div style="float:left;padding-right:10px"><h5>Enter Valid Contact Number </h5></div>
+
+                    <div style="float:left;padding-left:10px;">
+                        @Html.TextBoxFor(m => Model.WalletAccountView.ContactNo, new { placeholder = "Enter valid contact number like 167xxxxxxx", style = "width: 350px;" })
+                    </div>
+
+                    <div style="float:left;padding-left:10px">
+                        <input type="submit" value="Submit" id="btnSubmit" style="background-color: #f74258; transition: max-width 0.6s linear, background-color 0.3s linear, padding 0.1s linear; font-family: 'Open Sans'; font-size: 14px; color: white; height: 35px; width: 130px;" />
+                    </div>
+
+                    <div style="float:left;padding-left:10px">
+                        <p style="color:red">
+                            <h3><strong>@TempData["Message"]</strong></h3>
+                        </p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".master-column-wrapper").children().each(function () {
+            $(this).css({ "width": "100% !important;" });
+        });
+    });
+</script>
+

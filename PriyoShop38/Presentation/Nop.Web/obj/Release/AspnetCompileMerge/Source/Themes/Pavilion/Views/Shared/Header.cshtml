@@ -1,0 +1,283 @@
+﻿@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Services.Configuration
+
+@{
+    var currentStore = EngineContext.Current.Resolve<IStoreContext>().CurrentStore;
+    int storeId = currentStore.Id;
+    var settingsService = EngineContext.Current.Resolve<ISettingService>();
+    bool showCategoriesInSideMenu = settingsService.GetSettingByKey("pavilionthemesettings.ShowCategoriesInSideMenu", true, storeId, true);
+}
+
+<div class="header">
+    @Html.Widget("header")
+
+    <div class="header-upper">
+        <div class="center">
+            <div class="header-short-text">Trusted Online Shopping Site in Bangladesh</div>
+            <div class="hotline-section">
+                <span><a>@T("Hotline.TeliPhoneNumber")</a> @T("Hotline.WorkingHoure")</span>
+            </div>
+
+            @{
+                var taxTypeSelectorHtml = @Html.Action("TaxTypeSelector", "Common");
+                var currencySelectorHtml = @Html.Action("CurrencySelector", "Common");
+                var languageSelectorHtml = @Html.Action("LanguageSelector", "Common");
+
+                MvcHtmlString headerSelectorWidgetHtml = @Html.Widget("header_selectors");
+                // it is better to trim the string and then check for null or empty because the MvcHtmlString.IsNullOrEmpty fail if the variable contains empty spaces
+                var headerSelectorWidgetHtmlString = headerSelectorWidgetHtml.ToHtmlString().Trim();
+            }
+
+            @if (!MvcHtmlString.IsNullOrEmpty(taxTypeSelectorHtml) ||
+             !MvcHtmlString.IsNullOrEmpty(currencySelectorHtml) ||
+             !MvcHtmlString.IsNullOrEmpty(languageSelectorHtml) ||
+             !String.IsNullOrEmpty(headerSelectorWidgetHtmlString))
+            {
+                <div class="header-selectors-wrapper">
+                </div>
+                <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
+
+            }
+            <div class="header-upper-links-right">
+                @Html.Action("AdminHeaderLinks", "Common")
+                <a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("howtobuy") })">How to buy</a>
+                <a href="@Url.RouteUrl("sellwithus")">Sell with us</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="header-middle">
+        <div>
+            <div class="header-logo">
+                @Html.Action("Logo", "Common")
+            </div>
+            <div class="header-menu-parent">
+                <div class="header-menu @if (showCategoriesInSideMenu)
+                                        {<text>categories-in-side-panel</text>}">
+                    <div class="close-menu">
+                        <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                    </div>
+
+
+                    @Html.Action("TopMenu", "Catalog")
+
+
+                </div>
+            </div>
+            <div class="header-middle-search">
+                <div class="search-box store-search-box">
+                    @Html.Widget("algolia_search_box")
+                </div>
+            </div>
+            <div class="header-middle-right">
+                @Html.Action("FlyoutShoppingCart", "ShoppingCart")
+                <div class="header-links-wrapper">
+                    <label>@T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+                    @Html.Action("HeaderLinks", "Common")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-menu-wrapper" style="background-color: #e30047; margin-top: 1px;">
+        <div class="container">
+            <div class="header-menu has-mmenu-on-top">
+                @Html.Action("MegaMenu", "Common")
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .header-menu.has-mmenu-on-top {
+        text-align: center;
+    }
+
+        .header-menu.has-mmenu-on-top > .mega-menu > .root-category-items {
+            margin: 0 5px;
+        }
+
+            .header-menu.has-mmenu-on-top > .mega-menu > .root-category-items :hover {
+                background-color: #E30047;
+            }
+
+            .header-menu.has-mmenu-on-top > .mega-menu > .root-category-items > a :hover {
+                color: white;
+            }
+
+            .header-menu.has-mmenu-on-top > .mega-menu > .root-category-items > .sublist-wrap {
+                left: calc(01vw);
+                right: calc(02vw);
+                width: calc(97vw);
+                height: calc(68vh);
+                -ms-transform: translateY(30px);
+                -moz-transform: translateY(30px);
+                -webkit-transform: translateY(30px);
+                transform: translateY(30px);
+                margin: 0 0 0 0;
+                text-align: left;
+            }
+
+                .header-menu.has-mmenu-on-top > .mega-menu > .root-category-items > .sublist-wrap :hover {
+                    background-color: white;
+                }
+
+    @@media all and (max-width: 1000px) {
+        .header-menu.has-mmenu-on-top {
+            display: none !important;
+        }
+    }
+
+    @@media all and (min-width: 1001px) {
+        .header-menu.has-mmenu-on-top > .mega-menu {
+            display: block !important;
+        }
+    }
+
+    @@media all and (max-width: 1509px) and (min-width: 1354px) {
+        .header-middle-right {
+            padding-left: 5%;
+        }
+    }
+
+    @@media all and (max-width: 1355px) and (min-width: 1287px) {
+        .header-middle-right {
+            padding-left: 0;
+        }
+    }
+
+    @@media all and (max-width: 1288px) {
+        .header-middle-right {
+            padding-left: 0;
+        }
+    }
+
+    @@media all and (max-width: 1155px) {
+        .header-middle-right {
+            width: 40%;
+        }
+    }
+</style>
+
+@*@using Nop.Services.Localization
+    @using Nop.Web.Framework.Themes
+    @using System.Web.Mvc
+
+    @{
+        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("controller");
+        var actionName = HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("action");
+
+        bool isHomeSliderFullWidth = settingsService.GetSettingByKey("pavilionthemesettings.ishomepagemainsliderfullwidth", false, storeId, true);
+        bool stickyCategoryMenuFlyout = settingsService.GetSettingByKey("pavilionthemesettings.StickyCategoryMenuFlyout", true, storeId, true);
+
+
+        var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase) &&
+                         actionName.Equals("index", StringComparison.InvariantCultureIgnoreCase);
+
+        var homePageMainSlider = new MvcHtmlString("");
+
+        if (isHomePage)
+        {
+            homePageMainSlider = Html.Widget("home_page_main_slider");
+        }
+    }*@
+
+
+@*<div class="hotline-section">
+        Hotline:
+        <a href="tel:01717-864118">01717-864118</a>, <a href="tel:09636-102030">09636-102030</a>, <a href="tel:01775-463764">01775-463764</a>, <a href="tel:01793-153934">01793-153934</a> (9am to 11pm)
+    </div>*@
+
+
+@*<span><a href="tel:01717-864118">01717-864118</a>, <a href="tel:09636-102030">09636-102030</a> (9am-11pm)</span>*@
+@*@Html.Action("AdminHeaderLinks", "Common")*@
+
+@*@taxTypeSelectorHtml
+    @currencySelectorHtml
+    @languageSelectorHtml
+    @headerSelectorWidgetHtml*@
+@*<label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
+    <div class="header-selectors">
+        @taxTypeSelectorHtml
+        @currencySelectorHtml
+        @languageSelectorHtml
+        @headerSelectorWidgetHtml
+    </div>*@
+@*<a href="#">Download App</a>*@
+@*<div class="header-links-wrapper">
+        <label>@T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+        @Html.Action("HeaderLinks", "Common")
+    </div>*@
+@*@Html.Action("SearchBox", "Catalog")*@
+@*<div class="header-menu-parent">
+        <div class="header-menu @if (showCategoriesInSideMenu){<text>categories-in-side-panel</text>}">
+            <div class="close-menu">
+                <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+            </div>
+            @{
+                var menuHtml = Html.Widget("theme_header_menu");
+            }
+            @if (!MvcHtmlString.IsNullOrEmpty(menuHtml))
+            {
+                @menuHtml
+            }
+            else
+            {
+                @Html.Action("TopMenu", "Catalog")
+            }
+        </div>
+    </div>*@
+@*<div class="header-lower">
+        <div class="center">
+            @if (showCategoriesInSideMenu)
+            {
+                <span class="category-navigation-title">@T("SevenSpikes.Themes.Pavilion.Header.AllCategories")</span>
+
+                if (!isHomePage || isHomeSliderFullWidth)
+                {
+                    <div class="category-navigation-list-wrapper">
+                        <ul class="category-navigation-list @if (stickyCategoryMenuFlyout){<text>sticky-flyout</text>}"></ul>
+                    </div>
+                }
+            }
+
+            <div class="search-box store-search-box @if (!showCategoriesInSideMenu){<text>full-width</text>}">
+                @Html.Action("SearchBox", "Catalog")
+            </div>
+
+        </div>
+    </div>*@
+@*@if (isHomePage)
+    {
+        var homePageSliderCss = isHomeSliderFullWidth ? "slider-fullwidth" : "slider-right-column";
+
+        <div class="two-columns-area @homePageSliderCss">
+            @if (isHomeSliderFullWidth)
+            {
+                @homePageMainSlider
+            }
+
+            <div class="center">
+                <div class="two-colums-area-left">
+                    @if (showCategoriesInSideMenu && !isHomeSliderFullWidth)
+                    {
+                        <div class="category-navigation-list-wrapper">
+                            <ul class="category-navigation-list @if (stickyCategoryMenuFlyout){<text>sticky-flyout</text>}"></ul>
+                        </div>
+                    }
+
+                    @Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = 0, currentProductId = 0 })
+                    @Html.Action("HomepageProducts", "Product")
+                </div>
+                <div class="two-colums-area-right">
+                    @if (!isHomeSliderFullWidth)
+                    {
+                        @homePageMainSlider
+                    }
+                    @Html.Widget("homepage_slider_after")
+                </div>
+            </div>
+        </div>
+    }*@

@@ -1,0 +1,97 @@
+﻿@model CheckoutPaymentMethodModel
+@using Nop.Plugin.Misc.OnePageCheckOut.Models.Checkout;
+@{
+    String DefaultMethod = "Payments.CashOnDelivery";
+}
+
+<div class="checkout-data">
+    @Html.Widget("op_checkout_payment_method_top")
+    <h4>Choose a payment method</h4>
+
+    <div class="section payment-method">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "checkout-payment-method-form" }))
+        {
+            if (Model.DisplayRewardPoints && Model.PaymentMethods.Count > 0)
+            {
+                <div class="use-reward-points">
+                    @Html.EditorFor(model => model.UseRewardPoints)
+                    @string.Format(T("Checkout.UseRewardPoints").Text, Model.RewardPointsBalance, Model.RewardPointsAmount)
+                </div>
+            }
+
+            if (Model.PaymentMethods.Count > 0)
+            {
+                <ul class="method-list">
+                    @for (int i = 0; i < Model.PaymentMethods.Count; i++)
+                    {
+                        var paymentMethod = Model.PaymentMethods[i];
+                        var paymentMethodName = paymentMethod.Name;
+
+                        if (!String.IsNullOrEmpty(paymentMethod.Fee))
+                        {
+                            paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                        }
+
+                        <li>
+                            <div class="method-name">
+                                @if (!String.IsNullOrEmpty(paymentMethod.LogoUrl))
+                                {
+                                    <div class="payment-logo">
+                                        <label for="paymentmethod_@(i)">
+                                            <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
+                                        </label>
+                                    </div>
+                                }
+
+                                <div class="payment-details">
+                                    <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@(paymentMethod.PaymentMethodSystemName == DefaultMethod)" />
+                                    <label for="paymentmethod_@(i)">@paymentMethodName</label>
+                                </div>
+                            </div>
+
+                            @if (paymentMethod.PaymentMethodSystemName == "Payments.SSLCommerzEmi")
+                            {
+                                <div class="sSLCommerzEmiSelection" style="display: none">
+                                    <label><strong>@T("PaymentMethode.EmiOption.SelectedMessage")</strong></label>
+                                    <ul class="emiOption-list">
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption3" value="3" /><label for="emiOption3" id="emiOption3Label">@T("PaymentMethode.EmiOption1")-(@paymentMethod.EmiThreeMonthFee)</label></li>
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption6" value="6" /><label for="emiOption3" id="emiOption6Label">@T("PaymentMethode.EmiOption2")-(@paymentMethod.EmiSixMonthFee)</label></li>
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption9" value="9" /><label for="emiOption3" id="emiOption9Label">@T("PaymentMethode.EmiOption3")-(@paymentMethod.EmiNineMonthFee)</label></li>
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption12" value="12" /><label for="emiOption3" id="emiOption12Label">@T("PaymentMethode.EmiOption4")-(@paymentMethod.EmiTwelveMonthFee)</label></li>
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption18" value="18" /><label for="emiOption3" id="emiOption18Label">@T("PaymentMethode.EmiOption5")-(@paymentMethod.EmiEighteenMonthFee )</label></li>
+                                        <li><input type="radio" name="emiOption" class="emiOption" id="emiOption24" value="24" /><label for="emiOption3" id="emiOption24Label">@T("PaymentMethode.EmiOption6")-(@paymentMethod.EmiTwentyFourMonthFee )</label></li>
+                                    </ul>
+                                </div>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <div class="message-error">
+                    @T("Checkout.NoPaymentMethods")
+                </div>
+            }
+        }
+
+        <div class="buttons">
+            <input type="button" name="SavePayementMethodButton" value="@T("checkout.confirm.payment")" class="button-1 " onclick="CheckAddressValidation()" />
+        </div>
+    </div>
+
+    @Html.Widget("op_checkout_payment_method_bottom")
+</div>
+
+@*<script type="text/javascript">
+        $('input:radio[name="paymentmethod"]').change(
+    function () {
+        if ($(this).is(':checked') && $(this).val() == 'Payments.SSLCommerzEmi') {
+            $('.sSLCommerzEmiSelection').css('display', 'block');
+            $("#emiOption3").prop("checked", true);
+        } else {
+            $('.emiOption').prop('checked', false);
+            $('.sSLCommerzEmiSelection').css('display', 'none');
+        }
+    });
+    </script>*@

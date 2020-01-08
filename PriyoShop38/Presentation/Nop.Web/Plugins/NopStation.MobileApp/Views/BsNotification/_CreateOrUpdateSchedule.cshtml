@@ -1,0 +1,114 @@
+﻿@using BS.Plugin.NopStation.MobileApp.Helpers
+@model BS.Plugin.NopStation.MobileApp.Models.ScheduledNotificationModel
+@using Nop.Web.Framework
+@using BS.Plugin.NopStation.MobileApp.Domain;
+
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.QueuedCount)
+@Html.HiddenFor(model => model.IsQueued)
+@Html.HiddenFor(model => model.ErrorLog)
+@Html.HiddenFor(model => model.CreatedOnUtc)
+<div class="raw form-horizontal clearfix">
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.GroupId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.GroupId, Model.AvailableGroups)
+                        @Html.ValidationMessageFor(model => model.GroupId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.NotificationTypeId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.NotificationTypeId, EnumHelper.GetSelectList(typeof (NotificationType)))
+                        @Html.ValidationMessageFor(model => model.NotificationTypeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.NotificationMessageTemplateId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.NotificationMessageTemplateId, Model.AvailableMessageTemplates)
+                        @Html.ValidationMessageFor(model => model.NotificationMessageTemplateId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.Priority)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Priority)
+                        @Html.ValidationMessageFor(model => model.Priority)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.PictureId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.PictureId)
+                        @Html.ValidationMessageFor(model => model.PictureId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.SendingWillStartOnUtc)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SendingWillStartOnUtc)
+                        @Html.ValidationMessageFor(model => model.SendingWillStartOnUtc)
+                    </div>
+                </div>
+                @if (Model.Id > 0)
+                {
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CreatedOnUtc)
+                        </div>
+                        <div class="col-md-9">
+                            @Model.CreatedOnUtc.ToString("D")
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <input type="submit" id="btnAddNewProduct" value="@T("Admin.Catalog.Categories.Products.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("ProductAddPopup", "BsNotificationAdmin", new { scheduleId = Model.Id, btnId = "btnRefreshProducts", formId = "category-form", area = "" }))', 800, 800, true); return false;" class="k-button" />
+    <input type="submit" id="btnAddNewCategory" value="@T("Admin.Promotions.Discounts.AppliedToCategories.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("CategoryAddPopup", "BsNotificationAdmin", new { scheduleId = Model.Id, btnId = "btnRefreshCategories", formId = "discount-form", area = "" }))', 800, 800, true); return false;" class="k-button" />
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#@Html.FieldIdFor(model => model.NotificationTypeId)").change(toggleDiscountType);
+
+                toggleDiscountType();
+            });
+
+            function toggleDiscountType() {
+                var selectedDiscountTypeId = $("#@Html.FieldIdFor(model => model.NotificationTypeId)").val();
+                var id= @Model.Id;
+                if (id >0 && selectedDiscountTypeId == @(((int)NotificationType.PromotionProduct).ToString())) {
+                     $('#btnAddNewProduct').show();
+                     $('#btnAddNewCategory').hide();
+                }
+                else if (id >0 && selectedDiscountTypeId == @(((int)NotificationType.PromotionCategory).ToString())) {
+                    $('#btnAddNewProduct').hide();
+                    $('#btnAddNewCategory').show();
+
+                } else {
+                    $('#btnAddNewProduct').hide();
+                    $('#btnAddNewCategory').hide();
+                }
+            }
+    </script>

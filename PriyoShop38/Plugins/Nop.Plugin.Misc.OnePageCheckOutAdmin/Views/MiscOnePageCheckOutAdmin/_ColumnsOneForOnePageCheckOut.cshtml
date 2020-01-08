@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/MiscOnePageCheckOutAdmin/_RootForOnePageCheckOut.cshtml";
+}
+@section breadcrumb
+{
+    @if (IsSectionDefined("breadcrumbInner"))
+    {
+        @RenderSection("breadcrumbInner");
+    }
+}
+<div class="center-1">
+    @RenderBody()
+</div>

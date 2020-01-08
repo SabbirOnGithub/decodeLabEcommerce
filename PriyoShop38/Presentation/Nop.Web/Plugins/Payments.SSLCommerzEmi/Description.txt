@@ -1,0 +1,9 @@
+﻿Group: Payment methods
+FriendlyName: Easy EMI
+SystemName: Payments.SSLCommerzEmi
+Version: 1.50
+SupportedVersions: 3.80
+Author: Ratul Paul
+DisplayOrder: 6
+FileName: Nop.Plugin.Payments.SSLCommerzEmi.dll
+Description: 

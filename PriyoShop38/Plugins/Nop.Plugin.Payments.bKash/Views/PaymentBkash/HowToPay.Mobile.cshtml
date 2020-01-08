@@ -1,0 +1,49 @@
+﻿@model Nop.Plugin.Payments.Bkash.Models.BkashInfoModel
+<style type="text/css">
+.bkash-wrapper{ text-align: left;font-size: 13px;margin-top: 20px;padding: 5px;}
+.bkash-wrapper .title{ font-size: 30px;font-weight: bold;text-align: center;}
+.bkash-wrapper .content{ margin-top: 8px;margin-bottom: 8px;}
+.bkash-wrapper .content ul {list-style: none;}
+.blockquote-style{padding: 0 0 0 15px;margin: 0 0 20px;border-left: 5px solid #eeeeee;display: block;-webkit-margin-before: 1em;-webkit-margin-after: 1em;-webkit-margin-start: 40px;-webkit-margin-end: 40px;}
+.bkash-wrapper .content ul li{margin-bottom: 5px;}
+.flash{margin: 0 auto;margin-bottom: 25px;padding-left: 100px;}
+.image{overflow: hidden;*position: relative;}
+.image-wrapper{float: left;position: relative;left: 50%;}
+.image-wrapper .im{display: block;position: relative;left: -50%;}
+.circle{display: inline-block;width:30px;height:30px;border-radius:15px;font-size:15px;color:#fff;line-height:30px;text-align:center;background:#000}
+.logo-step{width: 30px;display: inline-block;float: left;margin-right: 5px;background: url('/Plugins/Payments.Bkash/Content/li.png');background-repeat: no-repeat;height: 30px;}
+.bkash-ul{}
+</style>
+<div class="clear"></div>
+<div class="bkash-wrapper">
+    <div class="title">How to pay with bKash</div>
+    <div class ="content text">
+        <ul class="bkash-ul">
+            <li>
+                <div class="logo-step" style="margin-top: 5px;"> </div>
+                <div>If you don’t have any bKash account go to your nearest bKash agent and ask them to send money to our bKash no: <b>"@Model.BkashSendMoneyPhoneNumber".</b> Please ask agent to put your order no in reference field.<br /></div>
+            </li>
+            <li style="margin-top: 20px;">
+                <div class="logo-step" style="margin-top: -4px;"></div>
+                <div>
+                    If you have a bKash account, please follow the below steps:<br/>
+                    <ul style="list-style: none;margin-top: 15px;">
+                        <li><div class="circle">1</div> Go to bKash Mobile Menu by dialing <b>@Model.DialNumber</b></li>
+                        <li><div class="circle">2</div> Choose 'Payment'</li>
+                        <li><div class="circle">3</div> Enter the Account Number <b>"@Model.BkashPaymentPhoneNumber"</b></li>
+                        <li><div class="circle">4</div> Enter the amount you want to pay</li>
+                        <li><div class="circle">5</div> Enter a reference* against your payment (put your order number)</li>
+                        <li><div class="circle">6</div> Enter the counter number (Enter 1)</li>
+                        <li><div class="circle">7</div> Now enter your bKash Mobile Menu PIN to confirm</li>
+                    </ul>
+                </div>
+            </li>        
+        </ul>
+        <div>When Done, You will receive a confirmation message from bKash.<br/><br/></div>
+    </div>
+    <div class="clear"></div>
+    <div class ="content image">
+        <div class="image-wrapper"><img alt="bKash Image" src="/Plugins/Payments.Bkash/Content/bkash3.jpg" class="im" style="max-width: 100%!important;"/></div>
+    </div>
+    <div class="clear"></div>
+</div>

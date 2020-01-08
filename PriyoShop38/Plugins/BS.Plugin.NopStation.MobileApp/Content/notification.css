@@ -1,0 +1,41 @@
+/*#formWrap { padding:10px; position:absolute; float:left; background-color:#000; background:rgba(0,0,0,.5); -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; }
+#messageForm { width:326px; border:1px solid #666; background-color:#eee; }
+#messageForm fieldset { padding:0; margin:0; position:relative; border:none; background-color:#eee; }
+#messageForm legend { visibility:hidden; height:0; }
+#messageForm span { display:block; width:326px; padding:10px 0; margin:0 0 20px; text-indent:20px; background-color:#bbb; border-bottom:1px solid #333; font:18px Georgia, Serif; color:#fff; }*/
+#friends { width:790px; padding:2px; border:1px solid #A7BAC5; background-color:#fff; cursor:text; }
+#friends input { width:auto; position:relative; top:0; float:left; border:none; display:block;}
+/*#friends #to { width:auto; position:relative; top:0; float:left; border:none; display:block;}
+#friends input, #friends textarea { display:block; width:274px; border:1px solid #aaa; }
+#friends label { display:block; margin:20px 0 3px; text-indent:22px; font:bold 11px Verdana, Sans-serif; color:#666; }
+#friends #toLabel { margin-top:0; }
+#friends button { float:right; margin:0 0 20px 0; }
+#friends #cancel { margin-right:20px; }*/
+#friends span { display:block; width:auto; margin: 0 2px; padding:3px 20px 4px 8px; position:relative; float:left; text-indent:0; background-color:#eee; border:1px solid #333; -moz-border-radius:7px; -webkit-border-radius:7px; border-radius:7px; color:#333; font:normal 11px Verdana, Sans-serif; }
+#friends span a { position:absolute; right:8px; top:2px; color:#666; font:bold 12px Verdana, Sans-serif; text-decoration:none; }
+#friends span a:hover { color:#ff0000; }
+.ui-menu .ui-menu-item { white-space:nowrap; padding:0 10px 0 0; }
+
+
+/*Group Tab Css*/
+.criteria-holder select { margin:0 5px; }
+.criteria-holder input { border: 1px solid #A7BAC5; padding: 3px 2px 1px; width: 200px; }
+.criteria-holder { margin:0 0 10px 10px; clear:both; }
+
+.input-holder { margin:0 0 20px 10px; clear:both; }
+.input-holder input { border: 1px solid #A7BAC5; padding: 3px 2px 1px; width: 200px; margin-left:50px; }
+
+/*View Templates css*/
+.wrap { overflow: hidden; margin: 10px; }
+/*.box { float: left; position: relative; width: 20%; padding-bottom: 20%; }
+.boxInner { position: absolute; left: 10px; right: 10px; top: 10px; bottom: 10px; overflow: hidden; }
+.boxInner img { width: 100%; }*/
+.box { background: none repeat scroll 0 0 #FFFFFF; border: 9px solid #FFFFFF; border-radius: 3px 3px 3px 3px; box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.15); float: left; margin: 15px 15px; padding: 0; position: relative; width: 200px; }
+.boxInner { }
+.boxInner img { display: block;  margin: 0 0 12px; position: relative; width: 100%; height:80%; z-index: 1; }
+/*.boxInner .titleBox { position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 0px; background: #000; background: rgba(0, 0, 0, 0.5); color: #FFF; padding: 10px; text-align: center; -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }*/
+.boxInner { position: relative; text-align: center; }
+.boxInner .titleBox { margin: 0 0 5px 0;}
+.boxInner button{ float:right; }
+/*.boxInner:hover .titleBox{ margin-bottom: 0; }*/
+

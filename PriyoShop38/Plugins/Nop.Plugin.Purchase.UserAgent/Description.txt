@@ -1,0 +1,9 @@
+﻿Group: NopStation
+FriendlyName: Purchase User Agent
+SystemName: Purchase.UserAgent
+Version: 1.00
+SupportedVersions: 3.80
+Author: Jaber Kibria
+DisplayOrder: 1
+FileName: Nop.Plugin.Purchase.UserAgent.dll
+Description: This plugin allows you to detect purchase User Agent

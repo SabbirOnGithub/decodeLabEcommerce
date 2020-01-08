@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SupportedWidgetZones>
+  <WidgetZone>content_before</WidgetZone>
+  <WidgetZone>home_page_before_best_sellers</WidgetZone>
+  <WidgetZone>home_page_before_categories</WidgetZone>
+  <WidgetZone>home_page_before_news</WidgetZone>
+  <WidgetZone>home_page_before_poll</WidgetZone>
+  <WidgetZone>home_page_before_products</WidgetZone>
+  <WidgetZone>home_page_top</WidgetZone>
+  <WidgetZone>home_page_bottom</WidgetZone>
+  <WidgetZone>categorydetails_top</WidgetZone>
+  <WidgetZone>categorydetails_bottom</WidgetZone>
+  <WidgetZone>productdetails_top</WidgetZone>
+  <WidgetZone>productdetails_bottom</WidgetZone>
+  <WidgetZone>manufacturerdetails_top</WidgetZone>
+  <WidgetZone>manufacturerdetails_bottom</WidgetZone>
+  <WidgetZone>left_side_column_before</WidgetZone>
+  <WidgetZone>left_side_column_after</WidgetZone>
+  <WidgetZone>right_side_column_before</WidgetZone>
+  <WidgetZone>right_side_column_after</WidgetZone>
+  <WidgetZone>cart_content_after</WidgetZone>
+  <WidgetZone>home_page_best_sellers</WidgetZone>
+
+  <WidgetZone>sure_thing_main_slider</WidgetZone>
+  <WidgetZone>sure_thing_page_top</WidgetZone>
+  <WidgetZone>sure_thing_page_middle</WidgetZone>
+  <WidgetZone>sure_thing_page_bottom</WidgetZone>
+
+  <WidgetZone>custom_page_main_banner</WidgetZone>
+  <WidgetZone>custom_page_main_slider</WidgetZone>
+  <WidgetZone>custom_page_middle</WidgetZone>
+  <WidgetZone>custom_page_bottom</WidgetZone>
+
+  <WidgetZone>kazi_n_kazi_tea_main_slider</WidgetZone>
+  <WidgetZone>kazi_n_kazi_tea_page_middle</WidgetZone>
+  <WidgetZone>kazi_n_kazi_tea_page_bottom</WidgetZone>
+
+  <!--Brand Week-->
+  <WidgetZone>brand_week_fashion_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_fashion_bottom_jcarousel</WidgetZone>
+
+  <WidgetZone>brand_week_smartphone_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_smartphone_bottom_jcarousel</WidgetZone>
+
+  <WidgetZone>brand_week_appliance_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_appliance_bottom_jcarousel</WidgetZone>
+
+  <WidgetZone>brand_week_grocery_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_grocery_bottom_jcarousel</WidgetZone>
+
+  <WidgetZone>brand_week_motorbike_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_motorbike_bottom_jcarousel</WidgetZone>
+
+  <WidgetZone>brand_week_gadget_middle_jcarousel</WidgetZone>
+  <WidgetZone>brand_week_gadget_bottom_jcarousel</WidgetZone>
+  <!--Brand Week-->
+
+  <!-- allow jcarousels in homepage -->
+  <WidgetZone>homepage_slider_after</WidgetZone>
+
+</SupportedWidgetZones>

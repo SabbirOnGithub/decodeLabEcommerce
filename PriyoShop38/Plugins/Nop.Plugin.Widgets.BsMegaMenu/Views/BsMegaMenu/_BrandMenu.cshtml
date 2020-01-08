@@ -1,0 +1,96 @@
+﻿@model List<ManufacturerModel>
+@using Nop.Web.Models.Catalog;
+<li id="brand" class="HasMultiple brands">
+    <a href="javascript:void(0);">
+        Brands
+    </a>
+    <div class="hasMegaMenu brands-mega-menu">
+        <div class="container">
+            <div class="row top-brands">
+                @foreach (var item in Model)
+            {
+                    <div class="col-xs-two">
+                        <a class="brand-link" href="@Url.RouteUrl("Manufacturer", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                            <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="all-brands">
+                <a class="pull-right btn-all-brands" href="@Url.RouteUrl("ManufacturerList")">
+                    All Brands
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+@*<script type="text/javascript">
+        $(document).ready(function () {
+
+            if ($(window).width() > 768) {
+
+                $('.dvMenu').on('mouseenter', '#brandMenuList', function () {
+                    $('#brandSubMenu').addClass('active');
+                    $('#brandMenuList').addClass('expanded');
+                    $('#megaMenuBehindLayer').addClass('active');
+                });
+                $('.dvMenu').on('mouseleave', '#brandMenuList', function () {
+                    $('#megaMenuBehindLayer').removeClass('active');
+                    $('#brandSubMenu').removeClass('active');
+                    $('#brandMenuList').removeClass('expanded');
+                });
+                $('.dvMenu').on('mouseenter', '#brandSubMenu', function () {
+                    $('#brandSubMenu').addClass('active');
+                    $('#brandMenuList').addClass('expanded');
+                    $('#megaMenuBehindLayer').addClass('active');
+                });
+                $('.dvMenu').on('mouseleave', '#brandSubMenu', function () {
+                    $('#megaMenuBehindLayer').removeClass('active');
+                    $('#brandSubMenu').removeClass('active');
+                    $('#brandMenuList').removeClass('expanded');
+                });
+
+            } else {
+
+                $("#brandMenuList > a").click(function () {
+                    $('#brandSubMenu').toggleClass('active');
+                    $('#brandMenuList').toggleClass('expanded');
+                    $('#megaMenuBehindLayer').toggleClass('active');
+                    $('#mobileMenuBehindLayer').removeClass('active');
+                    $('.top-menu.mobile').css('display', 'none');
+                });
+            };
+
+
+        });
+
+
+
+    </script>*@
+@*<script>
+        $(document).ready(function () {
+
+            $('.brand-sublist > li > a')
+                .on('mouseenter', function() {
+                    var div = $(this);
+                    div.stop(true, true).animate({
+                        margin: -4,
+                        width: "+=8",
+                        height: "+=8",
+                        padding: 14
+                    }, 'fast');
+                })
+                .on('mouseleave', function() {
+                    var div = $(this);
+                    div.stop(true, true).animate({
+                        margin: 0,
+                        width: "-=8",
+                        height: "-=8",
+                        padding: 10
+                    }, 'fast');
+                });
+
+        });
+    </script>*@

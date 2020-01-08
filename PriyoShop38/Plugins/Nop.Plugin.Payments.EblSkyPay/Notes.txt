@@ -1,0 +1,82 @@
+﻿'Copy local' property of the referenced assemblies are set to 'false'.
+We know that they're referenced by the main web applications. So there's no need to deploy them.
+It can dramatically reduce package size.
+
+
+Set project output path to ..\..\Presentation\Nop.Web\Plugins\{PluginName}\ (both 'Release' and 'Debug' configurations)
+
+
+All views should marked as embedded resources
+
+
+
+
+
+
+
+Payments.Payza
+==============
+Advance Integration
+
+I need to send 5 parameter to "https://secure.payza.com/checkout" as POST method
+	
+Required parameter
+------------------
+
+	1. ap_merchant 
+	2. ap_purchasetype   [item, service, item-goods, item-auction]
+	3. ap_itemname       [must be greater then the min amount that allowed in payza] [comma separated item name]
+	4. ap_amount		 [amount of order]
+	5. ap_currency		 [BDT] 
+
+Optional Parameter
+------------------
+	1. 
+
+
+
+
+
+
+Xdeh7^x8
+
+
+
+
+
+
+
+Sample POST form
+================
+NB : First 5 input must be used
+NB : ap_itemname, ap_amount, ap_quantity, ap_itemcode, ap_item_description could be multiple incase of 
+	multiple products where we use trailing _x for multiple item like ap_itemname_1
+
+	In case of three product ap_itemname will be
+		ap_itemname
+		ap_itemname_1
+		ap_itemname_2
+
+		
+<form method="post" action="https://secure.payza.com/checkout" > 
+    
+	<input type="hidden" name="ap_merchant" value="payza_merchant@test.com"/> 
+    <input type="hidden" name="ap_purchasetype" value="item-goods"/> 
+    
+	<input type="hidden" name="ap_itemname" value="MP3 Player"/> 
+    <input type="hidden" name="ap_amount" value="50"/> 
+    <input type="hidden" name="ap_currency" value="USD"/> 
+	
+	<input type="hidden" name="ap_quantity" value="2"/> 
+    <input type="hidden" name="ap_itemcode" value="XYZ123"/> 
+    <input type="hidden" name="ap_description" value="Audio equipment"/> 
+
+    <input type="hidden" name="ap_returnurl" value="http://www.example.com/thankyou.html"/> 
+    <input type="hidden" name="ap_cancelurl" value="http://www.example.com/cancel.html"/>
+	<input type="hidden" name="ap_taxamount" value="2.49"/> 
+    <input type="hidden" name="ap_additionalcharges" value="1.19"/> 
+    <input type="hidden" name="ap_shippingcharges" value="7.99"/>  
+    <input type="hidden" name="ap_discountamount" value="4.99"/>  
+    <input type="hidden" name="apc_1" value="Blue"/> 
+    <input type="image" src="https://www.payza.com/images/payza-buy-now.png"/> 
+</form>

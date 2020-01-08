@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/KaziNKaziTea/_Layout.cshtml";
+
+    Html.AppendCssFileParts("~/Themes/Pavilion/Content/css/owl.carousel.css");
+    //page class
+    Html.AppendPageCssClassParts("html-kazi-n-kazi-tea-home-page");
+}
+
+@section customScripts  {
+    <script>
+        $(document).ready(function () {
+            //$('.kazi-n-kazi-tea-page-top').find('.nivo-main-image').each(function () {
+            //    $(this).css('height', '359px');
+            //});
+
+            $('.jcarousel-container').each(function () {
+                var header = $(this).prev();
+
+                if (!header.hasClass('carousel-title')) {
+                    $(this).children().each(function () {
+                        if ($(this).hasClass('jcarousel-prev') || $(this).hasClass('jcarousel-next')) {
+                            $(this).css({ 'margin-top': '2px', 'height': '15px' });
+                        }
+                    });
+                } else {
+                    header.children().each(function () {
+                        var container = header.next();
+
+                        if (!$(this).text()) {
+                            container.children().each(function () {
+                                if ($(this).hasClass('jcarousel-prev') || $(this).hasClass('jcarousel-next')) {
+                                    $(this).css({ 'margin-top': '2px', 'height': '15px' });
+                                }
+                            });
+
+                            header.css({ 'display': 'none' });
+                        } else {
+                            container.children().each(function () {
+                                if ($(this).hasClass('jcarousel-prev') || $(this).hasClass('jcarousel-next')) {
+                                    $(this).css({ 'margin-top': '15px' });
+                                }
+                            });
+                        }
+
+                        return false;
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+@section customStyles  {
+    <style type="text/css">
+        h2.carousel-title {
+            margin: 0 !important;
+            text-align: center !important;
+            padding: 15px !important;
+            background-color: rgb(81,146,69);
+            border: 1px solid rgb(254,255,253);
+            border-bottom: none;
+        }
+
+            h2.carousel-title > span {
+                color: white;
+                border: 1px solid rgb(254,255,253);
+                padding: 2px 6px 2px 6px;
+                border-radius: 5px;
+                box-shadow: 0 0 5px;
+            }
+
+        div.jcarousel-container {
+            padding: 15px;
+            background-color: rgb(81,146,69);
+            border: 1px solid rgb(254,255,253);
+        }
+
+        .jcarousel-prev, .jcarousel-next {
+            margin-top: 10px;
+        }
+
+        .kazi-n-kazi-tea-page-midddle {
+            margin-top: 10px !important;
+        }
+
+        .kazi-n-kazi-tea-product-list {
+            margin-top: 10px !important;
+        }
+    </style>
+}
+
+<div class="kazi-n-kazi-tea-product-list">
+    @Html.Widget("kazi_n_kazi_tea_page_bottom")
+</div>
+
+<a href="/kazi-kazi-tea-estate-ltd"><h2 class="carousel-title" style="margin-bottom: 10px !important; margin-top: -20px !important;"><span>MORE</span></h2></a>
+
+<div></div>

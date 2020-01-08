@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Scripts for Facebook Pixel
+SystemName: Widgets.FacebookPixel
+Version: 3.70
+SupportedVersions: 3.80
+Author: Bibhuti Barai
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.FacebookPixel.dll

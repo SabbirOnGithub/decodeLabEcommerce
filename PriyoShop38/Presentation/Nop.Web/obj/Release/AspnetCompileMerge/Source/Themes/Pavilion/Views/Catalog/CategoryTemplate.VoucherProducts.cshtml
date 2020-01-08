@@ -1,0 +1,113 @@
+﻿@model CategoryModel
+
+@using Nop.Core.Domain.Common;
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
+
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-category-page");
+}
+<link href="~/Themes/Pavilion/Content/css/voucher-template.css" rel="stylesheet" />
+
+<div class="voucher-wrapper">
+    <div class="voucher-header">
+        @if (!String.IsNullOrWhiteSpace(Model.TopicBody))
+        {
+        <div class="voucher-header-top">
+            @Html.Raw(Model.TopicBody)
+        </div>
+        }
+        @if (Model.VoucherStartsOn.HasValue)
+        {
+        <div class="voucher-header-bottom" id="timer-section">
+            <h3>
+                @T("Catalog.TimeToStart")
+
+                <span id="timer-days">00</span> :
+                <span id="timer-hours">00</span> :
+                <span id="timer-mins">00</span> :
+                <span id="timer-secs">00</span>
+            </h3>
+        </div>
+        }
+    </div>
+    <div class="voucher-body">
+        <div class="voucher-item-grid">
+            @if (Model.Products.Count > 0)
+            {
+            foreach (var product in Model.Products)
+            {
+            <div class="voucher-item">
+                <a href="@Url.RouteUrl("Product", new { SeName=product.SeName })">
+                    <img alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title" class="img-fluid" />
+                </a>
+                <h4>@T("Catalog.CouponLeft") : <span>@product.StockQuantity</span></h4>
+            </div>
+            }
+            }
+            @{
+            var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            }
+            @if (!pager.IsEmpty())
+            {
+            <div class="pager">
+                @pager
+            </div>
+            }
+        </div>
+    </div>
+    <div class="voucher-footer">
+        @if (!String.IsNullOrWhiteSpace(Model.Description))
+        {
+        <div class="voucher-text-bottom">
+            @Html.Raw(Model.Description)
+        </div>
+        }
+    </div>
+</div>
+
+@if (Model.VoucherStartsOn.HasValue)
+{
+<script src="~/Themes/Pavilion/Content/scripts/jquery.timeLeft.js"></script>
+
+<script>
+    $(document).ready(function () {
+        startTime();
+    });
+
+    function startTime() {
+        var today = new Date('@Model.VoucherStartsOn.Value.ToString()');
+        var delta = (today.getTime() - Date.now()) / 1000;
+
+        if (delta > 0) {
+            var days = Math.floor(delta / 86400);
+            delta -= days * 86400;
+            $('#timer-days').html(days >= 10 ? days : '0' + days);
+
+            var hours = Math.floor(delta / 3600) % 24;
+            delta -= hours * 3600;
+            $('#timer-hours').html(hours >= 10 ? hours : '0' + hours);
+
+            var minutes = Math.floor(delta / 60) % 60;
+            delta -= minutes * 60;
+            $('#timer-mins').html(minutes >= 10 ? minutes : '0' + minutes);
+
+            var seconds = Math.floor(delta % 60);
+            $('#timer-secs').html(seconds >= 10 ? seconds : '0' + seconds);
+        }
+        else {
+            $('#timer-section').hide();
+        }
+        setTimeout(function () { startTime(); }, 999);
+    }
+</script>
+}

@@ -1,0 +1,56 @@
+﻿@model Nop.Plugin.Widgets.AlgoliaSearch.Models.AlgoliaSearchModel
+@using Nop.Web.Extensions;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+    //page class
+    Html.AppendPageCssClassParts("html-search-page");
+}
+
+@section left{
+    <div class="page-title">
+        <h1>@T("Search") - @Model.q</h1>
+    </div>
+    @*@Html.Action("MegaMenu", "Common")*@
+    @Html.Widget("theme_header_menu")
+    @Html.Partial("~/Plugins/Widgets.AlgoliaSearch/Views/_AlgoliaFilters.cshtml", Model)
+}
+<style>
+    .search-page .product-selectors {
+        display: block;
+    }
+</style>
+
+<div class="page category-page">
+    <div class="page-body">
+        @if (Model.Products.Count > 0)
+        {
+            @Html.Partial("~/Plugins/Widgets.AlgoliaSearch/Views/_AlgoliaSelectors.cshtml", Model.PagingFilteringContext)
+        }
+
+        @if (Model.Products.Count > 0)
+        {
+            <div class="product-@Model.PagingFilteringContext.ViewMode">
+                <div class="item-grid">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="item-box">
+                            @Html.Partial("_ProductBox", product)
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        @{
+            var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+        }
+        @if (!pager.IsEmpty())
+        {
+            <div class="pager">
+                @pager
+            </div>
+        }
+    </div>
+</div>

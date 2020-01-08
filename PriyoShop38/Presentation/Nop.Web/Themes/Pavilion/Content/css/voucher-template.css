@@ -1,0 +1,152 @@
+﻿
+.voucher-wrapper {
+    background: #e30047;
+}
+
+.voucher-header-top {
+    background-size: 100% 100%;
+    text-align: center;
+}
+
+    .voucher-header-top img {
+        max-width: 100%;
+    }
+
+    .voucher-header-top h1 {
+        color: #fffa1b;
+        margin: 0;
+        font-size: 40px;
+        text-shadow: 1px 4px 6px #000;
+    }
+
+    .voucher-header-top h2 {
+        color: #fff;
+        margin: 0;
+        font-size: 30px;
+        font-family: 'Varela Round', sans-serif;
+    }
+
+.voucher-header-bottom {
+    background: #c8003e;
+    background-image: url(img/top-bg-2.jpg);
+    background-size: 100% 100%;
+    padding: 15px 0;
+}
+
+    .voucher-header-bottom h3 {
+        text-align: center;
+        color: #fff;
+        margin: 0;
+        font-size: 30px;
+    }
+
+        .voucher-header-bottom h3 span {
+            background: #fffa1b;
+            color: #000;
+            display: inline-block;
+            padding: 2px 5px;
+        }
+
+.img-fluid {
+    max-width: 100%;
+}
+
+.voucher-item {
+    padding: 20px 20px;
+    background-image: linear-gradient(to top, #e6034a, #d70345, #c8003e, #eb014a, #e30047);
+}
+
+.voucher-item-grid {
+    text-align: center;
+}
+
+.voucher-item img {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.voucher-item h4 {
+    margin: 0;
+    color: #fff;
+}
+
+    .voucher-item h4 span {
+        color: #000;
+        background: #fff;
+        padding: 2px 8px;
+        display: inline-block;
+    }
+
+.voucher-footer-top {
+    background: rgba(255,255,255,0.4);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+    .voucher-footer-top h2 {
+        margin: 0;
+    }
+
+.voucher-footer-body {
+    color: #fff;
+    padding: 15px 30px;
+}
+
+    .voucher-footer-body li {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+ol {
+    list-style: decimal
+}
+
+@media(min-width: 768px) {
+    .voucher-item-grid {
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px 0;
+        padding-bottom: 0;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .voucher-item {
+        width: 50%;
+        padding-bottom: 20px;
+        padding: 20px 40px;
+    }
+
+        .voucher-item h4 {
+            margin: 0;
+        }
+
+    .voucher-footer-body {
+        width: calc(100% - 50px);
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+.voucher-text-bottom {
+    color: white;
+}
+
+    .voucher-text-bottom h2 {
+        background: rgba(255,255,255,0.4);
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .voucher-text-bottom ol {
+        padding: 10px 45px;
+    }
+
+    .voucher-text-bottom li {
+        line-height: 30px;
+    }

@@ -1,0 +1,130 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.DashboardModel.ThemeSettingModel
+@using Nop.Core.Infrastructure
+@using BS.Plugin.NopStation.MobileWebApi.Extensions
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI;
+@{
+    Html.SetActiveMenuItemSystemName("MobileWebApi.");
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@using System.Globalization;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+<script src="~/Plugins/NopStation.MobileWebApi/Scripts/jscolor.js" />
+<script>jscolor.init();</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="plugincontainer">
+        <div class="configurecontaincontainer">
+            <div class="storelocatersettingtitle">
+                <strong>@T("Plugins.NopStation.MobileWebApi.persionalizewebsiteTitle")</strong>
+            </div>
+            <div>
+                <table class="adminContent">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.HeaderBackgroundColor_OverrideForStore, model => model.HeaderBackgroundColor, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.HeaderBackgroundColor):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.HeaderBackgroundColor, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.HeaderBackgroundColorHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.HeaderBackgroundColor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.HeaderFontandIconColor_OverrideForStore, model => model.HeaderFontandIconColor, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.HeaderFontandIconColor):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.HeaderFontandIconColor, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.HeaderFontandIconColorHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.HeaderFontandIconColor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.HighlightedTextColor_OverrideForStore, model => model.HighlightedTextColor, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.HighlightedTextColor):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.HighlightedTextColor, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.HighlightedTextColorHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.HighlightedTextColor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.PrimaryTextColor_OverrideForStore, model => model.PrimaryTextColor, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.PrimaryTextColor):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.PrimaryTextColor, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.PrimaryTextColorHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.PrimaryTextColor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.SecondaryTextColor_OverrideForStore, model => model.SecondaryTextColor, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.SecondaryTextColor):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.SecondaryTextColor, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.SecondaryTextColorHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.SecondaryTextColor)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.BackgroundColorofPrimaryButton_OverrideForStore, model => model.BackgroundColorofPrimaryButton, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.BackgroundColorofPrimaryButton):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.BackgroundColorofPrimaryButton, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.BackgroundColorofPrimaryButtonHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.BackgroundColorofPrimaryButton)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.TextColorofPrimaryButton_OverrideForStore, model => model.TextColorofPrimaryButton, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.TextColorofPrimaryButton):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.TextColorofPrimaryButton, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.TextColorofPrimaryButtonHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.TextColorofPrimaryButton)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.OverrideStoreCheckboxFor(model => model.BackgroundColorofSecondaryButton_OverrideForStore, model => model.BackgroundColorofSecondaryButton, Model.ActiveStoreScopeConfiguration)
+                            @Html.NopLabelFor(model => model.BackgroundColorofSecondaryButton):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextBoxFor(model => model.BackgroundColorofSecondaryButton, new { @class = "color" })
+                            <div><label>@T("Plugins.NopStation.MobileWebApi.BackgroundColorofSecondaryButtonHint")<label></div>
+                            @Html.ValidationMessageFor(model => model.BackgroundColorofSecondaryButton)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="save" class="k-button" value="@T(" admin.common.save")" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+

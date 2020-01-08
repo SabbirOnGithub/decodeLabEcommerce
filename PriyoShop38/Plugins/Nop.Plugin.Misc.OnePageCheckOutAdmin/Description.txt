@@ -1,0 +1,8 @@
+﻿Group: Misc
+FriendlyName: One Page Check Out for Admin
+SystemName: Misc.OnePageCheckOutAdmin
+Version: 1.0
+SupportedVersions: 3.80
+Author: Md. Nizam Uddin Mahmud
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.OnePageCheckOutAdmin.dll

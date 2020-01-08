@@ -1,0 +1,8 @@
+﻿Group: Search
+FriendlyName: Elastic Search
+SystemName: Search.Elastic
+Version: 1.10
+SupportedVersions: 3.80
+Author: Sohel(skype: misohel@hotmail.com)
+DisplayOrder: 1
+FileName: Nop.Plugin.Search.Elastic.dll

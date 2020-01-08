@@ -1,0 +1,97 @@
+﻿@model Nop.Plugin.Payments.bKashAdvance.Models.PaymentViewModel
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+@if (Model.IsSandBox)
+{
+    <script src="https://scripts.sandbox.bka.sh/bKash-checkout-sandbox.js"></script>
+}
+else
+{
+    <script src="https://scripts.pay.bka.sh/versions/1.0.000-beta/checkout/bKash-checkout.js"></script>
+}
+
+<link href="~/Plugins/Payments.BkashAdvance/Content/css/lobibox.css" rel="stylesheet" />
+<script src="~/Plugins/Payments.BkashAdvance/Content/js/lobibox.js"></script>
+
+
+<style>
+    .master-wrapper-page .header {
+        z-index: 10 !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.ajax-loading-block-window').show();
+
+        bKash.init({
+            paymentMode: 'checkout',
+            paymentRequest: { amount: '@(decimal.Round(Model.OrderTotal, 2, MidpointRounding.AwayFromZero).ToString())', intent: '@Model.Intent' },
+            createRequest: function (request) {
+                $.ajax({
+                    url: "/bkash/createpayment",
+                    type: "POST",
+                    data: { orderId: '@Model.OrderId' },
+                    dataType: "json",
+                    success: function (response) {
+                        $('.ajax-loading-block-window').hide();
+
+                        if (response.status) {
+                            var responseData = JSON.parse(response.data);
+                            bKash.create().onSuccess(responseData);
+                        }
+                        else {
+                            Lobibox.alert('error', {
+                                size: 'large',
+                                sound: true,
+                                soundPath: '/Plugins/Payments.BkashAdvance/Content/sounds/',
+                                msg: response.message,
+                                onClickUrl: '/'
+                            });
+                            bKash.create().onError();
+                        }
+                    }
+                });
+            },
+            executeRequestOnAuthorization: function () {
+                $.ajax({
+                    url: "/bkash/executepayment",
+                    type: "POST",
+                    data: { orderId: '@Model.OrderId' },
+                    dataType: "json",
+                    success: function (response) {
+                       // console.log(response);
+                        if (response.status) {
+                            window.location.href = "/checkout/completed/@Model.OrderId";
+                        }
+                        else {
+                            Lobibox.alert('error', {
+                                size: 'large',
+                                sound: true,
+                                soundPath: '/Plugins/Payments.BkashAdvance/Content/sounds/',
+                                msg: response.message,
+                            });
+                            bKash.create().onError();
+                        }
+                    }
+                });
+            }
+        });
+
+        function closeAlert() {
+            console.log(response.message);
+            window.location.href = "/";
+        }
+
+        setTimeout(function () { $('#bKash_button').click(); }, 2000);
+    });
+
+</script>
+<div class="shopping-cart-page">
+    <button id="bKash_button" class="button-1 checkout-button">Click to continue</button>
+</div>

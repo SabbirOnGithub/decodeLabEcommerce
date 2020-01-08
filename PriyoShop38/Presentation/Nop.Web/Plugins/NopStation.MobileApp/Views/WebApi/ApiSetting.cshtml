@@ -1,0 +1,82 @@
+﻿@model BS.Plugin.NopStation.MobileWebApi.Models.ApiSettingsModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+@{
+    Html.SetActiveMenuItemSystemName("MobileWebApi.ApiSetting");
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using System.Globalization;
+
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.NopMobile.WebApi.ApiSettings")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal clearfix">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.CartThumbPictureSize)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.CartThumbPictureSize)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShowHomePageTopCategoryListIcon)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShowHomePageTopCategoryListIcon)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShowHomePageTopManufacturerListIcon)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShowHomePageTopManufacturerListIcon)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.CategoryListIconId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.CategoryListIconId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ManufacturerListIconId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ManufacturerListIconId)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

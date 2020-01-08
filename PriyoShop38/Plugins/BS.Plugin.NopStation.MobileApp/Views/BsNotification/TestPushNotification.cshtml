@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "_PluginsAdminLayout.cshtml";
+}
+@model BS.Plugin.NopStation.MobileApp.Models.QueuedNotificationModel
+@using System.Configuration
+@using System.Web;
+@using System.Web.Mvc;
+@using System.Collections.Generic;
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
+@using BS.Plugin.NopStation.MobileApp.Domain;
+@using Nop.Services
+
+@{
+    ViewBag.Title = T("Admin.Plugin.Misc.BsNotificaton.Test.Push").Text;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false)
+    <div class="raw form-horizontal clearfix">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.DeviceTypeId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.DeviceTypeId, ((DeviceType) Model.DeviceTypeId).ToSelectList())
+                            @Html.ValidationMessageFor(model => model.DeviceTypeId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.SubscriptionId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.SubscriptionId)
+                            @Html.ValidationMessageFor(model => model.SubscriptionId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.NotificationTypeId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.NotificationTypeId, ((NotificationType) Model.NotificationTypeId).ToSelectList())
+                            @Html.ValidationMessageFor(model => model.NotificationTypeId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.Message)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.Message)
+                            @Html.ValidationMessageFor(model => model.Message)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.ItemId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.ItemId)
+                            @Html.ValidationMessageFor(model => model.ItemId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.Image)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Image)
+                            @Html.ValidationMessageFor(model => model.Image)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Send")"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        }

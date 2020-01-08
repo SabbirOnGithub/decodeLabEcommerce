@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    Html.AddCssFileParts("~/Plugins/Misc.BsInstagramAdMarket/Content/styles.css");
+}
+@model BsInstagramVendorModel
+@using Nop.Core.Infrastructure
+@using BsWebApi.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false)
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    
+
+    <table class="adminContent">
+
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Name):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Email):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Description):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Description, "RichEditor")
+                @Html.ValidationMessageFor(model => model.Description)
+            </td>
+        </tr>
+       
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.MetaTitle):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.MetaTitle)
+                @Html.ValidationMessageFor(model => model.MetaTitle)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.MetaKeywords):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.MetaKeywords)
+                @Html.ValidationMessageFor(model => model.MetaKeywords)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.MetaDescription):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.MetaDescription)
+                @Html.ValidationMessageFor(model => model.MetaDescription)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.PageSizeOptions):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.PageSizeOptions)
+                @Html.ValidationMessageFor(model => model.PageSizeOptions)
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+          
+            </td>
+        </tr>
+    </table>
+}
+

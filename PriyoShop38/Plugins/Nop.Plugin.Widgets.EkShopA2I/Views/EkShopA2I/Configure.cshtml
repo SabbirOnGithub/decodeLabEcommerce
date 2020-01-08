@@ -1,0 +1,146 @@
+﻿@model Nop.Plugin.Widgets.EkShopA2I.Models.EsConfigureModel
+@using Nop.Web.Framework.Events;
+@using Nop.Services.Events;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    ViewBag.Title = "Ek-shop configuration";
+    Html.SetActiveMenuItemSystemName("EkShopA2i Settings");
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#@Html.FieldIdFor(model => model.EnableFreeShipping)").change(toggleMinimumCartValue);
+        
+        toggleMinimumCartValue();
+    });
+    
+    function toggleMinimumCartValue() {
+        if ($('#@Html.FieldIdFor(model => model.EnableFreeShipping)').is(':checked')) {
+            $('#pnlMinimumCartValue').show();
+        } else {
+            $('#pnlMinimumCartValue').hide();
+        }
+    }
+</script>
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Ek-shop configuration
+    </h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.AccessToken)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.AccessToken)
+                                @Html.ValidationMessageFor(model => model.AccessToken)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ApiKey)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ApiKey)
+                                @Html.ValidationMessageFor(model => model.ApiKey)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.Authorization)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.Authorization)
+                                @Html.ValidationMessageFor(model => model.Authorization)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.EnableLog)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.EnableLog)
+                                @Html.ValidationMessageFor(model => model.EnableLog)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.UdcCommission)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.UdcCommission)
+                                @Html.ValidationMessageFor(model => model.UdcCommission)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShowUdcCommissionOnProductDetails)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.CheckBoxFor(model => model.ShowUdcCommissionOnProductDetails)
+                                @Html.ValidationMessageFor(model => model.ShowUdcCommissionOnProductDetails)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShowUdcCommissionOnProductBox)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShowUdcCommissionOnProductBox)
+                                @Html.ValidationMessageFor(model => model.ShowUdcCommissionOnProductBox)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ShippingCharge)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShippingCharge) [Tk]
+                                @Html.ValidationMessageFor(model => model.ShippingCharge)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.EnableFreeShipping)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.EnableFreeShipping)
+                                @Html.ValidationMessageFor(model => model.EnableFreeShipping)
+                            </div>
+                        </div>
+                        <div class="form-group" id="pnlMinimumCartValue">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.MinimumCartValue)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.MinimumCartValue) [Tk]
+                                @Html.ValidationMessageFor(model => model.MinimumCartValue)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <input type="submit" name="save" class="btn bg-blue" value="@T(" Admin.Common.Save")" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

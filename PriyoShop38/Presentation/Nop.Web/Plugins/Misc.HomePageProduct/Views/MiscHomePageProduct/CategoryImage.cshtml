@@ -1,0 +1,326 @@
+﻿@model Nop.Plugin.Misc.HomePageProduct.Models.HomePageCategoryImageModel
+@using Nop.Core.Infrastructure
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = "Home page category image";
+
+    Html.AddScriptParts("~/Plugins/Misc.HomePageProduct/Content/js/jscolor.min.js");
+    Html.SetActiveMenuItemSystemName("Misc.HomePageProduct.CategoryList");
+}
+<style>
+    #CategoryName {
+        border: none;
+    }
+
+    #CategoryColor {
+        border-radius: 0;
+        box-shadow: none;
+        border-color: #d2d6de;
+        display: block;
+        width: 50%;
+        max-width: 250px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        border: 1px solid #ccc;
+        float: left
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#changeCategoryColor').click(function () {
+            var categoryId = $("#@Html.FieldIdFor(model => model.CategoryId)").val();
+            var categoryColor = $("#@Html.FieldIdFor(model => model.CategoryColor)").val();
+
+            var postData = {
+                categoryId: categoryId,
+                categoryColor: categoryColor
+            };
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.RouteUrl("Plugin.Misc.HomePageProduct.UpdateCategoryColor"))",
+                data: postData,
+                success: function (data) {
+                    var grid = $("#categorypictures-grid");
+                    grid.data('kendoGrid').dataSource.read();
+                    $('#addProductPicture').attr('disabled', false);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to add product picture.');
+                    $('#addProductPicture').attr('disabled', false);
+                }
+            });
+        });
+
+        $('#addProductPicture').click(function () {
+            var pictureId = $("#@Html.FieldIdFor(model => model.PictureId)").val();
+            var overrideAltAttribute = $("#@Html.FieldIdFor(model => model.OverrideAltAttribute)").val();
+            var overrideTitleAttribute = $("#@Html.FieldIdFor(model => model.OverrideTitleAttribute)").val();
+            var categoryId = $("#@Html.FieldIdFor(model => model.CategoryId)").val();
+            var url = $("#@Html.FieldIdFor(model => model.Url)").val();
+            var displayOrder = $("#@Html.FieldIdFor(model => model.DisplayOrder)").val();
+            var categoryColor = $("#@Html.FieldIdFor(model => model.CategoryColor)").val();
+
+            var caption = $("#@Html.FieldIdFor(model => model.Caption)").val();
+            var isMainPicture = $("#@Html.FieldIdFor(model => model.IsMainPicture)").is(':checked');
+            //$("#@Html.FieldIdFor(model => model.IsMainPicture)").val();
+
+            if (pictureId == 0) {
+                alert('Upload picture first');
+                return;
+            }
+
+            else if (categoryColor == "") {
+                alert('Please provide hex color');
+                return;
+            }
+
+            else if (categoryId == "") {
+                alert('Please select category from first page of plugin');
+                return;
+            }
+
+            $('#addProductPicture').attr('disabled', true);
+
+            var postData = {
+                pictureId: pictureId,
+                overrideAltAttribute: overrideAltAttribute,
+                overrideTitleAttribute: overrideTitleAttribute,
+                categoryId: categoryId,
+                url: url,
+                displayOrder: displayOrder,
+                categoryColor: categoryColor,
+                Caption: caption,
+                IsMainPicture: isMainPicture
+            };
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.RouteUrl("Plugin.Misc.HomePageProduct.CategoryImageAdd"))",
+                data: postData,
+                success: function (data) {
+                    if (data.Result) {
+                        var grid = $("#categorypictures-grid");
+                        grid.data('kendoGrid').dataSource.read();
+                        $('#addProductPicture').attr('disabled', false);
+                        $('.remove-image-button span').click();
+
+                        $("#@Html.FieldIdFor(model => model.PictureId)").val('');
+                        $("#@Html.FieldIdFor(model => model.OverrideAltAttribute)").val('');
+                        $("#@Html.FieldIdFor(model => model.OverrideTitleAttribute)").val('');
+                        $("#@Html.FieldIdFor(model => model.Url)").val('');
+                        $("#@Html.FieldIdFor(model => model.DisplayOrder)").kendoNumericTextBox({
+                            value: 0
+                        });
+                        $("#@Html.FieldIdFor(model => model.Caption)").val('');
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to add product picture.');
+                    $('#addProductPicture').attr('disabled', false);
+                }
+            });
+        });
+    });
+</script>
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Home page category image
+        <small><i class="fa fa-arrow-circle-left"></i><a href="/Plugin/HomePageProduct/CategoryList">back to plugin page</a></small>
+    </h1>
+</div>
+
+@Html.HiddenFor(model => model.CategoryId)
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div id="addcategorypicturediv" class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CategoryName)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopDisplayFor(model => model.CategoryName)
+                            @Html.ValidationMessageFor(model => model.CategoryName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.PictureId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.PictureId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.Caption)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.Caption)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.Url)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.Url)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.DisplayOrder)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.DisplayOrder)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.CategoryColor)
+                        </div>
+                        <div class="col-md-9">
+                            <input class="jscolor CategoryColor" id="CategoryColor" name="CategoryColor" type="text" value="444653"> <span style="color: red">*</span>
+                            <input type="button" class="k-button" value="@T("Close.ColorPicker")" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-md-offset-3">
+                            <button type="button" id="addProductPicture" class="btn bg-blue" style="float:left; margin-right: 5px">
+                                <i class="fa fa-plus-square"></i>
+                                @T("Admin.Catalog.Products.Pictures.AddButton")
+                            </button>
+                            <input type="button" id="changeCategoryColor" class="btn bg-blue" value="@T("Change.CategoryColor")" style="display: none;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="categorypictures-grid"></div>
+        <script>
+        $(document).ready(function () {
+            $("#categorypictures-grid").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: {
+                            url: "@Html.Raw(Url.Action("CategoryImageList", "HomePageProduct", new { categoryId = Model.CategoryId, area = "" }))",
+                            type: "POST",
+                            dataType: "json"
+                        },
+                        update: {
+                            url: "@Html.Raw(Url.Action("CategoryImageUpdate", "HomePageProduct", new { id = Model.PictureId, url = Model.Url, displayOrder = Model.DisplayOrder, area = "" }))",
+                            type: "POST",
+                            dataType: "json",
+                            data: addAntiForgeryToken
+                        },
+                        destroy: {
+                            url: "@Html.Raw(Url.Action("CategoryImageDelete", "HomePageProduct", new { id = Model.PictureId, area = "" }))",
+                            type: "POST",
+                            dataType: "json",
+                            data: addAntiForgeryToken
+                        }
+                    },
+                    schema: {
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors",
+                        model: {
+                            id: "Id",
+                            fields: {
+                                PictureUrl: { editable: false, type: "string" },
+                                Url: { editable: true, type: "string" },
+                                DisplayOrder: { editable: true, type: "int" },
+                                Caption: { editable: true, type: "string" },
+                                IsMainPicture: { editable: true, type: "bool" }
+                            }
+                        }
+                    },
+                    requestEnd: function (e) {
+                        if (e.type == "update") {
+                            this.read();
+                        }
+                    },
+                    error: function (e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                pageable: {
+                    refresh: true,
+                    numeric: false,
+                    previousNext: false,
+                    info: false
+                },
+                dataBound: onDataBound,
+                editable: {
+                    //confirmation: false,
+                    mode: "inline"
+                },
+                scrollable: false,
+                columns: [{
+                    field: "PictureUrl",
+                    title: "@T("Admin.Catalog.Products.Pictures.Fields.Picture")",
+                    template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /></a>',
+                    width: 200
+                }, {
+                    field: "Url",
+                    title: "Url",
+                    width: 200
+                }, {
+                    field: "Caption",
+                    title: "Caption",
+                    width: 200
+                }, {
+                    field: "DisplayOrder",
+                    title: "Display Order",
+                    width: 200
+                }, {
+                command: [
+                    {
+                        name: "edit",
+                        text: "@T("Admin.Common.Edit")"
+                    },
+                    {
+                        name: "destroy",
+                        text: "@T("Admin.Common.Delete")"
+                    }],
+                    width: 200
+                }]
+            });
+        });
+        </script>
+        <script type="text/javascript">
+
+            function onDataBound(e) {
+                if ($('#categorypictures-grid img').length > 0) {
+                    $("#changeCategoryColor").css("display", "block");
+                }
+            }
+        </script>
+    </div>
+</div>

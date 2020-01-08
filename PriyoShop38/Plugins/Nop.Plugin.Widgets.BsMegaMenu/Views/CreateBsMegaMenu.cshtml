@@ -1,0 +1,110 @@
+﻿@using System.Diagnostics
+@using Nop.Web.Framework;
+@using System.Linq;
+@using Nop.Web.Framework.UI;
+
+@model Nop.Plugin.Widgets.BsMegaMenu.Domain.BsMegaMenuDomain
+
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="section-header">
+    <div class="title">
+        @T("Uvited.Label.AddNewMegaMenu")
+        @Html.ActionLink("(" + "back to BS Mega Menu list" + ")", "ManageBsMegaMenu")
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var categoryIdVal = $('#CategoryId').val();
+
+        if (categoryIdVal < 1) {
+            $("#numberOfColumns").hide();
+            $("#columnPosition").hide();
+        }
+
+        else {
+            var value = $('#CategoryId :selected').val()
+            var text = $('#CategoryId :selected').text();
+            
+            if (text.indexOf(">>") > 0) {
+                $("#columnPosition").show();
+                $("#numberOfColumns").hide();
+            }
+
+            else {
+                $("#numberOfColumns").show();
+                $("#columnPosition").hide();
+            }
+        }                        
+
+        $('#CategoryId').change(function () {
+
+            var value = $('#CategoryId :selected').val()
+            var text = $('#CategoryId :selected').text();
+
+            if (value > 0) {
+                if (text.indexOf(">>") > 0)
+                {
+                    $("#columnPosition").show();
+                    $("#numberOfColumns").hide();
+                    $("#NumberOfColums").data("kendoNumericTextBox").value(0);
+                }
+                else
+                {
+                    $("#numberOfColumns").show();
+                    $("#columnPosition").hide();
+                    $("#ColumnPosition").data("kendoNumericTextBox").value(0);
+                }
+            }
+
+            else {
+                $("#numberOfColumns").hide();
+                $("#columnPosition").hide();
+            }
+        });
+        
+    });    
+</script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "megaMenuform" }))
+{
+    <fieldset>
+        <legend><strong>Manage Your Mega Menu</strong></legend>
+        <table class="adminContent">
+            <tr id="categoryList">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.CategoryId):</td>
+                <td class="adminData">
+                    @Html.DropDownList("CategoryId", Model.CategoryList, "Select One Category")
+                    @Html.ValidationMessageFor(m => m.CategoryId)
+                </td>
+            </tr>
+            <tr id="numberOfColumns">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.NumberOfColums):</td>
+                <td class="adminData">
+                    @Html.EditorFor(m => m.NumberOfColums)
+                    @Html.ValidationMessageFor(m => m.NumberOfColums)
+                </td>
+            </tr>
+            <tr id="columnPosition">
+                <td class="adminTitle">@Html.NopLabelFor(m => m.ColumnPosition):</td>
+                <td class="adminData">
+                    @Html.EditorFor(m => m.ColumnPosition)
+                    @Html.ValidationMessageFor(m => m.ColumnPosition)
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+        <br />
+
+        <table class="adminContent">
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="save" id="submit" class="k-button" value="@T("admin.common.save")" />
+                </td>
+            </tr>
+        </table>
+}

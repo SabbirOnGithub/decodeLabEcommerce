@@ -1,0 +1,170 @@
+﻿@model Nop.Plugin.Widgets.EkShopA2I.Models.VendorRestrictModel
+@using Nop.Web.Framework.Events;
+@using Nop.Services.Events;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    ViewBag.Title = "Manage Restricted Vendors";
+    Html.SetActiveMenuItemSystemName("EkShopA2i Manage Vendor");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Manage Restricted Vendors
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.SearchVendorName)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.SearchVendorName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <button type="button" id="search-vendors" class="btn btn-primary btn-search">
+                                    <i class="fa fa-search"></i>
+                                    @T("Admin.Common.Search")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="vendor-restrict-grid"></div>
+
+                        <script>
+                    $(document).ready(function() {
+                        $("#vendor-restrict-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "/EkshopA2i/VendorList",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: additionalVendorData
+                                    },
+                                    update: {
+                                        url: "/EkshopA2i/UpdateVendorRestriction",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id",
+                                        fields: {
+                                            VendorName: { editable: false, type: "string" },
+                                            Restricted: { editable: true, type: "boolean" },
+                                            Active: { editable: false, type: "boolean" },
+                                            Id: { editable: false, type: "number" }
+                                        }
+                                    }
+                                },
+                                requestEnd: function (e) {
+                                    if (e.type == "create" || e.type == "update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    this.cancelChanges();
+                                },
+                                pageSize: 15,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [15, 25, 50, 100]
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "VendorName",
+                                    title: "Vendor Name",
+                                    width: 300
+                                }, {
+                                    field: "Active",
+                                    title: "Active",
+                                    width: 200,
+                                    template: '# if(Active) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                                }, {
+                                    field: "Restricted",
+                                    title: "Restricted",
+                                    width: 200,
+                                    template: '# if(Restricted) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                                }, {
+                                    command: [
+                                        {
+                                            name: "edit",
+                                            text: {
+                                                edit: "@T("Admin.Common.Edit")",
+                                                update: "@T("Admin.Common.Update")",
+                                                cancel: "@T("Admin.Common.Cancel")"
+                                            }
+                                        }
+                                    ],
+                                    width: 200
+                                }
+                            ]
+                        });
+                    });
+                        </script>
+
+                        <script>
+                    $(document).ready(function () {
+                        $('#search-vendors').click(function () {
+                            var grid = $('#vendor-restrict-grid').data('kendoGrid');
+                            grid.dataSource.page(1);
+                            return false;
+                        });
+                    });
+
+                    function additionalVendorData() {
+                        var data = {
+                            SearchVendorName: $('#@Html.FieldIdFor(model => model.SearchVendorName)').val()
+                        };
+                        addAntiForgeryToken(data);
+                        return data;
+                    }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

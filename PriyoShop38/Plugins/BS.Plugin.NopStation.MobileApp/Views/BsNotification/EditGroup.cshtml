@@ -1,0 +1,24 @@
+﻿@using BS.Plugin.NopStation.MobileApp.Helpers
+@model BS.Plugin.NopStation.MobileApp.Models.CriteriaModel
+@using Nop.Web.Framework
+@{Layout = "_PluginsAdminLayout";}
+@{
+    //page title
+    ViewBag.Title = @T("Admin.Plugin.NopStation.MobileApp.Groups.Title.EditGroup").Text;
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-promotions.png")" alt="" />@T("Admin.Plugin.NopStation.MobileApp.Groups.Header.EditGroup") 
+            <a href="/Admin/Plugin/NopStation/MobileApp/SmartGroups"> @T("Admin.Plugin.NopStation.MobileApp.Common.BackToList") </a>
+        </div>
+        <div class="options">
+            <button name="button" value="save" class="t-button" onclick="GenerateModelData(); return false;">@T("Admin.Common.Save")</button>
+				
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdateGroup", Model)
+}
+
+

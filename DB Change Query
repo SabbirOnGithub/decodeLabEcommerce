@@ -1,0 +1,43 @@
+
+/****** Table Modify: Customer Table ******/
+ALTER TABLE Customer 
+ADD NewReferCode nvarchar(10), UsedReferCode nvarchar(10), IsReferCodeUsed bit, ImageUrl nvarchar(150), ReferCodeValue int
+
+
+
+/****** Table Modify: Order Table ******/
+ALTER TABLE [dbo].[Order] 
+ADD [PartialPayAmount] [decimal](18, 2) NOT NULL DEFAULT ((0))
+
+
+
+/****** Object:  Table [dbo].[EventBanner]    Script Date: 1/7/2020 9:01:36 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EventBanner](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[BannerName] [nvarchar](150) NOT NULL,
+	[PictureId] [int] NULL,
+	[IsActive] [bit] NOT NULL,
+	[PictureUrl] [nvarchar](250) NULL,
+ CONSTRAINT [PK_EventBanner] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EventBanner] ADD  CONSTRAINT [DF_EventBanner_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+
+ALTER TABLE [dbo].[EventBanner]  WITH CHECK ADD  CONSTRAINT [FK_EventBanner_Category] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Category] ([Id])
+GO
+
+ALTER TABLE [dbo].[EventBanner] CHECK CONSTRAINT [FK_EventBanner_Category]
+GO

@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C5AC5A5-D798-4167-B2DF-400C58FA3FA6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BS.Plugin.NopStation.MobileWebApi</RootNamespace>
+    <AssemblyName>BS.Plugin.NopStation.MobileWebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\NopStation.MobileWebApi\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\NopStation.MobileWebApi\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Algolia.Search">
+      <HintPath>..\..\packages\Algolia.Search.5.2.0\lib\net45\Algolia.Search.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi">
+      <HintPath>..\..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\Presentation\Nop.Web\bin\AutoMapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="JWT">
+      <HintPath>..\..\packages\JWT.1.3.4\lib\3.5\JWT.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Data.Edm.5.7.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PayPal">
+      <HintPath>..\..\packages\PayPal.1.0.0\lib\net451\PayPal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiWebWorkContext.cs" />
+    <None Include="AppData\bs-slider-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\bs-slider-backup-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\homepage-response-model-backup-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\homepage-response-model-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\manufacturer-backup-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\manufacturer-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\menu-category-backup-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\menu-category-json-v1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\menu-category-backup-json-v1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\currency-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\currency-backup-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="AppData\menu-category-json.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Controllers\AffilliateController.cs" />
+    <Compile Include="Controllers\HomePageApiController.cs" />
+    <Compile Include="Controllers\EventBannerController.cs" />
+    <Compile Include="Controllers\ZeroAgentController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Agent\AgentImageInformationMap.cs" />
+    <Compile Include="Data\Agent\AgentMasterInformationMap.cs" />
+    <Compile Include="Data\BS_HomePageCategoryMap.cs" />
+    <Compile Include="Data\BS_HomePageCategoryProductMap.cs" />
+    <Compile Include="Data\Agent\AgentImageInformationTempMap.cs" />
+    <Compile Include="Data\Agent\AgentMasterInformationTempMap.cs" />
+    <Compile Include="Domain\Agent\AgentImageInformation.cs" />
+    <Compile Include="Domain\Agent\AgentImageInformationTemp.cs" />
+    <Compile Include="Domain\Agent\AgentMasterInformation.cs" />
+    <Compile Include="Domain\Agent\AgentMasterInformationTemp.cs" />
+    <Compile Include="Models\AffiliateModel.cs" />
+    <Compile Include="Models\Agent\ZeroAgentResponse.cs" />
+    <Compile Include="Models\Agent\ZeroAgentOTP.cs" />
+    <Compile Include="Models\Agent\ZeroAgentInfo.cs" />
+    <Compile Include="Domain\BS_HomePageCategory.cs" />
+    <Compile Include="Domain\BS_HomePageCategoryProduct.cs" />
+    <Compile Include="Domain\CatalogFilteringModel.cs" />
+    <Compile Include="Domain\SliderDomainType.cs" />
+    <Compile Include="HomePageTask.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\FacebookExternalAuthController.cs" />
+    <Compile Include="Controllers\MobileWebApiConfigurationController.cs" />
+    <Compile Include="Controllers\ThemeDataController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Core\OAuthAuthenticationParametersApi.cs" />
+    <Compile Include="Data\BS_RecentlyViewedProductsApiMap.cs" />
+    <Compile Include="Data\BS_SliderMap.cs" />
+    <Compile Include="Domain\BS_RecentlyViewedProductsApi.cs" />
+    <Compile Include="Domain\BS_Slider.cs" />
+    <Compile Include="Extensions\ImageType.cs" />
+    <Compile Include="Extensions\NstAuthorization.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
+    <Compile Include="Infrastructure\EfStartUpTask.cs" />
+    <Compile Include="MobileWebApiSettings.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\MobileWebApiController.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\KeepAliveApiController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\MobileWebApiAdminController.cs" />
+    <Compile Include="Controllers\RedirectPageController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\ThemeSettingsController.cs" />
+    <Compile Include="CorsHandler.cs" />
+    <Compile Include="Data\MobileWebApiObjectContext.cs" />
+    <Compile Include="Data\BS_CategoryIconMap.cs" />
+    <Compile Include="Data\BS_ContentManagementMap.cs" />
+    <Compile Include="Data\BS_ContentManagementTemplateMap.cs" />
+    <Compile Include="Data\BS_FeaturedProductsMap.cs" />
+    <Compile Include="Data\DeviceMap.cs" />
+    <Compile Include="Data\EfStartUpTask.cs" />
+    <Compile Include="DependencyRegistrar.cs" />
+    <Compile Include="Domain\BS_CategoryIcon.cs" />
+    <Compile Include="Domain\BS_ContentManagement.cs" />
+    <Compile Include="Domain\BS_ContentManagementTemplate.cs" />
+    <Compile Include="Domain\BS_FeaturedProducts.cs" />
+    <Compile Include="Domain\Device.cs" />
+    <Compile Include="Domain\DeviceType.cs" />
+    <Compile Include="Extensions\AddressType.cs" />
+    <Compile Include="Extensions\AttributeParserHelper.cs" />
+    <Compile Include="Extensions\Authorize.Net\AuthorizeNetExtention.cs" />
+    <Compile Include="Extensions\Authorize.Net\TransactMode.cs" />
+    <Compile Include="Extensions\Constant.cs" />
+    <Compile Include="Extensions\CustomerLastActivityAuthorize.cs" />
+    <Compile Include="Extensions\ErrorMessageExtension.cs" />
+    <Compile Include="Extensions\ErrorType.cs" />
+    <Compile Include="Extensions\HelperExtension.cs" />
+    <Compile Include="Extensions\MappingExtensions.cs" />
+    <Compile Include="Extensions\PaymentType.cs" />
+    <Compile Include="Extensions\Paypal\PaypalDetailModel.cs" />
+    <Compile Include="Extensions\Paypal\PayPalExtension.cs" />
+    <Compile Include="Extensions\TokenAuthorizeAttribute.cs" />
+    <Compile Include="Extensions\ValidationExtension.cs" />
+    <Compile Include="Infrastructure\FileActionResult.cs" />
+    <Compile Include="Models\ApiSettingsModel.cs" />
+    <Compile Include="Models\Catalog\CatalogFeaturedCategoryWithProduct.cs" />
+    <Compile Include="Models\Catalog\CatalogPagingFilteringModel.cs" />
+    <Compile Include="Models\Catalog\CategoriesAndManufacturersModelApi.cs" />
+    <Compile Include="Models\Catalog\CategoryBaseModelApi.cs" />
+    <Compile Include="Models\Catalog\FreeDeliveryModelApi.cs" />
+    <Compile Include="Models\Catalog\ManuFactureModelApi.cs" />
+    <Compile Include="Models\Catalog\ManufactureBaseModelApi.cs" />
+    <Compile Include="Models\Catalog\MenuFacturerModelShortDetailApi.cs" />
+    <Compile Include="Models\Catalog\OnSaleProductModel.cs" />
+    <Compile Include="Models\Catalog\CustomerLanguageAndCurrencyModel.cs" />
+    <Compile Include="Models\Catalog\SearchModeApil.cs" />
+    <Compile Include="Models\Catalog\TagModelApi.cs" />
+    <Compile Include="Models\Catalog\VendorModelApi.cs" />
+    <Compile Include="Models\DashboardModel\AddBlogCommentModel.cs" />
+    <Compile Include="Models\DashboardModel\AddressAttributeModel.cs" />
+    <Compile Include="Models\DashboardModel\BannerSliderModel.cs" />
+    <Compile Include="Models\DashboardModel\BlogCommentModel.cs" />
+    <Compile Include="Models\DashboardModel\BlogPagingFilteringModel.cs" />
+    <Compile Include="Models\DashboardModel\BlogPostListModel.cs" />
+    <Compile Include="Models\DashboardModel\BlogPostModel.cs" />
+    <Compile Include="Models\DashboardModel\CatalogPagingFilteringModel.cs" />
+    <Compile Include="Models\DashboardModel\CategoryIconsModel.cs" />
+    <Compile Include="Models\DashboardModel\CategoryModel.cs" />
+    <Compile Include="Models\DashboardModel\CategoryNavigationModel.cs" />
+    <Compile Include="Models\DashboardModel\CategorySimpleModel.cs" />
+    <Compile Include="Models\DashboardModel\ChangePasswordModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutBillingAddressModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutConfirmModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutPaymentInfoModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutPaymentMethodModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutPickupPointModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutShippingAddressModel.cs" />
+    <Compile Include="Models\DashboardModel\CheckoutShippingMethodModel.cs" />
+    <Compile Include="Models\DashboardModel\CompareProductsModel.cs" />
+    <Compile Include="Models\DashboardModel\ConfigureModel.cs" />
+    <Compile Include="Models\DashboardModel\ContactInfoModel.cs" />
+    <Compile Include="Models\DashboardModel\ContentManagementModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerAddressEditModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerAddressListModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerAttributeModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerDownloadableProductsModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerInfoModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerOrderListModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerRewaredPointsModel.cs" />
+    <Compile Include="Models\DashboardModel\CustomerRole.cs" />
+    <Compile Include="Models\DashboardModel\CustomJsonResult.cs" />
+    <Compile Include="Models\DashboardModel\ErroMessageType.cs" />
+    <Compile Include="Models\DashboardModel\EstimateShippingModel.cs" />
+    <Compile Include="Models\DashboardModel\GeneralSettingModel.cs" />
+    <Compile Include="Models\DashboardModel\LoginModel.cs" />
+    <Compile Include="Models\DashboardModel\ManufacturerModel.cs" />
+    <Compile Include="Models\DashboardModel\MappingExtensions.cs" />
+    <Compile Include="Models\DashboardModel\MiniShoppingCartModel.cs" />
+    <Compile Include="Models\DashboardModel\MobileSettingsModel.cs" />
+    <Compile Include="Models\DashboardModel\OnePageCheckoutModel.cs" />
+    <Compile Include="Models\DashboardModel\OrderDetailModel.cs" />
+    <Compile Include="Models\DashboardModel\OrderTotalsModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductDetailsModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductModels.cs" />
+    <Compile Include="Models\DashboardModel\ProductOverviewModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductReviewModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductSpecificationModel.cs" />
+    <Compile Include="Models\DashboardModel\ProductTagModel.cs" />
+    <Compile Include="Models\DashboardModel\PushNotificationModel.cs" />
+    <Compile Include="Models\DashboardModel\RegisterModel.cs" />
+    <Compile Include="Models\DashboardModel\ResponceProductsModels.cs" />
+    <Compile Include="Models\DashboardModel\SearchModel.cs" />
+    <Compile Include="Models\FacebookExternalAuth\FacebookExternalAuthModelApi.cs" />
+    <Compile Include="Models\HomePageCategoryWithProductsModel.cs" />
+    <Compile Include="Models\HomePageResponseModel.cs" />
+    <Compile Include="Models\HomePage\HomepageApiListModel.cs" />
+    <Compile Include="Models\HomePage\HomePageCategoryListModel.cs" />
+    <Compile Include="Models\HomePage\HomePageCategoryModel.cs" />
+    <Compile Include="Models\HomePage\HomePagecategoryProductModel.cs" />
+    <Compile Include="Models\IconModel.cs" />
+    <Compile Include="Models\NstSettingsModel\NstSettingsModel.cs" />
+    <Compile Include="Models\NstSettingsModel\Nst_ConfigurationSettings.cs" />
+    <Compile Include="Models\SelectListGroup.cs" />
+    <Compile Include="Models\SelectListItem.cs" />
+    <Compile Include="Models\DashboardModel\ShipmentDetailsModel.cs" />
+    <Compile Include="Models\DashboardModel\ShoppingCartItemModel.cs" />
+    <Compile Include="Models\DashboardModel\ShoppingCartModel.cs" />
+    <Compile Include="Models\DashboardModel\SliderModel.cs" />
+    <Compile Include="Models\DashboardModel\StoreModel.cs" />
+    <Compile Include="Models\DashboardModel\ThemeSettingModel.cs" />
+    <Compile Include="Models\DashboardModel\TopicModel.cs" />
+    <Compile Include="Models\DashboardModel\TopMenuModel.cs" />
+    <Compile Include="Models\DashboardModel\UpdateSectionJsonModel.cs" />
+    <Compile Include="Models\Slider\SliderImageModel.cs" />
+    <Compile Include="Models\Vendor\VendorModel.cs" />
+    <Compile Include="Models\Vendor\VendorNavigationModel.cs" />
+    <Compile Include="Models\DashboardModel\WishlistModel.cs" />
+    <Compile Include="Models\Product\ProductDetailsModelApi.cs" />
+    <Compile Include="Models\_Common\AddAdressCommonResponseModel.cs" />
+    <Compile Include="Models\_Common\CurrencyNavModel.cs" />
+    <Compile Include="Models\_Common\CurrencyNavSelectorModel.cs" />
+    <Compile Include="Models\_Common\ExistingAddressCommonResponseModel.cs" />
+    <Compile Include="Models\_Common\KeyValueApi.cs" />
+    <Compile Include="Models\_Common\LanguageNavModel.cs" />
+    <Compile Include="Models\_Common\LanguageNavSelectorModel.cs" />
+    <Compile Include="Models\_Common\SingleValue.cs" />
+    <Compile Include="Models\_QueryModel\Catalog\PagingFilteringModel.cs" />
+    <Compile Include="Models\_QueryModel\Customer\ChangePasswordQueryModel.cs" />
+    <Compile Include="Models\_QueryModel\Customer\CustomerInfoQueryModel.cs" />
+    <Compile Include="Models\_QueryModel\Customer\RegisterQueryModel.cs" />
+    <Compile Include="Models\_QueryModel\Device\AppStartModel.cs" />
+    <Compile Include="Models\_QueryModel\Payment\AuthorizeQueryModel.cs" />
+    <Compile Include="Models\_QueryModel\Product\ProductReviewQueryModel.cs" />
+    <Compile Include="Models\_ResponseModel\Banner\EventBannerResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\CategoryResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\ManufacturerDetailFeaturedProductResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\CategoryDetailFeaturedProductAndSubcategoryResponseModel.cs" />
+    <Compile Include="Models\Catalog\CategoryModelApi.cs" />
+    <Compile Include="Models\Catalog\CategoryNavigationModelApi.cs" />
+    <Compile Include="Models\Catalog\CategoryOverViewModelApi.cs" />
+    <Compile Include="Models\Catalog\MenufactureOverViewModelApi.cs" />
+    <Compile Include="Models\Catalog\ProductOverViewModelApi.cs" />
+    <Compile Include="Models\Catalog\SubCategoryModelApi.cs" />
+    <Compile Include="Models\_QueryModel\Customer\LoginQueryModel.cs" />
+    <Compile Include="Controllers\WebApiController.cs" />
+    <Compile Include="Extensions\PrePareOverviewModelExtension.cs" />
+    <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\RouteProvider.cs" />
+    <Compile Include="Infrastructure\WebApi\FilterConfig.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\CustomExceptionLogger.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\ErrorResult.cs" />
+    <Compile Include="Infrastructure\WebApi\Logger\GlobalExceptionHandler.cs" />
+    <Compile Include="Infrastructure\WebApi\WebApiConfig.cs" />
+    <Compile Include="MobileWebApiPlugin.cs" />
+    <Compile Include="Models\_ResponseModel\Banner\HomePageBannerResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\BaseResponse.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\AllResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\ManufactureDetailProductResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\CategoryDetailProductResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\ManufacturerResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\ProductTagDetailResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\SearchProductResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\VendorResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Checkout\CheckoutBillingAddressResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Checkout\CheckoutPaymentMethodResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Checkout\CheckoutShippingMethodResposeModel.cs" />
+    <Compile Include="Models\_ResponseModel\Checkout\CompleteResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\ChangePasswordModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CommisionResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerAddressEditModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerAddressListModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerAttributeModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerAvatarModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerDownloadableProductsModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerInfoResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerLedgerDetailViewModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerLedgerViewModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerNavigationModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerPriyoCoinModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\LogInPostResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\ReferCodeModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\RegisterResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Customer\CustomerLaguageAndCurrencyResponceModel.cs" />
+    <Compile Include="Models\_ResponseModel\LanguageSelectorResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Order\CustomerOrderListResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Order\OrderDetailsResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Order\ShipmentDetailsResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\PayPal\PayPalResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Product\ProductReviewsResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\AddProductToCartResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\CheckoutInformationResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\CoupontypeResponse.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\OrderTotalsResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\ProductDetailPriceResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\PurchaseOfferResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\ShoppingCartResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ShoppingCart\WishlistResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\ThemeSetting\ThemeSettingsResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Catalog\TopicResponseModel.cs" />
+    <Compile Include="PluginSettings\ApiSettings.cs" />
+    <Compile Include="PluginSettings\AuthorizeNetPaymentSettings.cs" />
+    <Compile Include="PluginSettings\NivoSliderSettings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\_ResponseModel\GeneralResponseModel.cs" />
+    <Compile Include="RouteProvider.cs" />
+    <Compile Include="Services\Agent\AgentService.cs" />
+    <Compile Include="Services\Agent\IAgentService.cs" />
+    <Compile Include="Services\AuthorizationResultApi.cs" />
+    <Compile Include="Services\BsNopMobilePluginService.cs" />
+    <Compile Include="Services\BS_HomePageCategoryService.cs" />
+    <Compile Include="Services\BS_RecentlyViewedProductsApiService.cs" />
+    <Compile Include="Services\BS_SliderService.cs" />
+    <Compile Include="Services\CategoryIconService.cs" />
+    <Compile Include="Services\ContentManagementService.cs" />
+    <Compile Include="Services\ContentManagementTemplateService.cs" />
+    <Compile Include="Services\CustomerServiceApi.cs" />
+    <Compile Include="Services\DeviceService.cs" />
+    <Compile Include="Services\ExternalAuthorizerApi.cs" />
+    <Compile Include="Services\GenericAttributeServiceApi.cs" />
+    <Compile Include="Services\IBsNopMobilePluginService.cs" />
+    <Compile Include="Services\IBS_HomePageCategoryService.cs" />
+    <Compile Include="Services\IBS_RecentlyViewedProductsApiService.cs" />
+    <Compile Include="Services\IBS_SliderService.cs" />
+    <Compile Include="Services\ICategoryIconService.cs" />
+    <Compile Include="Services\IContentManagementService.cs" />
+    <Compile Include="Services\IContentManagementTemplateService.cs" />
+    <Compile Include="Services\ICustomerServiceApi.cs" />
+    <Compile Include="Services\IDeviceService.cs" />
+    <Compile Include="Services\IExternalAuthorizerApi.cs" />
+    <Compile Include="Services\IProductServiceApi.cs" />
+    <Compile Include="Services\IThemeDataService.cs" />
+    <Compile Include="Services\ProductServiceApi.cs" />
+    <Compile Include="Services\ThemeDataService.cs" />
+    <Compile Include="Utility\OTP.cs" />
+    <Compile Include="Validator\BannerSlider\BannerSliderValidator.cs" />
+    <Compile Include="Validator\Catalog\CategoryIconValidator.cs" />
+    <Compile Include="Validator\Catalog\ProductReviewsValidator.cs" />
+    <Compile Include="Validator\Slider\SliderImageValidator.cs" />
+    <Compile Include="Validator\Stores\StoreValidator.cs" />
+    <Compile Include="Validator\Topics\TopicValidator.cs" />
+    <Content Include="Views\WebApi\_CategoryIconCreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_SliderImageCreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\IconPackage\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\IconPackage\defaultIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\arrow.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\cross.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\hs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\hv.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jscolor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsInstagramAdMarket\Configure.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\styles.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Description.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="Views\BsInstagramAdMarket\InstagramOfferCreate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\BsInstagramAdMarket\InstagramOfferList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\BsInstagramAdMarket\InstagramAllUserList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsInstagramAdMarket\InstagramAllVendorList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsInstagramAdMarket\InstagramVendorCreate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\BsInstagramAdMarket\OfferDetails.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Views\WebApi\BannerSlider.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\CategoryIconCreate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\ContentManagement.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\Edit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\FeaturedProductsAddPopup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\GeneralSetting.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\MobileWebSiteSetting.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\PushNotification.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\Theme.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_NopMobileMenu.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\HomePageCategoryCreate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\HomePageCategoryEdit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_HomePageCategoryCreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_HomePageCategoryCreateOrUpdate.Info.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\_HomePageCategoryCreateOrUpdate.Products.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\CategoryIconEdit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\WebApi\CategoryIconList.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\WebApi\HomePageCategory.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\WebApi\ContactInfo.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\WebApi\ApiSetting.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Views\WebApi\SliderImageEdit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebApi\SliderImageCreate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\WebApi\NstSettings.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\WebApi\NstSettingsEdit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\WebApi\SliderImage.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\ServiceExtension\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj">
+      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+      <Name>Nop.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Nop.Data\Nop.Data.csproj">
+      <Project>{ccd7f2c9-6a2c-4cf0-8e89-076b8fc0f144}</Project>
+      <Name>Nop.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj">
+      <Project>{210541ad-f659-47da-8763-16f36c5cd2f4}</Project>
+      <Name>Nop.Services</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj">
+      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
+      <Name>Nop.Web.Framework</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj">
+      <Project>{4f1f649c-1020-45be-a487-f416d9297ff3}</Project>
+      <Name>Nop.Web</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Nop.Plugin.Widgets.AlgoliaSearch\Nop.Plugin.Widgets.AlgoliaSearch.csproj">
+      <Project>{f6121aae-7f70-4bdf-9e0e-38ac46e668c5}</Project>
+      <Name>Nop.Plugin.Widgets.AlgoliaSearch</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
