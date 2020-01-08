@@ -49,32 +49,34 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
         [HttpGet]
         public IHttpActionResult HomePageBanner()
         {
-            string jsonMenuCategory = null;
-            var filePath = CommonHelper.MapPath("~/ApiJson/bs-slider-json.json");
+//            string jsonMenuCategory = null;
+//            var filePath = CommonHelper.MapPath("~/ApiJson/bs-slider-json.json");
+//
+//            try
+//            {
+//                jsonMenuCategory = System.IO.File.ReadAllText(filePath);
+//            }
+//            catch { }
+//
+//            if (string.IsNullOrWhiteSpace(jsonMenuCategory))
+//            {
+//                try
+//                {
+//                    filePath = CommonHelper.MapPath("~/ApiJson/bs-slider-backup-json.json");
+//                    jsonMenuCategory = System.IO.File.ReadAllText(filePath);
+//                }
+//                catch { }
+//            }
+//            var pictureList = JsonConvert.DeserializeObject<List<HomePageBannerResponseModel.BannerModel>>(jsonMenuCategory);
+//            
+//
+//            var result = new HomePageBannerResponseModel();
+//
+//            result.IsEnabled = pictureList.Count > 0;
+//
+//            result.Data = pictureList;
 
-            try
-            {
-                jsonMenuCategory = System.IO.File.ReadAllText(filePath);
-            }
-            catch { }
-
-            if (string.IsNullOrWhiteSpace(jsonMenuCategory))
-            {
-                try
-                {
-                    filePath = CommonHelper.MapPath("~/ApiJson/bs-slider-backup-json.json");
-                    jsonMenuCategory = System.IO.File.ReadAllText(filePath);
-                }
-                catch { }
-            }
-            var pictureList = JsonConvert.DeserializeObject<List<HomePageBannerResponseModel.BannerModel>>(jsonMenuCategory);
-            
-
-            var result = new HomePageBannerResponseModel();
-
-            result.IsEnabled = pictureList.Count > 0;
-
-            result.Data = pictureList;
+            var result = "This Function Called";
 
             return Ok(result);
         }
