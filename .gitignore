@@ -29,3 +29,7 @@ config
 /PriyoShop38/Libraries/Nop.Data/obj
 /PriyoShop38/Libraries/Nop.Services/bin
 /PriyoShop38/Libraries/Nop.Services/obj
+/PriyoShop38/Presentation/Nop.Web/bin
+obj
+/PriyoShop38/Presentation/Nop.Web.Framework/bin
+obj
