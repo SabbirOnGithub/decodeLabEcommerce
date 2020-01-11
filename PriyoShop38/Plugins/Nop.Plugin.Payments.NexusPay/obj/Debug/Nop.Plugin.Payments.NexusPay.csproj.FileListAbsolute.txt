@@ -113,6 +113,6 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.dll.config
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.NexusPay\Nop.Plugin.Payments.NexusPay.pdb
-D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.csprojAssemblyReference.cache
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.NexusPay\obj\Debug\Nop.Plugin.Payments.NexusPay.csprojAssemblyReference.cache

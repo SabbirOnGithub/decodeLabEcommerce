@@ -12,6 +12,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models
         public HomePageResponseModel()
         {
             Banners = new List<BannerModel>();
+            EventBanners = new List<BannerModel>();
             Categories = new List<CategoryNavigationModelApi>();
             Manufacturers = new List<MenufactureOverViewModelApi>();
             V1Categories = new List<CategoryNavigationModelApi>();
@@ -21,6 +22,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models
         }
 
         public IList<BannerModel> Banners { set; get; }
+        public IList<BannerModel> EventBanners { set; get; }
 
         public bool BannerIsEnabled { get; set; }
 

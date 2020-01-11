@@ -162,14 +162,15 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         #region Utilities
 
-        public void UpdateHomepageCategory()
+        public void UpdateHomepageItems()
         {
             var homePageModel = new HomePageResponseModel();
             homePageModel.Language = PrepareLanguageModel();
-            homePageModel.Banners = PrepareBannerModel();
-            homePageModel.BannerIsEnabled = homePageModel.Banners.Any();
-            homePageModel.Categories = PrepareCategories();
-            homePageModel.CategoriesWithProducts = PrepareCategoriesWithProductsModel();
+            homePageModel.Banners = PrepareBannerModel();// ok
+            homePageModel.EventBanners = PrepareEventBannerModel();
+            homePageModel.BannerIsEnabled = homePageModel.Banners.Any(); //ok
+            homePageModel.Categories = PrepareCategories(); // ok
+            homePageModel.CategoriesWithProducts = PrepareCategoriesWithProductsModel(); //ok
             homePageModel.CategoryListIcon = _pictureService.GetPictureUrl(_apiSettings.CategoryListIconId);
             homePageModel.Icons = PrepareIconModel();
             homePageModel.ManufacturerListIcon = _pictureService.GetPictureUrl(_apiSettings.ManufacturerListIconId);
@@ -337,29 +338,6 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         protected IList<CategoryNavigationModelApi> PrepareCategories()
         {
-            var allCmodel = new List<CategoryNavigationModelApi>();
-            var allCats = _categoryService.GetAllCategories();
-            allCats.Add(_categoryService.GetAllCategories(categoryName: "App Only", showHidden: true).FirstOrDefault());
-
-            foreach (var item in allCats.OrderBy(x => x.DisplayOrder))
-            {
-                var categoryNavigationModelApi = new CategoryNavigationModelApi
-                {
-                    Id = item.Id,
-                    ParentCategoryId = item.ParentCategoryId,
-                    Name = item.Name,
-                    DisplayOrder = item.DisplayOrder,
-                };
-
-                int pictureSize = _mediaSettings.CategoryThumbPictureSize;
-                var picture = _pictureService.GetPictureById(item.PictureId);
-
-                categoryNavigationModelApi.ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize);
-                allCmodel.Add(categoryNavigationModelApi);
-            }
-
-
-
             var cmodel = new List<CategoryNavigationModelApi>();
             var cats = _categoryService.GetAllCategoriesDisplayedOnHomePage(ignoreAcl: true);
 
@@ -386,6 +364,25 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
         protected IList<HomePageBannerResponseModel.BannerModel> PrepareBannerModel()
         {
             var sliders = _sliderService.GetActiveBSSliderImages();
+
+            var pictureList = (from sliderDomain in sliders
+                select new HomePageBannerResponseModel.BannerModel
+                {
+                    ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
+                    DomainType = sliderDomain.SliderDomainTypeId,
+                    DomainId = sliderDomain.DomainId,
+                    //IsProduct = sliderDomain.IsProduct,
+                    //ProdOrCatId = sliderDomain.ProdOrCatId,
+                    Link = "",
+                    Text = ""
+                }).ToList();
+
+            return pictureList;
+        }
+
+        protected IList<HomePageBannerResponseModel.BannerModel> PrepareEventBannerModel()
+        {
+            var sliders = _sliderService.GetActiveBSSliderImages().Where(x=>x.IsEventBanner);
 
             var pictureList = (from sliderDomain in sliders
                 select new HomePageBannerResponseModel.BannerModel
@@ -438,6 +435,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 model.SliderActiveStartDate = slider.SliderActiveStartDate;
                 model.SliderDomainTypeId = slider.SliderDomainTypeId;
                 model.DisplayOrder = slider.DisplayOrder;
+                model.IsEventBanner = slider.IsEventBanner;
                 model.SliderDomainTypeStr = (int)slider.SliderDomainType == 0 ? "" : slider.SliderDomainType.ToString();
             }
             if (preparePictureUrl)
@@ -997,7 +995,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     categoryIcon.TextPrompt = model.TextPrompt;
                     _categoryIconService.UpdateCategoryIcon(categoryIcon);
                 }
-
+                UpdateHomepageItems();
                 if (continueEditing)
                     return RedirectToAction("CategoryIconEdit", new { id = categoryIcon.Id });
 
@@ -1055,7 +1053,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 categoryIcon.PictureId = model.PictureId;
                 categoryIcon.TextPrompt = model.TextPrompt;
                 _categoryIconService.UpdateCategoryIcon(categoryIcon);
-
+                UpdateHomepageItems();
                 if (continueEditing)
                     return RedirectToAction("CategoryIconEdit", new { id = categoryIcon.Id });
 
@@ -1081,6 +1079,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
         {
             var categoryIcon = _categoryIconService.GetCategoryIconById(id);
             _categoryIconService.DeleteCategoryIcon(categoryIcon);
+            UpdateHomepageItems();
 
             return RedirectToAction("CategoryIconList");
         }
@@ -1864,8 +1863,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 slider.SliderActiveStartDate = model.SliderActiveStartDate;
                 slider.SliderDomainTypeId = model.SliderDomainTypeId;
                 slider.DisplayOrder = model.DisplayOrder;
+                slider.IsEventBanner = model.IsEventBanner;
 
                 _bsSliderService.InsertSlider(slider);
+                UpdateHomepageItems();
 
                 if (continueEditing)
                     return RedirectToAction("SliderImageEdit", new { id = slider.Id });
@@ -1903,8 +1904,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 slider.SliderActiveStartDate = model.SliderActiveStartDate;
                 slider.SliderDomainTypeId = model.SliderDomainTypeId;
                 slider.DisplayOrder = model.DisplayOrder;
+                slider.IsEventBanner = model.IsEventBanner;
 
                 _bsSliderService.UpdateSlider(slider);
+                UpdateHomepageItems();
 
                 if (continueEditing)
                     return RedirectToAction("SliderImageEdit", new { id = slider.Id });
@@ -1930,9 +1933,20 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 _pictureService.DeletePicture(picture);
 
             _bsSliderService.DeleteSlider(id);
+            UpdateHomepageItems();
 
             return RedirectToAction("SliderImage");
         }
+
+        #endregion
+
+        #region Event Slider image
+        public ActionResult EventSliderImage()
+        {
+            var model = PrepareSliderImageModel(includeAvailableDomainTypes: true);
+            return View("~/Plugins/NopStation.MobileWebApi/Views/WebApi/SliderImage.cshtml", model);
+        }
+
 
         #endregion
 
@@ -2232,7 +2246,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     DisplayOrder = x.DisplayOrder,
                     Published = x.Published,
                     TextPrompt = x.TextPrompt,
-                    CategoryName = category != null ? category.GetFormattedBreadCrumb(_categoryService) : ""
+                    CategoryName = category != null ? category.GetFormattedBreadCrumb(_categoryService) : "",
+                    PercentValue = x.PercentValue ?? 0
                 };
                 return homepageModel;
             });
@@ -2265,11 +2280,12 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     DisplayOrder = model.DisplayOrder,
                     Published = model.Published,
                     TextPrompt = model.TextPrompt,
-                    PictureId = model.PictureId
+                    PictureId = model.PictureId,
+                    PercentValue = model.PercentValue
                 };
 
                 _homePageCategoryService.InsertHomePageCategory(homePageCategory);
-                UpdateHomepageCategory();
+                UpdateHomepageItems();
                 SuccessNotification("Home page category added successfully.");
                 if (continueEditing)
                 {
@@ -2286,7 +2302,6 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             return View("~/Plugins/NopStation.MobileWebApi/Views/WebApi/HomePageCategoryCreate.cshtml", model);
         }
-
 
         public ActionResult HomePageCategoryEdit(int id)
         {
@@ -2308,7 +2323,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 TextPrompt = homePageCategory.TextPrompt,
                 CategoryName = category != null ? category.Name : "",
                 PictureId = homePageCategory.PictureId,
-                CategoryId = homePageCategory.CategoryId
+                CategoryId = homePageCategory.CategoryId,
+                PercentValue = homePageCategory.PercentValue ?? 0
             };
 
             return View("~/Plugins/NopStation.MobileWebApi/Views/WebApi/HomePageCategoryEdit.cshtml", model);
@@ -2328,9 +2344,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 homePageCategory.Published = model.Published;
                 homePageCategory.TextPrompt = model.TextPrompt;
                 homePageCategory.PictureId = model.PictureId;
+                homePageCategory.PercentValue = model.PercentValue;
 
                 _homePageCategoryService.UpdateHomePageCategory(homePageCategory);
-                UpdateHomepageCategory();
+                UpdateHomepageItems();
 
                 SuccessNotification("Home page category updated successfully.");
                 if (continueEditing)
@@ -2356,7 +2373,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 return RedirectToAction("HomePageCategory");
 
             _homePageCategoryService.DeleteHomePageCategory(homePageCategory);
-            UpdateHomepageCategory();
+            UpdateHomepageItems();
 
             SuccessNotification("Home page category deleted successfully.");
             return RedirectToAction("HomePageCategory");
@@ -2407,6 +2424,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             homePageCategoryProduct.DisplayOrder = model.DisplayOrder;
             _homePageCategoryService.UpdateHomePageCategoryProduct(homePageCategoryProduct);
+            UpdateHomepageItems();
 
             return new NullJsonResult();
         }
@@ -2419,6 +2437,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 return new NullJsonResult();
 
             _homePageCategoryService.DeleteHomePageCategoryProduct(homePageCategoryProduct);
+            UpdateHomepageItems();
 
             return new NullJsonResult();
         }
@@ -2439,6 +2458,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             };
 
             _homePageCategoryService.InsertHomePageCategoryProduct(homePageCategoryProduct);
+            UpdateHomepageItems();
 
             return new NullJsonResult();
         }

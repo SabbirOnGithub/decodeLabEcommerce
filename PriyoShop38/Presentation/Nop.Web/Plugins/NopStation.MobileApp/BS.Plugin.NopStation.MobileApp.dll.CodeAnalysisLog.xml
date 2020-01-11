@@ -6,7 +6,7 @@
    <Modules>
     <Module Name="bs.plugin.nopstation.mobileapp.dll">
      <Messages>
-      <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+      <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
        <Issue Certainty="95" Level="Error">Mark 'BS.Plugin.NopStation.MobileApp.dll' with CLSCompliant(true) because it exposes externally visible types.</Issue>
       </Message>
      </Messages>
@@ -17,7 +17,7 @@
          <Members>
           <Member Name="#Init()" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="AvoidExcessiveComplexity" Category="Microsoft.Maintainability" CheckId="CA1502" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidExcessiveComplexity" Category="Microsoft.Maintainability" CheckId="CA1502" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="90" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp" File="AutoMapperConfiguration.cs" Line="20">'AutoMapperConfiguration.Init()' has a cyclomatic complexity of 43. Rewrite or refactor the method to reduce complexity to 25.</Issue>
             </Message>
            </Messages>
@@ -28,42 +28,42 @@
          <Members>
           <Member Name="#.ctor(Nop.Services.Media.IPictureService,Nop.Services.Configuration.ISettingService,Nop.Core.IWebHelper,BS.Plugin.NopStation.MobileApp.Data.MobileAppObjectContext,Nop.Core.IWorkContext,Nop.Services.Vendors.IVendorService,Nop.Core.Data.IRepository`1&lt;Nop.Core.Domain.Tasks.ScheduleTask&gt;,Nop.Services.Security.IPermissionService)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="vendorService" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="DependsOnFix">
+            <Message Id="vendorService" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="DependsOnFix">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp" File="MobileAppPlugin.cs" Line="34">Parameter 'vendorService' of 'MobileAppPlugin.MobileAppPlugin(IPictureService, ISettingService, IWebHelper, MobileAppObjectContext, IWorkContext, IVendorService, IRepository&lt;ScheduleTask&gt;, IPermissionService)' is never used. Remove the parameter or use it in the method body.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_pictureService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'MobileAppPlugin._pictureService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_settingService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'MobileAppPlugin._settingService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_webHelper" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'MobileAppPlugin._webHelper' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_workContext" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'MobileAppPlugin._workContext' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Authenticate()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="DependsOnFix">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="DependsOnFix">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp" File="MobileAppPlugin.cs" Line="180">The 'this' parameter (or 'Me' in Visual Basic) of 'MobileAppPlugin.Authenticate()' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
@@ -78,7 +78,7 @@
          <Members>
           <Member Name="#GetHeaderValue()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BaseApiController.cs" Line="10">Change 'BaseApiController.GetHeaderValue()' to a property if appropriate.</Issue>
             </Message>
            </Messages>
@@ -89,63 +89,63 @@
          <Members>
           <Member Name="#.ctor(BS.Plugin.NopStation.MobileApp.Services.ISmartGroupService,Nop.Services.Localization.ILocalizationService,Nop.Services.Security.IPermissionService,Nop.Services.Vendors.IVendorService,Nop.Services.Customers.ICustomerService,Nop.Services.Seo.IUrlRecordService,Nop.Core.IWorkContext,Nop.Services.Stores.IStoreService,Nop.Services.Configuration.ISettingService,Nop.Core.Domain.Common.AdminAreaSettings,BS.Plugin.NopStation.MobileApp.Services.ISmartGroupService,BS.Plugin.NopStation.MobileApp.Services.IScheduledNotificationService,BS.Plugin.NopStation.MobileWebApi.Services.IDeviceService,BS.Plugin.NopStation.MobileApp.Services.IQueuedNotificationService,Nop.Services.Catalog.ICategoryService,Nop.Services.Catalog.IManufacturerService,Nop.Services.Catalog.IProductService,BS.Plugin.NopStation.MobileApp.Services.INotificationMessageTemplateService,Nop.Core.IStoreContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="instagramOfferService" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="DependsOnFix">
+            <Message Id="instagramOfferService" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="DependsOnFix">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="67">Parameter 'instagramOfferService' of 'BsNotificationAdminController.BsNotificationAdminController(ISmartGroupService, ILocalizationService, IPermissionService, IVendorService, ICustomerService, IUrlRecordService, IWorkContext, IStoreService, ISettingService, AdminAreaSettings, ISmartGroupService, IScheduledNotificationService, IDeviceService, IQueuedNotificationService, ICategoryService, IManufacturerService, IProductService, INotificationMessageTemplateService, IStoreContext)' is never used. Remove the parameter or use it in the method body.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_adminAreaSettings" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationAdminController._adminAreaSettings' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_urlRecordService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationAdminController._urlRecordService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GetDeviceType(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="126">Modify 'BsNotificationAdminController.GetDeviceType(int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GetNotificationType(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="141">Modify 'BsNotificationAdminController.GetNotificationType(int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#PushTestNoticationToAndroid()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="952">Modify 'BsNotificationAdminController.PushTestNoticationToAndroid()' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#PushTestNoticationToIPhone()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="928">Modify 'BsNotificationAdminController.PushTestNoticationToIPhone()' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SmartGroupList(System.Int32,Nop.Web.Framework.Kendoui.DataSourceRequest)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="test" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="test" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="360">'BsNotificationAdminController.SmartGroupList(int, DataSourceRequest)' declares a variable, 'test', of type 'IEnumerable&lt;SmartContactModel&gt;', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#TestPushNotification(BS.Plugin.NopStation.MobileApp.Models.QueuedNotificationModel)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="877">Modify 'BsNotificationAdminController.TestPushNotification(QueuedNotificationModel)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationAdminController.cs" Line="901">Modify 'BsNotificationAdminController.TestPushNotification(QueuedNotificationModel)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
@@ -157,7 +157,7 @@
          <Members>
           <Member Name="#_pictureService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationApiController._pictureService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
@@ -168,52 +168,52 @@
          <Members>
           <Member Name="#_emailAccountService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationMessageTemplateController._emailAccountService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_emailAccountSettings" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationMessageTemplateController._emailAccountSettings' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_workflowMessageService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'BsNotificationMessageTemplateController._workflowMessageService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CopyTemplate(BS.Plugin.NopStation.MobileApp.Models.NotificationMessageTemplateModel)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationMessageTemplateController.cs" Line="389">Consider changing the type of parameter 'model' in 'BsNotificationMessageTemplateController.CopyTemplate(NotificationMessageTemplateModel)' from 'NotificationMessageTemplateModel' to its base type 'BaseNopEntityModel'. This method appears to only require base class members in its implementation. Suppress this violation if there is a compelling reason to require the more derived type in the method signature.</Issue>
             </Message>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationMessageTemplateController.cs" Line="404">Modify 'BsNotificationMessageTemplateController.CopyTemplate(NotificationMessageTemplateModel)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#FormatTokens(System.String[])" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationMessageTemplateController.cs" Line="106">The 'this' parameter (or 'Me' in Visual Basic) of 'BsNotificationMessageTemplateController.FormatTokens(string[])' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#NotificationMessageTemplateList(Nop.Web.Framework.Kendoui.DataSourceRequest,Nop.Admin.Models.Messages.MessageTemplateListModel)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="command" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="DependsOnFix">
+            <Message Id="command" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="DependsOnFix">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationMessageTemplateController.cs" Line="206">Parameter 'command' of 'BsNotificationMessageTemplateController.NotificationMessageTemplateList(DataSourceRequest, MessageTemplateListModel)' is never used. Remove the parameter or use it in the method body.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SaveSelectedTabIndex(System.Nullable`1&lt;System.Int32&gt;,System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Controllers" File="BsNotificationMessageTemplateController.cs" Line="79">Replace method 'BsNotificationMessageTemplateController.SaveSelectedTabIndex(int?, bool)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -228,24 +228,24 @@
          <Members>
           <Member Name="#ExecuteSqlCommand(System.String,System.Boolean,System.Nullable`1&lt;System.Int32&gt;,System.Object[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Data" File="MobileAppObjectContext.cs" Line="245">Replace method 'MobileAppObjectContext.ExecuteSqlCommand(string, bool, int?, params object[])' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ExecuteStoredProcedureList`1(System.String,System.Object[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Name="TooGeneric" Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Data" File="MobileAppObjectContext.cs" Line="192">'MobileAppObjectContext.ExecuteStoredProcedureList&lt;TEntity&gt;(string, params object[])' creates an exception of type 'Exception', an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SetDatabaseInitializer()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="customCommands" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="customCommands" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Data" File="MobileAppObjectContext.cs" Line="152">'MobileAppObjectContext.SetDatabaseInitializer()' declares a variable, 'customCommands', of type 'List&lt;string&gt;', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
-            <Message Id="tablesToValidate" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="tablesToValidate" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Data" File="MobileAppObjectContext.cs" Line="150">'MobileAppObjectContext.SetDatabaseInitializer()' declares a variable, 'tablesToValidate', of type 'string[]', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
            </Messages>
@@ -258,7 +258,7 @@
        <Types>
         <Type Name="NotificationType" Kind="Enum" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="EnumsShouldHaveZeroValue" Category="Microsoft.Design" CheckId="CA1008" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+          <Message TypeName="EnumsShouldHaveZeroValue" Category="Microsoft.Design" CheckId="CA1008" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
            <Issue Name="NotFlagsNoZeroValue" Certainty="95" Level="CriticalError">Add a member to 'NotificationType' that has a value of zero with a suggested name of 'None'.</Issue>
           </Message>
          </Messages>
@@ -271,7 +271,7 @@
          <Members>
           <Member Name="#DistanceTo(System.Double,System.Double,System.Double,System.Double,System.Char)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="DistanceExtension.cs" Line="13">Replace method 'DistanceExtension.DistanceTo(double, double, double, double, char)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -282,16 +282,16 @@
          <Members>
           <Member Name="#RetriveData`1(System.String,System.String,System.String,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="FcmExtension.cs" Line="15">Replace method 'FcmExtension.RetriveData&lt;TDestination&gt;(string, string, string, int)' with an overload that supplies all default arguments.</Issue>
             </Message>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="FcmExtension.cs" Line="51">Modify 'FcmExtension.RetriveData&lt;TDestination&gt;(string, string, string, int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
-            <Message TypeName="PassSystemUriObjectsInsteadOfStrings" Category="Microsoft.Usage" CheckId="CA2234" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="PassSystemUriObjectsInsteadOfStrings" Category="Microsoft.Usage" CheckId="CA2234" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="FcmExtension.cs" Line="15">Modify 'FcmExtension.RetriveData&lt;TDestination&gt;(string, string, string, int)' to call 'WebRequest.Create(Uri)' instead of 'WebRequest.Create(string)'.</Issue>
             </Message>
-            <Message Id="0#" TypeName="UriParametersShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1054" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message Id="0#" TypeName="UriParametersShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1054" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="60" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="FcmExtension.cs" Line="15">Change the type of parameter 'destinationUrl' of method 'FcmExtension.RetriveData&lt;TDestination&gt;(string, string, string, int)' from string to System.Uri, or provide an overload of 'FcmExtension.RetriveData&lt;TDestination&gt;(string, string, string, int)', that allows 'destinationUrl' to be passed as a System.Uri object.</Issue>
             </Message>
            </Messages>
@@ -302,11 +302,11 @@
          <Members>
           <Member Name="#ClientIdFor`2(System.Web.Mvc.HtmlHelper`1&lt;!!0&gt;,System.Linq.Expressions.Expression`1&lt;System.Func`2&lt;!!0,!!1&gt;&gt;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="HtmlExtensions.cs" Line="14">Consider changing the type of parameter 'expression' in 'HtmlExtensions.ClientIdFor&lt;TModel, TProperty&gt;(this HtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TProperty&gt;&gt;)' from 'Expression&lt;Func&lt;TModel, TProperty&gt;&gt;' to its base type 'LambdaExpression'. This method appears to only require base class members in its implementation. Suppress this violation if there is a compelling reason to require the more derived type in the method signature.</Issue>
              <Issue Certainty="50" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="HtmlExtensions.cs" Line="14">Consider changing the type of parameter 'htmlHelper' in 'HtmlExtensions.ClientIdFor&lt;TModel, TProperty&gt;(this HtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TProperty&gt;&gt;)' from 'HtmlHelper&lt;TModel&gt;' to its base type 'HtmlHelper'. This method appears to only require base class members in its implementation. Suppress this violation if there is a compelling reason to require the more derived type in the method signature.</Issue>
             </Message>
-            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Extensions" File="HtmlExtensions.cs" Line="14">Consider a design where 'HtmlExtensions.ClientIdFor&lt;TModel, TProperty&gt;(this HtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TProperty&gt;&gt;)' doesn't nest generic type 'Expression&lt;Func&lt;TModel, TProperty&gt;&gt;'.</Issue>
             </Message>
            </Messages>
@@ -321,17 +321,17 @@
          <Members>
           <Member Name="#GetConditions(System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Helpers" File="Helper.cs" Line="21">Replace method 'Helper.GetConditions(string)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ReadCsvFile(System.String)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Helpers" File="Helper.cs" Line="165">'Helper.ReadCsvFile(string)' appears to have no upstream public or protected callers.</Issue>
             </Message>
-            <Message Id="d" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="d" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Helpers" File="Helper.cs" Line="170">'Helper.ReadCsvFile(string)' declares a variable, 'd', of type 'Dictionary&lt;string, int&gt;', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
            </Messages>
@@ -344,7 +344,7 @@
        <Types>
         <Type Name="FilterConfig" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+          <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
            <Issue Certainty="90" Level="Error">Because type 'FilterConfig' contains only 'static' ('Shared' in Visual Basic) members, add a default private constructor to prevent the compiler from adding a default public constructor.</Issue>
           </Message>
          </Messages>
@@ -357,7 +357,7 @@
          <Members>
           <Member Name="#Log(System.Web.Http.ExceptionHandling.ExceptionLoggerContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Infrastructure\WebApi\Logger" File="CustomExceptionLogger.cs" Line="34">Modify 'SimpleExceptionLogger.Log(ExceptionLoggerContext)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
@@ -372,14 +372,14 @@
          <Members>
           <Member Name="#AvailableStores" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="CategoryForNotificationModel.cs" Line="27">Change 'CategoryForNotificationModel.AvailableStores' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SelectedCategoryIds" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="CategoryForNotificationModel.cs" Line="23">Change 'CategoryForNotificationModel.SelectedCategoryIds' to return a collection or make it a method.</Issue>
             </Message>
            </Messages>
@@ -390,10 +390,10 @@
          <Members>
           <Member Name="#Results" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="FcmErrorObject.cs" Line="21">Change 'FcmErrorObject.Results' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="FcmErrorObject.cs" Line="21">Change 'List&lt;FcmSingleResult&gt;' in 'FcmErrorObject.Results' to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Issue>
             </Message>
            </Messages>
@@ -404,7 +404,7 @@
          <Members>
           <Member Name="#AvailableStores" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="NotificationMessageTemplateListModel.cs" Line="17">Change 'NotificationMessageTemplateListModel.AvailableStores' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
@@ -415,24 +415,24 @@
          <Members>
           <Member Name="#AvailableStores" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="NotificationMessageTemplateModel.cs" Line="54">Change 'NotificationMessageTemplateModel.AvailableStores' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="NotificationMessageTemplateModel.cs" Line="54">Change 'List&lt;StoreModel&gt;' in 'NotificationMessageTemplateModel.AvailableStores' to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Locales" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="NotificationMessageTemplateModel.cs" Line="62">Change 'NotificationMessageTemplateModel.Locales' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SelectedStoreIds" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="NotificationMessageTemplateModel.cs" Line="55">Change 'NotificationMessageTemplateModel.SelectedStoreIds' to return a collection or make it a method.</Issue>
             </Message>
            </Messages>
@@ -443,42 +443,42 @@
          <Members>
           <Member Name="#AvailableCategories" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="36">Change 'ProductForNotificationModel.AvailableCategories' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#AvailableManufacturers" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="37">Change 'ProductForNotificationModel.AvailableManufacturers' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#AvailableProductTypes" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="40">Change 'ProductForNotificationModel.AvailableProductTypes' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#AvailableStores" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="38">Change 'ProductForNotificationModel.AvailableStores' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#AvailableVendors" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="39">Change 'ProductForNotificationModel.AvailableVendors' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SelectedProductIds" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ProductForNotificationModel.cs" Line="44">Change 'ProductForNotificationModel.SelectedProductIds' to return a collection or make it a method.</Issue>
             </Message>
            </Messages>
@@ -489,7 +489,7 @@
          <Members>
           <Member Name="#AvailableMessageTemplates" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Models" File="ScheduledNotificationModel.cs" Line="25">Change 'ScheduledNotificationModel.AvailableMessageTemplates' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
@@ -504,7 +504,7 @@
          <Members>
           <Member Name="#InsertLog(Nop.Core.Domain.Logging.LogLevel,System.String,System.String,Nop.Core.Domain.Customers.Customer)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error">Replace method 'ILoggerNotification.InsertLog(LogLevel, string, string, Customer)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -515,7 +515,7 @@
          <Members>
           <Member Name="#Execute()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="InsertQueuedNotificationsTask.cs" Line="28">Modify 'InsertQueuedNotificationsTask.Execute()' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
@@ -526,14 +526,14 @@
          <Members>
           <Member Name="#GetAllQueuedNotification()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="Error">Change 'List&lt;QueuedNotification&gt;' in 'IQueuedNotificationService.GetAllQueuedNotification()' to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SendAllUnSendQueuedNotication(System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error">Replace method 'IQueuedNotificationService.SendAllUnSendQueuedNotication(int)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -544,14 +544,14 @@
          <Members>
           <Member Name="#GetCustomerInfoById(System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error">Replace method 'ISmartGroupService.GetCustomerInfoById(int)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GroupNameIsExist(System.String,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error">Replace method 'ISmartGroupService.GroupNameIsExist(string, int)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -562,7 +562,7 @@
          <Members>
           <Member Name="#InsertLog(Nop.Core.Domain.Logging.LogLevel,System.String,System.String,Nop.Core.Domain.Customers.Customer)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="LoggerNotification.cs" Line="76">Replace method 'LoggerNotification.InsertLog(LogLevel, string, string, Customer)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
@@ -573,7 +573,7 @@
          <Members>
           <Member Name="#GetNotificationMessageTemplateByName(System.String,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Name="IncorrectMessage" Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="NotificationMessageTemplateService.cs" Line="164">Method 'NotificationMessageTemplateService.GetNotificationMessageTemplateByName(string, int)' passes parameter name 'notificationMessageTemplateName' as the 'message' argument to a 'ArgumentException' constructor. Replace this argument with a descriptive message and pass the parameter name in the correct position.</Issue>
             </Message>
            </Messages>
@@ -584,14 +584,14 @@
          <Members>
           <Member Name="#Execute()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationSendTask.cs" Line="27">Modify 'QueuedNotificationSendTask.Execute()' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Order" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="DependsOnFix">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="DependsOnFix">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationSendTask.cs" Line="41">The 'this' parameter (or 'Me' in Visual Basic) of 'QueuedNotificationSendTask.Order' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
@@ -602,82 +602,82 @@
          <Members>
           <Member Name="#_queuedEmailService" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'QueuedNotificationService._queuedEmailService' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_storeContext" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'QueuedNotificationService._storeContext' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_webHelper" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'QueuedNotificationService._webHelper' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ApnsIntialiaztion()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="94">'QueuedNotificationService.ApnsIntialiaztion()' appears to have no upstream public or protected callers.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GetAllQueuedNotification()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="179">Change 'List&lt;QueuedNotification&gt;' in 'QueuedNotificationService.GetAllQueuedNotification()' to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GetNotificationType(System.Int32)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="151">'QueuedNotificationService.GetNotificationType(int)' appears to have no upstream public or protected callers.</Issue>
             </Message>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="157">Modify 'QueuedNotificationService.GetNotificationType(int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="151">The 'this' parameter (or 'Me' in Visual Basic) of 'QueuedNotificationService.GetNotificationType(int)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#InsertQueuedNoticationsAccordingToScheduleByTime(System.DateTime)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="346">'QueuedNotificationService.InsertQueuedNoticationsAccordingToScheduleByTime(DateTime)' rethrows a caught exception and specifies it explicitly as an argument. Use 'throw' without an argument instead, in order to preserve the stack location where the exception was initially raised.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SendAllUnSendQueuedNotication(System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="360">Replace method 'QueuedNotificationService.SendAllUnSendQueuedNotication(int)' with an overload that supplies all default arguments.</Issue>
             </Message>
-            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="379">Modify 'QueuedNotificationService.SendAllUnSendQueuedNotication(int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
              <Issue Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="397">Modify 'QueuedNotificationService.SendAllUnSendQueuedNotication(int)' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
             </Message>
-            <Message Id="i" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="i" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="403">'QueuedNotificationService.SendAllUnSendQueuedNotication(int)' declares a variable, 'i', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SendTestNotication(BS.Plugin.NopStation.MobileApp.Domain.QueuedNotification)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Name="TooGeneric" Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="587">'QueuedNotificationService.SendTestNotication(QueuedNotification)' creates an exception of type 'Exception', an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.</Issue>
             </Message>
-            <Message Id="response" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message Id="response" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="582">'QueuedNotificationService.SendTestNotication(QueuedNotification)' declares a variable, 'response', of type 'FcmErrorObject', which is never used or is only assigned to. Use this variable or remove it.</Issue>
             </Message>
-            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="QueuedNotificationService.cs" Line="560">'QueuedNotificationService.SendTestNotication(QueuedNotification)' rethrows a caught exception and specifies it explicitly as an argument. Use 'throw' without an argument instead, in order to preserve the stack location where the exception was initially raised.</Issue>
             </Message>
            </Messages>
@@ -688,28 +688,28 @@
          <Members>
           <Member Name="#_commonSettings" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'ScheduledNotificationService._commonSettings' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_dbContext" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'ScheduledNotificationService._dbContext' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_deviceRepository" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'ScheduledNotificationService._deviceRepository' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#_queuedNotificationRepository" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'ScheduledNotificationService._queuedNotificationRepository' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
@@ -720,35 +720,35 @@
          <Members>
           <Member Name="#_adminAreaSettings" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning">It appears that field 'SmartGroupService._adminAreaSettings' is never used or is only ever assigned to. Use this field or remove it.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GetCustomerInfoById(System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="SmartGroupService.cs" Line="189">Replace method 'SmartGroupService.GetCustomerInfoById(int)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#GroupNameIsExist(System.String,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="Breaking">
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Error" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="SmartGroupService.cs" Line="183">Replace method 'SmartGroupService.GroupNameIsExist(string, int)' with an overload that supplies all default arguments.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SmartGroupSP(System.Int32,System.Int32,System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Name="IncorrectParameterName" Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="SmartGroupService.cs" Line="286">Method 'SmartGroupService.SmartGroupSP(int, int, string, string, string, string)' passes 'smartContactModel' as the 'paramName' argument to a 'ArgumentNullException' constructor. Replace this argument with one of the method's parameter names. Note that the provided parameter name should have the exact casing as declared on the method.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#SmartGroupSPForAllContacts(System.String,System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-07 21:51:57Z" FixCategory="NonBreaking">
+            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2020-01-10 15:55:59Z" FixCategory="NonBreaking">
              <Issue Name="IncorrectParameterName" Certainty="95" Level="CriticalError" Path="D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\Services" File="SmartGroupService.cs" Line="360">Method 'SmartGroupService.SmartGroupSPForAllContacts(string, string, string, string)' passes 'smartContactModel' as the 'paramName' argument to a 'ArgumentNullException' constructor. Replace this argument with one of the method's parameter names. Note that the provided parameter name should have the exact casing as declared on the method.</Issue>
             </Message>
            </Messages>

@@ -41,6 +41,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models.Slider
         [NopResourceDisplayName("Admin.SliderImage.Fields.DomainId")]
         public int DomainId { get; set; }
 
+
+        [NopResourceDisplayName("Admin.SliderImage.Fields.IsEventBanner")]
+        public bool IsEventBanner { get; set; }
+
         [NopResourceDisplayName("Admin.SliderImage.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
 

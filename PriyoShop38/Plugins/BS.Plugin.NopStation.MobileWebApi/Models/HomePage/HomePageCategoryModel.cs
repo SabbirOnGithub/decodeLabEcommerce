@@ -33,6 +33,9 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models.HomePage
         [NopResourceDisplayName("Plugins.NopStation.MobileWebApi.HomePageCategory.Published")]
         public bool Published { get; set; }
 
+        [NopResourceDisplayName("Plugins.NopStation.MobileWebApi.HomePageCategory.PercentValue")] 
+        public int PercentValue { get; set; }
+
         public HomePagecategoryProductModel AddProductModel { get; set; }
 
         public IList<SelectListItem> AvailableCategories { get; set; }

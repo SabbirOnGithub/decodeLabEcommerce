@@ -60,9 +60,9 @@
                             <div class="col-md-3">
                                 @Html.NopLabelFor(model => model.SearchPublishedId)
                             </div>
-                            <div class="col-md-9">
-                                @Html.NopDropDownListFor(model => model.SearchPublishedId, Model.AvailablePublishedOptions)
-                            </div>
+	                        <div class="col-md-9">
+		                        @Html.NopDropDownListFor(model => model.SearchPublishedId, Model.AvailablePublishedOptions)
+	                        </div>
                         </div>
                         <div class="col-md-7 col-md-offset-3">
                             <button type="button" id="search-categories" class="btn btn-primary btn-search">
@@ -134,6 +134,10 @@
                                 }, {
                                     field: "DisplayOrder",
                                     title: "Display order",
+                                    width: 100
+                                },{
+                                    field: "PercentValue",
+                                    title: "Percent Value",
                                     width: 100
                                 }, {
                                     field: "Published",

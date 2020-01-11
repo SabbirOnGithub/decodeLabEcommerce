@@ -18,6 +18,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Domain
         public int DisplayOrder { get; set; }
 
         public bool IsProduct { get; set; }
+        public bool IsEventBanner { get; set; }
+        public string PictureUrl { get; set; }
 
         public int ProdOrCatId { get; set; }
 

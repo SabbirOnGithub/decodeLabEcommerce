@@ -310,3 +310,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\bin\Debu
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.csproj.CopyComplete
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Libraries\Nop.Core\obj\Debug\Nop.Core.csprojAssemblyReference.cache

@@ -78,6 +78,6 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.dll.config
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\DiscountRules.PaymentMethod\Nop.Plugin.DiscountRules.PaymentMethod.pdb
-D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.csprojAssemblyReference.cache
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.PaymentMethod\obj\Debug\Nop.Plugin.DiscountRules.PaymentMethod.csprojAssemblyReference.cache

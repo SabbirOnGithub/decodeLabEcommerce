@@ -3,7 +3,19 @@
 ################################################################################
 
 /PriyoShop38/.vs/PriyoshopNop38/v15/Server/sqlite3
-*.suo
 /PriyoShop38/.vs/PriyoshopNop38/v16/Server/sqlite3/*.ide-shm
 /PriyoShop38/.vs/PriyoshopNop38/v16/Server/sqlite3
 /PriyoShop38/Presentation/Nop.Web/bin/*.zip
+*.suo
+*.user
+_ReSharper.*
+bin
+bin/
+obj
+obj/
+*.obj
+packages
+config
+/*.zip
+/Priyoshop38-Dev-DB-15-NOV/*.bak
+/new 1

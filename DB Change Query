@@ -1,13 +1,42 @@
 
-/****** Table Modify: Customer Table ******/
+/****** Table Modify:******/
+
+USE [PriyoShop38]
+GO
+
 ALTER TABLE Customer 
 ADD NewReferCode nvarchar(10), UsedReferCode nvarchar(10), IsReferCodeUsed bit, ImageUrl nvarchar(150), ReferCodeValue int
 
+
+ALTER TABLE  [dbo].[BS_Slider]
+ADD [IsProduct] [bit] NOT NULL DEFAULT ((0)) , 
+[ProdOrCatId] [int] NOT NULL DEFAULT ((0))
+
+
+ALTER TABLE  [dbo].[BS_HomePageCategory]
+ADD [PercentValue] [float] NULL DEFAULT ((0))
+
+
+ALTER TABLE  [dbo].[BS_Slider]
+ADD [IsEventBanner] [bit] NOT NULL DEFAULT ((0)),
+[PictureUrl] NVARCHAR(250) 
+
+
+ALTER TABLE  [dbo].[BS_Slider]
+ADD [IsEventBanner] [bit] NOT NULL DEFAULT ((0)),
+[PictureUrl] NVARCHAR(250) 
 
 
 /****** Table Modify: Order Table ******/
 ALTER TABLE [dbo].[Order] 
 ADD [PartialPayAmount] [decimal](18, 2) NOT NULL DEFAULT ((0))
+
+
+
+
+/****** Table Modify: BS_HomePageCategory ******/
+ALTER TABLE [dbo].[BS_HomePageCategory] 
+ADD [ApplicableFor] tinyint  DEFAULT ((0))
 
 
 
@@ -41,3 +70,34 @@ GO
 
 ALTER TABLE [dbo].[EventBanner] CHECK CONSTRAINT [FK_EventBanner_Category]
 GO
+
+
+
+
+
+
+
+USE [PriyoShop38]
+GO
+/****** Object:  StoredProcedure [Customer].[spBalanceTransferFromWallet]    Script Date: 1/9/2020 9:48:42 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROC [Customer].[spBalanceTransferFromWallet]
+@CustomerId INT ,
+@TransferToContactNumber BIGINT,
+@TransferAmount decimal(18,4)
+
+AS
+
+BEGIN
+INSERT INTO BalanceTransferFromWallet
+VALUES(@CustomerId ,@TransferToContactNumber,@TransferAmount)
+ 
+END
+
+
+
+

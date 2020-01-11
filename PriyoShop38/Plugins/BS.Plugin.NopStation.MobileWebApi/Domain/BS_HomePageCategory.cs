@@ -23,8 +23,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Domain
 
         public byte ApplicableFor { get; set; }
 
+        public int? PercentValue { get; set; }
+
         public virtual ICollection<BS_HomePageCategoryProduct> HomePageCategoryProducts
-        {
+        { 
 
             get { return _homePageCategoryProducts ?? (_homePageCategoryProducts = new List<BS_HomePageCategoryProduct>()); }
             protected set { _homePageCategoryProducts = value; }

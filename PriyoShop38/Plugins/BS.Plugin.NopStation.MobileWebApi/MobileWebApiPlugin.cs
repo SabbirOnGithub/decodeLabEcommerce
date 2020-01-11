@@ -85,6 +85,18 @@ namespace BS.Plugin.NopStation.MobileWebApi
                 };
                 menuItem.ChildNodes.Add(sliderInfoItem);
 
+                //var eventSliderInfoItem = new SiteMapNode()
+                //{
+                //    Title = "Event Slider",
+                //    ControllerName = "MobileWebApiConfiguration",
+                //    ActionName = "EventSliderImage",
+                //    Visible = true,
+                //    SystemName = "MobileWebApi.EventSliderImage",
+                //    RouteValues = new RouteValueDictionary() { { "area", null } },
+                //    IconClass = "fa-genderless"
+                //};
+                //menuItem.ChildNodes.Add(eventSliderInfoItem);
+
                 var nstSettings = new SiteMapNode()
                 {
                     Title = "NST_Settings",

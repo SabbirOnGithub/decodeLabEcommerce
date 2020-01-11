@@ -94,3 +94,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CreditCardPOS\Nop.Plugin.Payments.CreditCardPOS.pdb
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CreditCardPOS\obj\Debug\Nop.Plugin.Payments.CreditCardPOS.csprojAssemblyReference.cache
