@@ -11,7 +11,8 @@
 _ReSharper.*
 bin
 bin/
-obj
+/obj
+*/obj
 obj/
 *.obj
 packages
@@ -19,3 +20,9 @@ config
 /*.zip
 /Priyoshop38-Dev-DB-15-NOV/*.bak
 /new 1
+/PriyoShop38/Libraries/Nop.Core/obj
+/PriyoShop38/Libraries/Nop.Core/bin
+/PriyoShop38/Libraries/Nop.Data/obj
+/PriyoShop38/Libraries/Nop.Data/bin
+/PriyoShop38/Libraries/Nop.Services/bin
+/PriyoShop38/Libraries/Nop.Services/obj

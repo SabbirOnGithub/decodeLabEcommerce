@@ -82,8 +82,8 @@
 
 
 
-    <div class="jCarouselMainWrapper jcarousel-18-359  products-carousel "
-         data-carouselHtmlElementId="jcarousel-18-359"
+    <div class="jCarouselMainWrapper jcarousel-18-296  products-carousel "
+         data-carouselHtmlElementId="jcarousel-18-296"
          data-supportRtl="false"
          data-carouselItemMinWidth="200"
          data-numberOfVisibleItems="6"
@@ -100,7 +100,7 @@
 
                         <h2 class="carousel-title"><span>PRIYO DEALS</span></h2>
             
-            <ul id="jcarousel-18-359">
+            <ul id="jcarousel-18-296">
                     <li>
                         
                             
@@ -1787,8 +1787,8 @@
 
 
 
-    <div class="jCarouselMainWrapper jcarousel-31-359  products-carousel "
-         data-carouselHtmlElementId="jcarousel-31-359"
+    <div class="jCarouselMainWrapper jcarousel-31-333  products-carousel "
+         data-carouselHtmlElementId="jcarousel-31-333"
          data-supportRtl="false"
          data-carouselItemMinWidth="200"
          data-numberOfVisibleItems="6"
@@ -1805,7 +1805,7 @@
 
                         <h2 class="carousel-title"><span>Smart Gadget &amp; Accessories</span></h2>
             
-            <ul id="jcarousel-31-359">
+            <ul id="jcarousel-31-333">
                     <li>
                         
                             
@@ -2106,8 +2106,8 @@
 
 
 
-    <div class="jCarouselMainWrapper jcarousel-32-359  products-carousel "
-         data-carouselHtmlElementId="jcarousel-32-359"
+    <div class="jCarouselMainWrapper jcarousel-32-456  products-carousel "
+         data-carouselHtmlElementId="jcarousel-32-456"
          data-supportRtl="false"
          data-carouselItemMinWidth="200"
          data-numberOfVisibleItems="6"
@@ -2124,7 +2124,7 @@
 
                         <h2 class="carousel-title"><span>Appliances &amp; Decoration</span></h2>
             
-            <ul id="jcarousel-32-359">
+            <ul id="jcarousel-32-456">
                     <li>
                         
                             
@@ -2397,8 +2397,8 @@
 
 
 
-    <div class="jCarouselMainWrapper jcarousel-17-359  products-carousel "
-         data-carouselHtmlElementId="jcarousel-17-359"
+    <div class="jCarouselMainWrapper jcarousel-17-287  products-carousel "
+         data-carouselHtmlElementId="jcarousel-17-287"
          data-supportRtl="false"
          data-carouselItemMinWidth="200"
          data-numberOfVisibleItems="4"
@@ -2414,7 +2414,7 @@
         <div class="nop-jcarousel ">
 
             
-            <ul id="jcarousel-17-359">
+            <ul id="jcarousel-17-287">
                     <li>
                         
                             
@@ -2569,8 +2569,8 @@
 
 
         <div class="homepage-brand-title">Shop by Brand</div>
-    <div class="jCarouselMainWrapper jcarousel-2-457  manufacturers-carousel "
-         data-carouselHtmlElementId="jcarousel-2-457"
+    <div class="jCarouselMainWrapper jcarousel-2-241  manufacturers-carousel "
+         data-carouselHtmlElementId="jcarousel-2-241"
          data-supportRtl="false"
          data-carouselItemMinWidth="160"
          data-numberOfVisibleItems="10"
@@ -2587,7 +2587,7 @@
 
                         <h2 class="carousel-title"><span>FEATURED BRANDS</span></h2>
             
-            <ul id="jcarousel-2-457">
+            <ul id="jcarousel-2-241">
                     <li>
                         
                             
@@ -3045,8 +3045,8 @@
 
 
 
-    <div class="jCarouselMainWrapper jcarousel-1-316  products-carousel "
-         data-carouselHtmlElementId="jcarousel-1-316"
+    <div class="jCarouselMainWrapper jcarousel-1-338  products-carousel "
+         data-carouselHtmlElementId="jcarousel-1-338"
          data-supportRtl="false"
          data-carouselItemMinWidth="200"
          data-numberOfVisibleItems="6"
@@ -3063,7 +3063,7 @@
 
                         <h2 class="carousel-title"><span>New Arrival</span></h2>
             
-            <ul id="jcarousel-1-316">
+            <ul id="jcarousel-1-338">
                     <li>
                         
                             
