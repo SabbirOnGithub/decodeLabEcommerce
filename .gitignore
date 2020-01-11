@@ -26,3 +26,6 @@ config
 /PriyoShop38/Libraries/Nop.Data/bin
 /PriyoShop38/Libraries/Nop.Services/bin
 /PriyoShop38/Libraries/Nop.Services/obj
+/PriyoShop38/Libraries/Nop.Data/obj
+/PriyoShop38/Libraries/Nop.Services/bin
+/PriyoShop38/Libraries/Nop.Services/obj
