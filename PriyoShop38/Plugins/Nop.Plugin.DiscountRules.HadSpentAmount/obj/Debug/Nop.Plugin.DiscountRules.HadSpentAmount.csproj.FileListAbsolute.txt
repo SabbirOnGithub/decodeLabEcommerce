@@ -97,3 +97,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.csproj.App.config
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.csprojAssemblyReference.cache

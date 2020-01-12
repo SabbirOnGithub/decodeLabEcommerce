@@ -139,11 +139,28 @@
                                     field: "PercentValue",
                                     title: "Percent Value",
                                     width: 100
+                                },{
+                                    field: "ActiveStartDate",
+                                    title: "@T("Admin.SliderImage.Fields.SliderActiveStartDate")",
+                                    width: 150,
+                                    type: "date",
+                                    format: "{0:dd-MM-yyyy HH:mm}"
+                                },{
+                                    field: "ActiveEndDate",
+                                    title: "@T("Admin.SliderImage.Fields.SliderActiveEndDate")",
+                                    width: 150,
+                                    type: "date",
+                                    format: "{0:dd-MM-yyyy HH:mm}"
                                 }, {
                                     field: "Published",
                                     title: "Published",
                                     width: 100,
                                     template: '# if(Published) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                                }, {
+                                    field: "ForBlApp",
+                                    title: "For BL App",
+                                    width: 100,
+                                    template: '# if(ForBlApp) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
                                 }, {
                                     field: "Id",
                                     title: "@T("Admin.Common.Edit")",

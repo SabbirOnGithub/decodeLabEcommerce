@@ -25,9 +25,9 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel.Banner
             public int DomainId { get; set; }
 
 
-            //public bool IsProduct { get; set; }
+            public bool IsProduct { get; set; }
 
-            //public int ProdOrCatId { get; set; }
+            public int ProdOrCatId { get; set; }
         }
 
         #endregion

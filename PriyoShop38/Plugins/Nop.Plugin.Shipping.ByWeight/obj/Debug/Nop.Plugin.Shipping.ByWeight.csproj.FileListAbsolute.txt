@@ -123,3 +123,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Shipping.ByWeight\obj\Debug\Nop.Plugin.Shipping.ByWeight.csproj.App.config
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Shipping.ByWeight\obj\Debug\Nop.Plugin.Shipping.ByWeight.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Shipping.ByWeight\obj\Debug\Nop.Plugin.Shipping.ByWeight.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Shipping.ByWeight\obj\Debug\Nop.Plugin.Shipping.ByWeight.csprojAssemblyReference.cache

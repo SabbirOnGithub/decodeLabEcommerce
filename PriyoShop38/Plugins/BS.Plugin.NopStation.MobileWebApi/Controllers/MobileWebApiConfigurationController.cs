@@ -306,7 +306,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     TextPrompt = hpc.TextPrompt,
                     Id = hpc.Id,
                     ApplicableFor = hpc.ApplicableFor,
-                    IconUrl = _pictureService.GetPictureUrl(hpc.PictureId)
+                    IconUrl = _pictureService.GetPictureUrl(hpc.PictureId),
+                    ActiveEndDate = hpc.ActiveEndDate,
+                    ActiveStartDate = hpc.ActiveStartDate,
+                    ForBlApp = hpc.ForBlApp
                 };
 
                 var products = _productService.GetProductsByIds(hpc.HomePageCategoryProducts.OrderBy(x => x.DisplayOrder).Select(x => x.ProductId).ToArray());
@@ -317,6 +320,9 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 hpm.Products = PrepareProductOverviewModels(products).ToList();
                 model.Add(hpm);
             }
+
+            //most popular product
+
 
             return model;
         }
@@ -371,8 +377,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
                     DomainType = sliderDomain.SliderDomainTypeId,
                     DomainId = sliderDomain.DomainId,
-                    //IsProduct = sliderDomain.IsProduct,
-                    //ProdOrCatId = sliderDomain.ProdOrCatId,
+                    IsProduct = sliderDomain.IsProduct,
+                    ProdOrCatId = sliderDomain.ProdOrCatId,
                     Link = "",
                     Text = ""
                 }).ToList();
@@ -390,8 +396,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
                     DomainType = sliderDomain.SliderDomainTypeId,
                     DomainId = sliderDomain.DomainId,
-                    //IsProduct = sliderDomain.IsProduct,
-                    //ProdOrCatId = sliderDomain.ProdOrCatId,
+                    IsProduct = sliderDomain.IsProduct,
+                    ProdOrCatId = sliderDomain.ProdOrCatId,
                     Link = "",
                     Text = ""
                 }).ToList();
@@ -1843,7 +1849,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             return Json(gridModel);
         }
-
+         virtual 
         public ActionResult SliderImageCreate()
         {
             var model = PrepareSliderImageModel(null, null, true);
@@ -2247,7 +2253,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     Published = x.Published,
                     TextPrompt = x.TextPrompt,
                     CategoryName = category != null ? category.GetFormattedBreadCrumb(_categoryService) : "",
-                    PercentValue = x.PercentValue ?? 0
+                    PercentValue = x.PercentValue ?? 0,
+                    ActiveStartDate = x.ActiveStartDate,
+                    ActiveEndDate = x.ActiveEndDate,
+                    ForBlApp = x.ForBlApp
                 };
                 return homepageModel;
             });
@@ -2281,7 +2290,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     Published = model.Published,
                     TextPrompt = model.TextPrompt,
                     PictureId = model.PictureId,
-                    PercentValue = model.PercentValue
+                    PercentValue = model.PercentValue,
+                    ActiveEndDate = model.ActiveEndDate,
+                    ActiveStartDate = model.ActiveStartDate,
+                    ForBlApp = model.ForBlApp
                 };
 
                 _homePageCategoryService.InsertHomePageCategory(homePageCategory);
@@ -2324,7 +2336,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 CategoryName = category != null ? category.Name : "",
                 PictureId = homePageCategory.PictureId,
                 CategoryId = homePageCategory.CategoryId,
-                PercentValue = homePageCategory.PercentValue ?? 0
+                PercentValue = homePageCategory.PercentValue ?? 0,
+                ActiveStartDate = homePageCategory.ActiveStartDate,
+                ActiveEndDate =  homePageCategory.ActiveEndDate,
+                ForBlApp = homePageCategory.ForBlApp
             };
 
             return View("~/Plugins/NopStation.MobileWebApi/Views/WebApi/HomePageCategoryEdit.cshtml", model);
@@ -2345,6 +2360,9 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 homePageCategory.TextPrompt = model.TextPrompt;
                 homePageCategory.PictureId = model.PictureId;
                 homePageCategory.PercentValue = model.PercentValue;
+                homePageCategory.ActiveStartDate = model.ActiveStartDate;
+                homePageCategory.ActiveEndDate = model.ActiveEndDate;
+                homePageCategory.ForBlApp = model.ForBlApp;
 
                 _homePageCategoryService.UpdateHomePageCategory(homePageCategory);
                 UpdateHomepageItems();

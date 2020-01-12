@@ -50,20 +50,45 @@
                         @Html.NopEditorFor(model => model.Published)
                     </div>
                 </div>
+
 	            <div class="form-group">
 		            <div class="col-md-3">
-			            @Html.NopLabelFor(model => model.PercentValue)
+			            @Html.NopLabelFor(model => model.ForBlApp)
 		            </div>
 		            <div class="col-md-9">
-			            @Html.NopEditorFor(model => model.PercentValue)
+			            @Html.NopEditorFor(model => model.ForBlApp)
 		            </div>
 	            </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.PercentValue)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.PercentValue)
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-3">
                         @Html.NopLabelFor(model => model.PictureId)
                     </div>
                     <div class="col-md-9">
                         @Html.NopEditorFor(model => model.PictureId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ActiveStartDate)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ActiveStartDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ActiveEndDate)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ActiveEndDate)
                     </div>
                 </div>
             </div>

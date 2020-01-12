@@ -1,4 +1,5 @@
-﻿using Nop.Web.Framework;
+﻿using System;
+using Nop.Web.Framework;
 using Nop.Web.Framework.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,8 +34,19 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models.HomePage
         [NopResourceDisplayName("Plugins.NopStation.MobileWebApi.HomePageCategory.Published")]
         public bool Published { get; set; }
 
+        [NopResourceDisplayName("Plugins.NopStation.MobileWebApi.HomePageCategory.ForBlApp")]
+        public bool ForBlApp { get; set; }
+
         [NopResourceDisplayName("Plugins.NopStation.MobileWebApi.HomePageCategory.PercentValue")] 
         public int PercentValue { get; set; }
+
+        [NopResourceDisplayName("Admin.SliderImage.Fields.SliderActiveStartDate")]
+        [UIHint("DateTimeNullable")]
+        public DateTime? ActiveStartDate { get; set; }
+
+        [NopResourceDisplayName("Admin.SliderImage.Fields.SliderActiveEndDate")]
+        [UIHint("DateTimeNullable")]
+        public DateTime? ActiveEndDate { get; set; }
 
         public HomePagecategoryProductModel AddProductModel { get; set; }
 

@@ -14,7 +14,7 @@ ADD [IsProduct] [bit] NOT NULL DEFAULT ((0)) ,
 
 
 ALTER TABLE  [dbo].[BS_HomePageCategory]
-ADD [PercentValue] [float] NULL DEFAULT ((0))
+ADD [PercentValue] [int] NULL DEFAULT ((0)), [ActiveStartDate] [datetime] NULL, [[ActiveEndDate] [datetime] NULL, [ForBlApp] [bit] NOT NULL DEFAULT ((0))
 
 
 ALTER TABLE  [dbo].[BS_Slider]

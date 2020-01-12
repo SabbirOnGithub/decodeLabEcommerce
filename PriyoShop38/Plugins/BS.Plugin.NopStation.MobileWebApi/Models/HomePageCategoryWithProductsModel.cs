@@ -21,7 +21,15 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models
 
         public string IconUrl { get; set; }
 
+        public bool ForBlApp { get; set; }
+
         public byte ApplicableFor { get; set; }
+
+        public int? PercentValue { get; set; }
+
+        public DateTime? ActiveStartDate { get; set; }
+
+        public DateTime? ActiveEndDate { get; set; }
 
         public IList<ProductOverViewModelApi> Products { get; set; }
     }

@@ -20,10 +20,15 @@ namespace BS.Plugin.NopStation.MobileWebApi.Domain
         public string TextPrompt { get; set; }
 
         public bool Published { get; set; }
+        public bool ForBlApp { get; set; }
 
         public byte ApplicableFor { get; set; }
 
         public int? PercentValue { get; set; }
+
+        public DateTime? ActiveStartDate { get; set; }
+
+        public DateTime? ActiveEndDate { get; set; }
 
         public virtual ICollection<BS_HomePageCategoryProduct> HomePageCategoryProducts
         { 

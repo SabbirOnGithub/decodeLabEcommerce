@@ -1037,6 +1037,81 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("api/customer/convertPriyoCoinIntoWallet")]
+        public IHttpActionResult ConvertPriyoCoinIntoWallet()
+        {
+            var result = new GeneralResponseModel<string>();
+            var contactNo = "";
+            var customerName = "";
+            decimal amount = new decimal(0);
+            var amountType = "CREDIT";
+            string amountDescription = null;
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["phone"]))
+            {
+                contactNo = HttpContext.Current.Request["phone"];
+            }
+            else
+            {
+                result.Data = "Please provide Phone Number";
+                result.StatusCode = 400;
+
+                return Ok(result);
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["customerName"]))
+            {
+                customerName = HttpContext.Current.Request["customerName"];
+            }
+            else
+            {
+                result.Data = "Please provide Customer Name";
+                result.StatusCode = 400;
+
+                return Ok(result);
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amount"]))
+            {
+                amount = Convert.ToDecimal(HttpContext.Current.Request["amount"]);
+            }
+            else
+            {
+                result.Data = "Please provide Amount";
+                result.StatusCode = 400;
+
+                return Ok(result);
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amountDescription"]))
+            {
+                amountDescription = HttpContext.Current.Request["amountDescription"];
+            }
+
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amountType"]))
+            {
+                amountType = HttpContext.Current.Request["amountType"];
+            }
+
+
+            _customerService.InsertCustomerLedgerDetails(string.Format(@"[Customer].[spSaveCustomerLedgerInformation]
+                                                                                            @ContactNo = {0},
+                                                                                            @CustomerName = '{1}',
+                                                                                            @Amount = {2},
+                                                                                            @AmountType = {3},
+                                                                                            @AmountDescription = '{4}',
+                                                                                            @AmountSource = 1,
+                                                                                            @EntryBy = 1",
+                contactNo, customerName, amount, amountType, amountDescription));
+
+            result.Data = "Added Successfully";
+            result.StatusCode = 200;
+
+            return Ok(result);
+        }
+
         #endregion
 
         #region My account / Info
@@ -1085,8 +1160,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             var response = new GeneralResponseModel<string>();
             int customerId = 0;
             string referCode = null;
-            var pointType = "DEBIT";
-            var pointDescription = "Order Done";
+            var pointType = "CREDIT";
+            var pointDescription = "By Refer Code";
             var pointNumber = 5;
 
             if (!string.IsNullOrEmpty(HttpContext.Current.Request["CustomerId"]))
@@ -1137,12 +1212,12 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 return Ok(response);
             }
 
-            if (referringCustomer.IsReferCodeUsed.HasValue && referringCustomer.IsReferCodeUsed.Value)
-            {
-                response.StatusCode = 400;
-                response.SuccessMessage = "Code is already referred";
-                return Ok(response);
-            }
+            //if (referringCustomer.IsReferCodeUsed.HasValue && referringCustomer.IsReferCodeUsed.Value)
+            //{
+            //    response.StatusCode = 400;
+            //    response.SuccessMessage = "Code is already referred";
+            //    return Ok(response);
+            //}
 
             var referredCustomer = _customerService.GetCustomerById(customerId);
             if (referredCustomer.Id == 0)
@@ -1157,6 +1232,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             referredCustomer.UsedReferCode = referCode;
             _customerService.UpdateCustomer(referredCustomer);
+            pointNumber = referringCustomer.ReferCodeValue ?? 10;
 
 
             var referringCustomerPriyoCoin = new CustomerPriyoCoin
@@ -1858,79 +1934,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         }
 
-        [HttpPost]
-        [Route("api/customer/convertPriyoCoinIntoWallet")]
-        public IHttpActionResult ConvertPriyoCoinIntoWallet()
-        {
-            var result = new GeneralResponseModel<string>();
-            var contactNo = "";
-            var customerName = "";
-            decimal amount = new decimal(0);
-            var amountType = "CREDIT";
-            string amountDescription = null ;
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["phone"]))
-            {
-                contactNo = HttpContext.Current.Request["phone"];
-            }
-            else
-            {
-                result.Data = "Please provide Phone Number";
-                result.StatusCode = 400;
-
-                return Ok(result);
-            }
-
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["customerName"]))
-            {
-                customerName = HttpContext.Current.Request["customerName"];
-            }
-            else
-            {
-                result.Data = "Please provide Customer Name";
-                result.StatusCode = 400;
-
-                return Ok(result);
-            }
-
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amount"]))
-            {
-                amount = Convert.ToDecimal(HttpContext.Current.Request["amount"]);
-            }
-            else
-            {
-                result.Data = "Please provide Amount";
-                result.StatusCode = 400;
-
-                return Ok(result);
-            }
-
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amountDescription"]))
-            {
-                amountDescription = HttpContext.Current.Request["amountDescription"];
-            }
-
-
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request["amountType"]))
-            {
-                amountType = HttpContext.Current.Request["amountType"];
-            }
-
-
-            _customerService.InsertCustomerLedgerDetails(string.Format(@"[Customer].[spSaveCustomerLedgerInformation]
-                                                                                            @ContactNo = {0},
-                                                                                            @CustomerName = '{1}',
-                                                                                            @Amount = {2},
-                                                                                            @AmountType = {3},
-                                                                                            @AmountDescription = '{4}',
-                                                                                            @AmountSource = 1,
-                                                                                            @EntryBy = 1", 
-                contactNo, customerName, amount, amountType , amountDescription));
-
-            result.Data = "Added Successfully";
-            result.StatusCode = 200;
-
-            return Ok(result);
-        }
+        
 
 
         [HttpPost]

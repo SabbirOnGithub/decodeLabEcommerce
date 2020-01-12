@@ -93,3 +93,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\Payments.CashOnDelivery\Nop.Plugin.Payments.CashOnDelivery.pdb
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Debug\Nop.Plugin.Payments.CashOnDelivery.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Debug\Nop.Plugin.Payments.CashOnDelivery.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Debug\Nop.Plugin.Payments.CashOnDelivery.csprojAssemblyReference.cache
