@@ -433,6 +433,7 @@
     <Compile Include="Models\_ResponseModel\Order\OrderDetailsResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\Order\ShipmentDetailsResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\PayPal\PayPalResponseModel.cs" />
+    <Compile Include="Models\_ResponseModel\Product\PagingProductResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\Product\ProductReviewsResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\ShoppingCart\AddProductToCartResponseModel.cs" />
     <Compile Include="Models\_ResponseModel\ShoppingCart\CheckoutInformationResponseModel.cs" />

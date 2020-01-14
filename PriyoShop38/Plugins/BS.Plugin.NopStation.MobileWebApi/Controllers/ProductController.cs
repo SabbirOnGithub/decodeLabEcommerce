@@ -22,6 +22,7 @@ using BS.Plugin.NopStation.MobileWebApi.Models.Product;
 using BS.Plugin.NopStation.MobileWebApi.Models._Common;
 using BS.Plugin.NopStation.MobileWebApi.Models._QueryModel.Product;
 using BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel;
+using BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel.Catalog;
 using BS.Plugin.NopStation.MobileWebApi.Models._ResponseModel.Product;
 using BS.Plugin.NopStation.MobileWebApi.Services;
 using Nop.Services.Catalog;
@@ -913,6 +914,34 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             };
             return Ok(result);
         }
+
+
+        [System.Web.Http.Route("api/homepageallproducts")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult HomepageAllProducts(int? thumbPictureSize = null, int pageNumber = 1, int pageSize = int.MaxValue)
+        {
+            if (!thumbPictureSize.HasValue)
+            {
+                thumbPictureSize = _mediaSettings.ProductThumbPictureSize;
+            }
+//            var products = _productService.GetAllProductsDisplayedOnHomePage();
+            var products = _productService.SearchProducts(
+                storeId: _storeContext.CurrentStore.Id,
+                visibleIndividuallyOnly: true,
+                orderBy: ProductSortingEnum.CreatedOn,
+                pageIndex: pageNumber - 1,
+                pageSize: pageSize,
+                activeVendorOnly: true,
+                includeEkshopProducts: false);
+               
+            var model = new PagingProductResponseModel();
+            
+            model.Products = PrepareProductOverviewModels(products, true, true, thumbPictureSize).ToList();
+            model.PagingFilteringContext.LoadPagedList(products);
+
+            return Ok(model);
+        }
+
 
         [System.Web.Http.Route("api/productdetails/{productId}")]
         [System.Web.Http.HttpGet]
