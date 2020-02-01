@@ -28,8 +28,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Models
         public int? PercentValue { get; set; }
 
         public DateTime? ActiveStartDate { get; set; }
+        public string ActiveStartDateString { get; set; }
 
         public DateTime? ActiveEndDate { get; set; }
+        public string ActiveEndDateString { get; set; }
 
         public IList<ProductOverViewModelApi> Products { get; set; }
     }

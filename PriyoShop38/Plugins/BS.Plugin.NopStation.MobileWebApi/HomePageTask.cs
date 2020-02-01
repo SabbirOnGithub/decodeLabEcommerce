@@ -294,6 +294,36 @@ namespace BS.Plugin.NopStation.MobileWebApi
                 productThumbPictureSize, prepareSpecificationAttributes);
         }
 
+//        protected IList<HomePageCategoryWithProductsModel> PrepareCategoriesWithProductsModel()
+//        {
+//            var homePageCategories = _homePageCategoryService.GetAllHomePageCategories(publish: true);
+//            var model = new List<HomePageCategoryWithProductsModel>();
+//            foreach (var hpc in homePageCategories.Where(x => x.HomePageCategoryProducts.Count > 0))
+//            {
+//                var picture = _pictureService.GetPictureById(hpc.PictureId);
+//
+//                var hpm = new HomePageCategoryWithProductsModel()
+//                {
+//                    CategoryId = hpc.CategoryId,
+//                    TextPrompt = hpc.TextPrompt,
+//                    Id = hpc.Id,
+//                    ApplicableFor = hpc.ApplicableFor,
+//                    IconUrl = _pictureService.GetPictureUrl(hpc.PictureId)
+//                };
+//
+//                var products = _productService.GetProductsByIds(hpc.HomePageCategoryProducts.OrderBy(x => x.DisplayOrder).Select(x => x.ProductId).ToArray());
+//
+//                if (products == null || products.Count == 0)
+//                    continue;
+//
+//                hpm.Products = PrepareProductOverviewModels(products).ToList();
+//                model.Add(hpm);
+//            }
+//
+//            return model;
+//        }
+
+
         protected IList<HomePageCategoryWithProductsModel> PrepareCategoriesWithProductsModel()
         {
             var homePageCategories = _homePageCategoryService.GetAllHomePageCategories(publish: true);
@@ -308,8 +338,21 @@ namespace BS.Plugin.NopStation.MobileWebApi
                     TextPrompt = hpc.TextPrompt,
                     Id = hpc.Id,
                     ApplicableFor = hpc.ApplicableFor,
-                    IconUrl = _pictureService.GetPictureUrl(hpc.PictureId)
+                    IconUrl = _pictureService.GetPictureUrl(hpc.PictureId),
+                    ActiveEndDate = hpc.ActiveEndDate,
+                    ActiveStartDate = hpc.ActiveStartDate,
+                    ForBlApp = hpc.ForBlApp
                 };
+
+                if (hpc.ActiveStartDate != null)
+                {
+                    hpm.ActiveEndDateString = hpc.ActiveStartDate.Value.ToString("yyyy/MM/dd hh:mm:ss");
+                }
+
+                if (hpc.ActiveEndDate != null)
+                {
+                    hpm.ActiveEndDateString = hpc.ActiveEndDate.Value.ToString("yyyy/MM/dd hh:mm:ss");
+                }
 
                 var products = _productService.GetProductsByIds(hpc.HomePageCategoryProducts.OrderBy(x => x.DisplayOrder).Select(x => x.ProductId).ToArray());
 
@@ -322,6 +365,7 @@ namespace BS.Plugin.NopStation.MobileWebApi
 
             return model;
         }
+
 
         protected IList<CategoryNavigationModelApi> PrepareCategories()
         {
@@ -373,21 +417,60 @@ namespace BS.Plugin.NopStation.MobileWebApi
             return cmodel;
         }
 
+        //protected IList<HomePageBannerResponseModel.BannerModel> PrepareBannerModel()
+        //{
+        //    var sliders = _sliderService.GetActiveBSSliderImages();
+
+        //    var pictureList = (from sliderDomain in sliders
+        //                       select new HomePageBannerResponseModel.BannerModel
+        //                       {
+        //                           ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
+        //                           DomainType = sliderDomain.SliderDomainTypeId,
+        //                           DomainId = sliderDomain.DomainId,
+        //                           //IsProduct = sliderDomain.IsProduct,
+        //                           //ProdOrCatId = sliderDomain.ProdOrCatId,
+        //                           Link = "",
+        //                           Text = ""
+        //                       }).ToList();
+
+        //    return pictureList;
+        //}
+
+
         protected IList<HomePageBannerResponseModel.BannerModel> PrepareBannerModel()
         {
             var sliders = _sliderService.GetActiveBSSliderImages();
 
             var pictureList = (from sliderDomain in sliders
-                               select new HomePageBannerResponseModel.BannerModel
-                               {
-                                   ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
-                                   DomainType = sliderDomain.SliderDomainTypeId,
-                                   DomainId = sliderDomain.DomainId,
-                                   //IsProduct = sliderDomain.IsProduct,
-                                   //ProdOrCatId = sliderDomain.ProdOrCatId,
-                                   Link = "",
-                                   Text = ""
-                               }).ToList();
+                select new HomePageBannerResponseModel.BannerModel
+                {
+                    ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
+                    DomainType = sliderDomain.SliderDomainTypeId,
+                    DomainId = sliderDomain.DomainId,
+                    IsProduct = sliderDomain.IsProduct,
+                    ProdOrCatId = sliderDomain.ProdOrCatId,
+                    Link = "",
+                    Text = ""
+                }).ToList();
+
+            return pictureList;
+        }
+
+        protected IList<HomePageBannerResponseModel.BannerModel> PrepareEventBannerModel()
+        {
+            var sliders = _sliderService.GetActiveBSSliderImages().Where(x => x.IsEventBanner);
+
+            var pictureList = (from sliderDomain in sliders
+                select new HomePageBannerResponseModel.BannerModel
+                {
+                    ImageUrl = _pictureService.GetPictureUrl(sliderDomain.PictureId),
+                    DomainType = sliderDomain.SliderDomainTypeId,
+                    DomainId = sliderDomain.DomainId,
+                    IsProduct = sliderDomain.IsProduct,
+                    ProdOrCatId = sliderDomain.ProdOrCatId,
+                    Link = "",
+                    Text = ""
+                }).ToList();
 
             return pictureList;
         }
@@ -470,14 +553,38 @@ namespace BS.Plugin.NopStation.MobileWebApi
 
         #region Methods
 
+        #region old Execute
+
+        //        public void Execute()
+        //        {
+        //            var homePageModel = new HomePageResponseModel();
+        //            homePageModel.Language = PrepareLanguageModel();
+        //            homePageModel.Banners = PrepareBannerModel();
+        //            homePageModel.BannerIsEnabled = homePageModel.Banners.Any();
+        //            homePageModel.Categories = PrepareCategories();
+        //            homePageModel.CategoriesWithProducts = PrepareCategoriesWithProductsModel();
+        //            homePageModel.CategoryListIcon = _pictureService.GetPictureUrl(_apiSettings.CategoryListIconId);
+        //            homePageModel.Icons = PrepareIconModel();
+        //            homePageModel.ManufacturerListIcon = _pictureService.GetPictureUrl(_apiSettings.ManufacturerListIconId);
+        //            homePageModel.Manufacturers = PrepareManufacturersModel();
+        //
+        //            WriteHomePageJson(homePageModel);
+        //            WriteCurrencyJson();
+        //        }
+
+        #endregion
+
+
+
         public void Execute()
         {
             var homePageModel = new HomePageResponseModel();
             homePageModel.Language = PrepareLanguageModel();
-            homePageModel.Banners = PrepareBannerModel();
-            homePageModel.BannerIsEnabled = homePageModel.Banners.Any();
-            homePageModel.Categories = PrepareCategories();
-            homePageModel.CategoriesWithProducts = PrepareCategoriesWithProductsModel();
+            homePageModel.Banners = PrepareBannerModel();// ok
+            homePageModel.EventBanners = PrepareEventBannerModel();
+            homePageModel.BannerIsEnabled = homePageModel.Banners.Any(); //ok
+            homePageModel.Categories = PrepareCategories(); // ok
+            homePageModel.CategoriesWithProducts = PrepareCategoriesWithProductsModel(); //ok
             homePageModel.CategoryListIcon = _pictureService.GetPictureUrl(_apiSettings.CategoryListIconId);
             homePageModel.Icons = PrepareIconModel();
             homePageModel.ManufacturerListIcon = _pictureService.GetPictureUrl(_apiSettings.ManufacturerListIconId);

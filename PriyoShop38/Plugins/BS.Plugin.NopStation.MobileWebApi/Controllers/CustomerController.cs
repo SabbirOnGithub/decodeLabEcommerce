@@ -96,6 +96,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
         private readonly IPictureService _pictureService;
         private readonly ICustomerLedgerMasterService _customerLedgerMasterService;
         private readonly ICustomerLedgerDetailService _customerLedgerDetailService;
+        private readonly IFCMCustomerDeviceTokenService _fcmCustomerDeviceTokenService;
         private readonly IWebHelper _webHelper;
 
         #endregion
@@ -146,7 +147,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             ICustomerLedgerMasterService customerLedgerMasterService,
             IAffiliateService affiliateService,
             ICustomerLedgerDetailService customerLedgerDetailService,
-            IWebHelper webHelper, ICustomerPriyoCoinService customerPriyoCoinService)
+            IWebHelper webHelper, ICustomerPriyoCoinService customerPriyoCoinService, IFCMCustomerDeviceTokenService fcmCustomerDeviceTokenService)
         {
             this._customerSettings = customerSettings;
             this._customerRegistrationService = customerRegistrationService;
@@ -157,6 +158,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             this._addressSettings = addressSettings;
             this._webHelper = webHelper;
             this._customerPriyoCoinService = customerPriyoCoinService;
+            _fcmCustomerDeviceTokenService = fcmCustomerDeviceTokenService;
             this._forumSettings = forumSettings;
             this._orderSettings = orderSettings;
             this._dateTimeSettings = dateTimeSettings;
@@ -650,7 +652,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         #endregion
 
-        #region Action Method
+        #region Login/Register 
 
         #region login
         [System.Web.Http.Route("api/login")]
@@ -763,8 +765,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         #region Register
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/customer/register")]
+        [HttpPost]
+        [Route("api/customer/register")]
         public IHttpActionResult Register(RegisterQueryModel model)
         {
             var customer = _workContext.CurrentCustomer;
@@ -797,7 +799,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
                 if (registrationResult.Success)
                 {
-                    customer.CustomerGuid = new Guid();
+                    //customer.CustomerGuid = new Guid();
                     customer.NewReferCode = GenerateRandomReferCode(6);
                     _customerService.UpdateCustomer(customer);
                     //properties
@@ -1521,7 +1523,58 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         #endregion
 
-        //#region check
+
+        #region Notification
+
+        [Route("api/customer/saveFcmDeviceToken")]
+        [HttpPost]
+        public IHttpActionResult SaveFcmDeviceToken()
+        {
+            var result = new GeneralResponseModel<string>();
+            var customerId = 0;
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["CustomerId"]))
+            {
+                customerId = Convert.ToInt32(HttpContext.Current.Request["CustomerId"]);
+            }
+
+            var deviceToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["Token"]))
+            {
+                deviceToken = HttpContext.Current.Request["Token"];
+            }
+
+            if (customerId == 0 || deviceToken == string.Empty)
+            {
+                result.StatusCode = 400;
+                result.Data = "CustomerId or DeviceToken is missing";
+                result.SuccessMessage = "";
+                return Ok(result);
+            }
+
+           
+            var preObj =_fcmCustomerDeviceTokenService.GetFcmCustomerDeviceTokenByCustomer(customerId);
+            if (preObj != null)
+            {
+                preObj.FCMDeviceToken = deviceToken;
+                _fcmCustomerDeviceTokenService.UpdateFcmCustomerDeviceToken(preObj);
+            }
+            else
+            {
+                var fcmDeviceTokenObj = new FCMCustomerDeviceToken();
+                fcmDeviceTokenObj.CustomerId = customerId;
+                fcmDeviceTokenObj.FCMDeviceToken = deviceToken;
+                _fcmCustomerDeviceTokenService.InsertFcmCustomerDeviceToken(fcmDeviceTokenObj);
+            }
+
+            
+
+            result.StatusCode = 200;
+            result.SuccessMessage = "Device Token Saved Successfully";
+            return Ok(result);
+
+        }
+
+        #endregion
 
         #region My account / Addresses
 
@@ -1753,8 +1806,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         #region My account / Wallet
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/customer/wallet")]
+        [HttpPost]
+        [Route("api/customer/wallet")]
         public IHttpActionResult Wallet()
         {
             var model = new CustomerLedgerViewModel();
@@ -1801,8 +1854,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         }
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/customer/createWallet")]
+        [HttpPost]
+        [Route("api/customer/createWallet")]
         public IHttpActionResult CreateWallet()
         {
             var result = new GeneralResponseModel<string>();
@@ -1826,41 +1879,40 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                 result.StatusCode = 400;
                 return Ok(result);
             }
-            else if (contactNumber.Length < 10 || contactNumber.Length > 11)
+
+            if (contactNumber.Length > 11)
+            {
+                contactNumber = contactNumber.Substring(contactNumber.Length - 11);
+            }
+
+            if (contactNumber.Length < 10)
             {
                 result.Data = "Please enter valid contact number.";
                 result.StatusCode = 400;
                 return Ok(result);
             }
-            else
+
+            modelW.ContactNo = Convert.ToInt64(contactNumber);
+            modelW.CustomerID = customerId;
+
+            WalletAccountInformation CW = _customerLedgerMasterService.GetCustomerWalletAccountByContactNo(modelW.ContactNo);
+
+            if (CW == null)
             {
-                modelW.ContactNo = Convert.ToInt64(contactNumber);
-                modelW.CustomerID = customerId;
-
-                WalletAccountInformation CW = _customerLedgerMasterService.GetCustomerWalletAccountByContactNo(modelW.ContactNo);
-
-                if (CW == null)
-                {
-                    _customerLedgerMasterService.InsertWalletAccountInformation(modelW);
-                    result.Data = "OTP Created";
-                    result.StatusCode = 200;
-                    return Ok(result);
-                }
-                else
-                {
-                    result.Data = "Contact number already exists. Please enter another valid contact number.";
-                    result.StatusCode = 400;
-                    return Ok(result);
-                }
-
-
-                
+                _customerLedgerMasterService.InsertWalletAccountInformation(modelW);
+                result.Data = "OTP Created";
+                result.StatusCode = 200;
+                return Ok(result);
             }
+
+            result.Data = "Contact number already exists. Please enter another valid contact number.";
+            result.StatusCode = 400;
+            return Ok(result);
         }
 
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/customer/checkWalletOTP")]
+        [HttpPost]
+        [Route("api/customer/checkWalletOTP")]
         public IHttpActionResult CheckWalletOTP()
         {
             var result = new GeneralResponseModel<string>();
@@ -1934,7 +1986,7 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
         }
 
-        
+
 
 
         [HttpPost]

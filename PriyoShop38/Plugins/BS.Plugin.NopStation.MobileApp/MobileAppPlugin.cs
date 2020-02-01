@@ -329,6 +329,14 @@ namespace BS.Plugin.NopStation.MobileApp
                     RouteValues = new RouteValueDictionary() {{"Area", "Admin"}}
                 });
 
+                menuItemBuilder.ChildNodes.Add(new SiteMapNode
+                {
+                    Visible = true,
+                    Title = "FCM Notification",
+                    Url = "/Admin/Plugin/NopStation/MobileApp/FcmPush",
+                    RouteValues = new RouteValueDictionary() { { "Area", "Admin" } }
+                });
+
                 #endregion
 
 

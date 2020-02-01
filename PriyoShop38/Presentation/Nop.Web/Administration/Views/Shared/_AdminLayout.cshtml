@@ -39,6 +39,7 @@
     Html.AppendScriptParts("~/Administration/Scripts/admin.search.js");
     Html.AppendScriptParts("~/Administration/scripts/admin.navigation.js");
     Html.AppendScriptParts("~/Administration/Scripts/admin.common.js");
+	Html.AppendScriptParts("~/Administration/Scripts/angular.min.js");
     Html.AppendScriptParts("~/Administration/Scripts/typeahead/typeahead.bundle.min.js");
     Html.AppendScriptParts("~/Administration/Scripts/jquery-migrate-1.2.1.min.js");
     Html.AppendScriptParts("~/Administration/Scripts/jquery-ui-1.10.3.custom.min.js");
@@ -47,7 +48,8 @@
     Html.AppendScriptParts("~/Administration/Scripts/adminLTE/app.min.js");
     Html.AppendScriptParts("~/Administration/Scripts/bootstrap/bootstrap.min.js");
     Html.AppendScriptParts("~/Administration/Scripts/jquery-1.10.2.min.js");
-
+    
+     
     //page title
     string adminPageTitle = !String.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
     adminPageTitle += T("Admin.PageTitle").Text;

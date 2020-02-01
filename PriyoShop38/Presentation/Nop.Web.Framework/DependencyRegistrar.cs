@@ -157,6 +157,7 @@ namespace Nop.Web.Framework
             builder.RegisterType<BackInStockSubscriptionService>().As<IBackInStockSubscriptionService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<EventBannerService>().As<IEventBannerService>().InstancePerLifetimeScope();
+            builder.RegisterType<FCMCustomerDeviceTokenService>().As<IFCMCustomerDeviceTokenService>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerPriyoCoinService>().As<ICustomerPriyoCoinService>().InstancePerLifetimeScope();
             builder.RegisterType<CompareProductsService>().As<ICompareProductsService>().InstancePerLifetimeScope();
             builder.RegisterType<RecentlyViewedProductsService>().As<IRecentlyViewedProductsService>().InstancePerLifetimeScope();

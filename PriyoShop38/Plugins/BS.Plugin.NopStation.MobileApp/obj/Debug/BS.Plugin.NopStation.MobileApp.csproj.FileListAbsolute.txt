@@ -1116,3 +1116,5 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\obj\Debug\BS.Plugin.NopStation.MobileApp.csproj.CopyComplete
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\obj\Debug\BS.Plugin.NopStation.MobileApp.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\BS.Plugin.NopStation.MobileApp\obj\Debug\BS.Plugin.NopStation.MobileApp.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\NopStation.MobileApp\Views\BsNotification\SendNotification.cshtml
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugins\NopStation.MobileApp\Views\BsNotification\FcmPushNotification.cshtml

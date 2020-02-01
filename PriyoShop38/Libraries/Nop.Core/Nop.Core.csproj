@@ -126,6 +126,7 @@
     <Compile Include="Domain\Customers\CustomerLoginResults.cs" />
     <Compile Include="Domain\Customers\CustomerPriyoCoin.cs" />
     <Compile Include="Domain\Customers\Events.cs" />
+    <Compile Include="Domain\Customers\FCMCustomerDeviceToken.cs" />
     <Compile Include="Domain\Customers\MobileLoginCustomer.cs" />
     <Compile Include="Domain\Customers\WalletAccountInformation.cs" />
     <Compile Include="Domain\Customers\WalletAccountInformationTemp.cs" />

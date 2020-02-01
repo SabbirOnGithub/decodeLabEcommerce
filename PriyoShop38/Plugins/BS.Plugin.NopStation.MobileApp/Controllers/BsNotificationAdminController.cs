@@ -28,10 +28,19 @@ using Nop.Web.Framework.Kendoui;
 using Nop.Core.Domain.Vendors;
 using BS.Plugin.NopStation.MobileApp.Extensions;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Script.Serialization;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework;
 //using Nop.Plugin.NopStation.MobileWebApi.Services;
 using BS.Plugin.NopStation.MobileWebApi.Services;
+using Newtonsoft.Json;
+using SendingPushNotifications.Entities;
 
 namespace BS.Plugin.NopStation.MobileApp.Controllers
 {
@@ -41,7 +50,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
 
         #region Field
 
-       private readonly ILocalizationService _localizationService;
+        private readonly ILocalizationService _localizationService;
         private readonly IPermissionService _permissionService;
         private readonly IVendorService _vendorService;
         private readonly ICustomerService _customerService;
@@ -61,6 +70,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         private readonly IProductService _productService;
         private readonly INotificationMessageTemplateService _notificationMessageTemplateService;
         private readonly IStoreContext _storeContext;
+        private readonly IFCMCustomerDeviceTokenService _fcmCustomerDeviceTokenService;
         #endregion
 
         #region Ctor
@@ -80,13 +90,13 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             IQueuedNotificationService queuedNotificationService,
             ICategoryService categoryService,
             IManufacturerService manufacturerService,
-            IProductService productService, INotificationMessageTemplateService notificationMessageTemplateService, IStoreContext storeContext) 
+            IProductService productService, INotificationMessageTemplateService notificationMessageTemplateService, IStoreContext storeContext, IFCMCustomerDeviceTokenService fcmCustomerDeviceTokenService)
         {
             this._localizationService = localizationService;
             this._permissionService = permissionService;
             this._workContext = workContext;
             this._vendorService = vendorService;
-            
+
             this._customerService = customerService;
             this._urlRecordService = urlRecordService;
             this._settingService = settingService;
@@ -103,6 +113,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             this._productService = productService;
             _notificationMessageTemplateService = notificationMessageTemplateService;
             _storeContext = storeContext;
+            _fcmCustomerDeviceTokenService = fcmCustomerDeviceTokenService;
         }
         #endregion
 
@@ -116,16 +127,16 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         }
 
         [NonAction]
-        protected virtual string GetDeviceType(int  deviceTypeId)
+        protected virtual string GetDeviceType(int deviceTypeId)
         {
             try
             {
-                var deviceType= Enum.GetName(typeof (DeviceType), deviceTypeId);
+                var deviceType = Enum.GetName(typeof(DeviceType), deviceTypeId);
                 return deviceType;
             }
             catch (Exception)
             {
-                
+
                 return null;
             }
         }
@@ -144,6 +155,14 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 return null;
             }
         }
+
+        public static string GetRootUrl()
+        {
+            var tmpURi = System.Web.HttpContext.Current.Request.Url;
+            var tmpPort = tmpURi.Port > 0 && tmpURi.Port != 80 ? ":" + tmpURi.Port : "";
+            var rootUrl = tmpURi.Scheme + "://" + tmpURi.Host + tmpPort + "/";
+            return rootUrl;
+        }
         #endregion
 
         #region Action Method
@@ -155,7 +174,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         protected ActionResult AccessDeniedView()
         {
             //return new HttpUnauthorizedResult();
-            return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request.RawUrl,area="Admin" });
+            return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request.RawUrl, area = "Admin" });
         }
         #endregion
 
@@ -166,7 +185,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
                 return Content("Access denied");
 
-            
+
 
             //load settings for a chosen store scope
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
@@ -186,10 +205,10 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 model.ApplePassword_OverrideForStore = _settingService.SettingExists(settings, x => x.ApplePassword, storeScope);
                 model.GoogleConsoleAPIAccess_KEY_OverrideForStore = _settingService.SettingExists(settings, x => x.GoogleConsoleAPIAccess_KEY, storeScope);
             }
-            
+
             return View("~/Plugins/NopStation.MobileApp/Views/BsNotification/Configure.cshtml", model);
         }
-       
+
         [HttpPost]
         [ChildActionOnly]
         [FormValueRequired("save")]
@@ -230,8 +249,8 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 _settingService.SaveSetting(settings, x => x.GoogleConsoleAPIAccess_KEY, storeScope, false);
             else if (storeScope > 0)
                 _settingService.DeleteSetting(settings, x => x.GoogleConsoleAPIAccess_KEY, storeScope);
-            
-            _settingService.SaveSetting(settings,x=>x.IsAppleProductionMode);
+
+            _settingService.SaveSetting(settings, x => x.IsAppleProductionMode);
             _settingService.SaveSetting(settings, x => x.GoogleProject_Number);
             //now clear settings cache
             _settingService.ClearCache();
@@ -275,7 +294,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 {
 
                     DeviceModel m = x.ToModel();
-                    m.DeviceType =GetDeviceType(m.DeviceTypeId);
+                    m.DeviceType = GetDeviceType(m.DeviceTypeId);
                     m.CustomerName = GetcustomerFullName(m.CustomerId);
 
                     return m;
@@ -287,7 +306,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             return Json(gridModel);
         }
 
-      
+
         #endregion
 
         #region Group
@@ -304,8 +323,8 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
 
             return View();
         }
-        
-        
+
+
         ///--------------------------------------------------------------------------------------------
         /// <summary>
         /// Groups the specified command.
@@ -366,14 +385,14 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                     SmartContactModel m = x;
                     m.FullName = _customerService.GetCustomerById(m.CustomerId) != null
                         ? _customerService.GetCustomerById(m.CustomerId).GetFullName()
-                        : m.FirstName+' '+m.LastName;
+                        : m.FirstName + ' ' + m.LastName;
                     return m;
                 }),
 
                 Total = contacts.TotalCount
 
             };
-           
+
             return Json(GridModel);
 
         }
@@ -431,7 +450,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             var smartGroup = _smartGroupsService.GetSmartGroupById(id);
             if (smartGroup == null)
                 //No campaign found with the specified id
-                return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.SmartGroups"); 
+                return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.SmartGroups");
 
             var model = smartGroup.ToCriteriaModel();
             return View(model);
@@ -444,7 +463,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        
+
         public ActionResult EditGroup(CriteriaModel model)
         {
 
@@ -461,7 +480,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 _smartGroupsService.UpdateSmartGroup(smartGroup);
 
 
-                return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.SmartGroups"); 
+                return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.SmartGroups");
             }
 
             //If we got this far, something failed, redisplay form
@@ -484,12 +503,12 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             var group = _smartGroupsService.GetSmartGroupById(id);
             if (group == null)
                 throw new ArgumentException("No resource found with the specified id");
-           
-            _smartGroupsService.DeleteSmartGroup(group); 
+
+            _smartGroupsService.DeleteSmartGroup(group);
 
             return new NullJsonResult();
         }
-      
+
         #endregion
 
         #region Schedule
@@ -499,7 +518,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         /// Schedules the list.
         /// </summary>
         /// <returns></returns>
-        
+
         public ActionResult Schedule()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
@@ -514,7 +533,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns></returns>
-         [HttpPost]
+        [HttpPost]
         public ActionResult ScheduleList(DataSourceRequest command)
         {
             var groups = _scheduledNotificationService.GetAllSchedule(command.Page - 1, command.PageSize);
@@ -544,8 +563,8 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         public ActionResult CreateSchedule()
         {
             var model = new ScheduledNotificationModel();
-         
-           var groups = _smartGroupsService.GetAllSmartGroup();
+
+            var groups = _smartGroupsService.GetAllSmartGroup();
             var messageTemplates = _notificationMessageTemplateService.GetAllNotificationMessageTemplates(_storeContext.CurrentStore.Id);
 
             foreach (var messageTemplate in messageTemplates)
@@ -556,7 +575,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                     Value = messageTemplate.Id.ToString()
                 });
             }
-           model.AvailableGroups = new SelectList(groups, "Id", "Name");
+            model.AvailableGroups = new SelectList(groups, "Id", "Name");
             return View(model);
         }
 
@@ -579,7 +598,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                     _notificationMessageTemplateService.GetNotificationMessageTemplateById(
                         schedule.NotificationMessageTemplateId);
 
-                schedule.Message = messageTemplate != null? messageTemplate.Body : null;
+                schedule.Message = messageTemplate != null ? messageTemplate.Body : null;
                 schedule.Subject = messageTemplate != null ? messageTemplate.Subject : null;
 
                 schedule.CreatedOnUtc = DateTime.UtcNow;
@@ -587,7 +606,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 //_scheduleService.InsertSchedule(schedule);
 
                 return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.ScheduleList");
-                
+
             }
 
             //If we got this far, something failed, redisplay form
@@ -622,7 +641,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 });
             }
 
-            return View( model);
+            return View(model);
         }
 
         ///--------------------------------------------------------------------------------------------
@@ -635,7 +654,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         public ActionResult EditSchedule(ScheduledNotificationModel model)
         {
             var schedule = _scheduledNotificationService.GetScheduleById(model.Id);
-            
+
             if (schedule == null)
                 //No emailTemplate found with the specified id
                 return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.ScheduleList");
@@ -643,7 +662,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             model.PictureId = schedule.PictureId;
             if (ModelState.IsValid)
             {
-                
+
                 schedule = model.ToEntity(schedule);
                 var messageTemplate =
                    _notificationMessageTemplateService.GetNotificationMessageTemplateById(
@@ -652,7 +671,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
                 schedule.Subject = messageTemplate != null ? messageTemplate.Subject : null;
                 schedule.IsQueued = false;
                 _scheduledNotificationService.UpdateSchedule(schedule);
-                
+
                 return RedirectToRoute("Admin.Plugin.NopStation.MobileApp.ScheduleList");
             }
 
@@ -666,10 +685,10 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         /// </summary>
         /// <param name="id">The selected ids.</param>
         /// <returns></returns>
-        
+
         public ActionResult DeleteSchedule(int id)
         {
-            
+
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
                 return AccessDeniedView();
 
@@ -728,7 +747,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             return Json(gridModel);
         }
 
-        
+
         #endregion
 
         #region Add Category
@@ -772,7 +791,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
         [HttpPost]
         public ActionResult SetCatOrProdId(int scheduleId, int catOrProdId)
         {
-           
+
             var schedule = _scheduledNotificationService.GetScheduleById(scheduleId);
             schedule.ItemId = catOrProdId;
             _scheduledNotificationService.UpdateSchedule(schedule);
@@ -811,14 +830,14 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             model.AvailableProductTypes.Insert(0, new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
             model.ScheduleIdId = scheduleId;
             return View(model);
-            
-            
+
+
         }
 
         [HttpPost]
         public ActionResult ProductAddPopupList(DataSourceRequest command, ProductForNotificationModel model)
         {
-            
+
 
             var gridModel = new DataSourceResult();
             var products = _productService.SearchProducts(
@@ -838,78 +857,206 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             return Json(gridModel);
         }
 
-        
+
         #endregion
 
 
         #endregion
-        
+
         #region  Test notification
 
         [HttpGet]
         public ActionResult TestPushNotification()
         {
             var model = new QueuedNotificationModel();
-            
+
             return View(model);
         }
+        //        [HttpPost]
+        //        public ActionResult TestPushNotification(QueuedNotificationModel model)
+        //        {
+        //
+        //            if (model.DeviceTypeId==(int)DeviceType.iPhone)
+        //            {
+        //                try
+        //                {
+        //                    var notification = new QueuedNotification()
+        //                    {
+        //                        DeviceType = DeviceType.iPhone,
+        //                        SubscriptionId = model.SubscriptionId,
+        //                        Message =model.Message,
+        //                        NotificationTypeId = model.NotificationTypeId,
+        //                        ItemId = model.ItemId,
+        //                        Image = model.Image
+        //
+        //                    };
+        //                  
+        //                    _queuedNotificationService.SendTestNotication(notification);
+        //                    SuccessNotification("Sent Notification successfully!");
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    ModelState.AddModelError("Error:", ex.Message);
+        //                   
+        //                } 
+        //            }
+        //            else if (model.DeviceTypeId == (int)DeviceType.Android)
+        //            {
+        //                try
+        //                {
+        //                    var notification = new QueuedNotification()
+        //                    {
+        //                        DeviceType = DeviceType.Android,
+        //                        SubscriptionId = model.SubscriptionId,
+        //                        Message = model.Message,
+        //                        NotificationTypeId = model.NotificationTypeId,
+        //                        ItemId = model.ItemId,
+        //                        Image = model.Image
+        //
+        //                    };
+        //
+        //                    _queuedNotificationService.SendTestNotication(notification);
+        //                    SuccessNotification("Sent Notification successfully!");
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    ModelState.AddModelError("Error:", ex.Message);
+        //
+        //                } 
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError("Error:","UnKnown Device");
+        //            }
+        //            return View(model);
+        //        }
+
+
         [HttpPost]
         public ActionResult TestPushNotification(QueuedNotificationModel model)
         {
-            if (model.DeviceTypeId==(int)DeviceType.iPhone)
-            {
-                try
-                {
-                    var notification = new QueuedNotification()
-                    {
-                        DeviceType = DeviceType.iPhone,
-                        SubscriptionId = model.SubscriptionId,
-                        Message =model.Message,
-                        NotificationTypeId = model.NotificationTypeId,
-                        ItemId = model.ItemId,
-                        Image = model.Image
+            var title = "Test Message";
+            var body = "Test From Decode Lab (Sabbir)";
+            var data = new object();
+            string[] tokens = new String[] { "f0WCc-E32Ck:APA91bEHWcOolIWdHedzkDTObFh7bs3xN4SMSleIuNSgW7ufkLy0I5b9x7Gb6SCx5Mzj3TK6YfkPW_XnVzn5UiuMtoEqH-hivsYDt-8hCGG7BvmwOBnnNWP7G0OnnyH6HbB9iI2XLGvB" };
 
-                    };
-                  
-                    _queuedNotificationService.SendTestNotication(notification);
-                    SuccessNotification("Sent Notification successfully!");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("Error:", ex.Message);
-                   
-                } 
-            }
-            else if (model.DeviceTypeId == (int)DeviceType.Android)
-            {
-                try
-                {
-                    var notification = new QueuedNotification()
-                    {
-                        DeviceType = DeviceType.Android,
-                        SubscriptionId = model.SubscriptionId,
-                        Message = model.Message,
-                        NotificationTypeId = model.NotificationTypeId,
-                        ItemId = model.ItemId,
-                        Image = model.Image
+            var pushSent = SendPushNotification(tokens, title, body,"", data);
 
-                    };
-
-                    _queuedNotificationService.SendTestNotication(notification);
-                    SuccessNotification("Sent Notification successfully!");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("Error:", ex.Message);
-
-                } 
-            }
-            else
-            {
-                ModelState.AddModelError("Error:","UnKnown Device");
-            }
             return View(model);
         }
+
+
+
+        public ActionResult FcmPushNotification()
+        {
+            var model = new FcmPushNotificationModel();
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult FcmPushNotification(FcmPushNotificationModel model)
+        {
+            var customerTokenList = _fcmCustomerDeviceTokenService.GetAllFcmCustomerDeviceTokens()
+                .Select(x => x.FCMDeviceToken).ToArray();
+
+            var pushSent = SendPushNotification(customerTokenList, model.Title, model.Body,"", null);
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public JsonResult FcmPushNotification2(FcmPushNotificationModel model)
+        {
+
+            string imageUrl = String.Empty;
+            var httpRequest = System.Web.HttpContext.Current.Request;
+            if (Request.Files["file"] != null)
+            {
+                HttpPostedFileBase file = Request.Files["file"];
+                var ext = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                var extension = ext.ToLower();
+                string fileName = "notification_image" + extension;
+
+                var subFolder = Server.MapPath("~/Content/files/NotificationImages/");
+                if (!Directory.Exists(subFolder))
+                {
+                    Directory.CreateDirectory(subFolder);
+                }
+
+                if (System.IO.File.Exists(Server.MapPath("~/Content/files/NotificationImages/" + fileName)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Content/files/NotificationImages/" + fileName));
+                }
+
+                try
+                {
+                    var filePath = System.Web.HttpContext.Current.Server.MapPath("~/Content/files/NotificationImages/" + fileName);
+                    file.SaveAs(filePath);
+                    imageUrl = GetRootUrl() + "Content/files/NotificationImages/" + fileName;
+                }
+                catch (Exception e){}
+            }
+
+
+            var customerTokenList = _fcmCustomerDeviceTokenService.GetAllFcmCustomerDeviceTokens()
+                .Select(x => x.FCMDeviceToken).ToArray();
+
+            var pushSent = SendPushNotification(customerTokenList, model.Title, model.Body, imageUrl, null);
+            return Json(new
+            {
+                isSuccess = true,
+                message = "Done"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // method to send notification
+        public static async Task<bool> SendPushNotification(string[] deviceTokens, string title, string body, string image, object data)
+        {
+            Uri FireBasePushNotificationsURL = new Uri("https://fcm.googleapis.com/fcm/send");
+            string ServerKey = "AAAAg-EW0T4:APA91bEBVSrik34arIPP7xMjy90z4SDBgbKjJzusCKn1GdaunlbGGofcBAiiIRa2YsisBMvFxTedrD_LiE-Rtt2niHIGKdsizjMzZRo-fhZo1wRMLkwECNIreIxi9vGqyRtJztKUHpCw";
+
+            bool sent = false;
+
+            if (true)
+            {
+                //Object creation
+
+                var messageInformation = new Message()
+                {
+                    notification = new Notification()
+                    {
+                        title = title,
+                        text = body,
+                        image = image
+                    },
+                    data = data,
+                    registration_ids = deviceTokens
+                };
+
+                //Object to JSON STRUCTURE => using Newtonsoft.Json;
+                string jsonMessage = JsonConvert.SerializeObject(messageInformation);
+
+                
+                var request = new HttpRequestMessage(HttpMethod.Post, FireBasePushNotificationsURL);
+
+                request.Headers.TryAddWithoutValidation("Authorization", "key=" + ServerKey);
+                request.Content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage result;
+                using (var client = new HttpClient())
+                {
+                    result = await client.SendAsync(request);
+                    sent = sent && result.IsSuccessStatusCode;
+                }
+            }
+
+            return sent;
+        }
+
+
+
         [HttpGet]
         public ActionResult PushTestNoticationToIPhone()
         {
@@ -918,9 +1065,9 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             {
                 var notification = new QueuedNotification()
                 {
-                 DeviceType = DeviceType.iPhone,
-                 SubscriptionId = "a014b1c41ee42ad643540ee5f499ace36836f2d2f8f7699cb627d5bc2061b620",
-                 Message = "Hello, iPhone.....This is  push notification testing from NopCommerce Team! ",
+                    DeviceType = DeviceType.iPhone,
+                    SubscriptionId = "a014b1c41ee42ad643540ee5f499ace36836f2d2f8f7699cb627d5bc2061b620",
+                    Message = "Hello, iPhone.....This is  push notification testing from NopCommerce Team! ",
 
                 };
                 _queuedNotificationService.SendTestNotication(notification);
@@ -930,7 +1077,7 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
 
                 return Content(ex.Message);
             }
-            
+
             return Content("Sent successfully!");
         }
 
@@ -958,5 +1105,23 @@ namespace BS.Plugin.NopStation.MobileApp.Controllers
             return Content("Sent successfully!");
         }
         #endregion
+
+        #region Decode Push Notification
+
+        //public ActionResult SendNotification()
+        //{
+        //    var model = new SimpleNotificationModel();
+
+        //    return View(model);
+        //}
+
+        #endregion
+
+        [HttpPost]
+        public ActionResult SendPushNotification(SimpleNotificationModel simpleNotificationModel)
+        {
+            var data = simpleNotificationModel;
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

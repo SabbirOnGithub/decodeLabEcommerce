@@ -94,3 +94,4 @@ D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Presentation\Nop.Web\Plugin
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.GoogleAnalytics\obj\Debug\Nop.Plugin.Widgets.GoogleAnalytics.csproj.App.config
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.GoogleAnalytics\obj\Debug\Nop.Plugin.Widgets.GoogleAnalytics.dll
 D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.GoogleAnalytics\obj\Debug\Nop.Plugin.Widgets.GoogleAnalytics.pdb
+D:\Projects\decodeLab\decodeLabEcommerce\PriyoShop38\Plugins\Nop.Plugin.Widgets.GoogleAnalytics\obj\Debug\Nop.Plugin.Widgets.GoogleAnalytics.csprojAssemblyReference.cache

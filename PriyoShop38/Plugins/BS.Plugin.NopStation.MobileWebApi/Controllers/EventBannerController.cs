@@ -67,10 +67,8 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             var result = new EventBannerResponseModel();
             result.Data = eventBannerVmList;
-
             return Ok(result);
         }
-
         #endregion
 
 

@@ -1473,8 +1473,10 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
 
             //Task prepareShoppingCartModelTask = Task.Factory.StartNew(() => PrepareShoppingCartModel(model, cart));
             //Task<int> getTotalProductsTask = Task.Factory.StartNew<int>(() => cart.GetTotalProducts());
-            //Task<OrderTotalsResponseModel> prepareOrderTotalsModelTask = Task.Factory.StartNew<OrderTotalsResponseModel>(() => PrepareOrderTotalsModel(cart, true));
+            //Task<OrderTotalsResponseModel> prepareOrderTotalsModelTask =
+            //Task.Factory.StartNew<OrderTotalsResponseModel>(() => PrepareOrderTotalsModel(cart, true));
             //Task.WaitAll(prepareShoppingCartModelTask, getTotalProductsTask);
+
             PrepareShoppingCartModel(model, cart);
             return Ok(model);
         }

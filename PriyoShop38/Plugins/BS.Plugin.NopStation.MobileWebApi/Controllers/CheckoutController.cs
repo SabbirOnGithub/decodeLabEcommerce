@@ -738,9 +738,30 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     PaymentMethodSystemName = paymentMethodSystemName
                 };
 
-                var placeOrderResult = _orderProcessingService.PlaceOrder(processPaymentRequest);
+
+                decimal walletPayAmount = 0;
+                var customer = _customerService.GetCustomerById(processPaymentRequest.CustomerId);
+                if (customer != null)
+                {
+                    if (customer.WalletPayAmount != null)
+                    {
+                        if (customer.PayFromWallet == true)
+                        {
+                            walletPayAmount = (decimal)customer.WalletPayAmount;
+                        }
+
+                    }
+                }
+                
+
+                var placeOrderResult = _orderProcessingService.PlaceOrder(processPaymentRequest, walletPayAmount);
                 if (placeOrderResult.Success)
                 {
+
+                    customer.PayFromWallet = false;
+                    customer.WalletPayAmount = 0;
+                    _customerService.UpdateCustomer(customer);
+
                     var postProcessPaymentRequest = new PostProcessPaymentRequest
                     {
                         Order = placeOrderResult.PlacedOrder
@@ -821,6 +842,62 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
             }
         }
 
+        [Route("api/checkout/saveWalletInformation")]
+        [HttpPost]
+        public IHttpActionResult SaveWalletInformation()
+        {
+            var result = new GeneralResponseModel<bool>();
+            decimal payAmount = (decimal)0.0;
+            var customerId = 0;
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["walletPayAmount"]))
+            {
+                payAmount = Convert.ToDecimal(HttpContext.Current.Request["walletPayAmount"]);
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request["customerId"]))
+            {
+                customerId = Convert.ToInt32(HttpContext.Current.Request["customerId"]);
+            }
+
+            if (customerId == 0)
+            {
+                result.Data = false;
+                result.StatusCode = 400;
+                result.SuccessMessage = "customerId missing";
+                return Ok(result);
+            }
+
+            
+            var customer = _customerService.GetCustomerById(customerId);
+
+            if (customer != null)
+            {
+                if (payAmount > (decimal)0.0)
+                {
+                    customer.PayFromWallet = true;
+                    customer.WalletPayAmount = payAmount;
+                }
+                else
+                {
+                    customer.PayFromWallet = false;
+                    customer.WalletPayAmount = payAmount;
+                }
+
+                _customerService.UpdateCustomer(customer);
+                result.Data = true;
+                result.StatusCode = 200;
+                result.SuccessMessage = "Wallet Amount Saved Successfully";
+
+            }
+            else{
+                
+                    result.Data = false;
+                    result.StatusCode = 400;
+                    result.SuccessMessage = "customerId missing";
+            }
+
+            return Ok(result);
+        }
 
         [Route("api/checkout/savePartialPayment")]
         [HttpPost]

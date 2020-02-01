@@ -100,4 +100,59 @@ END
 
 
 
+/****** Table Modify: Order Table ******/
+
+update [PriyoShop38].[dbo].[Customer] set WalletPayAmount = 0.0000
+
+ALTER TABLE [dbo].[Customer]
+ADD [PayFromWallet] [bit] NULL, 
+[WalletPayAmount] [decimal](18, 4) NULL
+
+
+
+
+
+
+USE [PriyoShop38]
+GO
+
+/****** Object:  Table [dbo].[FCMCustomerDeviceToken]    Script Date: 1/22/2020 8:32:49 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FCMCustomerDeviceToken](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerId] [int] NULL,
+	[FCMDeviceToken] [ntext] NULL,
+ CONSTRAINT [PK_FCMCustomerDeviceToken] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[FCMCustomerDeviceToken]  WITH CHECK ADD  CONSTRAINT [FK_FCMCustomerDeviceToken_Customer] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([Id])
+GO
+
+ALTER TABLE [dbo].[FCMCustomerDeviceToken] CHECK CONSTRAINT [FK_FCMCustomerDeviceToken_Customer]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

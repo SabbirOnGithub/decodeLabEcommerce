@@ -312,6 +312,16 @@ namespace BS.Plugin.NopStation.MobileWebApi.Controllers
                     ForBlApp = hpc.ForBlApp
                 };
 
+                if (hpc.ActiveStartDate != null)
+                {
+                    hpm.ActiveEndDateString = hpc.ActiveStartDate.Value.ToString("yyyy/MM/dd hh:mm:ss");
+                }
+
+                if (hpc.ActiveEndDate != null)
+                {
+                    hpm.ActiveEndDateString = hpc.ActiveEndDate.Value.ToString("yyyy/MM/dd hh:mm:ss");
+                }
+
                 var products = _productService.GetProductsByIds(hpc.HomePageCategoryProducts.OrderBy(x => x.DisplayOrder).Select(x => x.ProductId).ToArray());
 
                 if (products == null || products.Count == 0)

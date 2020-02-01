@@ -22,69 +22,117 @@
     <div class="panel-group">
         <div class="panel panel-default">
             <div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.DeviceTypeId)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.DropDownListFor(model => model.DeviceTypeId, ((DeviceType) Model.DeviceTypeId).ToSelectList())
-                            @Html.ValidationMessageFor(model => model.DeviceTypeId)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.SubscriptionId)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.SubscriptionId)
-                            @Html.ValidationMessageFor(model => model.SubscriptionId)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.NotificationTypeId)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.DropDownListFor(model => model.NotificationTypeId, ((NotificationType) Model.NotificationTypeId).ToSelectList())
-                            @Html.ValidationMessageFor(model => model.NotificationTypeId)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.Message)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.TextAreaFor(model => model.Message)
-                            @Html.ValidationMessageFor(model => model.Message)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.ItemId)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.ItemId)
-                            @Html.ValidationMessageFor(model => model.ItemId)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.NopLabelFor(model => model.Image)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.Image)
-                            @Html.ValidationMessageFor(model => model.Image)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-9">
-                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Send")"/>
-                        </div>
-                    </div>
-                </div>
+	            <div class="panel-body">
+		            <b>This is test notification</b>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.DeviceTypeId)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.DropDownListFor(model => model.DeviceTypeId, ((DeviceType) Model.DeviceTypeId).ToSelectList())
+				            @Html.ValidationMessageFor(model => model.DeviceTypeId)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.SubscriptionId)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.EditorFor(model => model.SubscriptionId)
+				            @Html.ValidationMessageFor(model => model.SubscriptionId)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.NotificationTypeId)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.DropDownListFor(model => model.NotificationTypeId, 
+					            ((NotificationType)Model.NotificationTypeId).ToSelectList())
+				            @Html.ValidationMessageFor(model => model.NotificationTypeId)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.Message)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.TextAreaFor(model => model.Message)
+				            @Html.ValidationMessageFor(model => model.Message)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.ItemId)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.EditorFor(model => model.ItemId)
+				            @Html.ValidationMessageFor(model => model.ItemId)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-3">
+				            @Html.NopLabelFor(model => model.Image)
+			            </div>
+			            <div class="col-md-9">
+				            @Html.EditorFor(model => model.Image)
+				            @Html.ValidationMessageFor(model => model.Image)
+			            </div>
+		            </div>
+		            <div class="form-group">
+			            <div class="col-md-9">
+				            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Send")"/>
+			            </div>
+		            </div>
+	            </div>
             </div>
         </div>
     </div>
         </div>
         }
+
+		
+<div class="panel panel-default">
+	<div class="panel-heading"> Send Notification</div>
+	<div class="panel-body">
+		<div >
+			<div class="form-group">
+				<label for="title">Email:</label>
+				<input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+			</div>
+			<div class="form-group">
+				<label for="msg">Password:</label>
+				<input type="text" class="form-control" id="msg" placeholder="Enter message" name="msg">
+			</div>
+			<button id="sendNotification" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$("#sendNotification").click(function(){
+			var title = $("#title").val();
+			var msg = $("#msg").val();
+
+			$.ajax({
+				type: "POST",
+				url: "/BsNotificationAdmin/SendPushNotification",
+				data: {
+					"Title": title,
+					"Message" : msg
+				},                
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (result) {
+					alert("We returned: " + result);
+				},
+				error: function (xhr) {
+					//Do Something to handle error
+				}
+			});
+		});
+
+		
+	});
+</script>

@@ -157,6 +157,8 @@
     <Compile Include="Customers\CustomerLedgerDetailService.cs" />
     <Compile Include="Customers\CustomerLedgerMasterService.cs" />
     <Compile Include="Customers\CustomerPriyoCoinService.cs" />
+    <Compile Include="Customers\IFCMCustomerDeviceTokenService.cs" />
+    <Compile Include="Customers\FCMCustomerDeviceTokenService.cs" />
     <Compile Include="Customers\ICustomerLedgerDetailService.cs" />
     <Compile Include="Customers\ICustomerLedgerMasterService.cs" />
     <Compile Include="Customers\ICustomerPriyoCoinService.cs" />

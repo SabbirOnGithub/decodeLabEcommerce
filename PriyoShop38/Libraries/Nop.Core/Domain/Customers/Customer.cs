@@ -15,6 +15,7 @@ namespace Nop.Core.Domain.Customers
         private ICollection<ShoppingCartItem> _shoppingCartItems;
         private ICollection<ReturnRequest> _returnRequests;
         private ICollection<Address> _addresses;
+        private ICollection<FCMCustomerDeviceToken> _fcmCustomerDeviceTokens;
            
 
         /// <summary>
@@ -143,6 +144,8 @@ namespace Nop.Core.Domain.Customers
         public bool? IsReferCodeUsed { get; set; }
         public string ImageUrl { get; set; }
         public int? ReferCodeValue { get; set; }
+        public bool? PayFromWallet { get; set; }
+        public decimal? WalletPayAmount { get; set; } 
 
 
         #region Navigation properties
@@ -202,6 +205,18 @@ namespace Nop.Core.Domain.Customers
             get { return _addresses ?? (_addresses = new List<Address>()); }
             protected set { _addresses = value; }            
         }
+
+
+        /// <summary>
+        /// Gets or sets customer FCMDeviceToken
+        /// </summary>
+        public virtual ICollection<FCMCustomerDeviceToken> FCMCustomerDeviceTokens
+        {
+            get { return _fcmCustomerDeviceTokens ?? (_fcmCustomerDeviceTokens = new List<FCMCustomerDeviceToken>()); }
+            protected set { _fcmCustomerDeviceTokens = value; }            
+        }
+
+
 
 
         #endregion

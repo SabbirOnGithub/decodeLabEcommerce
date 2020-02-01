@@ -1211,7 +1211,7 @@ namespace Nop.Services.Orders
         {
             if (customer == null)
                 throw new ArgumentNullException("customer");
-
+                 
             var warnings = new List<string>();
 
             var shoppingCartItem = customer.ShoppingCartItems.FirstOrDefault(sci => sci.Id == shoppingCartItemId);

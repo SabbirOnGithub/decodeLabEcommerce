@@ -117,6 +117,7 @@
                 <script type="text/javascript">
                     var products = [];
                     $(document).ready(function () {
+
                         $.ajax({
                             url: '@Html.Raw(Url.Action("LoadCategoryProducts", "MobileWebApiConfiguration"))',
                             type: "get",

@@ -1093,6 +1093,7 @@
     <Content Include="Scripts\admin.search.js" />
     <Content Include="Scripts\adminLTE\app.js" />
     <Content Include="Scripts\adminLTE\app.min.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\npm.js" />

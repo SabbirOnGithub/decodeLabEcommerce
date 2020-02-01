@@ -46,6 +46,12 @@ namespace BS.Plugin.NopStation.MobileApp.Infrastructure
                  new[] { "BS.Plugin.NopStation.MobileApp.Controllers" }).DataTokens.Add("area", "admin");
             #endregion
 
+            #region FCM pushNotification route
+            routes.MapRoute("Admin.Plugin.NopStation.MobileApp.FcmPushNotification", "Admin/Plugin/NopStation/MobileApp/FcmPush",
+                new { controller = "BsNotificationAdmin", action = "FcmPushNotification" },
+                new[] { "BS.Plugin.NopStation.MobileApp.Controllers" }).DataTokens.Add("area", "admin");
+            #endregion
+
             #region device
             routes.MapRoute("Admin.Plugin.NopStation.MobileApp.DeviceList", "Admin/Plugin/NopStation/MobileApp/DeviceList",
                    new { controller = "BsNotificationAdmin", action = "Device" },
